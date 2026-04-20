@@ -63,11 +63,12 @@ function generate(projectRoot: string): void {
   }
 
   const summary = createSummary(contractsByFile);
-  writeGeneratedArtifacts(projectRoot, summary);
+  writeGeneratedArtifacts(projectRoot, summary, contractsByFile);
 
   log(`Generated artifacts for ${summary.endpoints.length} endpoints.`);
   log("- generated/types.ts");
   log("- generated/summary.json");
+  log("- generated/contract-model.ts");
 }
 
 function check(projectRoot: string): void {

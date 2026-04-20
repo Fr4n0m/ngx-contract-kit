@@ -20,6 +20,8 @@
 - 2026-04-20: Paleta dark mode ajustada de azul a verde carbón para coherencia visual (hero, cards, selector de idioma y footer).
 - 2026-04-20: Paleta refinada tomando referencia cromática de `landonorris.com` (oliva oscuro + marfil + acento lima).
 - 2026-04-20: Sistema de iconos migrado a `@tabler/icons-vue` para componentes de docs (footer y enlaces externos).
+- 2026-04-20: Validación del schema en `core` reforzada con chequeo de status HTTP en `response` y tests adicionales de errores de shape.
+- 2026-04-20: `generate` ahora produce `generated/contract-model.ts` con tipos por endpoint (params/query/body/response) a partir del contrato.
 
 ## Semana 0 - Descubrimiento y alcance (2-3 dias)
 
