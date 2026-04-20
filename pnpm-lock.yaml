@@ -28,6 +28,10 @@ importers:
         version: 3.2.4(@types/node@24.12.2)(jiti@1.21.7)(tsx@4.21.0)
 
   apps/docs:
+    dependencies:
+      '@tabler/icons-vue':
+        specifier: ^3.41.1
+        version: 3.41.1(vue@3.5.32(typescript@5.9.3))
     devDependencies:
       autoprefixer:
         specifier: ^10.4.21
@@ -645,6 +649,14 @@ packages:
 
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
+
+  '@tabler/icons-vue@3.41.1':
+    resolution: {integrity: sha512-OLLWlyrx6HdQpdgnZ8dO8uBGIIZwQDPgE8Gl6tUuAD7AgtfnmtFz8vb7dTEvxddM5CMpPt21ogPpBhJfEjSY+Q==}
+    peerDependencies:
+      vue: '>=3.0.1'
+
+  '@tabler/icons@3.41.1':
+    resolution: {integrity: sha512-OaRnVbRmH2nHtFeg+RmMJ/7m2oBIF9XCJAUD5gQnMrpK9f05ydj8MZrAf3NZQqOXyxGN1UBL0D5IKLLEUfr74Q==}
 
   '@turbo/darwin-64@2.9.6':
     resolution: {integrity: sha512-X/56SnVXIQZBLKwniGTwEQTGmtE5brSACnKMBWpY3YafuxVYefrC2acamfjgxP7BG5w3I+6jf0UrLoSzgPcSJg==}
@@ -2018,6 +2030,13 @@ snapshots:
       '@types/hast': 3.0.4
 
   '@shikijs/vscode-textmate@10.0.2': {}
+
+  '@tabler/icons-vue@3.41.1(vue@3.5.32(typescript@5.9.3))':
+    dependencies:
+      '@tabler/icons': 3.41.1
+      vue: 3.5.32(typescript@5.9.3)
+
+  '@tabler/icons@3.41.1': {}
 
   '@turbo/darwin-64@2.9.6':
     optional: true

@@ -19,6 +19,7 @@
 - 2026-04-20: Footer rediseñado como componente dedicado y profesional (`AppFooter.vue`) con contenido i18n desde JSON.
 - 2026-04-20: Paleta dark mode ajustada de azul a verde carbón para coherencia visual (hero, cards, selector de idioma y footer).
 - 2026-04-20: Paleta refinada tomando referencia cromática de `landonorris.com` (oliva oscuro + marfil + acento lima).
+- 2026-04-20: Sistema de iconos migrado a `@tabler/icons-vue` para componentes de docs (footer y enlaces externos).
 
 ## Semana 0 - Descubrimiento y alcance (2-3 dias)
 

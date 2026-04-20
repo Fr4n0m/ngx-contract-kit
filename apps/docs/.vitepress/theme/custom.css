@@ -63,9 +63,9 @@
     --vp-c-brand-1: #d2ff00;
     --vp-c-brand-2: #b6dd00;
     --vp-c-brand-3: #8aa800;
-    --vp-c-bg: #0f1714;
+    --vp-c-bg: #11180f;
     --vp-c-bg-soft: #1b2218;
-    --vp-c-bg-alt: #282c20;
+    --vp-c-bg-alt: #242b1f;
     --vp-c-text-1: #f4f4ed;
     --vp-c-text-2: #dde1d2;
     --vp-c-text-3: #b4b8a5;
@@ -80,22 +80,49 @@
   }
 
   .dark body {
-    background-image: radial-gradient(circle at 8% 5%, rgba(210, 255, 0, 0.1), rgba(15, 23, 20, 0) 45%),
-      radial-gradient(circle at 92% 10%, rgba(83, 84, 80, 0.2), rgba(15, 23, 20, 0) 38%);
+    background-image: radial-gradient(circle at 8% 5%, rgba(210, 255, 0, 0.12), rgba(17, 24, 15, 0) 45%),
+      radial-gradient(circle at 92% 10%, rgba(83, 84, 80, 0.22), rgba(17, 24, 15, 0) 38%);
   }
 }
 
 @layer components {
-  .VPDoc.has-aside .content-container {
-    max-width: 100%;
+  .VPContent .container,
+  .VPDoc .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .VPContent .content-container,
+  .VPDoc .content-container {
+    max-width: 1360px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .VPContent .content-container,
+    .VPDoc .content-container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 
   .VPDocAside {
     display: none !important;
   }
 
+  .VPDoc.has-aside .aside-container {
+    display: none !important;
+    width: 0 !important;
+  }
+
   .vp-doc {
-    @apply max-w-none;
+    max-width: 1180px !important;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
   }
 
   .VPButton.brand {

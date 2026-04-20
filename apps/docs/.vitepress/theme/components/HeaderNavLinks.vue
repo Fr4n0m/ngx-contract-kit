@@ -11,17 +11,17 @@ const t = computed(() => (lang.value === "es" ? es : en));
 <template>
   <nav class="ml-auto hidden w-full items-center justify-end gap-5 pr-3 md:flex">
     <a
-      class="text-sm text-slate-700 hover:text-brand-700 dark:text-brand-200 dark:hover:text-accent"
+      class="text-sm text-[color:var(--vp-c-text-1)] hover:text-brand-700 dark:hover:text-accent"
       href="/"
       >{{ t.nav.overview }}</a
     >
     <a
-      class="text-sm text-slate-700 hover:text-brand-700 dark:text-brand-200 dark:hover:text-accent"
+      class="text-sm text-[color:var(--vp-c-text-1)] hover:text-brand-700 dark:hover:text-accent"
       href="/#what-you-get"
       >{{ t.nav.whatYouGet }}</a
     >
     <a
-      class="text-sm text-slate-700 hover:text-brand-700 dark:text-brand-200 dark:hover:text-accent"
+      class="text-sm text-[color:var(--vp-c-text-1)] hover:text-brand-700 dark:hover:text-accent"
       href="/#how-it-works"
       >{{ t.nav.howItWorks }}</a
     >
