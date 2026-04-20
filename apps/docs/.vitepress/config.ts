@@ -6,6 +6,8 @@ export default defineConfig({
   lang: "en-US",
   themeConfig: {
     nav: [
+      { text: "Demo", link: "/demo" },
+      { text: "Quickstart", link: "/quickstart" },
       { text: "Roadmap", link: "/roadmap" },
       { text: "GitHub", link: "https://github.com/your-org/ngx-contract-kit" }
     ],
