@@ -3,6 +3,7 @@
 ## Seguimiento de cambios importantes
 
 - 2026-04-20: Inicializacion del repositorio, estructura monorepo, CI base y documentacion fundacional.
+- 2026-04-20: Regla de contribucion añadida para actualizar este roadmap en cada cambio importante.
 
 ## Semana 0 - Descubrimiento y alcance (2-3 dias)
 

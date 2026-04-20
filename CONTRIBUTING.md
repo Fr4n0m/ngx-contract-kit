@@ -18,3 +18,4 @@
 - Tests pasando.
 - Sin regressions en ejemplos.
 - Documentacion actualizada si cambia DX.
+- `ROADMAP.md` actualizado cuando el PR incluya un cambio importante (arquitectura, alcance, hitos o release).
