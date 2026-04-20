@@ -29,6 +29,8 @@ Ver [REPOSITORY_PLAN.md](./REPOSITORY_PLAN.md) y [ROADMAP.md](./ROADMAP.md).
 
 ```bash
 pnpm install
+pnpm docs:dev
+pnpm docs:build
 pnpm lint
 pnpm test
 pnpm build

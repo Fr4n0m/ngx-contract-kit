@@ -1,0 +1,14 @@
+{
+  "name": "@ngx-contract-kit/docs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Landing and documentation site for ngx-contract-kit",
+  "scripts": {
+    "dev": "vitepress dev .",
+    "build": "vitepress build .",
+    "preview": "vitepress preview ."
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
