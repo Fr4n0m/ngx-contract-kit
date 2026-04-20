@@ -30,7 +30,7 @@ const t = computed(() => dict[lang.value]);
       </div>
     </header>
 
-    <div class="grid gap-4 lg:grid-cols-3">
+    <div class="grid gap-5 lg:grid-cols-3">
       <article
         v-for="card in t.cards"
         :key="card.title"
@@ -44,7 +44,7 @@ const t = computed(() => dict[lang.value]);
 
     <section id="what-you-get" class="mt-12">
       <h2 class="mb-4 font-heading text-2xl text-[color:var(--vp-c-text-1)] md:text-3xl">{{ t.whatYouGet.title }}</h2>
-      <div class="grid gap-4 lg:grid-cols-3">
+      <div class="grid gap-5 lg:grid-cols-3">
         <article
           v-for="item in t.whatYouGet.items"
           :key="item.kicker"

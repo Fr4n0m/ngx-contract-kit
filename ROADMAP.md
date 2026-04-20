@@ -22,6 +22,8 @@
 - 2026-04-20: Sistema de iconos migrado a `@tabler/icons-vue` para componentes de docs (footer y enlaces externos).
 - 2026-04-20: Validación del schema en `core` reforzada con chequeo de status HTTP en `response` y tests adicionales de errores de shape.
 - 2026-04-20: `generate` ahora produce `generated/contract-model.ts` con tipos por endpoint (params/query/body/response) a partir del contrato.
+- 2026-04-20: Configuración de despliegue preparada para Vercel (`vercel.json`) apuntando a la landing de VitePress.
+- 2026-04-20: README rehacido en formato profesional bilingüe (ES/EN), badges, navegación rápida, secciones con iconos y guía de contribución.
 
 ## Semana 0 - Descubrimiento y alcance (2-3 dias)
 
