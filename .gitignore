@@ -4,3 +4,5 @@ dist
 .DS_Store
 coverage
 .env
+apps/docs/.vitepress/.temp
+apps/docs/.vitepress/cache
