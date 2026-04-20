@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@500;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --vp-c-brand-1: #2e6b53;
+    --vp-c-brand-2: #275544;
+    --vp-c-brand-3: #1f3b31;
+    --vp-c-bg: #f8f4ec;
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: linear-gradient(120deg, #1f3b31 5%, #3f8667 92%);
+  }
+
+  .dark {
+    --vp-c-bg: #151818;
+    --vp-c-bg-soft: #1b2120;
+  }
+
+  body {
+    @apply font-body text-ink antialiased;
+    background-image: radial-gradient(circle at 8% 5%, rgba(140, 196, 168, 0.32), rgba(248, 244, 236, 0) 45%),
+      radial-gradient(circle at 92% 10%, rgba(46, 107, 83, 0.16), rgba(248, 244, 236, 0) 38%);
+  }
+}
+
+@layer components {
+  .VPHero .name {
+    @apply font-heading tracking-tight;
+  }
+
+  .VPHero .text {
+    @apply font-heading text-4xl md:text-5xl;
+  }
+
+  .VPHero .tagline {
+    @apply text-base md:text-lg text-slate-700 max-w-2xl;
+  }
+
+  .VPButton.brand {
+    @apply bg-brand-700 border-brand-700 shadow-card;
+  }
+
+  .VPButton.alt {
+    @apply border-brand-700 text-brand-800 bg-white/80;
+  }
+
+  .VPFeature {
+    @apply rounded-2xl border border-brand-100 bg-white/85 shadow-card;
+  }
+
+  .VPFeature .title {
+    @apply font-heading text-lg text-ink;
+  }
+
+  .VPFeature .details {
+    @apply text-slate-700;
+  }
+}

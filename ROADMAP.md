@@ -5,6 +5,7 @@
 - 2026-04-20: Inicializacion del repositorio, estructura monorepo, CI base y documentacion fundacional.
 - 2026-04-20: Regla de contribucion añadida para actualizar este roadmap en cada cambio importante.
 - 2026-04-20: Landing/docs inicial creada en `apps/docs` con VitePress y scripts `docs:dev` / `docs:build`.
+- 2026-04-20: Estilos de la landing migrados a Tailwind CSS con tema visual custom para VitePress.
 
 ## Semana 0 - Descubrimiento y alcance (2-3 dias)
 
