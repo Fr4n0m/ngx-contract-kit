@@ -5,10 +5,10 @@
   "description": "CLI for ngx-contract-kit",
   "type": "commonjs",
   "bin": {
-    "ngx-contract-kit": "bin/ngx-contract-kit.js"
+    "ngx-contract-kit": "src/bin.ts"
   },
   "scripts": {
-    "build": "echo cli: no build step yet",
+    "build": "tsc -p tsconfig.json --noEmit",
     "test": "echo cli: no tests yet",
     "lint": "echo cli: no lint step yet"
   },

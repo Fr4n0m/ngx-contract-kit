@@ -24,6 +24,6 @@ pnpm ckit:check
 
 Upgrade the MVP to:
 
-- TypeScript strict mode in core and CLI.
 - Contract schema richer than method/path (params/body/response).
 - Real Angular client generator package.
+- NestJS plugin with typed request/response helpers.

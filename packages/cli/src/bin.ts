@@ -1,25 +1,20 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
-let core;
-try {
-  core = require("@ngx-contract-kit/core/src/index.js");
-} catch {
-  core = require(path.resolve(__dirname, "../../core/src/index.js"));
-}
-const { createSummary, diffSummaries, readContract, scanContractFiles, writeGeneratedArtifacts } = core;
+import fs from "node:fs";
+import path from "node:path";
+import { createSummary, diffSummaries, readContract, scanContractFiles, writeGeneratedArtifacts } from "../../core/src";
+import type { ContractFile, ContractSummary } from "../../core/src";
 
-function log(message) {
+function log(message: string): void {
   process.stdout.write(`${message}\n`);
 }
 
-function fail(message) {
+function fail(message: string): never {
   process.stderr.write(`Error: ${message}\n`);
   process.exit(1);
 }
 
-function initProject(projectRoot) {
+function initProject(projectRoot: string): void {
   const contractsDir = path.join(projectRoot, "contracts");
   const generatedDir = path.join(projectRoot, "generated");
   const contractFile = path.join(contractsDir, "users.contract.json");
@@ -29,7 +24,7 @@ function initProject(projectRoot) {
   fs.mkdirSync(generatedDir, { recursive: true });
 
   if (!fs.existsSync(contractFile)) {
-    const starter = {
+    const starter: ContractFile = {
       getUser: {
         method: "GET",
         path: "/users/:id"
@@ -56,13 +51,13 @@ function initProject(projectRoot) {
   log(`- Generated: ${path.relative(projectRoot, generatedDir)}`);
 }
 
-function generate(projectRoot) {
+function generate(projectRoot: string): void {
   const files = scanContractFiles(projectRoot);
   if (files.length === 0) {
     fail("No *.contract.json files found in contracts/");
   }
 
-  const contractsByFile = {};
+  const contractsByFile: Record<string, ContractFile> = {};
   for (const file of files) {
     contractsByFile[file] = readContract(file);
   }
@@ -75,15 +70,15 @@ function generate(projectRoot) {
   log("- generated/summary.json");
 }
 
-function check(projectRoot) {
+function check(projectRoot: string): void {
   const summaryPath = path.join(projectRoot, "generated", "summary.json");
   if (!fs.existsSync(summaryPath)) {
     fail("Missing generated/summary.json. Run `ngx-contract-kit generate` first.");
   }
 
-  const previous = JSON.parse(fs.readFileSync(summaryPath, "utf8"));
+  const previous = JSON.parse(fs.readFileSync(summaryPath, "utf8")) as ContractSummary;
   const files = scanContractFiles(projectRoot);
-  const contractsByFile = {};
+  const contractsByFile: Record<string, ContractFile> = {};
   for (const file of files) {
     contractsByFile[file] = readContract(file);
   }
@@ -102,7 +97,7 @@ function check(projectRoot) {
   log("No breaking changes detected.");
 }
 
-function printHelp() {
+function printHelp(): void {
   log("ngx-contract-kit");
   log("");
   log("Usage:");
@@ -111,7 +106,7 @@ function printHelp() {
   log("  ngx-contract-kit check");
 }
 
-function run() {
+function run(): void {
   const command = process.argv[2];
   const projectRoot = process.cwd();
 
