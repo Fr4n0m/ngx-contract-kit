@@ -7,6 +7,7 @@
 - 2026-04-20: Landing/docs inicial creada en `apps/docs` con VitePress y scripts `docs:dev` / `docs:build`.
 - 2026-04-20: Estilos de la landing migrados a Tailwind CSS con tema visual custom para VitePress.
 - 2026-04-20: Landing mejorada con seccion de demo end-to-end, CTAs de producto y navegacion de docs ampliada.
+- 2026-04-20: Workflow CI de GitHub eliminado por decision del proyecto (sin Actions por ahora).
 
 ## Semana 0 - Descubrimiento y alcance (2-3 dias)
 
