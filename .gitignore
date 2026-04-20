@@ -6,3 +6,4 @@ coverage
 .env
 apps/docs/.vitepress/.temp
 apps/docs/.vitepress/cache
+ROADMAP.md

@@ -52,7 +52,6 @@ pnpm build
 
 ### 🗺️ Documentación del proyecto
 
-- [ROADMAP.md](./ROADMAP.md)
 - [REPOSITORY_PLAN.md](./REPOSITORY_PLAN.md)
 - [BACKLOG.md](./BACKLOG.md)
 - [CONTRIBUTING.md](./CONTRIBUTING.md)
@@ -117,7 +116,6 @@ pnpm build
 
 ### 🗺️ Project docs
 
-- [ROADMAP.md](./ROADMAP.md)
 - [REPOSITORY_PLAN.md](./REPOSITORY_PLAN.md)
 - [BACKLOG.md](./BACKLOG.md)
 - [CONTRIBUTING.md](./CONTRIBUTING.md)
