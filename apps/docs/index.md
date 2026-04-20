@@ -3,50 +3,79 @@ layout: home
 
 hero:
   name: ngx-contract-kit
-  text: Contract-first toolkit for Angular + backend
-  tagline: Define your API once. Generate Angular clients, backend validators, mocks, and CI compatibility checks.
+  text: Ship Angular + backend APIs with one contract
+  tagline: Contract-first toolkit to generate typed clients, runtime-safe backend wiring, and release guards against breaking changes.
   actions:
     - theme: brand
+      text: Start in 5 minutes
+      link: /quickstart
+    - theme: alt
+      text: Explore Architecture
+      link: /architecture
+    - theme: alt
       text: View Demo Flow
       link: /demo
-    - theme: alt
-      text: Quickstart
-      link: /quickstart
 
 features:
-  - title: Single Source of Truth
-    details: Define API contracts once and keep frontend and backend in sync.
-  - title: Angular + Backend Ready
-    details: Generate Angular HttpClient clients and integrate with NestJS first.
-  - title: Safer Releases
-    details: Detect breaking API changes in CI before they reach production.
+  - title: Contract Once, Use Everywhere
+    details: Define endpoint metadata a single time and consume it across frontend, backend, tests, and CI.
+  - title: Angular + Nest Focused
+    details: Built for teams shipping Angular frontends and Node backends without duplicated API types.
+  - title: Release Confidence
+    details: Detect endpoint removals before merge and stop accidental breaking API releases.
 ---
 
-<div class="mt-8 grid gap-4 md:grid-cols-3">
-  <div class="rounded-2xl border border-brand-200 bg-white/90 p-5 shadow-card">
-    <p class="font-heading text-sm uppercase tracking-wide text-brand-700">DX</p>
-    <p class="mt-2 text-slate-700">Start fast with `init`, keep contracts readable, and generate code in seconds.</p>
+<div class="landing-grid mt-8">
+  <div class="landing-panel">
+    <p class="landing-kicker">PROBLEM</p>
+    <h3 class="landing-title">Frontend and backend drift over time</h3>
+    <p class="landing-copy">Teams duplicate DTOs, clients, and docs by hand. API changes slip through review and break apps late.</p>
   </div>
-  <div class="rounded-2xl border border-brand-200 bg-white/90 p-5 shadow-card">
-    <p class="font-heading text-sm uppercase tracking-wide text-brand-700">Reliability</p>
-    <p class="mt-2 text-slate-700">Block incompatible API changes before merge with contract diff checks in CI.</p>
+  <div class="landing-panel">
+    <p class="landing-kicker">SOLUTION</p>
+    <h3 class="landing-title">A contract-first pipeline</h3>
+    <p class="landing-copy">Generate types, client code, and compatibility checks from the same source so every layer stays aligned.</p>
   </div>
-  <div class="rounded-2xl border border-brand-200 bg-white/90 p-5 shadow-card">
-    <p class="font-heading text-sm uppercase tracking-wide text-brand-700">Open Source</p>
-    <p class="mt-2 text-slate-700">Designed for contributors: modular packages, clear ADRs, and explicit release process.</p>
+  <div class="landing-panel">
+    <p class="landing-kicker">STATUS</p>
+    <h3 class="landing-title">Early OSS, already runnable</h3>
+    <p class="landing-copy">Current MVP ships CLI commands for init, generate, and check with strict TypeScript core validation.</p>
   </div>
 </div>
 
-## End-to-end Flow
+## What you get
 
-1. Define a contract once in `.contract.ts`.
-2. Generate shared types and Angular client.
-3. Validate input/output on NestJS endpoints.
-4. Generate mocks for unit and e2e tests.
-5. Run contract compatibility checks in CI.
+<div class="landing-grid">
+  <div class="landing-panel">
+    <p class="landing-kicker">CLI</p>
+    <p class="landing-copy">`init`, `generate`, `check` commands to bootstrap contracts and enforce compatibility.</p>
+  </div>
+  <div class="landing-panel">
+    <p class="landing-kicker">CORE</p>
+    <p class="landing-copy">Strict contract validation with deterministic endpoint summary generation.</p>
+  </div>
+  <div class="landing-panel">
+    <p class="landing-kicker">ROADMAP</p>
+    <p class="landing-copy">Angular client generator, richer schema support, and backend plugins are next.</p>
+  </div>
+</div>
+
+## End-to-end flow
+
+1. Define contract files in `contracts/*.contract.json`.
+2. Run code generation for typed artifacts.
+3. Wire generated outputs into Angular and backend layers.
+4. Run contract checks to catch breaking changes before release.
+
+```bash
+pnpm ckit:init
+pnpm ckit:generate
+pnpm ckit:check
+```
 
 <div class="mt-8 flex flex-wrap gap-3">
-  <a class="VPButton brand" href="/quickstart">Get started</a>
-  <a class="VPButton alt" href="/roadmap">See roadmap</a>
-  <a class="VPButton alt" href="https://github.com/your-org/ngx-contract-kit">GitHub repo</a>
+  <a class="VPButton brand" href="/quickstart">Quickstart</a>
+  <a class="VPButton alt" href="/demo">Demo</a>
+  <a class="VPButton alt" href="/architecture">Architecture</a>
+  <a class="VPButton alt" href="https://github.com/Fr4n0m/ngx-contract-kit">GitHub</a>
 </div>

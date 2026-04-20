@@ -11,6 +11,7 @@
 - 2026-04-20: MVP tecnico inicial implementado en `packages/core` y `packages/cli` (`init`, `generate`, `check`) con contratos JSON.
 - 2026-04-20: `core` y `cli` migrados a TypeScript estricto; tests unitarios iniciales añadidos en `packages/core`.
 - 2026-04-20: Fix de docs/VitePress para ESM (`apps/docs/package.json` con `type: module`) para poder iniciar la landing en local.
+- 2026-04-20: Rediseño mayor de la landing/docs: nueva home orientada a producto, página de arquitectura, sidebar/footer y build limpio sin warnings de Tailwind.
 
 ## Semana 0 - Descubrimiento y alcance (2-3 dias)
 

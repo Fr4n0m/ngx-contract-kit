@@ -8,9 +8,31 @@ export default defineConfig({
     nav: [
       { text: "Demo", link: "/demo" },
       { text: "Quickstart", link: "/quickstart" },
+      { text: "Architecture", link: "/architecture" },
       { text: "Roadmap", link: "/roadmap" },
-      { text: "GitHub", link: "https://github.com/your-org/ngx-contract-kit" }
+      { text: "GitHub", link: "https://github.com/Fr4n0m/ngx-contract-kit" }
     ],
-    socialLinks: [{ icon: "github", link: "https://github.com/your-org/ngx-contract-kit" }]
+    sidebar: [
+      {
+        text: "Getting Started",
+        items: [
+          { text: "Home", link: "/" },
+          { text: "Quickstart", link: "/quickstart" },
+          { text: "Demo", link: "/demo" }
+        ]
+      },
+      {
+        text: "Project",
+        items: [
+          { text: "Architecture", link: "/architecture" },
+          { text: "Roadmap", link: "/roadmap" }
+        ]
+      }
+    ],
+    socialLinks: [{ icon: "github", link: "https://github.com/Fr4n0m/ngx-contract-kit" }],
+    footer: {
+      message: "MIT Licensed - Built in public.",
+      copyright: "Copyright 2026"
+    }
   }
 });

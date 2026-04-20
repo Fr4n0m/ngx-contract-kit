@@ -2,7 +2,11 @@ import type { Config } from "tailwindcss";
 
 export default {
   content: [
-    "./**/*.md",
+    "./index.md",
+    "./quickstart.md",
+    "./demo.md",
+    "./architecture.md",
+    "./roadmap.md",
     "./.vitepress/**/*.{ts,js,vue,css}",
     "../../README.md",
     "../../ROADMAP.md"

@@ -1,5 +1,9 @@
 # Roadmap
 
-Roadmap de ejecucion del proyecto en el repositorio principal:
+Roadmap de ejecucion del proyecto en el repositorio principal.
 
-- Ver [ROADMAP.md](../../ROADMAP.md)
+## Source of truth
+
+See the full roadmap file in the repository:
+
+- [ROADMAP.md on GitHub](https://github.com/Fr4n0m/ngx-contract-kit/blob/master/ROADMAP.md)

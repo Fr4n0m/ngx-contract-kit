@@ -58,4 +58,24 @@
   .VPFeature .details {
     @apply text-slate-700;
   }
+
+  .landing-grid {
+    @apply grid gap-4 md:grid-cols-3;
+  }
+
+  .landing-panel {
+    @apply rounded-2xl border border-brand-200 bg-white/90 p-5 shadow-card;
+  }
+
+  .landing-kicker {
+    @apply font-heading text-xs uppercase tracking-wider text-brand-700;
+  }
+
+  .landing-title {
+    @apply mt-2 font-heading text-xl text-ink;
+  }
+
+  .landing-copy {
+    @apply mt-2 text-slate-700;
+  }
 }
