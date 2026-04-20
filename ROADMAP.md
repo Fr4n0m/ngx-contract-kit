@@ -10,6 +10,7 @@
 - 2026-04-20: Workflow CI de GitHub eliminado por decision del proyecto (sin Actions por ahora).
 - 2026-04-20: MVP tecnico inicial implementado en `packages/core` y `packages/cli` (`init`, `generate`, `check`) con contratos JSON.
 - 2026-04-20: `core` y `cli` migrados a TypeScript estricto; tests unitarios iniciales añadidos en `packages/core`.
+- 2026-04-20: Fix de docs/VitePress para ESM (`apps/docs/package.json` con `type: module`) para poder iniciar la landing en local.
 
 ## Semana 0 - Descubrimiento y alcance (2-3 dias)
 
