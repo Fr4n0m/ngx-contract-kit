@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "ngx-contract-kit",
+    "description": "Toolkit contract-first para equipos Angular y backend"
+  },
+  "lang": {
+    "label": "Idioma",
+    "en": "Inglés",
+    "es": "Español"
+  },
+  "nav": {
+    "overview": "Inicio",
+    "whatYouGet": "Qué Incluye",
+    "howItWorks": "Cómo Funciona",
+    "github": "GitHub"
+  },
+  "hero": {
+    "name": "ngx-contract-kit",
+    "title": "Publica APIs Angular + backend desde un solo contrato",
+    "tagline": "Flujo de contrato único para generar clientes tipados, integración segura en backend y checks de compatibilidad antes de release.",
+    "actions": [
+      { "label": "Qué Incluye", "href": "#what-you-get", "theme": "brand" },
+      { "label": "Cómo Funciona", "href": "#how-it-works", "theme": "alt" }
+    ]
+  },
+  "cards": [
+    {
+      "kicker": "PROBLEMA",
+      "title": "Frontend y backend se desalinean",
+      "copy": "Los equipos duplican DTOs, clientes y supuestos de endpoints en varias capas."
+    },
+    {
+      "kicker": "SOLUCIÓN",
+      "title": "Generación contract-first",
+      "copy": "Define endpoints una sola vez y genera artefactos para mantener todo alineado."
+    },
+    {
+      "kicker": "ESTADO",
+      "title": "MVP ejecutable disponible",
+      "copy": "La versión actual incluye flujo CLI de init, generate y check de compatibilidad."
+    }
+  ],
+  "whatYouGet": {
+    "title": "Qué Incluye",
+    "items": [
+      {
+        "kicker": "CLI",
+        "copy": "Comandos para inicializar proyectos, generar artefactos y detectar breaking changes."
+      },
+      {
+        "kicker": "CORE",
+        "copy": "Validación estricta del esquema y generación determinista del resumen de endpoints."
+      },
+      {
+        "kicker": "ROADMAP",
+        "copy": "Generador Angular y capa de plugins backend en desarrollo activo."
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "Cómo Funciona",
+    "steps": [
+      "Define contratos en contracts/*.contract.json.",
+      "Ejecuta la generación de artefactos tipados.",
+      "Conecta los outputs generados en Angular y backend.",
+      "Ejecuta checks de compatibilidad antes de publicar cambios."
+    ],
+    "commands": ["pnpm ckit:init", "pnpm ckit:generate", "pnpm ckit:check"]
+  },
+  "footer": {
+    "eyebrow": "Toolkit Open Source",
+    "title": "Built for developers by Fr4n0m",
+    "description": "Flujo contract-first para equipos que buscan consistencia entre Angular y backend.",
+    "sections": {
+      "product": "Producto",
+      "resources": "Recursos"
+    },
+    "productLinks": [
+      { "label": "Inicio", "href": "/" },
+      { "label": "Qué Incluye", "href": "/#what-you-get" },
+      { "label": "Cómo Funciona", "href": "/#how-it-works" }
+    ],
+    "resourceLinks": [
+      { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" },
+      { "label": "Fr4n0m", "href": "https://codebyfran.es" }
+    ],
+    "legal": "Licencia MIT",
+    "copyright": "Copyright 2026"
+  },
+  "links": {
+    "githubProfile": "https://github.com/Fr4n0m",
+    "githubRepo": "https://github.com/Fr4n0m/ngx-contract-kit",
+    "website": "https://codebyfran.es"
+  }
+}

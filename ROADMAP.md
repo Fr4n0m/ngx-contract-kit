@@ -12,6 +12,13 @@
 - 2026-04-20: `core` y `cli` migrados a TypeScript estricto; tests unitarios iniciales añadidos en `packages/core`.
 - 2026-04-20: Fix de docs/VitePress para ESM (`apps/docs/package.json` con `type: module`) para poder iniciar la landing en local.
 - 2026-04-20: Rediseño mayor de la landing/docs: nueva home orientada a producto, página de arquitectura, sidebar/footer y build limpio sin warnings de Tailwind.
+- 2026-04-20: Tipografía de landing migrada a fuentes locales (`Ubuntu Sans Mono` para títulos y `Ubuntu Mono` para cuerpo).
+- 2026-04-20: Revisión de paleta y contraste en modo oscuro para docs/landing (mejor legibilidad en contenido y navegación).
+- 2026-04-20: Layout de docs refinado: sidebar izquierda eliminada y hero ajustado para evitar cortes/overflow en resoluciones medias y móviles.
+- 2026-04-20: Landing convertida a single-page i18n (`en/es`) con todos los textos en JSON y render dinámico por selector de idioma.
+- 2026-04-20: Footer rediseñado como componente dedicado y profesional (`AppFooter.vue`) con contenido i18n desde JSON.
+- 2026-04-20: Paleta dark mode ajustada de azul a verde carbón para coherencia visual (hero, cards, selector de idioma y footer).
+- 2026-04-20: Paleta refinada tomando referencia cromática de `landonorris.com` (oliva oscuro + marfil + acento lima).
 
 ## Semana 0 - Descubrimiento y alcance (2-3 dias)
 

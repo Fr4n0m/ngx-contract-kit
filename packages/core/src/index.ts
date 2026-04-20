@@ -2,10 +2,17 @@ import fs from "node:fs";
 import path from "node:path";
 
 export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+export type ContractScalarType = "string" | "number" | "boolean" | "unknown";
+export type ContractShape = Record<string, ContractScalarType>;
+export type ContractResponses = Record<string, ContractShape>;
 
 export type ContractEndpoint = {
   method: HttpMethod;
   path: string;
+  params?: ContractShape;
+  query?: ContractShape;
+  body?: ContractShape;
+  response?: ContractResponses;
 };
 
 export type ContractFile = Record<string, ContractEndpoint>;
@@ -23,9 +30,24 @@ export type ContractSummary = {
 };
 
 const METHOD_SET = new Set<HttpMethod>(["GET", "POST", "PUT", "PATCH", "DELETE"]);
+const SCALAR_SET = new Set<ContractScalarType>(["string", "number", "boolean", "unknown"]);
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function validateShape(shape: unknown, label: string): void {
+  if (!isRecord(shape)) {
+    throw new Error(`Invalid ${label}: expected an object`);
+  }
+
+  for (const [field, fieldType] of Object.entries(shape)) {
+    if (typeof fieldType !== "string" || !SCALAR_SET.has(fieldType as ContractScalarType)) {
+      throw new Error(
+        `Invalid ${label}.${field}: type must be one of ${Array.from(SCALAR_SET).join(", ")}`
+      );
+    }
+  }
 }
 
 export function validateContract(contract: unknown, sourceName = "unknown"): asserts contract is ContractFile {
@@ -51,6 +73,27 @@ export function validateContract(contract: unknown, sourceName = "unknown"): ass
       throw new Error(
         `Invalid endpoint "${endpointName}" in ${sourceName}: "method" must be one of ${Array.from(METHOD_SET).join(", ")}`
       );
+    }
+
+    if ("params" in endpoint) {
+      validateShape(endpoint.params, `endpoint "${endpointName}".params`);
+    }
+
+    if ("query" in endpoint) {
+      validateShape(endpoint.query, `endpoint "${endpointName}".query`);
+    }
+
+    if ("body" in endpoint) {
+      validateShape(endpoint.body, `endpoint "${endpointName}".body`);
+    }
+
+    if ("response" in endpoint) {
+      if (!isRecord(endpoint.response)) {
+        throw new Error(`Invalid endpoint "${endpointName}" in ${sourceName}: "response" must be an object`);
+      }
+      for (const [statusCode, shape] of Object.entries(endpoint.response)) {
+        validateShape(shape, `endpoint "${endpointName}".response.${statusCode}`);
+      }
     }
   }
 }

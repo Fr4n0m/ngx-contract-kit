@@ -3,35 +3,31 @@ import type { Config } from "tailwindcss";
 export default {
   content: [
     "./index.md",
-    "./quickstart.md",
-    "./demo.md",
-    "./architecture.md",
-    "./roadmap.md",
     "./.vitepress/**/*.{ts,js,vue,css}",
-    "../../README.md",
-    "../../ROADMAP.md"
+    "./i18n/*.json"
   ],
   theme: {
     extend: {
       colors: {
         brand: {
-          50: "#f4f9f7",
-          100: "#dbede5",
-          200: "#b7dbc9",
-          300: "#8cc4a8",
-          400: "#5aa07f",
-          500: "#3f8667",
-          600: "#2e6b53",
-          700: "#275544",
-          800: "#224538",
-          900: "#1f3b31"
+          50: "#f9faf6",
+          100: "#f4f4ed",
+          200: "#dde1d2",
+          300: "#c7ccb9",
+          400: "#b4b8a5",
+          500: "#8b907f",
+          600: "#686d5f",
+          700: "#535450",
+          800: "#343a26",
+          900: "#282c20"
         },
-        ink: "#1d1f21",
+        accent: "#d2ff00",
+        ink: "#1f2319",
         sand: "#f8f4ec"
       },
       fontFamily: {
-        heading: ["Sora", "ui-sans-serif", "system-ui"],
-        body: ["Manrope", "ui-sans-serif", "system-ui"]
+        heading: ["Ubuntu Sans Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"],
+        body: ["Ubuntu Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"]
       },
       boxShadow: {
         card: "0 20px 40px -26px rgba(29, 31, 33, 0.45)"

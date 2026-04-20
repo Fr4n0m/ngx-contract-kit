@@ -1,38 +1,13 @@
 import { defineConfig } from "vitepress";
+import en from "../i18n/en.json";
 
 export default defineConfig({
-  title: "ngx-contract-kit",
-  description: "Contract-first toolkit for Angular + backend teams",
+  title: en.meta.title,
+  description: en.meta.description,
   lang: "en-US",
   themeConfig: {
-    nav: [
-      { text: "Demo", link: "/demo" },
-      { text: "Quickstart", link: "/quickstart" },
-      { text: "Architecture", link: "/architecture" },
-      { text: "Roadmap", link: "/roadmap" },
-      { text: "GitHub", link: "https://github.com/Fr4n0m/ngx-contract-kit" }
-    ],
-    sidebar: [
-      {
-        text: "Getting Started",
-        items: [
-          { text: "Home", link: "/" },
-          { text: "Quickstart", link: "/quickstart" },
-          { text: "Demo", link: "/demo" }
-        ]
-      },
-      {
-        text: "Project",
-        items: [
-          { text: "Architecture", link: "/architecture" },
-          { text: "Roadmap", link: "/roadmap" }
-        ]
-      }
-    ],
-    socialLinks: [{ icon: "github", link: "https://github.com/Fr4n0m/ngx-contract-kit" }],
-    footer: {
-      message: "MIT Licensed - Built in public.",
-      copyright: "Copyright 2026"
-    }
+    nav: [],
+    sidebar: false,
+    socialLinks: [{ icon: "github", link: en.links.githubRepo }]
   }
 });
