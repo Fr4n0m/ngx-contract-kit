@@ -1,0 +1,18 @@
+{
+  "name": "@ngx-contract-kit/cli",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CLI for ngx-contract-kit",
+  "type": "commonjs",
+  "bin": {
+    "ngx-contract-kit": "bin/ngx-contract-kit.js"
+  },
+  "scripts": {
+    "build": "echo cli: no build step yet",
+    "test": "echo cli: no tests yet",
+    "lint": "echo cli: no lint step yet"
+  },
+  "dependencies": {
+    "@ngx-contract-kit/core": "workspace:*"
+  }
+}

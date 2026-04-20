@@ -12,9 +12,18 @@ pnpm install
 pnpm docs:dev
 ```
 
-## 3. Next milestone
+## 3. Try the CLI MVP
 
-Scaffold `packages/core` and `packages/cli` to support:
+```bash
+pnpm ckit:init
+pnpm ckit:generate
+pnpm ckit:check
+```
 
-- `ngx-contract-kit init`
-- `ngx-contract-kit generate`
+## 4. Next milestone
+
+Upgrade the MVP to:
+
+- TypeScript strict mode in core and CLI.
+- Contract schema richer than method/path (params/body/response).
+- Real Angular client generator package.

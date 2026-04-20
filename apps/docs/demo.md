@@ -19,7 +19,7 @@ export const usersContract = {
 ## 2. Generate client + types
 
 ```bash
-npx ngx-contract-kit generate
+pnpm ckit:generate
 ```
 
 Output:
@@ -48,7 +48,7 @@ getUser(@Param() params: GetUserParams): Promise<GetUser200Response> {
 ## 5. Protect CI from breaking changes
 
 ```bash
-npx ngx-contract-kit check
+pnpm ckit:check
 ```
 
 If a contract change is incompatible, CI fails before merge.

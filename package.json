@@ -13,6 +13,9 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "format": "prettier --write .",
+    "ckit:init": "node packages/cli/bin/ngx-contract-kit.js init",
+    "ckit:generate": "node packages/cli/bin/ngx-contract-kit.js generate",
+    "ckit:check": "node packages/cli/bin/ngx-contract-kit.js check",
     "docs:dev": "pnpm --filter @ngx-contract-kit/docs dev",
     "docs:build": "pnpm --filter @ngx-contract-kit/docs build"
   },
