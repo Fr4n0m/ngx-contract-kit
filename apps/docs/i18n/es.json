@@ -73,7 +73,7 @@
     "description": "Flujo contract-first para equipos que buscan consistencia entre Angular y backend.",
     "sections": {
       "product": "Producto",
-      "resources": "Recursos"
+      "prs": "PRs aquí"
     },
     "productLinks": [
       { "label": "Inicio", "href": "/" },
@@ -81,8 +81,7 @@
       { "label": "Cómo Funciona", "href": "/#how-it-works" }
     ],
     "resourceLinks": [
-      { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" },
-      { "label": "Fr4n0m", "href": "https://codebyfran.es" }
+      { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" }
     ],
     "legal": "Licencia MIT",
     "copyright": "Copyright 2026"

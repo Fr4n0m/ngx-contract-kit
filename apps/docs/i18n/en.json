@@ -69,11 +69,11 @@
   },
   "footer": {
     "eyebrow": "Open Source Toolkit",
-    "title": "Built for developers by Fr4n0m",
+    "title": "ngx-contract-kit",
     "description": "Contract-first workflow for teams that want consistency between Angular and backend code.",
     "sections": {
       "product": "Product",
-      "resources": "Resources"
+      "prs": "PRs here"
     },
     "productLinks": [
       { "label": "Overview", "href": "/" },
@@ -81,9 +81,11 @@
       { "label": "How It Works", "href": "/#how-it-works" }
     ],
     "resourceLinks": [
-      { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" },
-      { "label": "Fr4n0m", "href": "https://codebyfran.es" }
+      { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" }
     ],
+    "signaturePrefix": "Built for developers by",
+    "signatureName": "Fr4n0m",
+    "signatureUrl": "https://codebyfran.es",
     "legal": "MIT License",
     "copyright": "Copyright 2026"
   },

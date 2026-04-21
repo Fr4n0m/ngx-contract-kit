@@ -75,6 +75,7 @@
 
   body {
     @apply font-body antialiased;
+    overflow-x: hidden;
     background-image: radial-gradient(circle at 8% 5%, rgba(210, 255, 0, 0.12), rgba(248, 244, 236, 0) 45%),
       radial-gradient(circle at 92% 10%, rgba(83, 84, 80, 0.12), rgba(248, 244, 236, 0) 38%);
   }
@@ -86,19 +87,42 @@
 }
 
 @layer components {
+  :root {
+    --vp-layout-max-width: 100%;
+  }
+
+  .VPNavBar .container,
+  .VPNavBar .content {
+    max-width: none !important;
+  }
+
+  .VPNavBar .container {
+    padding-left: clamp(1rem, 4vw, 4rem);
+    padding-right: clamp(1rem, 4vw, 4rem);
+  }
+
   .VPContent .container,
   .VPDoc .container {
+    width: 100% !important;
+    max-width: 100% !important;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 0 !important;
+  }
+
+  .VPContent,
+  .VPDoc {
+    padding-bottom: 0 !important;
   }
 
   .VPContent .content-container,
   .VPDoc .content-container {
-    max-width: 1680px;
+    width: 100% !important;
+    max-width: 100% !important;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 2.25rem;
-    padding-right: 2.25rem;
+    padding-left: clamp(1rem, 4vw, 4rem);
+    padding-right: clamp(1rem, 4vw, 4rem);
   }
 
   @media (max-width: 768px) {
@@ -119,10 +143,20 @@
   }
 
   .vp-doc {
-    max-width: 1420px !important;
+    max-width: none !important;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+  }
+
+  .VPDoc .content,
+  .VPDoc .content > div,
+  .VPDoc .content-body,
+  .VPDoc .vp-doc,
+  .vp-doc > div,
+  .vp-doc > section {
+    max-width: none !important;
+    width: 100% !important;
   }
 
   .VPButton.brand {
