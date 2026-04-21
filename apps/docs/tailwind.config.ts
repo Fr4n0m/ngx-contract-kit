@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  darkMode: "class",
   content: [
     "./index.md",
     "./.vitepress/**/*.{ts,js,vue,css}",
@@ -26,6 +27,7 @@ export default {
         sand: "#f8f4ec"
       },
       fontFamily: {
+        project: ["Bruno Ace", "Ubuntu Sans Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"],
         heading: ["Ubuntu Sans Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"],
         body: ["Ubuntu Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"]
       },

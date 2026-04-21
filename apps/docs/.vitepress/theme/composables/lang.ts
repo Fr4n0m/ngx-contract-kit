@@ -1,6 +1,10 @@
-import { onMounted, ref } from "vue";
+import { onMounted, ref, type Ref } from "vue";
 
 export type Lang = "en" | "es";
+type UseLangResult = {
+  lang: Ref<Lang>;
+  setLang: (next: Lang) => void;
+};
 
 const STORAGE_KEY = "ngx-contract-kit-lang";
 const lang = ref<Lang>("en");
@@ -18,7 +22,7 @@ function detectInitialLang(): Lang {
   return navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
 }
 
-export function useLang() {
+export function useLang(): UseLangResult {
   onMounted(() => {
     if (!initialized) {
       lang.value = detectInitialLang();

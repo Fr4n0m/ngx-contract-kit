@@ -16,6 +16,9 @@ type FooterPayload = {
   };
   productLinks: FooterLink[];
   resourceLinks: FooterLink[];
+  signaturePrefix: string;
+  signatureName: string;
+  signatureUrl: string;
   legal: string;
   copyright: string;
 };
@@ -32,11 +35,11 @@ defineProps<{
     <div class="grid gap-8 md:grid-cols-12">
       <div class="md:col-span-6">
         <p
-          class="font-heading text-xs uppercase tracking-[0.18em] text-brand-700 dark:text-brand-300"
+          class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#46583f] dark:text-[#b6dd00]"
         >
           {{ footer.eyebrow }}
         </p>
-        <h3 class="mt-3 font-heading text-2xl text-[color:var(--vp-c-text-1)]">
+        <h3 class="mt-3 font-project text-2xl text-[color:var(--vp-c-text-1)]">
           {{ footer.title }}
         </h3>
         <p
@@ -47,10 +50,7 @@ defineProps<{
       </div>
 
       <div class="md:col-span-3">
-        <p class="font-heading text-sm text-[color:var(--vp-c-text-1)]">
-          {{ footer.sections.product }}
-        </p>
-        <ul class="mt-3 space-y-2">
+        <ul class="space-y-2">
           <li v-for="link in footer.productLinks" :key="link.href">
             <a
               class="text-sm text-[color:var(--vp-c-text-1)] transition hover:text-brand-700 dark:text-[color:var(--vp-c-text-2)] dark:hover:text-brand-300"
@@ -83,14 +83,25 @@ defineProps<{
     </div>
 
     <div
-      class="mt-8 flex flex-wrap items-center justify-between gap-2 border-t border-[color:var(--vp-c-bg-alt)] pt-4"
+      class="mt-8 grid gap-2 border-t border-[color:var(--vp-c-bg-alt)] pt-4 text-xs text-[color:var(--vp-c-text-2)] md:grid-cols-3 md:items-center"
     >
       <p
-        class="text-xs uppercase tracking-wide text-[color:var(--vp-c-text-2)]"
+        class="uppercase tracking-wide"
       >
         {{ footer.legal }}
       </p>
-      <p class="text-xs text-[color:var(--vp-c-text-2)]">
+      <p class="md:text-center">
+        {{ footer.signaturePrefix }}
+        <a
+          class="underline underline-offset-4 transition hover:text-brand-700 dark:hover:text-brand-300"
+          :href="footer.signatureUrl"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {{ footer.signatureName }}
+        </a>
+      </p>
+      <p class="md:text-right">
         {{ footer.copyright }}
       </p>
     </div>

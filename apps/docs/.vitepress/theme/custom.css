@@ -1,3 +1,5 @@
+@import "@fontsource/bruno-ace";
+
 @font-face {
   font-family: "Ubuntu Sans Mono";
   src: url("../../assets/fonts/font-2/static/UbuntuSansMono-Regular.ttf") format("truetype");
@@ -48,15 +50,19 @@
     --vp-c-brand-2: #535450;
     --vp-c-brand-3: #343a26;
     --vp-c-brand-soft: #d2ff00;
-    --vp-c-bg: #f8f4ec;
-    --vp-c-bg-soft: #f4f4ed;
-    --vp-c-bg-alt: #dde1d2;
-    --vp-c-text-1: #1f2319;
-    --vp-c-text-2: #343a26;
-    --vp-c-text-3: #535450;
+    --vp-c-bg: #b7c1b2;
+    --vp-c-bg-soft: #cbd3c7;
+    --vp-c-bg-alt: #94a08d;
+    --vp-c-text-1: #11170f;
+    --vp-c-text-2: #1f281b;
+    --vp-c-text-3: #33402c;
     --vp-home-hero-name-color: transparent;
     --vp-home-hero-name-background: linear-gradient(120deg, #343a26 5%, #686d5f 92%);
     --vp-code-bg: #1f2319;
+    --ck-code-fg: #163a2b;
+    --ck-code-inline-bg: #d9e5d8;
+    --ck-code-inline-fg: #143327;
+    --ck-code-border: #9fb59b;
   }
 
   .dark {
@@ -70,18 +76,24 @@
     --vp-c-text-2: #dde1d2;
     --vp-c-text-3: #b4b8a5;
     --vp-code-bg: #0e1613;
+    --ck-code-fg: #9cf279;
+    --ck-code-inline-bg: #1c2a1f;
+    --ck-code-inline-fg: #b7ff93;
+    --ck-code-border: #3e5842;
     --vp-home-hero-name-background: linear-gradient(120deg, #d2ff00 5%, #b4b8a5 92%);
   }
 
   body {
     @apply font-body antialiased;
     overflow-x: hidden;
-    background-image: radial-gradient(circle at 8% 5%, rgba(210, 255, 0, 0.12), rgba(248, 244, 236, 0) 45%),
-      radial-gradient(circle at 92% 10%, rgba(83, 84, 80, 0.12), rgba(248, 244, 236, 0) 38%);
+    background-image:
+      radial-gradient(circle at 10% 6%, rgba(173, 196, 104, 0.18), rgba(183, 193, 178, 0) 44%),
+      radial-gradient(circle at 90% 12%, rgba(60, 73, 55, 0.2), rgba(183, 193, 178, 0) 40%);
   }
 
   .dark body {
-    background-image: radial-gradient(circle at 8% 5%, rgba(210, 255, 0, 0.12), rgba(17, 24, 15, 0) 45%),
+    background-image:
+      radial-gradient(circle at 8% 5%, rgba(210, 255, 0, 0.12), rgba(17, 24, 15, 0) 45%),
       radial-gradient(circle at 92% 10%, rgba(83, 84, 80, 0.22), rgba(17, 24, 15, 0) 38%);
   }
 }
@@ -101,233 +113,119 @@
     padding-right: clamp(1rem, 4vw, 4rem);
   }
 
-  .VPContent .container,
-  .VPDoc .container {
+  .VPNavBar .content-body {
+    min-width: 0 !important;
     width: 100% !important;
-    max-width: 100% !important;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 0 !important;
   }
 
-  .VPContent,
-  .VPDoc {
-    padding-bottom: 0 !important;
+  .VPNavBarTitle .title,
+  .VPNavBarTitle .text {
+    font-family: "Bruno Ace", "Ubuntu Sans Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, monospace !important;
+    letter-spacing: 0.02em;
   }
 
-  .VPContent .content-container,
-  .VPDoc .content-container {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: clamp(1rem, 4vw, 4rem);
-    padding-right: clamp(1rem, 4vw, 4rem);
+  .VPSwitch {
+    border: 1px solid rgba(17, 23, 15, 0.24);
+    background-color: rgba(17, 23, 15, 0.14);
   }
 
-  @media (max-width: 768px) {
-    .VPContent .content-container,
-    .VPDoc .content-container {
-      padding-left: 1rem;
-      padding-right: 1rem;
+  .VPSwitch .check {
+    background-color: #f4f6f0;
+    border: 1px solid rgba(17, 23, 15, 0.28);
+  }
+
+  .VPSwitch .icon {
+    color: #1a2116;
+  }
+
+  .dark .VPSwitch {
+    border-color: rgba(210, 255, 0, 0.28);
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .dark .VPSwitch .check {
+    background-color: #11180f;
+    border-color: rgba(210, 255, 0, 0.3);
+  }
+
+  .dark .VPSwitch .icon {
+    color: #d2ff00;
+  }
+
+  .vp-doc :not(pre) > code {
+    color: var(--ck-code-inline-fg);
+    background: var(--ck-code-inline-bg);
+    border: 1px solid var(--ck-code-border);
+    border-radius: 0.375rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .vp-doc div[class*="language-"] {
+    border: 1px solid var(--ck-code-border);
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 70%, #0f1d16 30%);
+  }
+
+  .vp-doc div[class*="language-"] code {
+    color: var(--ck-code-fg) !important;
+  }
+
+  .dark .vp-doc div[class*="language-"] {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 65%, #07100d 35%);
+  }
+
+  @media (min-width: 960px) {
+    .VPSidebar {
+      background: transparent !important;
+      border-right: 1px solid rgba(17, 23, 15, 0.12);
+      box-shadow: none !important;
     }
-  }
 
-  .VPDocAside {
-    display: none !important;
-  }
+    .VPSidebar .curtain {
+      background: transparent !important;
+    }
 
-  .VPDoc.has-aside .aside-container {
-    display: none !important;
-    width: 0 !important;
-  }
+    .VPSidebar .group .text {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--vp-c-text-3);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
 
-  .vp-doc {
-    max-width: none !important;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-  }
+    .VPSidebarItem .item .link {
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.75rem;
+      color: var(--vp-c-text-2) !important;
+      transition: background-color 120ms ease, color 120ms ease;
+      border-left: 2px solid transparent;
+    }
 
-  .VPDoc .content,
-  .VPDoc .content > div,
-  .VPDoc .content-body,
-  .VPDoc .vp-doc,
-  .vp-doc > div,
-  .vp-doc > section {
-    max-width: none !important;
-    width: 100% !important;
-  }
+    .VPSidebarItem .item .link:hover {
+      background: rgba(17, 23, 15, 0.06);
+      color: var(--vp-c-text-1) !important;
+    }
 
-  .VPButton.brand {
-    @apply bg-accent border-accent text-[#1f2319] shadow-card;
-  }
+    .VPSidebarItem.is-active > .item .link,
+    .VPSidebarItem .item .link.active {
+      background: rgba(17, 23, 15, 0.1);
+      color: var(--vp-c-text-1) !important;
+      border-left-color: rgba(17, 23, 15, 0.45);
+    }
 
-  .VPButton.alt {
-    @apply border-brand-700 text-brand-800 bg-white/80;
-  }
+    .dark .VPSidebar {
+      border-right-color: rgba(210, 255, 0, 0.15);
+    }
 
-  .dark .VPButton.alt {
-    @apply border-brand-500 text-brand-200 bg-brand-900/70;
-  }
+    .dark .VPSidebarItem .item .link:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
 
-  .VPFeature {
-    @apply rounded-2xl border border-brand-100 bg-white/85 shadow-card;
-  }
-
-  .dark .VPFeature {
-    @apply border-brand-900/40 bg-slate-900/70;
-  }
-
-  .VPFeature .title {
-    @apply font-heading text-lg text-ink;
-  }
-
-  .dark .VPFeature .title {
-    @apply text-slate-100;
-  }
-
-  .VPFeature .details {
-    @apply text-slate-700;
-  }
-
-  .dark .VPFeature .details {
-    @apply text-slate-300;
-  }
-
-  .landing-grid {
-    @apply grid gap-4 lg:grid-cols-3;
-  }
-
-  .landing-panel {
-    @apply rounded-2xl border border-brand-200 bg-white/90 p-5 shadow-card;
-  }
-
-  .landing-kicker {
-    @apply font-heading text-xs uppercase tracking-wider text-brand-700;
-  }
-
-  .landing-title {
-    @apply mt-2 font-heading text-xl text-ink;
-  }
-
-  .landing-copy {
-    @apply mt-2 text-slate-700;
-  }
-
-  .dark .landing-copy {
-    @apply text-slate-300;
-  }
-
-  .landing-root {
-    @apply mx-auto max-w-6xl pb-16 pt-8;
-  }
-
-  .landing-lang {
-    @apply mb-6 flex items-center justify-end gap-2;
-  }
-
-  .landing-lang-label {
-    @apply text-sm text-slate-500;
-  }
-
-  .landing-lang-btn {
-    @apply rounded-md border border-slate-300 bg-white/80 px-3 py-1 text-sm text-slate-700 transition;
-  }
-
-  .dark .landing-lang-btn {
-    @apply border-slate-700 bg-slate-900/70 text-slate-300;
-  }
-
-  .landing-lang-btn.active {
-    @apply border-brand-700 bg-brand-700 text-white;
-  }
-
-  .dark .landing-lang-btn.active {
-    @apply border-brand-400 bg-brand-500 text-slate-950;
-  }
-
-  .landing-hero {
-    @apply mb-10 rounded-3xl border border-brand-200 bg-white/85 p-8 shadow-card;
-  }
-
-  .dark .landing-hero {
-    @apply border-brand-900/40 bg-slate-900/70;
-  }
-
-  .landing-hero-name {
-    @apply font-heading text-sm uppercase tracking-[0.2em] text-brand-700;
-  }
-
-  .dark .landing-hero-name {
-    @apply text-brand-300;
-  }
-
-  .landing-hero-title {
-    @apply mt-3 font-heading text-3xl leading-tight text-ink md:text-5xl;
-  }
-
-  .dark .landing-hero-title {
-    @apply text-slate-100;
-  }
-
-  .landing-hero-tagline {
-    @apply mt-4 max-w-3xl text-base text-slate-700 md:text-lg;
-  }
-
-  .dark .landing-hero-tagline {
-    @apply text-slate-300;
-  }
-
-  .landing-hero-actions {
-    @apply mt-6 flex flex-wrap gap-3;
-  }
-
-  .landing-section {
-    @apply mt-12;
-  }
-
-  .landing-section-title {
-    @apply mb-4 font-heading text-2xl text-ink md:text-3xl;
-  }
-
-  .dark .landing-section-title {
-    @apply text-slate-100;
-  }
-
-  .landing-steps {
-    @apply list-decimal space-y-2 pl-6 text-slate-700;
-  }
-
-  .dark .landing-steps {
-    @apply text-slate-300;
-  }
-
-  .landing-footer {
-    @apply mt-14 border-t border-slate-300/70 pt-6;
-  }
-
-  .dark .landing-footer {
-    @apply border-slate-700/60;
-  }
-
-  .landing-footer-copy {
-    @apply text-slate-700;
-  }
-
-  .dark .landing-footer-copy {
-    @apply text-slate-300;
-  }
-
-  .landing-footer-links {
-    @apply mt-3 flex flex-wrap gap-4;
-  }
-
-  .landing-footer-links a {
-    @apply text-brand-700 underline underline-offset-4;
-  }
-
-  .dark .landing-footer-links a {
-    @apply text-brand-300;
+    .dark .VPSidebarItem.is-active > .item .link,
+    .dark .VPSidebarItem .item .link.active {
+      background: rgba(255, 255, 255, 0.08);
+      border-left-color: rgba(210, 255, 0, 0.6);
+      color: var(--vp-c-text-1) !important;
+    }
   }
 }

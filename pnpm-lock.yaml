@@ -29,9 +29,15 @@ importers:
 
   apps/docs:
     dependencies:
+      '@fontsource/bruno-ace':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@tabler/icons-vue':
         specifier: ^3.41.1
         version: 3.41.1(vue@3.5.32(typescript@5.9.3))
+      vue:
+        specifier: ^3.5.22
+        version: 3.5.32(typescript@5.9.3)
     devDependencies:
       autoprefixer:
         specifier: ^10.4.21
@@ -469,6 +475,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource/bruno-ace@5.2.8':
+    resolution: {integrity: sha512-4eZs5PPW6A7tat5w+SoNvWdq1ZX/G+0HHrgEpiEx4rPcHc97N7eIdioyOyeSMRqYoXQZcS4nvFuh17BtTaNlLw==}
 
   '@iconify-json/simple-icons@1.2.79':
     resolution: {integrity: sha512-aNyO7Fd1qej9oQfIyohYFRv0lhQLaZ+6UkK1c1qwax0MDPUOZOdq65MlU500kow97pD/W+b2u1And3e25eE24Q==}
@@ -1883,6 +1892,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.27.7':
     optional: true
+
+  '@fontsource/bruno-ace@5.2.8': {}
 
   '@iconify-json/simple-icons@1.2.79':
     dependencies:

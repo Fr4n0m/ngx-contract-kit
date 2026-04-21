@@ -4,6 +4,7 @@ import { h, Fragment } from "vue";
 import LandingPage from "./components/LandingPage.vue";
 import HeaderLangSwitch from "./components/HeaderLangSwitch.vue";
 import HeaderNavLinks from "./components/HeaderNavLinks.vue";
+import GlobalFooter from "./components/GlobalFooter.vue";
 import "./custom.css";
 
 const theme: Theme = {
@@ -11,7 +12,8 @@ const theme: Theme = {
   Layout: () =>
     h(DefaultTheme.Layout, null, {
       "nav-bar-content-before": () => h(HeaderNavLinks),
-      "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch)])
+      "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch)]),
+      "layout-bottom": () => h(GlobalFooter)
     }),
   enhanceApp(ctx) {
     DefaultTheme.enhanceApp?.(ctx);

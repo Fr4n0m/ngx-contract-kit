@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "ngx-contract-kit",
+    "title": "contract-kit",
     "description": "Contract-first toolkit for Angular and backend teams"
   },
   "lang": {
@@ -10,17 +10,37 @@
   },
   "nav": {
     "overview": "Overview",
+    "docs": "Docs",
     "whatYouGet": "What You Get",
     "howItWorks": "How It Works",
     "github": "GitHub"
   },
+  "docsNav": {
+    "docsHome": "Docs Home",
+    "quickstart": "Quickstart",
+    "cliReference": "CLI",
+    "contractSchema": "Schema",
+    "generators": "Generators",
+    "versioning": "Versioning",
+    "examples": "Examples",
+    "contributing": "Contributing",
+    "faq": "FAQ"
+  },
   "hero": {
-    "name": "ngx-contract-kit",
+    "name": "contract-kit",
     "title": "Ship Angular + backend APIs from one contract",
     "tagline": "Single-source contract workflow to generate typed clients, backend-safe wiring, and compatibility checks before release.",
     "actions": [
-      { "label": "What You Get", "href": "#what-you-get", "theme": "brand" },
-      { "label": "How It Works", "href": "#how-it-works", "theme": "alt" }
+      {
+        "label": "What You Get",
+        "href": "#what-you-get",
+        "theme": "brand"
+      },
+      {
+        "label": "How It Works",
+        "href": "#how-it-works",
+        "theme": "alt"
+      }
     ]
   },
   "cards": [
@@ -65,23 +85,39 @@
       "Connect generated outputs in Angular and backend code.",
       "Run compatibility checks before releasing changes."
     ],
-    "commands": ["pnpm ckit:init", "pnpm ckit:generate", "pnpm ckit:check"]
+    "commands": [
+      "pnpm ckit:init",
+      "pnpm ckit:generate",
+      "pnpm ckit:check"
+    ]
   },
   "footer": {
     "eyebrow": "Open Source Toolkit",
-    "title": "ngx-contract-kit",
+    "title": "contract-kit",
     "description": "Contract-first workflow for teams that want consistency between Angular and backend code.",
     "sections": {
       "product": "Product",
       "prs": "PRs here"
     },
     "productLinks": [
-      { "label": "Overview", "href": "/" },
-      { "label": "What You Get", "href": "/#what-you-get" },
-      { "label": "How It Works", "href": "/#how-it-works" }
+      {
+        "label": "Docs",
+        "href": "/docs/"
+      },
+      {
+        "label": "What You Get",
+        "href": "/#what-you-get"
+      },
+      {
+        "label": "How It Works",
+        "href": "/#how-it-works"
+      }
     ],
     "resourceLinks": [
-      { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" }
+      {
+        "label": "GitHub",
+        "href": "https://github.com/Fr4n0m/ngx-contract-kit"
+      }
     ],
     "signaturePrefix": "Built for developers by",
     "signatureName": "Fr4n0m",
