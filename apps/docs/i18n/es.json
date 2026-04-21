@@ -91,6 +91,84 @@
       "pnpm ckit:check"
     ]
   },
+  "commandPalette": {
+    "title": "contract-kit",
+    "messages": {
+      "searchPlaceholder": "Busca páginas, docs y acciones",
+      "noResults": "No hay comandos que coincidan.",
+      "closeLabel": "Cerrar paleta de comandos"
+    },
+    "recentsSectionTitle": "Recientes",
+    "sections": {
+      "product": "Producto",
+      "docs": "Documentación",
+      "community": "Comunidad"
+    },
+    "items": {
+      "product": [
+        {
+          "id": "home",
+          "title": "Inicio",
+          "subtitle": "Resumen de la landing",
+          "href": "/",
+          "shortcut": "mod+h"
+        },
+        {
+          "id": "what-you-get",
+          "title": "Qué Incluye",
+          "subtitle": "Features y capacidades",
+          "href": "/#what-you-get"
+        },
+        {
+          "id": "how-it-works",
+          "title": "Cómo Funciona",
+          "subtitle": "Flujo y checks de release",
+          "href": "/#how-it-works"
+        }
+      ],
+      "docs": [
+        {
+          "id": "docs-overview",
+          "title": "Inicio Docs",
+          "subtitle": "Índice de documentación",
+          "href": "/docs/",
+          "shortcut": "mod+d"
+        },
+        {
+          "id": "docs-quickstart",
+          "title": "Inicio rápido",
+          "subtitle": "Instalación y primeros comandos",
+          "href": "/docs/quickstart"
+        },
+        {
+          "id": "docs-cli",
+          "title": "Referencia CLI",
+          "subtitle": "Todos los comandos de CLI",
+          "href": "/docs/cli-reference"
+        },
+        {
+          "id": "docs-schema",
+          "title": "Schema de Contrato",
+          "subtitle": "Estructura y validación",
+          "href": "/docs/contract-schema"
+        }
+      ],
+      "community": [
+        {
+          "id": "github-repo",
+          "title": "Repositorio GitHub",
+          "subtitle": "Código fuente e issues",
+          "href": "https://github.com/Fr4n0m/ngx-contract-kit"
+        },
+        {
+          "id": "fr4nom-site",
+          "title": "Portfolio Fr4n0m",
+          "subtitle": "Creado por Fr4n0m",
+          "href": "https://codebyfran.es"
+        }
+      ]
+    }
+  },
   "footer": {
     "eyebrow": "Toolkit Open Source",
     "title": "contract-kit",
