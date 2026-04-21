@@ -10,7 +10,7 @@ const t = computed(() => dict[lang.value as Lang]);
 </script>
 
 <template>
-  <nav class="ml-auto hidden items-center gap-5 pr-1 md:flex">
+  <nav class="ml-auto hidden flex-nowrap items-center gap-5 pr-0 md:flex">
     <a
       class="whitespace-nowrap text-sm text-[color:var(--vp-c-text-1)] hover:text-brand-700 dark:hover:text-accent"
       href="/"

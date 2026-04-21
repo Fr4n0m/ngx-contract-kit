@@ -59,6 +59,9 @@
     --vp-home-hero-name-color: transparent;
     --vp-home-hero-name-background: linear-gradient(120deg, #343a26 5%, #686d5f 92%);
     --vp-code-bg: #1f2319;
+    --vp-code-color: #1f5a3f;
+    --vp-code-block-color: #1f5a3f;
+    --vp-code-lang-color: #2a3d31;
     --ck-code-fg: #163a2b;
     --ck-code-inline-bg: #d9e5d8;
     --ck-code-inline-fg: #143327;
@@ -76,6 +79,9 @@
     --vp-c-text-2: #dde1d2;
     --vp-c-text-3: #b4b8a5;
     --vp-code-bg: #0e1613;
+    --vp-code-color: #b6dd00;
+    --vp-code-block-color: #c9ef38;
+    --vp-code-lang-color: #d8e9a5;
     --ck-code-fg: #9cf279;
     --ck-code-inline-bg: #1c2a1f;
     --ck-code-inline-fg: #b7ff93;
@@ -167,6 +173,14 @@
 
   .vp-doc div[class*="language-"] code {
     color: var(--ck-code-fg) !important;
+  }
+
+  html:not(.dark) .vp-code span {
+    --shiki-light: #2a6b4a !important;
+  }
+
+  .dark .vp-code span {
+    --shiki-dark: #c9ef38 !important;
   }
 
   .dark .vp-doc div[class*="language-"] {
