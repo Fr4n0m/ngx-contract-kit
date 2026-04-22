@@ -35,7 +35,7 @@ defineProps<{
     <div class="grid gap-8 md:grid-cols-12">
       <div class="md:col-span-6">
         <p
-          class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#46583f] dark:text-[#b6dd00]"
+          class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-brand-700 dark:text-accent"
         >
           {{ footer.eyebrow }}
         </p>

@@ -79,17 +79,43 @@
   },
   "howItWorks": {
     "title": "How It Works",
+    "intro": "From contract to release-safe integration in four practical steps.",
     "steps": [
-      "Define contract files in contracts/*.contract.json.",
-      "Run generation for typed artifacts.",
-      "Connect generated outputs in Angular and backend code.",
-      "Run compatibility checks before releasing changes."
+      {
+        "title": "Define your contract",
+        "detail": "Create endpoint definitions in contracts/*.contract.json with request and response shapes.",
+        "command": "pnpm ckit:init"
+      },
+      {
+        "title": "Generate typed artifacts",
+        "detail": "Produce deterministic models and helper outputs from the contract source.",
+        "command": "pnpm ckit:generate"
+      },
+      {
+        "title": "Wire Angular + backend",
+        "detail": "Connect generated outputs in Angular clients and backend handlers to keep both sides aligned."
+      },
+      {
+        "title": "Check compatibility before release",
+        "detail": "Run contract diff checks to detect breaking API changes early in CI.",
+        "command": "pnpm ckit:check"
+      }
     ],
-    "commands": [
-      "pnpm ckit:init",
-      "pnpm ckit:generate",
-      "pnpm ckit:check"
-    ]
+    "example": {
+      "title": "Minimal contract example",
+      "fileLabel": "contracts/users.contract.json",
+      "code": "{\n  \"service\": \"users\",\n  \"endpoints\": [{\n    \"path\": \"/users/:id\",\n    \"method\": \"GET\",\n    \"response\": { \"200\": { \"id\": \"string\", \"email\": \"string\" } }\n  }]\n}"
+    },
+    "releaseChecks": {
+      "title": "Release checklist",
+      "items": [
+        "Schema stays valid and deterministic.",
+        "Generated outputs are in sync with the contract.",
+        "No breaking changes without intentional version bump."
+      ]
+    },
+    "commandsTitle": "Core commands",
+    "commands": ["pnpm ckit:init", "pnpm ckit:generate", "pnpm ckit:check"]
   },
   "commandPalette": {
     "title": "contract-kit",
@@ -104,6 +130,79 @@
       "docs": "Documentation",
       "community": "Community"
     },
+    "docsNested": {
+      "title": "Documentation",
+      "subtitle": "Browse all docs sections"
+    },
+    "docsGroups": [
+      {
+        "id": "docs-start",
+        "title": "Start",
+        "items": [
+          {
+            "id": "docs-overview",
+            "title": "Docs Overview",
+            "subtitle": "Documentation index",
+            "href": "/docs/",
+            "shortcut": "mod+d"
+          },
+          {
+            "id": "docs-quickstart",
+            "title": "Quickstart",
+            "subtitle": "Install and first commands",
+            "href": "/docs/quickstart"
+          }
+        ]
+      },
+      {
+        "id": "docs-reference",
+        "title": "Reference",
+        "items": [
+          {
+            "id": "docs-cli",
+            "title": "CLI Reference",
+            "subtitle": "All CLI commands",
+            "href": "/docs/cli-reference"
+          },
+          {
+            "id": "docs-schema",
+            "title": "Contract Schema",
+            "subtitle": "Structure and validation",
+            "href": "/docs/contract-schema"
+          },
+          {
+            "id": "docs-generators",
+            "title": "Generators",
+            "subtitle": "Supported outputs",
+            "href": "/docs/generators"
+          },
+          {
+            "id": "docs-versioning",
+            "title": "Versioning",
+            "subtitle": "Compatibility strategy",
+            "href": "/docs/versioning"
+          },
+          {
+            "id": "docs-examples",
+            "title": "Examples",
+            "subtitle": "Integration scenarios",
+            "href": "/docs/examples"
+          },
+          {
+            "id": "docs-contributing",
+            "title": "Contributing",
+            "subtitle": "Open source contributions",
+            "href": "/docs/contributing"
+          },
+          {
+            "id": "docs-faq",
+            "title": "FAQ",
+            "subtitle": "Common questions",
+            "href": "/docs/faq"
+          }
+        ]
+      }
+    ],
     "items": {
       "product": [
         {
@@ -124,33 +223,6 @@
           "title": "How It Works",
           "subtitle": "Workflow and release checks",
           "href": "/#how-it-works"
-        }
-      ],
-      "docs": [
-        {
-          "id": "docs-overview",
-          "title": "Docs Overview",
-          "subtitle": "Documentation index",
-          "href": "/docs/",
-          "shortcut": "mod+d"
-        },
-        {
-          "id": "docs-quickstart",
-          "title": "Quickstart",
-          "subtitle": "Install and first commands",
-          "href": "/docs/quickstart"
-        },
-        {
-          "id": "docs-cli",
-          "title": "CLI Reference",
-          "subtitle": "All CLI commands",
-          "href": "/docs/cli-reference"
-        },
-        {
-          "id": "docs-schema",
-          "title": "Contract Schema",
-          "subtitle": "Structure and validation",
-          "href": "/docs/contract-schema"
         }
       ],
       "community": [
