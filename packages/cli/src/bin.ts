@@ -69,6 +69,7 @@ function generate(projectRoot: string): void {
   log("- generated/types.ts");
   log("- generated/summary.json");
   log("- generated/contract-model.ts");
+  log("- generated/angular-client.ts");
 }
 
 function check(projectRoot: string): void {
@@ -91,6 +92,15 @@ function check(projectRoot: string): void {
     log("Breaking changes detected:");
     for (const removed of diff.removed) {
       log(`- Removed endpoint: ${removed}`);
+    }
+    for (const changed of diff.changedSignatures) {
+      log(`- Changed endpoint signature: ${changed}`);
+    }
+    for (const removedStatus of diff.removedResponseStatuses) {
+      log(`- Removed response status: ${removedStatus}`);
+    }
+    for (const removedFields of diff.removedRequestFields) {
+      log(`- Removed request field: ${removedFields}`);
     }
     process.exit(2);
   }

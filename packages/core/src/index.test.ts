@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createSummary, diffSummaries, generateContractModelFile, validateContract } from "./index";
+import { createSummary, diffSummaries, generateAngularClientFile, generateContractModelFile, validateContract } from "./index";
 
 describe("validateContract", () => {
   it("accepts a valid contract", () => {
@@ -72,20 +72,96 @@ describe("createSummary", () => {
 describe("diffSummaries", () => {
   it("detects removed endpoints as breaking", () => {
     const previous = {
-      version: 1 as const,
+      version: 2 as const,
       endpoints: [
-        { file: "users.contract.json", name: "getUser", method: "GET" as const, path: "/users/:id" },
-        { file: "users.contract.json", name: "listUsers", method: "GET" as const, path: "/users" }
+        {
+          file: "users.contract.json",
+          name: "getUser",
+          method: "GET" as const,
+          path: "/users/:id",
+          paramsFields: ["id"],
+          queryFields: [],
+          bodyFields: [],
+          responseStatusCodes: ["200", "404"]
+        },
+        {
+          file: "users.contract.json",
+          name: "listUsers",
+          method: "GET" as const,
+          path: "/users",
+          paramsFields: [],
+          queryFields: [],
+          bodyFields: [],
+          responseStatusCodes: ["200"]
+        }
       ]
     };
     const current = {
-      version: 1 as const,
-      endpoints: [{ file: "users.contract.json", name: "listUsers", method: "GET" as const, path: "/users" }]
+      version: 2 as const,
+      endpoints: [
+        {
+          file: "users.contract.json",
+          name: "listUsers",
+          method: "GET" as const,
+          path: "/users",
+          paramsFields: [],
+          queryFields: [],
+          bodyFields: [],
+          responseStatusCodes: ["200"]
+        }
+      ]
     };
 
     const diff = diffSummaries(previous, current);
     expect(diff.breaking).toBe(true);
-    expect(diff.removed).toEqual(["GET /users/:id"]);
+    expect(diff.removed).toEqual(["GET /users/:id (users.contract.json:getUser)"]);
+    expect(diff.changedSignatures).toEqual([]);
+    expect(diff.removedResponseStatuses).toEqual([]);
+    expect(diff.removedRequestFields).toEqual([]);
+  });
+
+  it("detects signature/status/field removals as breaking", () => {
+    const previous = {
+      version: 2 as const,
+      endpoints: [
+        {
+          file: "users.contract.json",
+          name: "getUser",
+          method: "GET" as const,
+          path: "/users/:id",
+          paramsFields: ["id"],
+          queryFields: ["expand"],
+          bodyFields: [],
+          responseStatusCodes: ["200", "404"]
+        }
+      ]
+    };
+    const current = {
+      version: 2 as const,
+      endpoints: [
+        {
+          file: "users.contract.json",
+          name: "getUser",
+          method: "POST" as const,
+          path: "/users/find",
+          paramsFields: [],
+          queryFields: [],
+          bodyFields: [],
+          responseStatusCodes: ["200"]
+        }
+      ]
+    };
+
+    const diff = diffSummaries(previous, current);
+    expect(diff.breaking).toBe(true);
+    expect(diff.removed).toEqual([]);
+    expect(diff.changedSignatures).toEqual([
+      "users.contract.json:getUser (GET /users/:id -> POST /users/find)"
+    ]);
+    expect(diff.removedResponseStatuses).toEqual(["users.contract.json:getUser (404)"]);
+    expect(diff.removedRequestFields).toEqual([
+      "users.contract.json:getUser (params: id | query: expand)"
+    ]);
   });
 });
 
@@ -110,5 +186,29 @@ describe("generateContractModelFile", () => {
     expect(output).toContain('params: {\n  id: string;\n};');
     expect(output).toContain('"200": {\n  id: string;\n  age: number;\n};');
     expect(output).toContain('"404": {\n  message: string;\n};');
+  });
+});
+
+describe("generateAngularClientFile", () => {
+  it("renders typed request/response aliases and client methods", () => {
+    const output = generateAngularClientFile({
+      "users.contract.json": {
+        getUser: {
+          method: "GET",
+          path: "/users/:id",
+          params: { id: "string" },
+          query: { includePosts: "boolean" },
+          response: {
+            "200": { id: "string" }
+          }
+        }
+      }
+    });
+
+    expect(output).toContain("export type GetUserRequest");
+    expect(output).toContain('ContractModel["getUser"]["params"]');
+    expect(output).toContain("export class ContractKitClient");
+    expect(output).toContain('getUser(input: GetUserRequest): Observable<GetUserResponse>');
+    expect(output).toContain('return this.request<GetUserResponse>("GET", "/users/:id", input);');
   });
 });
