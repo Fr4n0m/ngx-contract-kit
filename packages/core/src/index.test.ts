@@ -193,7 +193,7 @@ describe("generateContractModelFile", () => {
       }
     });
 
-    expect(output).toContain('"getUser": {');
+    expect(output).toContain('"users.getUser": {');
     expect(output).toContain('params: {\n  id: string;\n};');
     expect(output).toContain('"200": {\n  id: string;\n  age: number;\n};');
     expect(output).toContain('"404": {\n  message: string;\n};');
@@ -216,11 +216,27 @@ describe("generateAngularClientFile", () => {
       }
     });
 
-    expect(output).toContain("export type GetUserRequest");
-    expect(output).toContain('ContractModel["getUser"]["params"]');
+    expect(output).toContain("export type UsersGetUserRequest");
+    expect(output).toContain('ContractModel["users.getUser"]["params"]');
     expect(output).toContain("export class ContractKitClient");
-    expect(output).toContain('getUser(input: GetUserRequest): Observable<GetUserResponse>');
-    expect(output).toContain('return this.request<GetUserResponse>("GET", "/users/:id", input);');
+    expect(output).toContain('users_getUser(input: UsersGetUserRequest): Observable<UsersGetUserResponse>');
+    expect(output).toContain('return this.request<UsersGetUserResponse>("GET", "/users/:id", input);');
+  });
+
+  it("namespaces generated keys and methods to avoid collisions", () => {
+    const output = generateAngularClientFile({
+      "users.contract.json": {
+        getOne: { method: "GET", path: "/users/:id", response: { "200": { id: "string" } } }
+      },
+      "teams.contract.json": {
+        getOne: { method: "GET", path: "/teams/:id", response: { "200": { id: "string" } } }
+      }
+    });
+
+    expect(output).toContain("users_getOne(input: UsersGetOneRequest)");
+    expect(output).toContain("teams_getOne(input: TeamsGetOneRequest)");
+    expect(output).toContain('ContractModel["users.getOne"]["response"]["200"]');
+    expect(output).toContain('ContractModel["teams.getOne"]["response"]["200"]');
   });
 });
 

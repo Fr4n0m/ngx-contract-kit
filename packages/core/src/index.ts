@@ -260,26 +260,35 @@ function toPascalCase(input: string): string {
     .join("") || "Endpoint";
 }
 
-function responseSuccessType(endpointName: string, endpoint: ContractEndpoint): string {
+function contractNamespaceFromFile(filePath: string): string {
+  const base = path.basename(filePath);
+  return base.replace(/\.contract\.json$/i, "");
+}
+
+function contractEndpointKey(filePath: string, endpointName: string): string {
+  return `${contractNamespaceFromFile(filePath)}.${endpointName}`;
+}
+
+function responseSuccessType(contractKey: string, endpoint: ContractEndpoint): string {
   const statuses = Object.keys(endpoint.response ?? {});
   if (statuses.length === 0) {
     return "unknown";
   }
   if (statuses.includes("200")) {
-    return `ContractModel["${endpointName}"]["response"]["200"]`;
+    return `ContractModel["${contractKey}"]["response"]["200"]`;
   }
   const sorted = [...statuses].sort();
   const union = sorted
-    .map((status) => `ContractModel["${endpointName}"]["response"]["${status}"]`)
+    .map((status) => `ContractModel["${contractKey}"]["response"]["${status}"]`)
     .join(" | ");
   return union;
 }
 
-function endpointRequestType(endpointName: string): string {
+function endpointRequestType(contractKey: string): string {
   return `{
-    params: ContractModel["${endpointName}"]["params"];
-    query: ContractModel["${endpointName}"]["query"];
-    body: ContractModel["${endpointName}"]["body"];
+    params: ContractModel["${contractKey}"]["params"];
+    query: ContractModel["${contractKey}"]["query"];
+    body: ContractModel["${contractKey}"]["body"];
   }`;
 }
 
@@ -295,14 +304,16 @@ export function generateAngularClientFile(contractsByFile: Record<string, Contra
   lines.push("");
 
   const sortedFiles = Object.entries(contractsByFile).sort(([a], [b]) => a.localeCompare(b));
-  for (const [, contract] of sortedFiles) {
+  for (const [filePath, contract] of sortedFiles) {
+    const namespace = contractNamespaceFromFile(filePath);
     const endpoints = Object.entries(contract).sort(([a], [b]) => a.localeCompare(b));
     for (const [endpointName, endpoint] of endpoints) {
-      const methodName = toIdentifier(endpointName);
-      const requestTypeName = `${toPascalCase(endpointName)}Request`;
-      const responseTypeName = `${toPascalCase(endpointName)}Response`;
-      lines.push(`export type ${requestTypeName} = ${endpointRequestType(endpointName)};`);
-      lines.push(`export type ${responseTypeName} = ${responseSuccessType(endpointName, endpoint)};`);
+      const contractKey = contractEndpointKey(filePath, endpointName);
+      const methodName = toIdentifier(`${namespace}_${endpointName}`);
+      const requestTypeName = `${toPascalCase(namespace)}${toPascalCase(endpointName)}Request`;
+      const responseTypeName = `${toPascalCase(namespace)}${toPascalCase(endpointName)}Response`;
+      lines.push(`export type ${requestTypeName} = ${endpointRequestType(contractKey)};`);
+      lines.push(`export type ${responseTypeName} = ${responseSuccessType(contractKey, endpoint)};`);
       lines.push("");
       methodBlocks.push(`  ${methodName}(input: ${requestTypeName}): Observable<${responseTypeName}> {`);
       methodBlocks.push(
@@ -360,10 +371,11 @@ export function generateContractModelFile(contractsByFile: Record<string, Contra
   lines.push("export type ContractModel = {");
 
   const sortedFiles = Object.entries(contractsByFile).sort(([a], [b]) => a.localeCompare(b));
-  for (const [, contract] of sortedFiles) {
+  for (const [filePath, contract] of sortedFiles) {
     const endpoints = Object.entries(contract).sort(([a], [b]) => a.localeCompare(b));
     for (const [name, endpoint] of endpoints) {
-      lines.push(`  "${name}": {`);
+      const contractKey = contractEndpointKey(filePath, name);
+      lines.push(`  "${contractKey}": {`);
       lines.push(`    method: "${endpoint.method}";`);
       lines.push(`    path: "${endpoint.path}";`);
       lines.push(`    params: ${shapeToTypeLiteral(endpoint.params)};`);
