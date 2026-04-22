@@ -5,7 +5,7 @@ export default {
   content: [
     "./index.md",
     "./.vitepress/**/*.{ts,js,vue,css}",
-    "./i18n/*.json"
+    "./i18n/**/*.json"
   ],
   theme: {
     extend: {
@@ -29,7 +29,7 @@ export default {
       fontFamily: {
         project: ["Bruno Ace", "Ubuntu Sans Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"],
         heading: ["Ubuntu Sans Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"],
-        body: ["Ubuntu Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"]
+        body: ["Ubuntu Sans Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"]
       },
       boxShadow: {
         card: "0 20px 40px -26px rgba(29, 31, 33, 0.45)"

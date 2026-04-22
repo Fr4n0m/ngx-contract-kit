@@ -5,11 +5,12 @@ import {
   IconBulb,
   IconCodeCircle2,
   IconRoute2,
-  IconRocket
+  IconRocket,
 } from "@tabler/icons-vue";
-import en from "../../../i18n/en.json";
-import es from "../../../i18n/es.json";
+import { en, es } from "../../../i18n";
 import LandingFeatureCard from "./LandingFeatureCard.vue";
+import TerminalCodeBlock from "./TerminalCodeBlock.vue";
+import TerminalCommandList from "./TerminalCommandList.vue";
 import LandingValueCard from "./LandingValueCard.vue";
 import { useLang, type Lang } from "../composables/lang";
 
@@ -19,31 +20,54 @@ const { lang } = useLang();
 const t = computed(() => dict[lang.value as Lang]);
 const cardIcons = [IconAlertTriangle, IconBulb, IconRocket] as const;
 const whatYouGetIcons = [IconCodeCircle2, IconBulb, IconRoute2] as const;
-const howItWorksIcons = [IconCodeCircle2, IconBulb, IconRoute2, IconRocket] as const;
+const howItWorksIcons = [
+  IconCodeCircle2,
+  IconBulb,
+  IconRoute2,
+  IconRocket,
+] as const;
 
 const actionBaseClass =
   "inline-flex items-center rounded-md border px-4 py-2 text-sm font-semibold transition";
 
 const actionThemeClass = {
   brand:
-    "border-accent bg-accent text-[#1f2319] shadow-card hover:brightness-95",
-  alt:
-    "border-brand-700 bg-brand-100/75 text-brand-800 hover:bg-brand-100 dark:border-brand-500 dark:bg-brand-900/70 dark:text-brand-200 dark:hover:bg-brand-900"
+    "border-accent bg-accent !text-[#1f2319] dark:!text-[#1f2319] shadow-card hover:brightness-95",
+  alt: "border-brand-700 bg-brand-100/75 text-brand-800 hover:bg-brand-100 dark:border-brand-500 dark:bg-brand-900/70 dark:text-brand-200 dark:hover:bg-brand-900",
 } as const;
 </script>
 
 <template>
-  <section class="relative left-1/2 w-dvw -translate-x-1/2 overflow-x-hidden px-[clamp(1rem,4vw,4rem)] pb-10 pt-8">
+  <section
+    class="relative left-1/2 w-dvw -translate-x-1/2 overflow-x-hidden px-[clamp(1rem,4vw,4rem)] pb-10 pt-8"
+  >
     <div class="mx-auto w-full max-w-none">
-      <header class="mb-10 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-8 shadow-card">
-        <p class="font-project text-sm font-semibold uppercase tracking-[0.2em] text-brand-700 dark:text-accent">{{ t.hero.name }}</p>
-        <h1 class="mt-3 font-heading text-3xl leading-tight text-[color:var(--vp-c-text-1)] md:text-5xl">{{ t.hero.title }}</h1>
-        <p class="mt-4 max-w-5xl text-base text-[color:var(--vp-c-text-2)] md:text-lg">{{ t.hero.tagline }}</p>
+      <header
+        class="mb-10 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-8 shadow-card"
+      >
+        <p
+          class="font-project text-sm font-semibold uppercase tracking-[0.2em] text-brand-700 dark:text-accent"
+        >
+          {{ t.hero.name }}
+        </p>
+        <h1
+          class="mt-3 font-heading text-3xl leading-tight text-[color:var(--vp-c-text-1)] md:text-5xl"
+        >
+          {{ t.hero.title }}
+        </h1>
+        <p
+          class="mt-4 max-w-5xl text-base text-[color:var(--vp-c-text-2)] md:text-lg"
+        >
+          {{ t.hero.tagline }}
+        </p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a
             v-for="action in t.hero.actions"
             :key="action.href"
-            :class="[actionBaseClass, actionThemeClass[action.theme as keyof typeof actionThemeClass]]"
+            :class="[
+              actionBaseClass,
+              actionThemeClass[action.theme as keyof typeof actionThemeClass],
+            ]"
             :href="action.href"
           >
             {{ action.label }}
@@ -64,7 +88,11 @@ const actionThemeClass = {
       </div>
 
       <section id="what-you-get" class="mt-12">
-        <h2 class="mb-4 font-heading text-2xl text-[color:var(--vp-c-text-1)] md:text-3xl">{{ t.whatYouGet.title }}</h2>
+        <h2
+          class="mb-4 font-heading text-2xl text-[color:var(--vp-c-text-1)] md:text-3xl"
+        >
+          {{ t.whatYouGet.title }}
+        </h2>
         <div class="grid gap-5 lg:grid-cols-3">
           <LandingValueCard
             v-for="(item, index) in t.whatYouGet.items"
@@ -78,8 +106,14 @@ const actionThemeClass = {
       </section>
 
       <section id="how-it-works" class="mt-12">
-        <h2 class="mb-4 font-heading text-2xl text-[color:var(--vp-c-text-1)] md:text-3xl">{{ t.howItWorks.title }}</h2>
-        <p class="mb-6 max-w-4xl text-[color:var(--vp-c-text-2)]">{{ t.howItWorks.intro }}</p>
+        <h2
+          class="mb-4 font-heading text-2xl text-[color:var(--vp-c-text-1)] md:text-3xl"
+        >
+          {{ t.howItWorks.title }}
+        </h2>
+        <p class="mb-6 max-w-4xl text-[color:var(--vp-c-text-2)]">
+          {{ t.howItWorks.intro }}
+        </p>
 
         <div class="grid gap-4 md:grid-cols-2">
           <article
@@ -90,7 +124,7 @@ const actionThemeClass = {
             <div class="flex items-start justify-between gap-3">
               <div class="inline-flex items-center gap-2">
                 <span
-                  class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent font-heading text-xs text-[#1f2319]"
+                  class="inline-flex size-20 items-center justify-center rounded-full bg-accent font-heading text-xs text-[#1f2319]"
                 >
                   {{ index + 1 }}
                 </span>
@@ -100,52 +134,59 @@ const actionThemeClass = {
                   class="text-brand-700 dark:text-accent"
                 />
               </div>
-              <code
-                v-if="step.command"
-                class="rounded border border-[color:var(--vp-c-bg-alt)] bg-black/5 px-2 py-0.5 text-xs dark:bg-white/5"
-                >{{ step.command }}</code
-              >
             </div>
-            <h3 class="mt-3 font-heading text-xl text-[color:var(--vp-c-text-1)]">{{ step.title }}</h3>
-            <p class="mt-2 text-[color:var(--vp-c-text-2)]">{{ step.detail }}</p>
+            <h3
+              class="mt-3 font-heading text-xl text-[color:var(--vp-c-text-1)]"
+            >
+              {{ step.title }}
+            </h3>
+            <p class="mt-2 text-[color:var(--vp-c-text-2)]">
+              {{ step.detail }}
+            </p>
+            <div v-if="step.command" class="mt-4">
+              <TerminalCommandList :commands="[step.command]" compact />
+            </div>
           </article>
         </div>
 
         <div class="mt-6 grid gap-4 lg:grid-cols-2">
-          <article class="rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card">
+          <article
+            class="rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card"
+          >
             <div class="mb-2 flex items-center justify-between gap-3">
-              <h3 class="font-heading text-xl text-[color:var(--vp-c-text-1)]">{{ t.howItWorks.example.title }}</h3>
-              <span class="rounded bg-black/10 px-2 py-1 text-xs text-[color:var(--vp-c-text-2)] dark:bg-white/10">
-                {{ t.howItWorks.example.fileLabel }}
-              </span>
+              <h3 class="font-heading text-xl text-[color:var(--vp-c-text-1)]">
+                {{ t.howItWorks.example.title }}
+              </h3>
             </div>
-            <pre class="language-json"><code>{{ t.howItWorks.example.code }}</code></pre>
+            <TerminalCodeBlock
+              :file-label="t.howItWorks.example.fileLabel"
+              :code="t.howItWorks.example.code"
+            />
           </article>
 
-          <article class="rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card">
-            <h3 class="font-heading text-xl text-[color:var(--vp-c-text-1)]">{{ t.howItWorks.releaseChecks.title }}</h3>
+          <article
+            class="rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card"
+          >
+            <h3 class="font-heading text-xl text-[color:var(--vp-c-text-1)]">
+              {{ t.howItWorks.releaseChecks.title }}
+            </h3>
             <ul class="mt-3 space-y-2 text-[color:var(--vp-c-text-2)]">
               <li
                 v-for="item in t.howItWorks.releaseChecks.items"
                 :key="item"
-                class="flex items-start gap-2"
+                class="flex items-center gap-2"
               >
-                <span class="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-accent" />
+                <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
                 <span>{{ item }}</span>
               </li>
             </ul>
             <div class="mt-4 border-t border-[color:var(--vp-c-bg-alt)] pt-3">
-              <p class="mb-2 text-xs uppercase tracking-wider text-[color:var(--vp-c-text-3)]">
+              <p
+                class="mb-2 text-xs uppercase tracking-wider text-[color:var(--vp-c-text-3)]"
+              >
                 {{ t.howItWorks.commandsTitle }}
               </p>
-              <div class="flex flex-wrap gap-2">
-                <code
-                  v-for="command in t.howItWorks.commands"
-                  :key="command"
-                  class="rounded border border-[color:var(--vp-c-bg-alt)] bg-black/5 px-2 py-1 text-xs dark:bg-white/5"
-                  >{{ command }}</code
-                >
-              </div>
+              <TerminalCommandList :commands="t.howItWorks.commands" />
             </div>
           </article>
         </div>

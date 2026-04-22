@@ -1,0 +1,45 @@
+{
+  "title": "How It Works",
+  "intro": "From contract to release-safe integration in four practical steps.",
+  "steps": [
+    {
+      "title": "Define your contract",
+      "detail": "Create endpoint definitions in contracts/*.contract.json with request and response shapes.",
+      "command": "pnpm ckit:init"
+    },
+    {
+      "title": "Generate typed artifacts",
+      "detail": "Produce deterministic models and helper outputs from the contract source.",
+      "command": "pnpm ckit:generate"
+    },
+    {
+      "title": "Wire Angular + backend",
+      "detail": "Connect generated outputs in Angular clients and backend handlers to keep both sides aligned."
+    },
+    {
+      "title": "Check compatibility before release",
+      "detail": "Run contract diff checks to detect breaking API changes early in CI.",
+      "command": "pnpm ckit:check"
+    }
+  ],
+  "example": {
+    "title": "Minimal contract example",
+    "fileLabel": "contracts/users.contract.json",
+    "code": "{\n  \"service\": \"users\",\n  \"endpoints\": [{\n    \"path\": \"/users/:id\",\n    \"method\": \"GET\",\n    \"response\": { \"200\": { \"id\": \"string\", \"email\": \"string\" } }\n  }]\n}"
+  },
+  "releaseChecks": {
+    "title": "Release checklist",
+    "items": [
+      "Schema stays valid and deterministic.",
+      "Generated outputs are in sync with the contract.",
+      "No breaking changes without intentional version bump."
+    ]
+  },
+  "commandsTitle": "Core commands",
+  "commands": [
+    "pnpm ckit:init",
+    "pnpm ckit:generate",
+    "pnpm ckit:check"
+  ]
+}
+

@@ -8,7 +8,6 @@
 - [CLI Reference](/docs/cli-reference)
 - [Contract Schema](/docs/contract-schema)
 - [Generators](/docs/generators)
-- [Versioning](/docs/versioning)
 - [Examples](/docs/examples)
 - [Contributing](/docs/contributing)
 - [FAQ](/docs/faq)

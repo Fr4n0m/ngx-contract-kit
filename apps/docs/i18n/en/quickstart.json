@@ -1,0 +1,24 @@
+{
+  "title": "Quickstart",
+  "steps": {
+    "install": "Install",
+    "initialize": "Initialize",
+    "generate": "Generate",
+    "compatibility": "Compatibility check"
+  },
+  "commands": {
+    "initialize": "pnpm ckit:init",
+    "generate": "pnpm ckit:generate",
+    "check": "pnpm ckit:check"
+  },
+  "installSelector": {
+    "label": "Choose package manager",
+    "options": {
+      "pnpm": "pnpm",
+      "npm": "npm",
+      "yarn": "yarn",
+      "bun": "bun"
+    }
+  }
+}
+

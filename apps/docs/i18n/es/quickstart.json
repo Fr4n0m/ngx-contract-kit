@@ -1,0 +1,24 @@
+{
+  "title": "Inicio rápido",
+  "steps": {
+    "install": "Instalar",
+    "initialize": "Inicializar",
+    "generate": "Generar",
+    "compatibility": "Check de compatibilidad"
+  },
+  "commands": {
+    "initialize": "pnpm ckit:init",
+    "generate": "pnpm ckit:generate",
+    "check": "pnpm ckit:check"
+  },
+  "installSelector": {
+    "label": "Elige el gestor de paquetes",
+    "options": {
+      "pnpm": "pnpm",
+      "npm": "npm",
+      "yarn": "yarn",
+      "bun": "bun"
+    }
+  }
+}
+

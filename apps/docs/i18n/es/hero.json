@@ -1,0 +1,18 @@
+{
+  "name": "contract-kit",
+  "title": "Publica APIs Angular + backend desde un solo contrato",
+  "tagline": "Flujo de contrato único para generar clientes tipados, integración segura en backend y checks de compatibilidad antes de release.",
+  "actions": [
+    {
+      "label": "Qué Incluye",
+      "href": "#what-you-get",
+      "theme": "brand"
+    },
+    {
+      "label": "Cómo Funciona",
+      "href": "#how-it-works",
+      "theme": "alt"
+    }
+  ]
+}
+

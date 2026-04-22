@@ -12,6 +12,4 @@ Review response status and request/response shape changes in the contract.
 
 Run:
 
-```bash
-pnpm ckit:check
-```
+<TerminalCommandList :commands="['pnpm ckit:check']" />

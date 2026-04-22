@@ -1,0 +1,119 @@
+{
+  "title": "contract-kit",
+  "messages": {
+    "searchPlaceholder": "Search pages, docs, and actions",
+    "noResults": "No matching command found.",
+    "closeLabel": "Close command palette"
+  },
+  "recentsSectionTitle": "Recent",
+  "sections": {
+    "product": "Product",
+    "docs": "Documentation",
+    "community": "Community"
+  },
+  "docsNested": {
+    "title": "Documentation",
+    "subtitle": "Browse all docs sections"
+  },
+  "docsGroups": [
+    {
+      "id": "docs-start",
+      "title": "Start",
+      "items": [
+        {
+          "id": "docs-overview",
+          "title": "Docs Overview",
+          "subtitle": "Documentation index",
+          "href": "/docs/",
+          "shortcut": "mod+d"
+        },
+        {
+          "id": "docs-quickstart",
+          "title": "Quickstart",
+          "subtitle": "Install and first commands",
+          "href": "/docs/quickstart"
+        }
+      ]
+    },
+    {
+      "id": "docs-reference",
+      "title": "Reference",
+      "items": [
+        {
+          "id": "docs-cli",
+          "title": "CLI Reference",
+          "subtitle": "All CLI commands",
+          "href": "/docs/cli-reference"
+        },
+        {
+          "id": "docs-schema",
+          "title": "Contract Schema",
+          "subtitle": "Structure and validation",
+          "href": "/docs/contract-schema"
+        },
+        {
+          "id": "docs-generators",
+          "title": "Generators",
+          "subtitle": "Supported outputs",
+          "href": "/docs/generators"
+        },
+        {
+          "id": "docs-examples",
+          "title": "Examples",
+          "subtitle": "Integration scenarios",
+          "href": "/docs/examples"
+        },
+        {
+          "id": "docs-contributing",
+          "title": "Contributing",
+          "subtitle": "Open source contributions",
+          "href": "/docs/contributing"
+        },
+        {
+          "id": "docs-faq",
+          "title": "FAQ",
+          "subtitle": "Common questions",
+          "href": "/docs/faq"
+        }
+      ]
+    }
+  ],
+  "items": {
+    "product": [
+      {
+        "id": "home",
+        "title": "Home",
+        "subtitle": "Landing overview",
+        "href": "/",
+        "shortcut": "mod+h"
+      },
+      {
+        "id": "what-you-get",
+        "title": "What You Get",
+        "subtitle": "Features and capabilities",
+        "href": "/#what-you-get"
+      },
+      {
+        "id": "how-it-works",
+        "title": "How It Works",
+        "subtitle": "Workflow and release checks",
+        "href": "/#how-it-works"
+      }
+    ],
+    "community": [
+      {
+        "id": "github-repo",
+        "title": "GitHub Repository",
+        "subtitle": "Source code and issues",
+        "href": "https://github.com/Fr4n0m/ngx-contract-kit"
+      },
+      {
+        "id": "fr4nom-site",
+        "title": "Fr4n0m Portfolio",
+        "subtitle": "Built by Fr4n0m",
+        "href": "https://codebyfran.es"
+      }
+    ]
+  }
+}
+

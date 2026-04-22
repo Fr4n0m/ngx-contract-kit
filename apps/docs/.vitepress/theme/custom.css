@@ -24,22 +24,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Ubuntu Mono";
-  src: url("../../assets/fonts/font-1/UbuntuMono-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Ubuntu Mono";
-  src: url("../../assets/fonts/font-1/UbuntuMono-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -192,12 +176,29 @@
   }
 
   @media (min-width: 960px) {
+    .has-docs-sidebar .VPDoc {
+      padding-left: clamp(1rem, 3vw, 2.5rem) !important;
+      padding-right: clamp(1rem, 3vw, 2.5rem) !important;
+    }
+
+    .has-docs-sidebar .VPDoc .container,
+    .has-docs-sidebar .VPDoc .content {
+      max-width: none !important;
+      width: 100% !important;
+    }
+
+    .has-docs-sidebar .VPDoc .content {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
     .has-docs-sidebar .VPDoc .content-container {
       display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: clamp(210px, 16vw, 250px) minmax(0, 1fr);
+      gap: clamp(1rem, 2vw, 2rem);
       max-width: none !important;
       width: 100%;
+      margin: 0 auto;
     }
 
     .has-docs-sidebar .VPDoc .content-container > .docs-sidebar {
@@ -243,5 +244,12 @@
     color: #d2ff00 !important;
     border-color: rgba(210, 255, 0, 0.5) !important;
     background: rgba(210, 255, 0, 0.12) !important;
+  }
+
+  .has-docs-sidebar .VPDoc .main,
+  .has-docs-sidebar .VPDoc .vp-doc,
+  .has-docs-sidebar .VPDoc .content-container .vp-doc > div {
+    max-width: none !important;
+    width: 100% !important;
   }
 }

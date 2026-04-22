@@ -1,0 +1,18 @@
+{
+  "name": "contract-kit",
+  "title": "Ship Angular + backend APIs from one contract",
+  "tagline": "Single-source contract workflow to generate typed clients, backend-safe wiring, and compatibility checks before release.",
+  "actions": [
+    {
+      "label": "What You Get",
+      "href": "#what-you-get",
+      "theme": "brand"
+    },
+    {
+      "label": "How It Works",
+      "href": "#how-it-works",
+      "theme": "alt"
+    }
+  ]
+}
+

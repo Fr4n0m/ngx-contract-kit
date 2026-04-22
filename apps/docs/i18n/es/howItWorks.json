@@ -1,0 +1,45 @@
+{
+  "title": "Cómo Funciona",
+  "intro": "Del contrato a una integración segura para release en cuatro pasos prácticos.",
+  "steps": [
+    {
+      "title": "Define tu contrato",
+      "detail": "Crea definiciones de endpoints en contracts/*.contract.json con shape de request y response.",
+      "command": "pnpm ckit:init"
+    },
+    {
+      "title": "Genera artefactos tipados",
+      "detail": "Produce modelos y salidas deterministas a partir del contrato.",
+      "command": "pnpm ckit:generate"
+    },
+    {
+      "title": "Conecta Angular + backend",
+      "detail": "Integra los outputs generados en clientes Angular y handlers backend para mantener ambos lados alineados."
+    },
+    {
+      "title": "Valida compatibilidad antes de publicar",
+      "detail": "Ejecuta checks de diff del contrato para detectar breaking changes en CI.",
+      "command": "pnpm ckit:check"
+    }
+  ],
+  "example": {
+    "title": "Ejemplo mínimo de contrato",
+    "fileLabel": "contracts/users.contract.json",
+    "code": "{\n  \"service\": \"users\",\n  \"endpoints\": [{\n    \"path\": \"/users/:id\",\n    \"method\": \"GET\",\n    \"response\": { \"200\": { \"id\": \"string\", \"email\": \"string\" } }\n  }]\n}"
+  },
+  "releaseChecks": {
+    "title": "Checklist de release",
+    "items": [
+      "El schema se mantiene válido y determinista.",
+      "Los artefactos generados están sincronizados con el contrato.",
+      "No hay breaking changes sin versionado intencional."
+    ]
+  },
+  "commandsTitle": "Comandos base",
+  "commands": [
+    "pnpm ckit:init",
+    "pnpm ckit:generate",
+    "pnpm ckit:check"
+  ]
+}
+

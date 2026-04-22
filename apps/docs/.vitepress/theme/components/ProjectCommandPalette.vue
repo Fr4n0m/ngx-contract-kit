@@ -26,8 +26,7 @@ import {
   IconSparkles,
   IconUserHeart,
 } from "@tabler/icons-vue";
-import en from "../../../i18n/en.json";
-import es from "../../../i18n/es.json";
+import { en, es } from "../../../i18n";
 import { useLang, type Lang } from "../composables/lang";
 
 const { lang } = useLang();
@@ -51,7 +50,6 @@ const itemIconById: Record<string, Component> = {
   "docs-cli": IconCodeCircle2,
   "docs-schema": IconBraces,
   "docs-generators": IconSettingsCode,
-  "docs-versioning": IconRoute2,
   "docs-examples": IconFlask2,
   "docs-contributing": IconUserHeart,
   "docs-faq": IconFileDescription,
@@ -226,3 +224,4 @@ const classNames = {
     </template>
   </CommandPalette>
 </template>
+

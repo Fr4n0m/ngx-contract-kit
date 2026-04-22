@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import en from "../../../i18n/en.json";
-import es from "../../../i18n/es.json";
+import { en, es } from "../../../i18n";
 import AppFooter from "./AppFooter.vue";
 import { useLang, type Lang } from "../composables/lang";
 
@@ -15,3 +14,4 @@ const t = computed(() => dict[lang.value as Lang]);
     <AppFooter :footer="t.footer" />
   </div>
 </template>
+

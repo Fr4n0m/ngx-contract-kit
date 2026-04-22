@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import en from "../../../i18n/en.json";
-import es from "../../../i18n/es.json";
+import { en, es } from "../../../i18n";
 import { useLang, type Lang } from "../composables/lang";
 
 const { lang } = useLang();
@@ -33,3 +32,4 @@ const t = computed(() => dict[lang.value as Lang]);
     >
   </nav>
 </template>
+

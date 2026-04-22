@@ -7,6 +7,10 @@ import HeaderNavLinks from "./components/HeaderNavLinks.vue";
 import GlobalFooter from "./components/GlobalFooter.vue";
 import ProjectCommandPalette from "./components/ProjectCommandPalette.vue";
 import DocsSidebar from "./components/DocsSidebar.vue";
+import InstallCommandSelector from "./components/InstallCommandSelector.vue";
+import QuickstartGuide from "./components/QuickstartGuide.vue";
+import TerminalCommandList from "./components/TerminalCommandList.vue";
+import TerminalCodeBlock from "./components/TerminalCodeBlock.vue";
 import "./custom.css";
 
 const theme: Theme = {
@@ -22,6 +26,10 @@ const theme: Theme = {
   enhanceApp(ctx) {
     DefaultTheme.enhanceApp?.(ctx);
     ctx.app.component("LandingPage", LandingPage);
+    ctx.app.component("InstallCommandSelector", InstallCommandSelector);
+    ctx.app.component("QuickstartGuide", QuickstartGuide);
+    ctx.app.component("TerminalCommandList", TerminalCommandList);
+    ctx.app.component("TerminalCodeBlock", TerminalCodeBlock);
   }
 };
 

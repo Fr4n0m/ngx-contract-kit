@@ -1,5 +1,5 @@
 import { defineConfig } from "vitepress";
-import en from "../i18n/en.json";
+import { en } from "../i18n";
 
 export default defineConfig({
   title: en.meta.title,
@@ -14,3 +14,4 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: en.links.githubRepo }]
   }
 });
+

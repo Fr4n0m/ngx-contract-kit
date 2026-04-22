@@ -1,0 +1,18 @@
+[
+  {
+    "kicker": "PROBLEMA",
+    "title": "Frontend y backend se desalinean",
+    "copy": "Los equipos duplican DTOs, clientes y supuestos de endpoints en varias capas."
+  },
+  {
+    "kicker": "SOLUCIÓN",
+    "title": "Generación contract-first",
+    "copy": "Define endpoints una sola vez y genera artefactos para mantener todo alineado."
+  },
+  {
+    "kicker": "ESTADO",
+    "title": "MVP ejecutable disponible",
+    "copy": "La versión actual incluye flujo CLI de init, generate y check de compatibilidad."
+  }
+]
+

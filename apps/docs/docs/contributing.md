@@ -4,13 +4,8 @@ Help improve `contract-kit` by opening issues and pull requests.
 
 ## Local setup
 
-```bash
-pnpm install
-pnpm docs:dev
-```
+<TerminalCommandList :commands="['pnpm install', 'pnpm docs:dev']" />
 
 ## Before opening a PR
 
-```bash
-pnpm docs:build
-```
+<TerminalCommandList :commands="['pnpm docs:build']" />

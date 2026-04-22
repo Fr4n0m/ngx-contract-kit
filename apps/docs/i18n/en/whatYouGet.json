@@ -1,0 +1,18 @@
+{
+  "title": "What You Get",
+  "items": [
+    {
+      "kicker": "CLI",
+      "copy": "Commands to initialize projects, generate artifacts, and check breaking changes."
+    },
+    {
+      "kicker": "CORE",
+      "copy": "Strict schema validation and deterministic endpoint summary generation."
+    },
+    {
+      "kicker": "ROADMAP",
+      "copy": "Angular generator and backend plugin layers under active development."
+    }
+  ]
+}
+

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, onUnmounted, watchEffect } from "vue";
 import { useRoute } from "vitepress";
-import en from "../../../i18n/en.json";
-import es from "../../../i18n/es.json";
+import { en, es } from "../../../i18n";
 import { useLang, type Lang } from "../composables/lang";
 
 type DocsItem = {
@@ -16,7 +15,6 @@ const docsItems: DocsItem[] = [
   { key: "cliReference", href: "/docs/cli-reference" },
   { key: "contractSchema", href: "/docs/contract-schema" },
   { key: "generators", href: "/docs/generators" },
-  { key: "versioning", href: "/docs/versioning" },
   { key: "examples", href: "/docs/examples" },
   { key: "contributing", href: "/docs/contributing" },
   { key: "faq", href: "/docs/faq" }
@@ -86,3 +84,4 @@ onUnmounted(() => {
     </nav>
   </aside>
 </template>
+
