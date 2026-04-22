@@ -91,9 +91,17 @@ describe("diffSummaries", () => {
           method: "GET" as const,
           path: "/users/:id",
           paramsFields: ["id"],
+          paramsSignatures: ["id:string"],
           queryFields: [],
+          querySignatures: [],
           bodyFields: [],
+          bodySignatures: [],
           responseStatusCodes: ["200", "404"]
+          ,
+          responseSignatures: {
+            "200": ["id:string"],
+            "404": ["message:string"]
+          }
         },
         {
           file: "users.contract.json",
@@ -101,9 +109,16 @@ describe("diffSummaries", () => {
           method: "GET" as const,
           path: "/users",
           paramsFields: [],
+          paramsSignatures: [],
           queryFields: [],
+          querySignatures: [],
           bodyFields: [],
+          bodySignatures: [],
           responseStatusCodes: ["200"]
+          ,
+          responseSignatures: {
+            "200": ["items:unknown"]
+          }
         }
       ]
     };
@@ -116,9 +131,16 @@ describe("diffSummaries", () => {
           method: "GET" as const,
           path: "/users",
           paramsFields: [],
+          paramsSignatures: [],
           queryFields: [],
+          querySignatures: [],
           bodyFields: [],
+          bodySignatures: [],
           responseStatusCodes: ["200"]
+          ,
+          responseSignatures: {
+            "200": ["items:unknown"]
+          }
         }
       ]
     };
@@ -129,6 +151,10 @@ describe("diffSummaries", () => {
     expect(diff.changedSignatures).toEqual([]);
     expect(diff.removedResponseStatuses).toEqual([]);
     expect(diff.removedRequestFields).toEqual([]);
+    expect(diff.addedRequestFields).toEqual([]);
+    expect(diff.changedRequestFieldTypes).toEqual([]);
+    expect(diff.removedResponseFields).toEqual([]);
+    expect(diff.changedResponseFieldTypes).toEqual([]);
   });
 
   it("detects signature/status/field removals as breaking", () => {
@@ -141,9 +167,17 @@ describe("diffSummaries", () => {
           method: "GET" as const,
           path: "/users/:id",
           paramsFields: ["id"],
+          paramsSignatures: ["id:string"],
           queryFields: ["expand"],
+          querySignatures: ["expand:boolean"],
           bodyFields: [],
+          bodySignatures: [],
           responseStatusCodes: ["200", "404"]
+          ,
+          responseSignatures: {
+            "200": ["id:string"],
+            "404": ["message:string"]
+          }
         }
       ]
     };
@@ -156,9 +190,16 @@ describe("diffSummaries", () => {
           method: "POST" as const,
           path: "/users/find",
           paramsFields: [],
+          paramsSignatures: [],
           queryFields: [],
+          querySignatures: [],
           bodyFields: [],
+          bodySignatures: [],
           responseStatusCodes: ["200"]
+          ,
+          responseSignatures: {
+            "200": ["id:string"]
+          }
         }
       ]
     };
@@ -172,6 +213,74 @@ describe("diffSummaries", () => {
     expect(diff.removedResponseStatuses).toEqual(["users.contract.json:getUser (404)"]);
     expect(diff.removedRequestFields).toEqual([
       "users.contract.json:getUser (params: id | query: expand)"
+    ]);
+    expect(diff.addedRequestFields).toEqual([]);
+    expect(diff.changedRequestFieldTypes).toEqual([]);
+    expect(diff.removedResponseFields).toEqual([]);
+    expect(diff.changedResponseFieldTypes).toEqual([]);
+  });
+
+  it("detects added required request fields and field type changes", () => {
+    const previous = {
+      version: 2 as const,
+      endpoints: [
+        {
+          file: "users.contract.json",
+          name: "updateUser",
+          method: "PUT" as const,
+          path: "/users/:id",
+          paramsFields: ["id"],
+          paramsSignatures: ["id:string"],
+          queryFields: [],
+          querySignatures: [],
+          bodyFields: ["name"],
+          bodySignatures: ["name:string"],
+          responseStatusCodes: ["200"],
+          responseSignatures: {
+            "200": ["id:string", "name:string"]
+          }
+        }
+      ]
+    };
+    const current = {
+      version: 2 as const,
+      endpoints: [
+        {
+          file: "users.contract.json",
+          name: "updateUser",
+          method: "PUT" as const,
+          path: "/users/:id",
+          paramsFields: ["id"],
+          paramsSignatures: ["id:number"],
+          queryFields: [],
+          querySignatures: [],
+          bodyFields: ["name", "email"],
+          bodySignatures: ["email:string", "name:string"],
+          responseStatusCodes: ["200"],
+          responseSignatures: {
+            "200": ["id:number"]
+          }
+        }
+      ]
+    };
+
+    const diff = diffSummaries(previous, current);
+    expect(diff.breaking).toBe(true);
+    expect(diff.removed).toEqual([]);
+    expect(diff.changedSignatures).toEqual([]);
+    expect(diff.removedResponseStatuses).toEqual([]);
+    expect(diff.removedRequestFields).toEqual([]);
+    expect(diff.addedRequestFields).toEqual([
+      "users.contract.json:updateUser (body: email)"
+    ]);
+    expect(diff.changedRequestFieldTypes).toEqual([
+      "users.contract.json:updateUser (params: id: string -> number)"
+    ]);
+    expect(diff.removedResponseFields).toEqual([
+      "users.contract.json:updateUser [200] (name)"
+    ]);
+    expect(diff.changedResponseFieldTypes).toEqual([
+      "users.contract.json:updateUser [200] (id: string -> number)"
     ]);
   });
 });

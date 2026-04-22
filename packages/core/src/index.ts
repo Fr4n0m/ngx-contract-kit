@@ -23,9 +23,13 @@ export type SummaryEndpoint = {
   method: HttpMethod;
   path: string;
   paramsFields: string[];
+  paramsSignatures: string[];
   queryFields: string[];
+  querySignatures: string[];
   bodyFields: string[];
+  bodySignatures: string[];
   responseStatusCodes: string[];
+  responseSignatures: Record<string, string[]>;
 };
 
 export type ContractSummary = {
@@ -78,6 +82,20 @@ function validateResponseShapes(response: unknown, label: string): void {
     }
     validateShape(shape, `${label}.${statusCode}`);
   }
+}
+
+function shapeSignatures(shape: ContractShape | undefined): string[] {
+  return Object.entries(shape ?? {})
+    .map(([field, scalar]) => `${field}:${scalar}`)
+    .sort();
+}
+
+function responseSignatures(response: ContractResponses | undefined): Record<string, string[]> {
+  const result: Record<string, string[]> = {};
+  for (const [status, shape] of Object.entries(response ?? {})) {
+    result[status] = shapeSignatures(shape);
+  }
+  return result;
 }
 
 export function validateContract(contract: unknown, sourceName = "unknown"): asserts contract is ContractFile {
@@ -185,9 +203,13 @@ export function createSummary(contractsByFile: Record<string, ContractFile>): Co
         method: endpoint.method,
         path: endpoint.path,
         paramsFields: Object.keys(endpoint.params ?? {}).sort(),
+        paramsSignatures: shapeSignatures(endpoint.params),
         queryFields: Object.keys(endpoint.query ?? {}).sort(),
+        querySignatures: shapeSignatures(endpoint.query),
         bodyFields: Object.keys(endpoint.body ?? {}).sort(),
-        responseStatusCodes: Object.keys(endpoint.response ?? {}).sort()
+        bodySignatures: shapeSignatures(endpoint.body),
+        responseStatusCodes: Object.keys(endpoint.response ?? {}).sort(),
+        responseSignatures: responseSignatures(endpoint.response)
       });
     }
   }
@@ -431,12 +453,48 @@ export function diffSummaries(
   changedSignatures: string[];
   removedResponseStatuses: string[];
   removedRequestFields: string[];
+  addedRequestFields: string[];
+  changedRequestFieldTypes: string[];
+  removedResponseFields: string[];
+  changedResponseFieldTypes: string[];
 } {
   const keyOf = (endpoint: SummaryEndpoint): string => `${endpoint.file}#${endpoint.name}`;
   const sortedCopy = (values: readonly string[]): string[] => [...values].sort();
   const calcRemoved = (previousItems: readonly string[], currentItems: readonly string[]): string[] => {
     const currentSet = new Set(currentItems);
     return sortedCopy(previousItems).filter((item) => !currentSet.has(item));
+  };
+  const calcAdded = (previousItems: readonly string[], currentItems: readonly string[]): string[] => {
+    const previousSet = new Set(previousItems);
+    return sortedCopy(currentItems).filter((item) => !previousSet.has(item));
+  };
+  const toSignatureMap = (signatures: readonly string[]): Map<string, string> => {
+    const map = new Map<string, string>();
+    for (const signature of signatures) {
+      const separator = signature.indexOf(":");
+      if (separator <= 0 || separator === signature.length - 1) {
+        continue;
+      }
+      const field = signature.slice(0, separator);
+      const scalarType = signature.slice(separator + 1);
+      map.set(field, scalarType);
+    }
+    return map;
+  };
+  const collectChangedTypes = (
+    previousSignatures: readonly string[],
+    currentSignatures: readonly string[]
+  ): string[] => {
+    const previousMap = toSignatureMap(previousSignatures);
+    const currentMap = toSignatureMap(currentSignatures);
+    const changed: string[] = [];
+    for (const [field, previousType] of previousMap) {
+      const currentType = currentMap.get(field);
+      if (currentType && currentType !== previousType) {
+        changed.push(`${field}: ${previousType} -> ${currentType}`);
+      }
+    }
+    return changed.sort();
   };
 
   const previousByKey = new Map(previous.endpoints.map((endpoint) => [keyOf(endpoint), endpoint]));
@@ -452,6 +510,10 @@ export function diffSummaries(
   const changedSignatures: string[] = [];
   const removedResponseStatuses: string[] = [];
   const removedRequestFields: string[] = [];
+  const addedRequestFields: string[] = [];
+  const changedRequestFieldTypes: string[] = [];
+  const removedResponseFields: string[] = [];
+  const changedResponseFieldTypes: string[] = [];
 
   for (const [key, previousEndpoint] of previousByKey) {
     const currentEndpoint = currentByKey.get(key);
@@ -481,6 +543,9 @@ export function diffSummaries(
     const removedParams = calcRemoved(previousEndpoint.paramsFields ?? [], currentEndpoint.paramsFields ?? []);
     const removedQuery = calcRemoved(previousEndpoint.queryFields ?? [], currentEndpoint.queryFields ?? []);
     const removedBody = calcRemoved(previousEndpoint.bodyFields ?? [], currentEndpoint.bodyFields ?? []);
+    const addedParams = calcAdded(previousEndpoint.paramsFields ?? [], currentEndpoint.paramsFields ?? []);
+    const addedQuery = calcAdded(previousEndpoint.queryFields ?? [], currentEndpoint.queryFields ?? []);
+    const addedBody = calcAdded(previousEndpoint.bodyFields ?? [], currentEndpoint.bodyFields ?? []);
 
     const parts: string[] = [];
     if (removedParams.length > 0) {
@@ -495,19 +560,95 @@ export function diffSummaries(
     if (parts.length > 0) {
       removedRequestFields.push(`${previousEndpoint.file}:${previousEndpoint.name} (${parts.join(" | ")})`);
     }
+
+    const addedParts: string[] = [];
+    if (addedParams.length > 0) {
+      addedParts.push(`params: ${addedParams.join(", ")}`);
+    }
+    if (addedQuery.length > 0) {
+      addedParts.push(`query: ${addedQuery.join(", ")}`);
+    }
+    if (addedBody.length > 0) {
+      addedParts.push(`body: ${addedBody.join(", ")}`);
+    }
+    if (addedParts.length > 0) {
+      addedRequestFields.push(`${previousEndpoint.file}:${previousEndpoint.name} (${addedParts.join(" | ")})`);
+    }
+
+    const changedParamTypes = collectChangedTypes(
+      previousEndpoint.paramsSignatures ?? [],
+      currentEndpoint.paramsSignatures ?? []
+    );
+    const changedQueryTypes = collectChangedTypes(
+      previousEndpoint.querySignatures ?? [],
+      currentEndpoint.querySignatures ?? []
+    );
+    const changedBodyTypes = collectChangedTypes(
+      previousEndpoint.bodySignatures ?? [],
+      currentEndpoint.bodySignatures ?? []
+    );
+    const changedRequestParts: string[] = [];
+    if (changedParamTypes.length > 0) {
+      changedRequestParts.push(`params: ${changedParamTypes.join(", ")}`);
+    }
+    if (changedQueryTypes.length > 0) {
+      changedRequestParts.push(`query: ${changedQueryTypes.join(", ")}`);
+    }
+    if (changedBodyTypes.length > 0) {
+      changedRequestParts.push(`body: ${changedBodyTypes.join(", ")}`);
+    }
+    if (changedRequestParts.length > 0) {
+      changedRequestFieldTypes.push(
+        `${previousEndpoint.file}:${previousEndpoint.name} (${changedRequestParts.join(" | ")})`
+      );
+    }
+
+    const previousResponseStatuses = Object.keys(previousEndpoint.responseSignatures ?? {});
+    const currentResponseStatuses = Object.keys(currentEndpoint.responseSignatures ?? {});
+    const commonStatuses = sortedCopy(previousResponseStatuses).filter((status) =>
+      new Set(currentResponseStatuses).has(status)
+    );
+    for (const status of commonStatuses) {
+      const previousStatusSignatures = previousEndpoint.responseSignatures?.[status] ?? [];
+      const currentStatusSignatures = currentEndpoint.responseSignatures?.[status] ?? [];
+      const previousStatusMap = toSignatureMap(previousStatusSignatures);
+      const currentStatusMap = toSignatureMap(currentStatusSignatures);
+      const removedFields = sortedCopy(Array.from(previousStatusMap.keys())).filter(
+        (field) => !currentStatusMap.has(field)
+      );
+      if (removedFields.length > 0) {
+        removedResponseFields.push(
+          `${previousEndpoint.file}:${previousEndpoint.name} [${status}] (${removedFields.join(", ")})`
+        );
+      }
+      const changedTypes = collectChangedTypes(previousStatusSignatures, currentStatusSignatures);
+      if (changedTypes.length > 0) {
+        changedResponseFieldTypes.push(
+          `${previousEndpoint.file}:${previousEndpoint.name} [${status}] (${changedTypes.join(", ")})`
+        );
+      }
+    }
   }
 
   const hasBreaking =
     removed.length > 0 ||
     changedSignatures.length > 0 ||
     removedResponseStatuses.length > 0 ||
-    removedRequestFields.length > 0;
+    removedRequestFields.length > 0 ||
+    addedRequestFields.length > 0 ||
+    changedRequestFieldTypes.length > 0 ||
+    removedResponseFields.length > 0 ||
+    changedResponseFieldTypes.length > 0;
 
   return {
     breaking: hasBreaking,
     removed: sortedCopy(removed),
     changedSignatures: sortedCopy(changedSignatures),
     removedResponseStatuses: sortedCopy(removedResponseStatuses),
-    removedRequestFields: sortedCopy(removedRequestFields)
+    removedRequestFields: sortedCopy(removedRequestFields),
+    addedRequestFields: sortedCopy(addedRequestFields),
+    changedRequestFieldTypes: sortedCopy(changedRequestFieldTypes),
+    removedResponseFields: sortedCopy(removedResponseFields),
+    changedResponseFieldTypes: sortedCopy(changedResponseFieldTypes)
   };
 }

@@ -121,6 +121,18 @@ function check(projectRoot: string): void {
     for (const removedFields of diff.removedRequestFields) {
       log(`- Removed request field: ${removedFields}`);
     }
+    for (const addedFields of diff.addedRequestFields) {
+      log(`- Added required request field: ${addedFields}`);
+    }
+    for (const changedRequestTypes of diff.changedRequestFieldTypes) {
+      log(`- Changed request field type: ${changedRequestTypes}`);
+    }
+    for (const removedResponseFields of diff.removedResponseFields) {
+      log(`- Removed response field: ${removedResponseFields}`);
+    }
+    for (const changedResponseTypes of diff.changedResponseFieldTypes) {
+      log(`- Changed response field type: ${changedResponseTypes}`);
+    }
     process.exit(2);
   }
 
