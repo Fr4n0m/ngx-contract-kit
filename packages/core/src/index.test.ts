@@ -1,5 +1,16 @@
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { createSummary, diffSummaries, generateAngularClientFile, generateContractModelFile, validateContract } from "./index";
+import {
+  createSummary,
+  diffSummaries,
+  generateAngularClientFile,
+  generateContractModelFile,
+  readProjectConfig,
+  validateContract,
+  writeGeneratedArtifacts
+} from "./index";
 
 describe("validateContract", () => {
   it("accepts a valid contract", () => {
@@ -210,5 +221,72 @@ describe("generateAngularClientFile", () => {
     expect(output).toContain("export class ContractKitClient");
     expect(output).toContain('getUser(input: GetUserRequest): Observable<GetUserResponse>');
     expect(output).toContain('return this.request<GetUserResponse>("GET", "/users/:id", input);');
+  });
+});
+
+describe("readProjectConfig", () => {
+  it("returns defaults when config is missing", () => {
+    const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "ckit-config-missing-"));
+    try {
+      const config = readProjectConfig(projectRoot);
+      expect(config.contractsDir).toBe("contracts");
+      expect(config.outputDir).toBe("generated");
+    } finally {
+      fs.rmSync(projectRoot, { recursive: true, force: true });
+    }
+  });
+
+  it("reads custom config when present", () => {
+    const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "ckit-config-custom-"));
+    try {
+      const configPath = path.join(projectRoot, "ngx-contract-kit.config.json");
+      fs.writeFileSync(
+        configPath,
+        JSON.stringify({ schemaVersion: 1, contractsDir: "api-contracts", outputDir: "artifacts" }),
+        "utf8"
+      );
+      const config = readProjectConfig(projectRoot);
+      expect(config.contractsDir).toBe("api-contracts");
+      expect(config.outputDir).toBe("artifacts");
+    } finally {
+      fs.rmSync(projectRoot, { recursive: true, force: true });
+    }
+  });
+
+  it("throws when config schemaVersion is invalid", () => {
+    const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "ckit-config-invalid-"));
+    try {
+      const configPath = path.join(projectRoot, "ngx-contract-kit.config.json");
+      fs.writeFileSync(
+        configPath,
+        JSON.stringify({ schemaVersion: 2, contractsDir: "contracts", outputDir: "generated" }),
+        "utf8"
+      );
+      expect(() => readProjectConfig(projectRoot)).toThrow(/schemaVersion/);
+    } finally {
+      fs.rmSync(projectRoot, { recursive: true, force: true });
+    }
+  });
+});
+
+describe("writeGeneratedArtifacts", () => {
+  it("writes files into custom output directory", () => {
+    const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "ckit-output-dir-"));
+    try {
+      const contractsByFile = {
+        "users.contract.json": {
+          getUser: { method: "GET" as const, path: "/users/:id" }
+        }
+      };
+      const summary = createSummary(contractsByFile);
+      writeGeneratedArtifacts(projectRoot, summary, contractsByFile, "artifacts");
+
+      const summaryPath = path.join(projectRoot, "artifacts", "summary.json");
+      const angularClientPath = path.join(projectRoot, "artifacts", "angular-client.ts");
+      expect(fs.existsSync(summaryPath)).toBe(true);
+      expect(fs.existsSync(angularClientPath)).toBe(true);
+    } finally {
+      fs.rmSync(projectRoot, { recursive: true, force: true });
+    }
   });
 });

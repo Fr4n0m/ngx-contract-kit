@@ -33,6 +33,18 @@ export type ContractSummary = {
   endpoints: SummaryEndpoint[];
 };
 
+export type ProjectConfig = {
+  schemaVersion: 1;
+  contractsDir: string;
+  outputDir: string;
+};
+
+export const DEFAULT_PROJECT_CONFIG: ProjectConfig = {
+  schemaVersion: 1,
+  contractsDir: "contracts",
+  outputDir: "generated"
+};
+
 const METHOD_SET = new Set<HttpMethod>(["GET", "POST", "PUT", "PATCH", "DELETE"]);
 const SCALAR_SET = new Set<ContractScalarType>(["string", "number", "boolean", "unknown"]);
 const STATUS_CODE_PATTERN = /^[1-5][0-9][0-9]$/;
@@ -118,16 +130,49 @@ export function readContract(filePath: string): ContractFile {
   return parsed;
 }
 
-export function scanContractFiles(projectRoot: string): string[] {
-  const contractsDir = path.join(projectRoot, "contracts");
-  if (!fs.existsSync(contractsDir)) {
-    throw new Error(`Missing contracts directory: ${contractsDir}`);
+export function readProjectConfig(projectRoot: string): ProjectConfig {
+  const configPath = path.join(projectRoot, "ngx-contract-kit.config.json");
+  if (!fs.existsSync(configPath)) {
+    return DEFAULT_PROJECT_CONFIG;
+  }
+
+  const raw = fs.readFileSync(configPath, "utf8");
+  const parsed: unknown = JSON.parse(raw);
+  if (!isRecord(parsed)) {
+    throw new Error("Invalid ngx-contract-kit.config.json: expected an object");
+  }
+
+  const schemaVersion = parsed.schemaVersion;
+  if (schemaVersion !== 1) {
+    throw new Error("Invalid ngx-contract-kit.config.json: schemaVersion must be 1");
+  }
+
+  const contractsDir = parsed.contractsDir;
+  const outputDir = parsed.outputDir;
+  if (typeof contractsDir !== "string" || contractsDir.trim().length === 0) {
+    throw new Error("Invalid ngx-contract-kit.config.json: contractsDir must be a non-empty string");
+  }
+  if (typeof outputDir !== "string" || outputDir.trim().length === 0) {
+    throw new Error("Invalid ngx-contract-kit.config.json: outputDir must be a non-empty string");
+  }
+
+  return {
+    schemaVersion: 1,
+    contractsDir: contractsDir.trim(),
+    outputDir: outputDir.trim()
+  };
+}
+
+export function scanContractFiles(projectRoot: string, contractsDir = DEFAULT_PROJECT_CONFIG.contractsDir): string[] {
+  const contractsRoot = path.join(projectRoot, contractsDir);
+  if (!fs.existsSync(contractsRoot)) {
+    throw new Error(`Missing contracts directory: ${contractsRoot}`);
   }
 
   return fs
-    .readdirSync(contractsDir)
+    .readdirSync(contractsRoot)
     .filter((file) => file.endsWith(".contract.json"))
-    .map((file) => path.join(contractsDir, file));
+    .map((file) => path.join(contractsRoot, file));
 }
 
 export function createSummary(contractsByFile: Record<string, ContractFile>): ContractSummary {
@@ -344,22 +389,23 @@ export function generateContractModelFile(contractsByFile: Record<string, Contra
 export function writeGeneratedArtifacts(
   projectRoot: string,
   summary: ContractSummary,
-  contractsByFile?: Record<string, ContractFile>
+  contractsByFile?: Record<string, ContractFile>,
+  outputDir = DEFAULT_PROJECT_CONFIG.outputDir
 ): void {
-  const outputDir = path.join(projectRoot, "generated");
-  fs.mkdirSync(outputDir, { recursive: true });
+  const outputRoot = path.join(projectRoot, outputDir);
+  fs.mkdirSync(outputRoot, { recursive: true });
 
-  const typesPath = path.join(outputDir, "types.ts");
+  const typesPath = path.join(outputRoot, "types.ts");
   fs.writeFileSync(typesPath, generateTypesFile(summary), "utf8");
 
-  const summaryPath = path.join(outputDir, "summary.json");
+  const summaryPath = path.join(outputRoot, "summary.json");
   fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2), "utf8");
 
   if (contractsByFile) {
-    const contractModelPath = path.join(outputDir, "contract-model.ts");
+    const contractModelPath = path.join(outputRoot, "contract-model.ts");
     fs.writeFileSync(contractModelPath, generateContractModelFile(contractsByFile), "utf8");
 
-    const angularClientPath = path.join(outputDir, "angular-client.ts");
+    const angularClientPath = path.join(outputRoot, "angular-client.ts");
     fs.writeFileSync(angularClientPath, generateAngularClientFile(contractsByFile), "utf8");
   }
 }
