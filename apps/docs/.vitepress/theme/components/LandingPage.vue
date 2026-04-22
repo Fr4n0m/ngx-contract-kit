@@ -124,23 +124,16 @@ const actionThemeClass = {
             <div class="flex items-start justify-between gap-3">
               <div class="inline-flex items-center gap-2">
                 <span
-                  class="inline-flex size-20 items-center justify-center rounded-full bg-accent font-heading text-xs text-[#1f2319]"
+                  class="inline-flex size-14 items-center justify-center rounded-full bg-accent font-heading text-[30px] text-[#1f2319]"
                 >
-                  {{ index + 1 }}
+                  <component :is="howItWorksIcons[index]" :size="35" />
                 </span>
-                <component
-                  :is="howItWorksIcons[index]"
-                  :size="20"
-                  class="text-brand-700 dark:text-accent"
-                />
               </div>
             </div>
-            <h3
-              class="mt-3 font-heading text-xl text-[color:var(--vp-c-text-1)]"
-            >
+            <h3 class="font-heading text-xl text-[color:var(--vp-c-text-1)]">
               {{ step.title }}
             </h3>
-            <p class="mt-2 text-[color:var(--vp-c-text-2)]">
+            <p class="text-[color:var(--vp-c-text-2)]">
               {{ step.detail }}
             </p>
             <div v-if="step.command" class="mt-4">
