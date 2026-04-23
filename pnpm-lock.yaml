@@ -57,11 +57,68 @@ importers:
 
   packages/cli:
     dependencies:
+      '@ngx-contract-kit/contract-diff':
+        specifier: workspace:*
+        version: link:../contract-diff
+      '@ngx-contract-kit/core':
+        specifier: workspace:*
+        version: link:../core
+      '@ngx-contract-kit/generator-angular-client':
+        specifier: workspace:*
+        version: link:../generator-angular-client
+      '@ngx-contract-kit/generator-typescript':
+        specifier: workspace:*
+        version: link:../generator-typescript
+      '@ngx-contract-kit/mock-generator':
+        specifier: workspace:*
+        version: link:../mock-generator
+      '@ngx-contract-kit/plugin-nestjs':
+        specifier: workspace:*
+        version: link:../plugin-nestjs
+      '@ngx-contract-kit/validator-zod':
+        specifier: workspace:*
+        version: link:../validator-zod
+
+  packages/contract-diff:
+    dependencies:
       '@ngx-contract-kit/core':
         specifier: workspace:*
         version: link:../core
 
   packages/core: {}
+
+  packages/generator-angular-client:
+    dependencies:
+      '@ngx-contract-kit/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/generator-typescript:
+    dependencies:
+      '@ngx-contract-kit/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/mock-generator:
+    dependencies:
+      '@ngx-contract-kit/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/plugin-nestjs:
+    dependencies:
+      '@ngx-contract-kit/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/validator-zod:
+    dependencies:
+      '@ngx-contract-kit/core':
+        specifier: workspace:*
+        version: link:../core
+      zod:
+        specifier: ^4.1.12
+        version: 4.3.6
 
 packages:
 
@@ -1611,6 +1668,9 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -3097,5 +3157,7 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
+
+  zod@4.3.6: {}
 
   zwitch@2.0.4: {}

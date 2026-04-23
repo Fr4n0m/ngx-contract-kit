@@ -1,8 +1,8 @@
 {
-  "name": "@ngx-contract-kit/core",
+  "name": "@ngx-contract-kit/generator-typescript",
   "version": "0.1.0",
   "private": false,
-  "description": "Core contract parsing and generation utilities",
+  "description": "TypeScript model generator for ngx-contract-kit contracts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -23,6 +23,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
-    "lint": "echo core: no lint step yet"
+    "lint": "echo generator-typescript: no lint step yet"
+  },
+  "dependencies": {
+    "@ngx-contract-kit/core": "workspace:*"
   }
 }

@@ -1,8 +1,8 @@
 {
-  "name": "@ngx-contract-kit/core",
+  "name": "@ngx-contract-kit/validator-zod",
   "version": "0.1.0",
   "private": false,
-  "description": "Core contract parsing and generation utilities",
+  "description": "Zod validation helpers for ngx-contract-kit contract shapes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -23,6 +23,10 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
-    "lint": "echo core: no lint step yet"
+    "lint": "echo validator-zod: no lint step yet"
+  },
+  "dependencies": {
+    "@ngx-contract-kit/core": "workspace:*",
+    "zod": "^4.1.12"
   }
 }

@@ -3,6 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+  type ContractSummary,
   createSummary,
   diffSummaries,
   generateAngularClientFile,
@@ -82,7 +83,7 @@ describe("createSummary", () => {
 
 describe("diffSummaries", () => {
   it("detects removed endpoints as breaking", () => {
-    const previous = {
+    const previous: ContractSummary = {
       version: 2 as const,
       endpoints: [
         {
@@ -122,7 +123,7 @@ describe("diffSummaries", () => {
         }
       ]
     };
-    const current = {
+    const current: ContractSummary = {
       version: 2 as const,
       endpoints: [
         {
@@ -158,7 +159,7 @@ describe("diffSummaries", () => {
   });
 
   it("detects signature/status/field removals as breaking", () => {
-    const previous = {
+    const previous: ContractSummary = {
       version: 2 as const,
       endpoints: [
         {
@@ -181,7 +182,7 @@ describe("diffSummaries", () => {
         }
       ]
     };
-    const current = {
+    const current: ContractSummary = {
       version: 2 as const,
       endpoints: [
         {
@@ -221,7 +222,7 @@ describe("diffSummaries", () => {
   });
 
   it("detects added required request fields and field type changes", () => {
-    const previous = {
+    const previous: ContractSummary = {
       version: 2 as const,
       endpoints: [
         {
@@ -242,7 +243,7 @@ describe("diffSummaries", () => {
         }
       ]
     };
-    const current = {
+    const current: ContractSummary = {
       version: 2 as const,
       endpoints: [
         {
@@ -413,5 +414,36 @@ describe("writeGeneratedArtifacts", () => {
     } finally {
       fs.rmSync(projectRoot, { recursive: true, force: true });
     }
+  });
+});
+
+describe("generator snapshots", () => {
+  it("keeps generated artifacts deterministic", () => {
+    const contractsByFile = {
+      "users.contract.json": {
+        getUser: {
+          method: "GET" as const,
+          path: "/users/:id",
+          params: { id: "string" as const },
+          query: { includePosts: "boolean" as const },
+          response: {
+            "200": { id: "string" as const, email: "string" as const },
+            "404": { message: "string" as const }
+          }
+        },
+        updateUser: {
+          method: "PUT" as const,
+          path: "/users/:id",
+          params: { id: "string" as const },
+          body: { email: "string" as const },
+          response: {
+            "200": { id: "string" as const, email: "string" as const }
+          }
+        }
+      }
+    };
+
+    expect(generateContractModelFile(contractsByFile)).toMatchSnapshot("contract-model");
+    expect(generateAngularClientFile(contractsByFile)).toMatchSnapshot("angular-client");
   });
 });

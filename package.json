@@ -15,6 +15,9 @@
     "format": "prettier --write .",
     "ckit:init": "tsx packages/cli/src/bin.ts init",
     "ckit:generate": "tsx packages/cli/src/bin.ts generate",
+    "ckit:backend": "tsx packages/cli/src/bin.ts backend",
+    "ckit:mock": "tsx packages/cli/src/bin.ts mock",
+    "ckit:validate": "tsx packages/cli/src/bin.ts validate",
     "ckit:check": "tsx packages/cli/src/bin.ts check",
     "docs:dev": "pnpm --filter @ngx-contract-kit/docs dev",
     "docs:build": "pnpm --filter @ngx-contract-kit/docs build"

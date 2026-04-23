@@ -3,22 +3,52 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
+  compareContractSummaries,
+  createContractDiffReport,
+  formatContractDiffReport
+} from "@ngx-contract-kit/contract-diff";
+import {
   createSummary,
-  diffSummaries,
   readContract,
   readProjectConfig,
   scanContractFiles,
   writeGeneratedArtifacts
-} from "../../core/src";
-import type { ContractFile, ContractSummary, ProjectConfig } from "../../core/src";
+} from "@ngx-contract-kit/core";
+import { generateAngularClient } from "@ngx-contract-kit/generator-angular-client";
+import { generateTypeScriptModels } from "@ngx-contract-kit/generator-typescript";
+import { generateMocksFromContracts } from "@ngx-contract-kit/mock-generator";
+import { generateZodSchemasSource } from "@ngx-contract-kit/validator-zod";
+import {
+  createNestModelFromContracts,
+  generateNestControllerSource,
+  generateNestHandlersStubSource
+} from "@ngx-contract-kit/plugin-nestjs";
+import type { ContractFile, ContractSummary, ProjectConfig } from "@ngx-contract-kit/core";
 
-function log(message: string): void {
+export type CliLogger = (message: string) => void;
+
+export class CliCommandError extends Error {
+  readonly exitCode: number;
+
+  constructor(message: string, exitCode = 1) {
+    super(message);
+    this.name = "CliCommandError";
+    this.exitCode = exitCode;
+  }
+}
+
+export type CheckCommandOptions = {
+  baselinePath?: string;
+  jsonOutput?: boolean;
+  reportPath?: string;
+};
+
+function defaultLogger(message: string): void {
   process.stdout.write(`${message}\n`);
 }
 
-function fail(message: string): never {
-  process.stderr.write(`Error: ${message}\n`);
-  process.exit(1);
+function fail(message: string, exitCode = 1): never {
+  throw new CliCommandError(message, exitCode);
 }
 
 function safeReadProjectConfig(projectRoot: string): ProjectConfig {
@@ -30,7 +60,7 @@ function safeReadProjectConfig(projectRoot: string): ProjectConfig {
   }
 }
 
-function initProject(projectRoot: string): void {
+export function initProject(projectRoot: string, log: CliLogger = defaultLogger): void {
   const config = safeReadProjectConfig(projectRoot);
   const contractsDir = path.join(projectRoot, config.contractsDir);
   const generatedDir = path.join(projectRoot, config.outputDir);
@@ -68,8 +98,7 @@ function initProject(projectRoot: string): void {
   log(`- Generated: ${path.relative(projectRoot, generatedDir)}`);
 }
 
-function generate(projectRoot: string): void {
-  const config = safeReadProjectConfig(projectRoot);
+function loadContractsByFile(projectRoot: string, config: ProjectConfig): Record<string, ContractFile> {
   const files = scanContractFiles(projectRoot, config.contractsDir);
   if (files.length === 0) {
     fail(`No *.contract.json files found in ${config.contractsDir}/`);
@@ -79,22 +108,109 @@ function generate(projectRoot: string): void {
   for (const file of files) {
     contractsByFile[file] = readContract(file);
   }
+  return contractsByFile;
+}
+
+function writeFrontendArtifacts(
+  projectRoot: string,
+  config: ProjectConfig,
+  contractsByFile: Record<string, ContractFile>
+): void {
+  const outputRoot = path.join(projectRoot, config.outputDir);
+  fs.mkdirSync(outputRoot, { recursive: true });
+
+  const contractModelPath = path.join(outputRoot, "contract-model.ts");
+  fs.writeFileSync(contractModelPath, generateTypeScriptModels(contractsByFile), "utf8");
+
+  const angularClientPath = path.join(outputRoot, "angular-client.ts");
+  fs.writeFileSync(angularClientPath, generateAngularClient(contractsByFile), "utf8");
+}
+
+function writeBackendArtifacts(
+  projectRoot: string,
+  config: ProjectConfig,
+  contractsByFile: Record<string, ContractFile>
+): void {
+  const outputRoot = path.join(projectRoot, config.outputDir);
+  fs.mkdirSync(outputRoot, { recursive: true });
+
+  const zodSchemasPath = path.join(outputRoot, "zod-schemas.ts");
+  fs.writeFileSync(zodSchemasPath, generateZodSchemasSource(contractsByFile), "utf8");
+
+  const nestControllerPath = path.join(outputRoot, "nest-controller.ts");
+  const nestHandlersPath = path.join(outputRoot, "nest-handlers.stub.ts");
+  const nestModel = createNestModelFromContracts(contractsByFile);
+  fs.writeFileSync(nestControllerPath, generateNestControllerSource(nestModel), "utf8");
+  fs.writeFileSync(nestHandlersPath, generateNestHandlersStubSource(nestModel), "utf8");
+}
+
+export function generate(projectRoot: string, log: CliLogger = defaultLogger): void {
+  const config = safeReadProjectConfig(projectRoot);
+  const contractsByFile = loadContractsByFile(projectRoot, config);
 
   const summary = createSummary(contractsByFile);
-  writeGeneratedArtifacts(projectRoot, summary, contractsByFile, config.outputDir);
+  writeGeneratedArtifacts(projectRoot, summary, undefined, config.outputDir);
+  writeFrontendArtifacts(projectRoot, config, contractsByFile);
+  writeBackendArtifacts(projectRoot, config, contractsByFile);
 
   log(`Generated artifacts for ${summary.endpoints.length} endpoints.`);
   log(`- ${config.outputDir}/types.ts`);
   log(`- ${config.outputDir}/summary.json`);
   log(`- ${config.outputDir}/contract-model.ts`);
   log(`- ${config.outputDir}/angular-client.ts`);
+  log(`- ${config.outputDir}/zod-schemas.ts`);
+  log(`- ${config.outputDir}/nest-controller.ts`);
+  log(`- ${config.outputDir}/nest-handlers.stub.ts`);
 }
 
-function check(projectRoot: string): void {
+export function generateBackend(projectRoot: string, log: CliLogger = defaultLogger): void {
   const config = safeReadProjectConfig(projectRoot);
-  const summaryPath = path.join(projectRoot, config.outputDir, "summary.json");
+  const contractsByFile = loadContractsByFile(projectRoot, config);
+  writeBackendArtifacts(projectRoot, config, contractsByFile);
+
+  log("Generated backend artifacts.");
+  log(`- ${config.outputDir}/zod-schemas.ts`);
+  log(`- ${config.outputDir}/nest-controller.ts`);
+  log(`- ${config.outputDir}/nest-handlers.stub.ts`);
+}
+
+export function generateMocks(projectRoot: string, log: CliLogger = defaultLogger): void {
+  const config = safeReadProjectConfig(projectRoot);
+  const contractsByFile = loadContractsByFile(projectRoot, config);
+  const mocks = generateMocksFromContracts(contractsByFile);
+
+  const outputPath = path.join(projectRoot, config.outputDir, "mocks.json");
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, JSON.stringify(mocks, null, 2), "utf8");
+  log(`Generated mocks for ${Object.keys(mocks).length} endpoints.`);
+  log(`- ${config.outputDir}/mocks.json`);
+}
+
+export function validateContracts(projectRoot: string, log: CliLogger = defaultLogger): void {
+  const config = safeReadProjectConfig(projectRoot);
+  const contractsByFile = loadContractsByFile(projectRoot, config);
+  const summary = createSummary(contractsByFile);
+  log(`Validated ${Object.keys(contractsByFile).length} contract file(s).`);
+  log(`- Endpoints: ${summary.endpoints.length}`);
+  log("Contracts are valid.");
+}
+
+export function check(
+  projectRoot: string,
+  log: CliLogger = defaultLogger,
+  options: CheckCommandOptions = {}
+): number {
+  const config = safeReadProjectConfig(projectRoot);
+  const baselinePath = options.baselinePath
+    ? path.resolve(projectRoot, options.baselinePath)
+    : path.join(projectRoot, config.outputDir, "summary.json");
+  const summaryPath = baselinePath;
   if (!fs.existsSync(summaryPath)) {
-    fail(`Missing ${config.outputDir}/summary.json. Run \`ngx-contract-kit generate\` first.`);
+    fail(
+      options.baselinePath
+        ? `Missing baseline summary file: ${options.baselinePath}`
+        : `Missing ${config.outputDir}/summary.json. Run \`ngx-contract-kit generate\` first.`
+    );
   }
 
   const previous = JSON.parse(fs.readFileSync(summaryPath, "utf8")) as ContractSummary;
@@ -105,72 +221,139 @@ function check(projectRoot: string): void {
   }
 
   const current = createSummary(contractsByFile);
-  const diff = diffSummaries(previous, current);
+  const diff = compareContractSummaries(previous, current);
+  const report = createContractDiffReport(diff);
+
+  if (options.reportPath) {
+    const resolvedReportPath = path.resolve(projectRoot, options.reportPath);
+    fs.mkdirSync(path.dirname(resolvedReportPath), { recursive: true });
+    fs.writeFileSync(resolvedReportPath, JSON.stringify(report, null, 2), "utf8");
+    log(`Wrote contract diff report: ${path.relative(projectRoot, resolvedReportPath)}`);
+  }
+
+  if (options.jsonOutput) {
+    log(JSON.stringify(report));
+  }
 
   if (diff.breaking) {
-    log("Breaking changes detected:");
-    for (const removed of diff.removed) {
-      log(`- Removed endpoint: ${removed}`);
+    const lines = formatContractDiffReport(diff);
+    for (const line of lines) {
+      log(line);
     }
-    for (const changed of diff.changedSignatures) {
-      log(`- Changed endpoint signature: ${changed}`);
-    }
-    for (const removedStatus of diff.removedResponseStatuses) {
-      log(`- Removed response status: ${removedStatus}`);
-    }
-    for (const removedFields of diff.removedRequestFields) {
-      log(`- Removed request field: ${removedFields}`);
-    }
-    for (const addedFields of diff.addedRequestFields) {
-      log(`- Added required request field: ${addedFields}`);
-    }
-    for (const changedRequestTypes of diff.changedRequestFieldTypes) {
-      log(`- Changed request field type: ${changedRequestTypes}`);
-    }
-    for (const removedResponseFields of diff.removedResponseFields) {
-      log(`- Removed response field: ${removedResponseFields}`);
-    }
-    for (const changedResponseTypes of diff.changedResponseFieldTypes) {
-      log(`- Changed response field type: ${changedResponseTypes}`);
-    }
-    process.exit(2);
+    return 2;
   }
 
   log("No breaking changes detected.");
+  return 0;
 }
 
-function printHelp(): void {
+function parseCheckOptions(rawArgs: string[]): CheckCommandOptions {
+  const options: CheckCommandOptions = {};
+
+  for (let index = 0; index < rawArgs.length; index += 1) {
+    const arg = rawArgs[index];
+    if (!arg) {
+      continue;
+    }
+
+    if (arg === "--json") {
+      options.jsonOutput = true;
+      continue;
+    }
+
+    if (arg === "--baseline") {
+      const value = rawArgs[index + 1];
+      if (!value || value.startsWith("-")) {
+        fail("Missing value for --baseline");
+      }
+      options.baselinePath = value;
+      index += 1;
+      continue;
+    }
+
+    if (arg === "--report") {
+      const value = rawArgs[index + 1];
+      if (!value || value.startsWith("-")) {
+        fail("Missing value for --report");
+      }
+      options.reportPath = value;
+      index += 1;
+      continue;
+    }
+
+    fail(`Unknown check option "${arg}".`);
+  }
+
+  return options;
+}
+
+export function printHelp(log: CliLogger = defaultLogger): void {
   log("ngx-contract-kit");
   log("");
   log("Usage:");
   log("  ngx-contract-kit init");
   log("  ngx-contract-kit generate");
-  log("  ngx-contract-kit check");
+  log("  ngx-contract-kit backend");
+  log("  ngx-contract-kit mock");
+  log("  ngx-contract-kit validate");
+  log("  ngx-contract-kit check [--json] [--report <path>] [--baseline <summary-path>]");
 }
 
-function run(): void {
-  const command = process.argv[2];
-  const projectRoot = process.cwd();
-
+export function runCommand(
+  command: string | undefined,
+  projectRoot: string,
+  log: CliLogger = defaultLogger,
+  rawArgs: string[] = []
+): number {
   if (!command || command === "--help" || command === "-h") {
-    printHelp();
-    return;
+    printHelp(log);
+    return 0;
   }
 
   if (command === "init") {
-    initProject(projectRoot);
-    return;
+    initProject(projectRoot, log);
+    return 0;
   }
   if (command === "generate") {
-    generate(projectRoot);
-    return;
+    generate(projectRoot, log);
+    return 0;
+  }
+  if (command === "backend") {
+    generateBackend(projectRoot, log);
+    return 0;
+  }
+  if (command === "mock") {
+    generateMocks(projectRoot, log);
+    return 0;
+  }
+  if (command === "validate") {
+    validateContracts(projectRoot, log);
+    return 0;
   }
   if (command === "check") {
-    check(projectRoot);
-    return;
+    return check(projectRoot, log, parseCheckOptions(rawArgs));
   }
 
   fail(`Unknown command "${command}". Use --help.`);
+}
+
+function run(): void {
+  const [, , command, ...rawArgs] = process.argv;
+  const projectRoot = process.cwd();
+  try {
+    const exitCode = runCommand(command, projectRoot, defaultLogger, rawArgs);
+    if (exitCode !== 0) {
+      process.exit(exitCode);
+    }
+  } catch (error) {
+    if (error instanceof CliCommandError) {
+      process.stderr.write(`Error: ${error.message}\n`);
+      process.exit(error.exitCode);
+    }
+    const message = error instanceof Error ? error.message : String(error);
+    process.stderr.write(`Error: ${message}\n`);
+    process.exit(1);
+  }
 }
 
 run();
