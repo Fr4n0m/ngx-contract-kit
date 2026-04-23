@@ -1,0 +1,10 @@
+[
+  "@ngx-contract-kit/core",
+  "@ngx-contract-kit/generator-typescript",
+  "@ngx-contract-kit/generator-angular-client",
+  "@ngx-contract-kit/mock-generator",
+  "@ngx-contract-kit/plugin-nestjs",
+  "@ngx-contract-kit/validator-zod",
+  "@ngx-contract-kit/contract-diff",
+  "@ngx-contract-kit/cli"
+]

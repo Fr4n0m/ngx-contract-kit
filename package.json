@@ -20,7 +20,10 @@
     "ckit:validate": "tsx packages/cli/src/bin.ts validate",
     "ckit:check": "tsx packages/cli/src/bin.ts check",
     "docs:dev": "pnpm --filter @ngx-contract-kit/docs dev",
-    "docs:build": "pnpm --filter @ngx-contract-kit/docs build"
+    "docs:build": "pnpm --filter @ngx-contract-kit/docs build",
+    "release:preflight": "node tooling/scripts/release-preflight.mjs",
+    "release:publish:dry": "node tooling/scripts/release-publish.mjs",
+    "release:publish:first": "node tooling/scripts/release-publish.mjs --publish"
   },
   "devDependencies": {
     "@types/node": "^24.7.2",
