@@ -1,8 +1,8 @@
 {
-  "name": "@ngx-contract-kit/generator-angular-client",
+  "name": "@fr4n0m/generator-angular-client",
   "version": "0.1.0",
   "private": false,
-  "description": "Angular client generator for ngx-contract-kit contracts",
+  "description": "Angular client generator for contract-kit contracts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -26,6 +26,6 @@
     "lint": "echo generator-angular-client: no lint step yet"
   },
   "dependencies": {
-    "@ngx-contract-kit/core": "workspace:*"
+    "@fr4n0m/core": "workspace:*"
   }
 }

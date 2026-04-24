@@ -1,9 +1,9 @@
 {
-  "name": "@ngx-contract-kit/docs",
+  "name": "@fr4n0m/docs",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Landing and documentation site for ngx-contract-kit",
+  "description": "Landing and documentation site for contract-kit",
   "scripts": {
     "dev": "vitepress dev .",
     "build": "vitepress build .",

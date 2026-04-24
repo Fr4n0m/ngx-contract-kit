@@ -1,8 +1,8 @@
 {
-  "name": "@ngx-contract-kit/contract-diff",
+  "name": "@fr4n0m/contract-diff",
   "version": "0.1.0",
   "private": false,
-  "description": "Contract summary comparison helpers for ngx-contract-kit",
+  "description": "Contract summary comparison helpers for contract-kit",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -26,6 +26,6 @@
     "lint": "echo contract-diff: no lint step yet"
   },
   "dependencies": {
-    "@ngx-contract-kit/core": "workspace:*"
+    "@fr4n0m/core": "workspace:*"
   }
 }

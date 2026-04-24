@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "pnpm --filter @ngx-contract-kit/docs build",
+  "buildCommand": "pnpm --filter @fr4n0m/docs build",
   "outputDirectory": "apps/docs/.vitepress/dist",
   "installCommand": "pnpm install",
   "framework": null

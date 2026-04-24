@@ -1,4 +1,4 @@
-# ngx-contract-kit
+# contract-kit
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
 ![Angular](https://img.shields.io/badge/Angular-Client-DD0031?logo=angular&logoColor=white)
@@ -14,7 +14,7 @@
 ## Español
 
 ### 🚀 ¿Qué es?
-`ngx-contract-kit` es un toolkit open source para equipos **Angular + backend** que permite definir un contrato API una sola vez y reutilizarlo para:
+`contract-kit` es un toolkit open source para equipos **Angular + backend** que permite definir un contrato API una sola vez y reutilizarlo para:
 
 - tipos compartidos,
 - generación de artefactos,
@@ -77,7 +77,7 @@ Ya está preparado con `vercel.json`:
 ## English
 
 ### 🚀 What is it?
-`ngx-contract-kit` is an open source toolkit for **Angular + backend** teams.  
+`contract-kit` is an open source toolkit for **Angular + backend** teams.  
 Define your API contract once, then reuse it for:
 
 - shared types,

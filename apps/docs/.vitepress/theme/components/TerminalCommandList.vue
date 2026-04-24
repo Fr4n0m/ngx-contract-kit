@@ -42,7 +42,7 @@ async function copyCommands(): Promise<void> {
 
 <template>
   <div
-    class="rounded-xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-code-bg)]"
+    class="min-w-0 rounded-xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-code-bg)]"
     :class="compact ? 'p-2' : 'p-3'"
   >
     <div class="mb-2 flex items-center justify-end">
@@ -58,10 +58,10 @@ async function copyCommands(): Promise<void> {
       <div
         v-for="command in commands"
         :key="command"
-        class="flex items-center gap-2 font-body text-sm"
+        class="flex min-w-0 items-start gap-2 font-body text-sm"
       >
         <span class="select-none text-accent">$</span>
-        <span class="text-accent">{{ command }}</span>
+        <span class="min-w-0 break-all text-accent">{{ command }}</span>
       </div>
     </div>
   </div>

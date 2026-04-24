@@ -6,24 +6,24 @@ import {
   compareContractSummaries,
   createContractDiffReport,
   formatContractDiffReport
-} from "@ngx-contract-kit/contract-diff";
+} from "@fr4n0m/contract-diff";
 import {
   createSummary,
   readContract,
   readProjectConfig,
   scanContractFiles,
   writeGeneratedArtifacts
-} from "@ngx-contract-kit/core";
-import { generateAngularClient } from "@ngx-contract-kit/generator-angular-client";
-import { generateTypeScriptModels } from "@ngx-contract-kit/generator-typescript";
-import { generateMocksFromContracts } from "@ngx-contract-kit/mock-generator";
-import { generateZodSchemasSource } from "@ngx-contract-kit/validator-zod";
+} from "@fr4n0m/core";
+import { generateAngularClient } from "@fr4n0m/generator-angular-client";
+import { generateTypeScriptModels } from "@fr4n0m/generator-typescript";
+import { generateMocksFromContracts } from "@fr4n0m/mock-generator";
+import { generateZodSchemasSource } from "@fr4n0m/validator-zod";
 import {
   createNestModelFromContracts,
   generateNestControllerSource,
   generateNestHandlersStubSource
-} from "@ngx-contract-kit/plugin-nestjs";
-import type { ContractFile, ContractSummary, ProjectConfig } from "@ngx-contract-kit/core";
+} from "@fr4n0m/plugin-nestjs";
+import type { ContractFile, ContractSummary, ProjectConfig } from "@fr4n0m/core";
 
 export type CliLogger = (message: string) => void;
 
@@ -65,7 +65,7 @@ export function initProject(projectRoot: string, log: CliLogger = defaultLogger)
   const contractsDir = path.join(projectRoot, config.contractsDir);
   const generatedDir = path.join(projectRoot, config.outputDir);
   const contractFile = path.join(contractsDir, "users.contract.json");
-  const configFile = path.join(projectRoot, "ngx-contract-kit.config.json");
+  const configFile = path.join(projectRoot, "contract-kit.config.json");
 
   fs.mkdirSync(contractsDir, { recursive: true });
   fs.mkdirSync(generatedDir, { recursive: true });
@@ -93,7 +93,7 @@ export function initProject(projectRoot: string, log: CliLogger = defaultLogger)
     fs.writeFileSync(configFile, JSON.stringify(initialConfig, null, 2), "utf8");
   }
 
-  log("Initialized ngx-contract-kit project.");
+  log("Initialized contract-kit project.");
   log(`- Contracts: ${path.relative(projectRoot, contractsDir)}`);
   log(`- Generated: ${path.relative(projectRoot, generatedDir)}`);
 }
@@ -209,7 +209,7 @@ export function check(
     fail(
       options.baselinePath
         ? `Missing baseline summary file: ${options.baselinePath}`
-        : `Missing ${config.outputDir}/summary.json. Run \`ngx-contract-kit generate\` first.`
+        : `Missing ${config.outputDir}/summary.json. Run \`contract-kit generate\` first.`
     );
   }
 
@@ -288,15 +288,15 @@ function parseCheckOptions(rawArgs: string[]): CheckCommandOptions {
 }
 
 export function printHelp(log: CliLogger = defaultLogger): void {
-  log("ngx-contract-kit");
+  log("contract-kit");
   log("");
   log("Usage:");
-  log("  ngx-contract-kit init");
-  log("  ngx-contract-kit generate");
-  log("  ngx-contract-kit backend");
-  log("  ngx-contract-kit mock");
-  log("  ngx-contract-kit validate");
-  log("  ngx-contract-kit check [--json] [--report <path>] [--baseline <summary-path>]");
+  log("  contract-kit init");
+  log("  contract-kit generate");
+  log("  contract-kit backend");
+  log("  contract-kit mock");
+  log("  contract-kit validate");
+  log("  contract-kit check [--json] [--report <path>] [--baseline <summary-path>]");
 }
 
 export function runCommand(

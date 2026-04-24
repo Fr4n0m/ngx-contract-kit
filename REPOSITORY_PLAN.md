@@ -2,7 +2,7 @@
 
 ## Nombre
 
-`ngx-contract-kit`
+`contract-kit`
 
 ## Estrategia
 
@@ -13,14 +13,14 @@
 ## Estructura propuesta
 
 ```text
-ngx-contract-kit/
+contract-kit/
   apps/
     docs/                        # Sitio docs (VitePress o Docusaurus)
     examples/
       angular-nest-basic/
       angular-express-basic/
   packages/
-    cli/                         # npx ngx-contract-kit
+    cli/                         # npx contract-kit
     core/                        # parser + AST + motor de generacion
     generator-typescript/        # tipos compartidos
     generator-angular-client/    # cliente Angular HttpClient

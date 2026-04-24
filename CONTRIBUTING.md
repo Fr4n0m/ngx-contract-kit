@@ -1,4 +1,4 @@
-# Contribuir a ngx-contract-kit
+# Contribuir a contract-kit
 
 ## Flujo de trabajo
 

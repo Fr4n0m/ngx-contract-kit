@@ -7,6 +7,7 @@ import HeaderNavLinks from "./components/HeaderNavLinks.vue";
 import GlobalFooter from "./components/GlobalFooter.vue";
 import ProjectCommandPalette from "./components/ProjectCommandPalette.vue";
 import DocsSidebar from "./components/DocsSidebar.vue";
+import LayoutBackground from "./components/LayoutBackground.vue";
 import InstallCommandSelector from "./components/InstallCommandSelector.vue";
 import QuickstartGuide from "./components/QuickstartGuide.vue";
 import TerminalCommandList from "./components/TerminalCommandList.vue";
@@ -19,7 +20,7 @@ const theme: Theme = {
     h(DefaultTheme.Layout, null, {
       "nav-bar-content-before": () => h(HeaderNavLinks),
       "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch)]),
-      "layout-top": () => h(ProjectCommandPalette),
+      "layout-top": () => h(Fragment, null, [h(LayoutBackground), h(ProjectCommandPalette)]),
       "doc-before": () => h(DocsSidebar),
       "layout-bottom": () => h(GlobalFooter)
     }),

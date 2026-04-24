@@ -365,7 +365,7 @@ describe("readProjectConfig", () => {
   it("reads custom config when present", () => {
     const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "ckit-config-custom-"));
     try {
-      const configPath = path.join(projectRoot, "ngx-contract-kit.config.json");
+      const configPath = path.join(projectRoot, "contract-kit.config.json");
       fs.writeFileSync(
         configPath,
         JSON.stringify({ schemaVersion: 1, contractsDir: "api-contracts", outputDir: "artifacts" }),
@@ -382,7 +382,7 @@ describe("readProjectConfig", () => {
   it("throws when config schemaVersion is invalid", () => {
     const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "ckit-config-invalid-"));
     try {
-      const configPath = path.join(projectRoot, "ngx-contract-kit.config.json");
+      const configPath = path.join(projectRoot, "contract-kit.config.json");
       fs.writeFileSync(
         configPath,
         JSON.stringify({ schemaVersion: 2, contractsDir: "contracts", outputDir: "generated" }),

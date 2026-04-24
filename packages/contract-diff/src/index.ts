@@ -1,5 +1,5 @@
-import { diffSummaries } from "@ngx-contract-kit/core";
-import type { ContractSummary } from "@ngx-contract-kit/core";
+import { diffSummaries } from "@fr4n0m/core";
+import type { ContractSummary } from "@fr4n0m/core";
 
 export type ContractDiffResult = ReturnType<typeof diffSummaries>;
 export type ContractDiffIssueCode =

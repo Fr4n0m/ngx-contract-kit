@@ -1,8 +1,8 @@
 {
-  "name": "@ngx-contract-kit/cli",
+  "name": "@fr4n0m/cli",
   "version": "0.1.0",
   "private": false,
-  "description": "CLI for ngx-contract-kit",
+  "description": "CLI for contract-kit",
   "type": "commonjs",
   "main": "dist/bin.js",
   "files": [
@@ -12,6 +12,7 @@
     "access": "public"
   },
   "bin": {
+    "contract-kit": "dist/bin.js",
     "ngx-contract-kit": "dist/bin.js"
   },
   "scripts": {
@@ -20,12 +21,12 @@
     "lint": "echo cli: no lint step yet"
   },
   "dependencies": {
-    "@ngx-contract-kit/contract-diff": "workspace:*",
-    "@ngx-contract-kit/core": "workspace:*",
-    "@ngx-contract-kit/generator-angular-client": "workspace:*",
-    "@ngx-contract-kit/generator-typescript": "workspace:*",
-    "@ngx-contract-kit/mock-generator": "workspace:*",
-    "@ngx-contract-kit/plugin-nestjs": "workspace:*",
-    "@ngx-contract-kit/validator-zod": "workspace:*"
+    "@fr4n0m/contract-diff": "workspace:*",
+    "@fr4n0m/core": "workspace:*",
+    "@fr4n0m/generator-angular-client": "workspace:*",
+    "@fr4n0m/generator-typescript": "workspace:*",
+    "@fr4n0m/mock-generator": "workspace:*",
+    "@fr4n0m/plugin-nestjs": "workspace:*",
+    "@fr4n0m/validator-zod": "workspace:*"
   }
 }

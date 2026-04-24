@@ -1,5 +1,5 @@
 import path from "node:path";
-import type { ContractFile, ContractScalarType, ContractShape } from "@ngx-contract-kit/core";
+import type { ContractFile, ContractScalarType, ContractShape } from "@fr4n0m/core";
 
 function scalarMock(field: string, scalar: ContractScalarType): unknown {
   switch (scalar) {

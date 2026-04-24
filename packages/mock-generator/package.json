@@ -1,8 +1,8 @@
 {
-  "name": "@ngx-contract-kit/mock-generator",
+  "name": "@fr4n0m/mock-generator",
   "version": "0.1.0",
   "private": false,
-  "description": "Mock payload generator for ngx-contract-kit contract shapes",
+  "description": "Mock payload generator for contract-kit contract shapes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -26,6 +26,6 @@
     "lint": "echo mock-generator: no lint step yet"
   },
   "dependencies": {
-    "@ngx-contract-kit/core": "workspace:*"
+    "@fr4n0m/core": "workspace:*"
   }
 }

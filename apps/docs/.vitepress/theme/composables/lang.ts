@@ -6,7 +6,7 @@ type UseLangResult = {
   setLang: (next: Lang) => void;
 };
 
-const STORAGE_KEY = "ngx-contract-kit-lang";
+const STORAGE_KEY = "contract-kit-lang";
 const lang = ref<Lang>("en");
 
 let initialized = false;

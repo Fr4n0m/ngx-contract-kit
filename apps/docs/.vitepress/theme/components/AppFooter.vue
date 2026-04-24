@@ -30,7 +30,7 @@ defineProps<{
 
 <template>
   <footer
-    class="mt-10 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-6 py-8 shadow-card"
+    class="mt-10 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card sm:px-6 sm:py-8"
   >
     <div class="grid gap-8 md:grid-cols-12">
       <div class="md:col-span-6">
@@ -39,7 +39,7 @@ defineProps<{
         >
           {{ footer.eyebrow }}
         </p>
-        <h3 class="mt-3 font-project text-2xl text-[color:var(--vp-c-text-1)]">
+        <h3 class="mt-3 break-words font-project text-2xl text-[color:var(--vp-c-text-1)]">
           {{ footer.title }}
         </h3>
         <p
@@ -90,7 +90,7 @@ defineProps<{
       >
         {{ footer.legal }}
       </p>
-      <p class="md:text-center">
+      <p class="break-words md:text-center">
         {{ footer.signaturePrefix }}
         <a
           class="underline underline-offset-4 transition hover:text-brand-700 dark:hover:text-brand-300"

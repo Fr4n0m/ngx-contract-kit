@@ -1,8 +1,8 @@
 {
-  "name": "@ngx-contract-kit/plugin-nestjs",
+  "name": "@fr4n0m/plugin-nestjs",
   "version": "0.1.0",
   "private": false,
-  "description": "Typed NestJS wiring helpers for ngx-contract-kit contracts",
+  "description": "Typed NestJS wiring helpers for contract-kit contracts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -26,6 +26,6 @@
     "lint": "echo plugin-nestjs: no lint step yet"
   },
   "dependencies": {
-    "@ngx-contract-kit/core": "workspace:*"
+    "@fr4n0m/core": "workspace:*"
   }
 }
