@@ -54,12 +54,12 @@ onUnmounted(() => {
 <template>
   <aside v-if="isDocsRoute" class="docs-sidebar hidden lg:block">
     <nav
-      class="sticky top-24 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-3 font-body"
+      class="sticky top-24 rounded-2xl border border-black/10 bg-white/45 p-3 font-body backdrop-blur-sm dark:border-[color:var(--vp-c-bg-alt)] dark:bg-[color:var(--vp-c-bg-soft)]"
     >
       <div class="relative">
         <div
           v-if="activeIndex >= 0"
-          class="pointer-events-none absolute left-0 right-0 z-[1] rounded-lg border border-black/10 bg-black/8 transition-transform duration-300 ease-out dark:border-white/10 dark:bg-white/10"
+          class="pointer-events-none absolute left-0 right-0 z-[1] rounded-lg border border-black/10 bg-black/6 transition-transform duration-300 ease-out dark:border-white/10 dark:bg-white/10"
           :style="{ height: '2.5rem', transform: `translateY(${activeIndex * 2.75}rem)` }"
         >
           <span
@@ -75,7 +75,7 @@ onUnmounted(() => {
         :class="
           isActive(item.href)
             ? 'text-[color:var(--vp-c-text-1)]'
-            : 'text-[color:var(--vp-c-text-2)] hover:bg-black/5 hover:text-[color:var(--vp-c-text-1)] dark:hover:bg-white/5'
+            : 'text-[color:var(--vp-c-text-2)] hover:bg-black/10 hover:text-[color:var(--vp-c-text-1)] dark:hover:bg-white/5 dark:hover:text-accent'
         "
       >
         {{ t.docsNav[item.key] }}

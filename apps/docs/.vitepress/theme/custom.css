@@ -30,10 +30,10 @@
 
 @layer base {
   :root {
-    --vp-c-brand-1: #686d5f;
-    --vp-c-brand-2: #535450;
-    --vp-c-brand-3: #343a26;
-    --vp-c-brand-soft: #d2ff00;
+    --vp-c-brand-1: #d2ff00;
+    --vp-c-brand-2: #c7f100;
+    --vp-c-brand-3: #b4d900;
+    --vp-c-brand-soft: #b6dd00;
     --vp-c-bg: #b7c1b2;
     --vp-c-bg-soft: #cbd3c7;
     --vp-c-bg-alt: #94a08d;
@@ -41,7 +41,7 @@
     --vp-c-text-2: #1f281b;
     --vp-c-text-3: #33402c;
     --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: linear-gradient(120deg, #343a26 5%, #686d5f 92%);
+    --vp-home-hero-name-background: linear-gradient(120deg, #d2ff00 5%, #b6dd00 92%);
     --vp-code-bg: #1f2319;
     --vp-code-color: #2f4f40;
     --vp-code-block-color: #264638;
@@ -54,8 +54,8 @@
 
   .dark {
     --vp-c-brand-1: #d2ff00;
-    --vp-c-brand-2: #b6dd00;
-    --vp-c-brand-3: #8aa800;
+    --vp-c-brand-2: #c7f100;
+    --vp-c-brand-3: #b4d900;
     --vp-c-bg: #11180f;
     --vp-c-bg-soft: #1b2218;
     --vp-c-bg-alt: #242b1f;
@@ -99,13 +99,34 @@
   }
 
   .VPNavBar .container {
-    padding-left: clamp(1rem, 4vw, 4rem);
-    padding-right: clamp(1rem, 4vw, 4rem);
+    padding-left: clamp(1rem, 2vw, 4rem);
+    padding-right: clamp(1rem, 2vw, 4rem);
+  }
+
+  .VPNavBar .content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   .VPNavBar .content-body {
     min-width: 0 !important;
     width: 100% !important;
+  }
+
+  .VPNav,
+  .VPNavBar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .VPNavBar {
+    background: rgba(189, 198, 182, 0.62) !important;
+    border-bottom: 1px solid rgba(47, 62, 40, 0.22);
+  }
+
+  .dark .VPNavBar {
+    background: rgba(13, 20, 12, 0.68) !important;
+    border-bottom-color: rgba(210, 255, 0, 0.18);
   }
 
   .VPNavBarTitle .title,
@@ -115,17 +136,17 @@
   }
 
   .VPSwitch {
-    border: 1px solid rgba(17, 23, 15, 0.24);
-    background-color: rgba(17, 23, 15, 0.14);
+    border: 1px solid rgba(210, 255, 0, 0.55);
+    background-color: rgba(255, 255, 255, 0.18);
   }
 
   .VPSwitch .check {
-    background-color: #f4f6f0;
-    border: 1px solid rgba(17, 23, 15, 0.28);
+    background-color: #ffffff;
+    border: 1px solid rgba(31, 35, 25, 0.3);
   }
 
   .VPSwitch .icon {
-    color: #1a2116;
+    color: #1f2319;
   }
 
   .dark .VPSwitch {
@@ -142,7 +163,7 @@
     color: #d2ff00;
   }
 
-  .vp-doc :not(pre) > code {
+  .vp-doc :not(pre)>code {
     color: var(--ck-code-inline-fg);
     background: var(--ck-code-inline-bg);
     border: 1px solid var(--ck-code-border);
@@ -169,6 +190,49 @@
 
   .dark .vp-doc div[class*="language-"] {
     background: color-mix(in srgb, var(--vp-c-bg-soft) 65%, #07100d 35%);
+  }
+
+  .vp-doc div[class*="language-"] .copy,
+  .vp-doc div[class*="language-"] button.copy,
+  .vp-doc div[class*="language-"] .vp-copy,
+  .vp-doc div[class*="language-"] button[title*="Copy"],
+  .vp-doc div[class*="language-"] button[aria-label*="Copy"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    color: var(--vp-c-text-1) !important;
+    border: 1px solid var(--vp-c-bg-alt) !important;
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 78%, #ffffff 22%) !important;
+  }
+
+  .vp-doc div[class*="language-"] .copy:hover,
+  .vp-doc div[class*="language-"] button.copy:hover,
+  .vp-doc div[class*="language-"] .vp-copy:hover,
+  .vp-doc div[class*="language-"] button[title*="Copy"]:hover,
+  .vp-doc div[class*="language-"] button[aria-label*="Copy"]:hover {
+    color: #1f2319 !important;
+    background: var(--vp-c-brand-1) !important;
+    border-color: var(--vp-c-brand-2) !important;
+  }
+
+  html:not(.dark) .vp-doc a {
+    color: #1f2319;
+    text-decoration-color: rgba(210, 255, 0, 0.75);
+  }
+
+  html:not(.dark) .vp-doc a:hover {
+    color: #11170f;
+    text-decoration-color: rgba(210, 255, 0, 1);
+  }
+
+  .dark .vp-doc div[class*="language-"] .copy,
+  .dark .vp-doc div[class*="language-"] button.copy,
+  .dark .vp-doc div[class*="language-"] .vp-copy,
+  .dark .vp-doc div[class*="language-"] button[title*="Copy"],
+  .dark .vp-doc div[class*="language-"] button[aria-label*="Copy"] {
+    color: var(--vp-c-text-1) !important;
+    border-color: var(--vp-c-bg-alt) !important;
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 65%, #0b130f 35%) !important;
   }
 
   .VPSidebar {
@@ -201,12 +265,12 @@
       margin: 0 auto;
     }
 
-    .has-docs-sidebar .VPDoc .content-container > .docs-sidebar {
+    .has-docs-sidebar .VPDoc .content-container>.docs-sidebar {
       grid-column: 1;
     }
 
-    .has-docs-sidebar .VPDoc .content-container > .main,
-  .has-docs-sidebar .VPDoc .content-container > .VPDocFooter {
+    .has-docs-sidebar .VPDoc .content-container>.main,
+    .has-docs-sidebar .VPDoc .content-container>.VPDocFooter {
       grid-column: 2;
       min-width: 0;
     }
@@ -234,8 +298,8 @@
 
   .ck-cmd-close-btn:hover,
   .ck-cmd-close-btn:focus-visible {
-    color: #8aa800 !important;
-    border-color: rgba(138, 168, 0, 0.45) !important;
+    color: #1f2319 !important;
+    border-color: rgba(210, 255, 0, 0.55) !important;
     background: rgba(182, 221, 0, 0.14) !important;
   }
 
@@ -248,7 +312,7 @@
 
   .has-docs-sidebar .VPDoc .main,
   .has-docs-sidebar .VPDoc .vp-doc,
-  .has-docs-sidebar .VPDoc .content-container .vp-doc > div {
+  .has-docs-sidebar .VPDoc .content-container .vp-doc>div {
     max-width: none !important;
     width: 100% !important;
   }

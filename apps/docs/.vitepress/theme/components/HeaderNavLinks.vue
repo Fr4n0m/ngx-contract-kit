@@ -11,22 +11,22 @@ const t = computed(() => dict[lang.value as Lang]);
 <template>
   <nav class="hidden w-full flex-nowrap items-center justify-end gap-5 pr-0 md:flex">
     <a
-      class="whitespace-nowrap text-sm text-[color:var(--vp-c-text-1)] hover:text-brand-700 dark:hover:text-accent"
+      class="whitespace-nowrap rounded-md px-2 py-1 text-sm text-[color:var(--vp-c-text-1)] transition hover:bg-[#d2ff00] hover:text-[#1f2319] focus-visible:bg-[#d2ff00] focus-visible:text-[#1f2319]"
       href="/"
       >{{ t.nav.overview }}</a
     >
     <a
-      class="whitespace-nowrap text-sm text-[color:var(--vp-c-text-1)] hover:text-brand-700 dark:hover:text-accent"
+      class="whitespace-nowrap rounded-md px-2 py-1 text-sm text-[color:var(--vp-c-text-1)] transition hover:bg-[#d2ff00] hover:text-[#1f2319] focus-visible:bg-[#d2ff00] focus-visible:text-[#1f2319]"
       href="/#what-you-get"
       >{{ t.nav.whatYouGet }}</a
     >
     <a
-      class="whitespace-nowrap text-sm text-[color:var(--vp-c-text-1)] hover:text-brand-700 dark:hover:text-accent"
+      class="whitespace-nowrap rounded-md px-2 py-1 text-sm text-[color:var(--vp-c-text-1)] transition hover:bg-[#d2ff00] hover:text-[#1f2319] focus-visible:bg-[#d2ff00] focus-visible:text-[#1f2319]"
       href="/docs/"
       >{{ t.nav.docs }}</a
     >
     <a
-      class="whitespace-nowrap text-sm text-[color:var(--vp-c-text-1)] hover:text-brand-700 dark:hover:text-accent"
+      class="whitespace-nowrap rounded-md px-2 py-1 text-sm text-[color:var(--vp-c-text-1)] transition hover:bg-[#d2ff00] hover:text-[#1f2319] focus-visible:bg-[#d2ff00] focus-visible:text-[#1f2319]"
       href="/#how-it-works"
       >{{ t.nav.howItWorks }}</a
     >

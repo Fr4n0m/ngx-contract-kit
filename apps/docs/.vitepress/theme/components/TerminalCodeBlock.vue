@@ -41,14 +41,14 @@ async function copyCode(): Promise<void> {
 <template>
   <div class="min-w-0 overflow-hidden rounded-xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-code-bg)]">
     <div
-      class="flex items-center justify-between gap-2 border-b border-[color:var(--vp-c-bg-alt)] bg-black/20 px-3 py-1.5 text-xs text-[color:var(--vp-c-text-2)] dark:bg-white/5"
+      class="flex items-center justify-between gap-2 border-b border-[color:var(--vp-c-bg-alt)] bg-[#162117] px-3 py-1.5 text-xs text-[#d9e5d8] dark:bg-white/5 dark:text-[#dde1d2]"
     >
       <span class="min-w-0 truncate">{{ fileLabel }}</span>
       <div class="flex shrink-0 items-center gap-2">
         <span class="uppercase tracking-wide text-accent">json</span>
         <button
           type="button"
-          class="rounded-md border border-[color:var(--vp-c-bg-alt)] px-2 py-1 text-xs font-medium text-[color:var(--vp-c-text-2)] transition hover:text-accent"
+          class="rounded-md border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-2 py-1 text-xs font-semibold text-[color:var(--vp-c-text-1)] transition hover:border-accent hover:bg-accent hover:text-[#1f2319] dark:bg-[color:var(--vp-c-bg-alt)] dark:text-[color:var(--vp-c-text-1)] dark:hover:bg-accent dark:hover:text-[#1f2319]"
           @click="copyCode"
         >
           {{ copied ? "Copied" : "Copy" }}

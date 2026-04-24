@@ -9,7 +9,7 @@ const { lang, setLang } = useLang();
     <button
       type="button"
       class="rounded px-2 py-1 text-xs font-semibold transition"
-      :class="lang === 'en' ? 'bg-brand-700 text-white dark:bg-accent dark:text-[#1f2319]' : 'text-[color:var(--vp-c-text-2)]'"
+      :class="lang === 'en' ? 'bg-accent text-[#1f2319]' : 'text-[color:var(--vp-c-text-2)]'"
       @click="setLang('en')"
     >
       EN
@@ -17,7 +17,7 @@ const { lang, setLang } = useLang();
     <button
       type="button"
       class="rounded px-2 py-1 text-xs font-semibold transition"
-      :class="lang === 'es' ? 'bg-brand-700 text-white dark:bg-accent dark:text-[#1f2319]' : 'text-[color:var(--vp-c-text-2)]'"
+      :class="lang === 'es' ? 'bg-accent text-[#1f2319]' : 'text-[color:var(--vp-c-text-2)]'"
       @click="setLang('es')"
     >
       ES

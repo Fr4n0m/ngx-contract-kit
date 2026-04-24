@@ -30,12 +30,12 @@ defineProps<{
 
 <template>
   <footer
-    class="mt-10 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card sm:px-6 sm:py-8"
+    class="mt-4 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card sm:px-6 sm:py-8"
   >
     <div class="grid gap-8 md:grid-cols-12">
       <div class="md:col-span-6">
         <p
-          class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-brand-700 dark:text-accent"
+          class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--vp-c-text-3)] dark:text-accent"
         >
           {{ footer.eyebrow }}
         </p>
@@ -53,7 +53,7 @@ defineProps<{
         <ul class="space-y-2">
           <li v-for="link in footer.productLinks" :key="link.href">
             <a
-              class="text-sm text-[color:var(--vp-c-text-1)] transition hover:text-brand-700 dark:text-[color:var(--vp-c-text-2)] dark:hover:text-brand-300"
+              class="text-sm text-[color:var(--vp-c-text-1)] transition hover:text-accent dark:text-[color:var(--vp-c-text-2)] dark:hover:text-accent"
               :href="link.href"
             >
               {{ link.label }}
@@ -69,7 +69,7 @@ defineProps<{
         <ul class="mt-3 space-y-2">
           <li v-for="link in footer.resourceLinks" :key="link.href">
             <a
-              class="inline-flex items-center gap-1.5 text-sm text-[color:var(--vp-c-text-1)] transition hover:text-brand-700 dark:text-[color:var(--vp-c-text-2)] dark:hover:text-brand-300"
+              class="inline-flex items-center gap-1.5 text-sm text-[color:var(--vp-c-text-1)] transition hover:text-accent dark:text-[color:var(--vp-c-text-2)] dark:hover:text-accent"
               :href="link.href"
               :target="link.href.startsWith('http') ? '_blank' : undefined"
               rel="noreferrer"
@@ -93,7 +93,7 @@ defineProps<{
       <p class="break-words md:text-center">
         {{ footer.signaturePrefix }}
         <a
-          class="underline underline-offset-4 transition hover:text-brand-700 dark:hover:text-brand-300"
+          class="underline underline-offset-4 transition hover:text-accent dark:hover:text-accent"
           :href="footer.signatureUrl"
           target="_blank"
           rel="noreferrer"

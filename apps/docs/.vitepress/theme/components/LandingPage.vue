@@ -33,20 +33,20 @@ const actionBaseClass =
 const actionThemeClass = {
   brand:
     "border-accent bg-accent !text-[#1f2319] dark:!text-[#1f2319] shadow-card hover:brightness-95",
-  alt: "border-brand-700 bg-brand-100/75 text-brand-800 hover:bg-brand-100 dark:border-brand-500 dark:bg-brand-900/70 dark:text-brand-200 dark:hover:bg-brand-900",
+  alt: "border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] text-[color:var(--vp-c-text-1)] hover:border-accent hover:text-accent dark:border-[color:var(--vp-c-bg-alt)] dark:bg-[color:var(--vp-c-bg-soft)] dark:text-[color:var(--vp-c-text-1)] dark:hover:border-accent dark:hover:text-accent",
 } as const;
 </script>
 
 <template>
   <section
-    class="relative w-full overflow-x-hidden bg-transparent px-[clamp(0.75rem,4vw,4rem)] pb-10 pt-8"
+    class="relative mx-[calc(50%-50vw)] w-screen max-w-none overflow-x-clip bg-transparent px-[clamp(1rem,4vw,4rem)] pb-4 pt-8"
   >
     <div class="relative z-10 mx-auto w-full max-w-none min-w-0">
       <header
         class="mb-8 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card sm:mb-10 sm:p-8"
       >
         <p
-          class="font-project text-sm font-semibold uppercase tracking-[0.2em] text-brand-700 dark:text-accent"
+          class="font-project text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--vp-c-text-3)] dark:text-accent"
         >
           {{ t.hero.name }}
         </p>
@@ -83,7 +83,7 @@ const actionThemeClass = {
           :kicker="card.kicker"
           :title="card.title"
           :copy="card.copy"
-          :icon-size="28"
+          :icon-size="20"
         />
       </div>
 
@@ -100,7 +100,7 @@ const actionThemeClass = {
             :icon="whatYouGetIcons[index]"
             :kicker="item.kicker"
             :copy="item.copy"
-            :icon-size="26"
+            :icon-size="18"
           />
         </div>
       </section>
@@ -130,7 +130,9 @@ const actionThemeClass = {
                 </span>
               </div>
             </div>
-            <h3 class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]">
+            <h3
+              class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]"
+            >
               {{ step.title }}
             </h3>
             <p class="break-words text-[color:var(--vp-c-text-2)]">
@@ -147,7 +149,9 @@ const actionThemeClass = {
             class="min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
             <div class="mb-2 flex items-center justify-between gap-3">
-              <h3 class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]">
+              <h3
+                class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]"
+              >
                 {{ t.howItWorks.example.title }}
               </h3>
             </div>
@@ -160,16 +164,20 @@ const actionThemeClass = {
           <article
             class="min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
-            <h3 class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]">
+            <h3
+              class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]"
+            >
               {{ t.howItWorks.releaseChecks.title }}
             </h3>
             <ul class="mt-3 space-y-2 text-[color:var(--vp-c-text-2)]">
               <li
                 v-for="item in t.howItWorks.releaseChecks.items"
                 :key="item"
-                class="flex min-w-0 items-start gap-2"
+                class="flex min-w-0 justify-start items-center gap-2"
               >
-                <span class="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                <span
+                  class="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                />
                 <span class="min-w-0 break-words">{{ item }}</span>
               </li>
             </ul>
