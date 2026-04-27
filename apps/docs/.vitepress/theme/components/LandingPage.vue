@@ -30,7 +30,7 @@ const howItWorksIcons = [
 ] as const;
 
 const actionBaseClass =
-  "inline-flex items-center rounded-md border px-4 py-2 text-sm font-semibold transition";
+  "inline-flex items-center border px-4 py-2 text-sm font-semibold transition";
 
 const actionThemeClass = {
   brand:
@@ -50,7 +50,7 @@ const howItWorksRef = useReveal(0);
     <div class="relative z-10 mx-auto w-full max-w-none min-w-0">
       <header
         ref="heroRef"
-        class="reveal landing-hero mb-8 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:mb-10 sm:p-8"
+        class="reveal landing-hero mb-8 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:mb-10 sm:p-8"
       >
         <p
           class="font-project text-sm font-semibold uppercase tracking-[0.2em] text-[#1f1f1f] dark:text-accent"
@@ -132,12 +132,12 @@ const howItWorksRef = useReveal(0);
           <article
             v-for="(step, index) in t.howItWorks.steps"
             :key="step.title"
-            class="landing-card min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
+            class="landing-card min-w-0 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
             <div class="flex items-start justify-between gap-3">
               <div class="inline-flex items-center gap-2">
                 <span
-                  class="inline-flex size-14 items-center justify-center rounded-full bg-accent font-heading text-[30px] text-[#1f1f1f]"
+                  class="inline-flex size-14 items-center justify-center bg-accent font-heading text-[30px] text-[#1f1f1f]"
                 >
                   <component :is="howItWorksIcons[index]" :size="35" />
                 </span>
@@ -159,10 +159,12 @@ const howItWorksRef = useReveal(0);
 
         <div class="mt-6 grid gap-4 lg:grid-cols-2">
           <article
-            class="landing-card min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
+            class="landing-card min-w-0 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
-            <div class="mb-2 inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[color:var(--vp-c-text-3)]">
-              <span class="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+            <div
+              class="mb-2 inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[color:var(--vp-c-text-3)]"
+            >
+              <span class="inline-block h-1.5 w-1.5 shrink-0 bg-accent" />
               <span>{{ t.howItWorks.example.contextLabel }}</span>
             </div>
             <div class="mb-2 flex items-center justify-between gap-3">
@@ -182,7 +184,7 @@ const howItWorksRef = useReveal(0);
           </article>
 
           <article
-            class="landing-card min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
+            class="landing-card min-w-0 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
             <h3
               class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]"
@@ -195,9 +197,7 @@ const howItWorksRef = useReveal(0);
                 :key="item"
                 class="flex min-w-0 justify-start items-center gap-2"
               >
-                <span
-                  class="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
-                />
+                <span class="inline-block h-1.5 w-1.5 shrink-0 bg-accent" />
                 <span class="min-w-0 break-words">{{ item }}</span>
               </li>
             </ul>

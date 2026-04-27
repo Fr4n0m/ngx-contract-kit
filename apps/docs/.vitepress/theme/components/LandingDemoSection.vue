@@ -74,10 +74,22 @@ type TabId = "contract" | "angular" | "nestjs" | "zod";
 const activeTab = ref<TabId>("contract");
 
 const tabData: Record<TabId, { lang: string; file: string; code: string }> = {
-  contract: { lang: "json", file: "contracts/users.contract.json", code: CONTRACT_CODE },
-  angular:  { lang: "ts",   file: "generated/angular-client.ts",   code: ANGULAR_CODE },
-  nestjs:   { lang: "ts",   file: "generated/nest-controller.ts",  code: NESTJS_CODE },
-  zod:      { lang: "ts",   file: "generated/zod-schemas.ts",      code: ZOD_CODE },
+  contract: {
+    lang: "json",
+    file: "contracts/users.contract.json",
+    code: CONTRACT_CODE,
+  },
+  angular: {
+    lang: "ts",
+    file: "generated/angular-client.ts",
+    code: ANGULAR_CODE,
+  },
+  nestjs: {
+    lang: "ts",
+    file: "generated/nest-controller.ts",
+    code: NESTJS_CODE,
+  },
+  zod: { lang: "ts", file: "generated/zod-schemas.ts", code: ZOD_CODE },
 };
 
 const copied = ref(false);
@@ -99,7 +111,9 @@ async function copyCode(): Promise<void> {
   }
   copied.value = true;
   if (copiedTimer) clearTimeout(copiedTimer);
-  copiedTimer = setTimeout(() => { copied.value = false; }, 1200);
+  copiedTimer = setTimeout(() => {
+    copied.value = false;
+  }, 1200);
 }
 
 const titleRef = useReveal(0);
@@ -118,7 +132,7 @@ const titleRef = useReveal(0);
     </p>
 
     <div
-      class="landing-card min-w-0 overflow-hidden rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] shadow-card"
+      class="landing-card min-w-0 overflow-hidden border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] shadow-card"
     >
       <!-- Tab bar -->
       <div
@@ -127,7 +141,7 @@ const titleRef = useReveal(0);
         <button
           type="button"
           :class="[
-            'rounded-lg px-3 py-1.5 text-xs font-semibold transition',
+            'px-3 py-1.5 text-xs font-semibold transition',
             activeTab === 'contract'
               ? 'bg-accent text-[#1f1f1f]'
               : 'text-[#888] hover:text-[#ffffff]',
@@ -146,7 +160,7 @@ const titleRef = useReveal(0);
         <button
           type="button"
           :class="[
-            'rounded-lg px-3 py-1.5 text-xs font-semibold transition',
+            'px-3 py-1.5 text-xs font-semibold transition',
             activeTab === 'angular'
               ? 'bg-accent text-[#1f1f1f]'
               : 'text-[#888] hover:text-[#ffffff]',
@@ -158,7 +172,7 @@ const titleRef = useReveal(0);
         <button
           type="button"
           :class="[
-            'rounded-lg px-3 py-1.5 text-xs font-semibold transition',
+            'px-3 py-1.5 text-xs font-semibold transition',
             activeTab === 'nestjs'
               ? 'bg-accent text-[#1f1f1f]'
               : 'text-[#888] hover:text-[#ffffff]',
@@ -170,7 +184,7 @@ const titleRef = useReveal(0);
         <button
           type="button"
           :class="[
-            'rounded-lg px-3 py-1.5 text-xs font-semibold transition',
+            'px-3 py-1.5 text-xs font-semibold transition',
             activeTab === 'zod'
               ? 'bg-accent text-[#1f1f1f]'
               : 'text-[#888] hover:text-[#ffffff]',
@@ -185,12 +199,16 @@ const titleRef = useReveal(0);
       <div
         class="flex items-center justify-between gap-2 border-b border-[color:var(--vp-c-bg-alt)] bg-[#0d0d0d] px-3 py-1.5 text-xs text-[#888]"
       >
-        <span class="min-w-0 truncate font-mono">{{ tabData[activeTab].file }}</span>
+        <span class="min-w-0 truncate font-mono">{{
+          tabData[activeTab].file
+        }}</span>
         <div class="flex shrink-0 items-center gap-2">
-          <span class="font-mono uppercase tracking-wide text-accent">{{ tabData[activeTab].lang }}</span>
+          <span class="font-mono uppercase tracking-wide text-accent">{{
+            tabData[activeTab].lang
+          }}</span>
           <button
             type="button"
-            class="rounded-md border border-[#2a2a2a] bg-[#2a2a2a] px-2 py-1 text-xs font-semibold text-[#d2ff00] transition hover:border-accent hover:brightness-110"
+            class="border border-[#3a3a3a] bg-[#2a2a2a] px-2 py-1 text-xs font-semibold text-[#d2ff00] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f]"
             @click="copyCode"
           >
             {{ copied ? "Copied" : "Copy" }}

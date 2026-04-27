@@ -33,7 +33,7 @@ const getResourceIcon = (href: string) =>
 
 <template>
   <footer
-    class="mt-4 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:px-6 sm:py-8"
+    class="mt-4 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:px-6 sm:py-8"
   >
     <div class="grid gap-8 md:grid-cols-12">
       <div class="md:col-span-6">
@@ -42,7 +42,9 @@ const getResourceIcon = (href: string) =>
         >
           {{ footer.eyebrow }}
         </p>
-        <h3 class="mt-3 break-words font-project text-2xl text-[color:var(--vp-c-text-1)]">
+        <h3
+          class="mt-3 break-words font-project text-2xl text-[color:var(--vp-c-text-1)]"
+        >
           {{ footer.title }}
         </h3>
         <p
@@ -56,7 +58,7 @@ const getResourceIcon = (href: string) =>
         <ul class="space-y-2">
           <li v-for="link in footer.productLinks" :key="link.href">
             <a
-              class="text-sm text-[color:var(--vp-c-text-2)] transition hover:text-accent"
+              class="text-sm text-[color:var(--vp-c-text-2)] transition hover:text-ink hover:bg-accent animation-all duration-300 p-1 hover:scale-95 active:scale-90"
               :href="link.href"
             >
               {{ link.label }}
@@ -72,7 +74,7 @@ const getResourceIcon = (href: string) =>
         <ul class="mt-3 space-y-2">
           <li v-for="link in footer.resourceLinks" :key="link.href">
             <a
-              class="inline-flex items-center gap-1.5 text-sm text-[color:var(--vp-c-text-2)] transition hover:text-accent"
+              class="inline-flex items-center gap-1.5 text-sm text-[color:var(--vp-c-text-2)] transition hover:text-ink hover:bg-accent animation-all duration-300 p-1 hover:scale-95 active:scale-90"
               :href="link.href"
               :target="link.href.startsWith('http') ? '_blank' : undefined"
               rel="noreferrer"
@@ -88,15 +90,13 @@ const getResourceIcon = (href: string) =>
     <div
       class="mt-8 grid gap-2 border-t border-[color:var(--vp-c-bg-alt)] pt-4 text-xs text-[color:var(--vp-c-text-2)] md:grid-cols-3 md:items-center"
     >
-      <p
-        class="uppercase tracking-wide"
-      >
+      <p class="uppercase tracking-wide">
         {{ footer.legal }}
       </p>
       <p class="break-words md:text-center">
         {{ footer.signaturePrefix }}
         <a
-          class="underline underline-offset-4 transition hover:text-accent dark:hover:text-accent"
+          class="underline underline-offset-4 transition hover:text-ink hover:bg-accent animation-all duration-300 p-1 hover:scale-95 active:scale-90"
           :href="footer.signatureUrl"
           target="_blank"
           rel="noreferrer"

@@ -39,7 +39,9 @@ async function copyCode(): Promise<void> {
 </script>
 
 <template>
-  <div class="min-w-0 overflow-hidden rounded-xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-code-bg)]">
+  <div
+    class="min-w-0 overflow-hidden border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-code-bg)]"
+  >
     <div
       class="flex items-center justify-between gap-2 border-b border-[color:var(--vp-c-bg-alt)] bg-[#070707] px-3 py-1.5 text-xs text-[#ffffff] dark:bg-[#1f1f1f] dark:text-[#ffffff]"
     >
@@ -48,13 +50,15 @@ async function copyCode(): Promise<void> {
         <span class="uppercase tracking-wide text-accent">json</span>
         <button
           type="button"
-          class="rounded-md border border-[color:var(--vp-c-bg-alt)] bg-[#ffffff] px-2 py-1 text-xs font-semibold text-[#1f1f1f] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f] dark:bg-[#1f1f1f] dark:text-[#ffffff] dark:hover:bg-accent dark:hover:text-[#1f1f1f]"
+          class="border border-[color:var(--vp-c-bg-alt)] bg-[#ffffff] px-2 py-1 text-xs font-semibold text-[#1f1f1f] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f] dark:bg-[#1f1f1f] dark:text-[#ffffff] dark:hover:bg-accent dark:hover:text-[#1f1f1f]"
           @click="copyCode"
         >
           {{ copied ? "Copied" : "Copy" }}
         </button>
       </div>
     </div>
-    <pre class="m-0 overflow-x-auto whitespace-pre-wrap break-words p-3 md:whitespace-pre"><code class="font-body text-sm text-[#ffffff] dark:text-accent">{{ code }}</code></pre>
+    <pre
+      class="m-0 overflow-x-auto whitespace-pre-wrap break-words p-3 md:whitespace-pre"
+    ><code class="font-body text-sm text-[#ffffff] dark:text-accent">{{ code }}</code></pre>
   </div>
 </template>
