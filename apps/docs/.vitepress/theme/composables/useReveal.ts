@@ -32,7 +32,11 @@ export function useReveal(delay = 0): Ref<HTMLElement | null> {
     );
 
     observer.observe(target);
-    fallbackTimer = setTimeout(show, 900 + delay);
+    fallbackTimer = setTimeout(() => {
+      const rect = target.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) show();
+      else fallbackTimer = null;
+    }, 900 + delay);
   });
 
   onUnmounted(() => {
