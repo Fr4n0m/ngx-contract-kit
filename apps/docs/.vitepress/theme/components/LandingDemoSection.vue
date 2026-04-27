@@ -9,24 +9,9 @@ defineProps<{
   valueItems: string[];
   outputTitle: string;
   outputItems: string[];
-  contractLabel: string;
-  coreLabel: string;
-  generatorTsLabel: string;
-  angularLabel: string;
-  nestLabel: string;
-  zodLabel: string;
-  mockLabel: string;
-  diffLabel: string;
-  cliLabel: string;
-  generateBadge: string;
-  flowTitle: string;
-  flowDescription: string;
   runLabel: string;
   runningLabel: string;
   replayLabel: string;
-  contractStep: string;
-  engineStep: string;
-  outputStep: string;
 }>();
 
 const titleRef = useReveal(0);
@@ -85,24 +70,9 @@ const panelRef = useReveal(220);
 
     <div ref="panelRef" class="reveal">
       <DemoFlowPanel
-        :contract-label="contractLabel"
-        :core-label="coreLabel"
-        :generator-ts-label="generatorTsLabel"
-        :angular-label="angularLabel"
-        :nest-label="nestLabel"
-        :zod-label="zodLabel"
-        :mock-label="mockLabel"
-        :diff-label="diffLabel"
-        :cli-label="cliLabel"
-        :generate-badge="generateBadge"
-        :flow-title="flowTitle"
-        :flow-description="flowDescription"
         :run-label="runLabel"
         :running-label="runningLabel"
         :replay-label="replayLabel"
-        :contract-step="contractStep"
-        :engine-step="engineStep"
-        :output-step="outputStep"
       />
     </div>
   </section>
