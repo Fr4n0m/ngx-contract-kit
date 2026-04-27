@@ -1,6 +1,6 @@
 {
   "name": "@fr4n0m/contract-kit",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": false,
   "description": "CLI and library for contract-driven API development between Angular and NestJS",
   "type": "commonjs",
