@@ -35,7 +35,7 @@ const actionBaseClass =
 const actionThemeClass = {
   brand:
     "border-accent bg-accent !text-[#1f1f1f] dark:!text-[#1f1f1f] shadow-card hover:brightness-95",
-  alt: "border-[#1f1f1f] bg-transparent text-[#1f1f1f] hover:-translate-y-0.5 hover:border-[#1f1f1f] hover:bg-[#1f1f1f] hover:text-[#ffffff] hover:shadow-[0_8px_20px_-10px_rgba(7,7,7,0.45)] dark:border-[#ffffff] dark:text-[#ffffff] dark:hover:border-accent dark:hover:bg-accent dark:hover:text-[#070707] dark:hover:shadow-[0_8px_24px_-10px_rgba(210,255,0,0.45)]",
+  alt: "border-[#1f1f1f] bg-transparent text-[#1f1f1f] hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-[#1f1f1f] hover:shadow-[0_8px_20px_-10px_rgba(210,255,0,0.35)] dark:border-[#ffffff] dark:text-[#ffffff] dark:hover:border-accent dark:hover:bg-accent dark:hover:text-[#070707] dark:hover:shadow-[0_8px_24px_-10px_rgba(210,255,0,0.45)]",
 } as const;
 
 const heroRef = useReveal(0);
