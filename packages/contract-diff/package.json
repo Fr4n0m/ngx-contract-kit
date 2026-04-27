@@ -1,7 +1,7 @@
 {
   "name": "@fr4n0m/contract-diff",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "description": "Contract summary comparison helpers for contract-kit",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

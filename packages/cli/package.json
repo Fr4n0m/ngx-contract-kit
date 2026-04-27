@@ -1,8 +1,8 @@
 {
   "name": "@fr4n0m/contract-kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
-  "description": "CLI for contract-kit",
+  "description": "CLI and library for contract-driven API development between Angular and NestJS",
   "type": "commonjs",
   "main": "dist/bin.js",
   "files": [
@@ -11,12 +11,49 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.mjs",
+      "require": "./dist/core.js"
+    },
+    "./diff": {
+      "types": "./dist/diff.d.ts",
+      "import": "./dist/diff.mjs",
+      "require": "./dist/diff.js"
+    },
+    "./mock": {
+      "types": "./dist/mock.d.ts",
+      "import": "./dist/mock.mjs",
+      "require": "./dist/mock.js"
+    },
+    "./zod": {
+      "types": "./dist/zod.d.ts",
+      "import": "./dist/zod.mjs",
+      "require": "./dist/zod.js"
+    },
+    "./nestjs": {
+      "types": "./dist/nestjs.d.ts",
+      "import": "./dist/nestjs.mjs",
+      "require": "./dist/nestjs.js"
+    },
+    "./generator-ts": {
+      "types": "./dist/generator-ts.d.ts",
+      "import": "./dist/generator-ts.mjs",
+      "require": "./dist/generator-ts.js"
+    },
+    "./generator-angular": {
+      "types": "./dist/generator-angular.d.ts",
+      "import": "./dist/generator-angular.mjs",
+      "require": "./dist/generator-angular.js"
+    }
+  },
   "bin": {
     "contract-kit": "dist/bin.js",
     "ngx-contract-kit": "dist/bin.js"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsup",
     "test": "vitest run",
     "lint": "tsc -p tsconfig.json --noEmit"
   },
@@ -28,6 +65,9 @@
     "@fr4n0m/mock-generator": "workspace:*",
     "@fr4n0m/plugin-nestjs": "workspace:*",
     "@fr4n0m/validator-zod": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1"
   },
   "license": "MIT",
   "homepage": "https://ngx-contract-kit-docs.vercel.app/",
@@ -42,6 +82,7 @@
   "keywords": [
     "contract-kit",
     "angular",
+    "nestjs",
     "backend",
     "api",
     "open-source",

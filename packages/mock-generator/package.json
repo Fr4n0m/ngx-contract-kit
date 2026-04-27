@@ -1,7 +1,7 @@
 {
   "name": "@fr4n0m/mock-generator",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "description": "Mock payload generator for contract-kit contract shapes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

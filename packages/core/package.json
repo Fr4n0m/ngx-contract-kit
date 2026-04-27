@@ -1,7 +1,7 @@
 {
   "name": "@fr4n0m/core",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "description": "Core contract parsing and generation utilities",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
