@@ -12,6 +12,7 @@ import LandingFeatureCard from "./LandingFeatureCard.vue";
 import TerminalCodeBlock from "./TerminalCodeBlock.vue";
 import TerminalCommandList from "./TerminalCommandList.vue";
 import LandingValueCard from "./LandingValueCard.vue";
+import LandingDemoSection from "./LandingDemoSection.vue";
 import { useLang, type Lang } from "../composables/lang";
 import { useReveal } from "../composables/useReveal";
 
@@ -211,6 +212,16 @@ const howItWorksRef = useReveal(0);
           </article>
         </div>
       </section>
+
+      <LandingDemoSection
+        :title="t.demo.title"
+        :description="t.demo.description"
+        :contract-label="t.demo.contractLabel"
+        :angular-label="t.demo.angularLabel"
+        :nest-label="t.demo.nestLabel"
+        :zod-label="t.demo.zodLabel"
+        :generate-badge="t.demo.generateBadge"
+      />
     </div>
   </section>
 </template>

@@ -1,0 +1,9 @@
+{
+  "title": "See it in action",
+  "description": "Define one contract file. Run one command. Get typed Angular client, NestJS controller, and Zod schemas — all from a single source of truth.",
+  "contractLabel": "Contract",
+  "angularLabel": "Angular Client",
+  "nestLabel": "NestJS Controller",
+  "zodLabel": "Zod Schemas",
+  "generateBadge": "contract-kit generate"
+}

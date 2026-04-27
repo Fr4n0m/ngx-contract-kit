@@ -7,6 +7,7 @@ import heroEn from "./en/hero.json";
 import cardsEn from "./en/cards.json";
 import whatYouGetEn from "./en/whatYouGet.json";
 import howItWorksEn from "./en/howItWorks.json";
+import demoEn from "./en/demo.json";
 import commandPaletteEn from "./en/commandPalette.json";
 import footerEn from "./en/footer.json";
 import linksEn from "./en/links.json";
@@ -20,6 +21,7 @@ import heroEs from "./es/hero.json";
 import cardsEs from "./es/cards.json";
 import whatYouGetEs from "./es/whatYouGet.json";
 import howItWorksEs from "./es/howItWorks.json";
+import demoEs from "./es/demo.json";
 import commandPaletteEs from "./es/commandPalette.json";
 import footerEs from "./es/footer.json";
 import linksEs from "./es/links.json";
@@ -34,6 +36,7 @@ export const en = {
   cards: cardsEn,
   whatYouGet: whatYouGetEn,
   howItWorks: howItWorksEn,
+  demo: demoEn,
   commandPalette: commandPaletteEn,
   footer: footerEn,
   links: linksEn
@@ -49,6 +52,7 @@ export const es = {
   cards: cardsEs,
   whatYouGet: whatYouGetEs,
   howItWorks: howItWorksEs,
+  demo: demoEs,
   commandPalette: commandPaletteEs,
   footer: footerEs,
   links: linksEs

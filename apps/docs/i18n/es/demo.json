@@ -1,0 +1,9 @@
+{
+  "title": "Vélo en acción",
+  "description": "Define un archivo de contrato. Ejecuta un comando. Obtén cliente Angular tipado, controller NestJS y schemas Zod — desde una única fuente de verdad.",
+  "contractLabel": "Contrato",
+  "angularLabel": "Cliente Angular",
+  "nestLabel": "Controller NestJS",
+  "zodLabel": "Schemas Zod",
+  "generateBadge": "contract-kit generate"
+}
