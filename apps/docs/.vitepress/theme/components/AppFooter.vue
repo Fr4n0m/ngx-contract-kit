@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { IconBrandGithub, IconCoffee } from "@tabler/icons-vue";
+import { useReveal } from "../composables/useReveal";
 
 type FooterLink = {
   label: string;
@@ -27,13 +28,16 @@ defineProps<{
   footer: FooterPayload;
 }>();
 
+const el = useReveal(0);
+
 const getResourceIcon = (href: string) =>
   href.includes("buymeacoffee.com") ? IconCoffee : IconBrandGithub;
 </script>
 
 <template>
   <footer
-    class="mt-4 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:px-6 sm:py-8"
+    ref="el"
+    class="reveal mt-4 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:px-6 sm:py-8"
   >
     <div class="grid gap-8 md:grid-cols-12">
       <div class="md:col-span-6">
