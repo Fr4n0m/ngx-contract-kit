@@ -47,12 +47,12 @@ async function copyCommands(): Promise<void> {
   >
     <button
       type="button"
-      class="absolute right-2 top-2 rounded-md border border-[#3a3a3a] bg-[#2a2a2a] px-2 py-1 text-xs font-semibold text-[#d2ff00] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f]"
+      class="absolute inset-y-0 right-2 my-auto h-fit rounded-md border border-[#3a3a3a] bg-[#2a2a2a] px-2 py-1 text-xs font-semibold text-[#d2ff00] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f]"
       @click="copyCommands"
     >
       {{ copied ? "Copied" : "Copy" }}
     </button>
-    <div class="space-y-1">
+    <div class="space-y-1 pr-14">
       <div
         v-for="command in commands"
         :key="command"
