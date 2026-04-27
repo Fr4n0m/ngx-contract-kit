@@ -12,6 +12,7 @@ import InstallCommandSelector from "./components/InstallCommandSelector.vue";
 import QuickstartGuide from "./components/QuickstartGuide.vue";
 import TerminalCommandList from "./components/TerminalCommandList.vue";
 import TerminalCodeBlock from "./components/TerminalCodeBlock.vue";
+import DemoFlowPanel from "./components/DemoFlowPanel.vue";
 import DocsHomeContent from "./components/docs/DocsHomeContent.vue";
 import CliReferenceContent from "./components/docs/CliReferenceContent.vue";
 import ContractSchemaContent from "./components/docs/ContractSchemaContent.vue";
@@ -38,6 +39,7 @@ const theme: Theme = {
     ctx.app.component("QuickstartGuide", QuickstartGuide);
     ctx.app.component("TerminalCommandList", TerminalCommandList);
     ctx.app.component("TerminalCodeBlock", TerminalCodeBlock);
+    ctx.app.component("DemoFlowPanel", DemoFlowPanel);
     ctx.app.component("DocsHomeContent", DocsHomeContent);
     ctx.app.component("CliReferenceContent", CliReferenceContent);
     ctx.app.component("ContractSchemaContent", ContractSchemaContent);
