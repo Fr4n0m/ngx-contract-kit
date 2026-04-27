@@ -246,7 +246,7 @@ const openPalette = () => {
     <button
       type="button"
       class="btn-small"
-      :aria-label="t.trigger.label"
+      :aria-label="`command — ${t.trigger.label}`"
       :title="`${t.trigger.label} (${t.trigger.hint})`"
       @click="openPalette"
     >
@@ -307,9 +307,11 @@ h7.999c4.418,0,8,3.582,8,8S68.418,72,64,72z"
 
 .btn-small:hover {
   transform: scale(1.1);
+  border-color: #d2ff00;
   box-shadow:
     0 12px 24px rgba(7, 7, 7, 0.24),
-    0 2px 8px rgba(7, 7, 7, 0.16);
+    0 2px 8px rgba(7, 7, 7, 0.16),
+    0 0 0 2px rgba(210, 255, 0, 0.25);
 }
 
 :global(.dark) .btn-small:hover {
