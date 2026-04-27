@@ -1,0 +1,58 @@
+{
+  "title": "Contract Schema",
+  "intro": "Contracts are JSON files that define API behavior in a deterministic format.",
+  "mentalModelTitle": "Mental model",
+  "mentalModel": "A contract is the API truth source. Your app code consumes generated artifacts from that truth instead of duplicating endpoint types manually across layers.",
+  "requiredTitle": "Core shape",
+  "requiredItems": [
+    "`service`: logical service name.",
+    "`endpoints`: endpoint list.",
+    "Each endpoint defines method, path and response statuses."
+  ],
+  "endpointTitle": "Endpoint fields",
+  "endpointItems": [
+    "`path`: route path (example `/users/:id`).",
+    "`method`: HTTP verb (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).",
+    "`params`, `query`, `body`: optional input shapes.",
+    "`response`: object keyed by HTTP status code."
+  ],
+  "fieldGuideTitle": "Field guide",
+  "fieldGuide": [
+    {
+      "name": "service",
+      "meaning": "Logical namespace for endpoints inside a single contract file.",
+      "example": "Example: `users`, `billing`, `notifications`."
+    },
+    {
+      "name": "path + method",
+      "meaning": "Unique operation identity. Together they define routing and generated method signatures.",
+      "example": "Example: `GET /users/:id`, `POST /users`."
+    },
+    {
+      "name": "params / query / body",
+      "meaning": "Typed input channels. Generated clients and validators use these shapes directly.",
+      "example": "Example: `params.id`, `query.page`, `body.email`."
+    },
+    {
+      "name": "response",
+      "meaning": "Map of status code -> payload shape. Drives output typings and compatibility checks.",
+      "example": "Example: `200`, `201`, `400`, `404` each with explicit payload schema."
+    }
+  ],
+  "sampleTitle": "Minimal contract example",
+  "sampleFile": "contracts/users.contract.json",
+  "sampleCode": "{\n  \"service\": \"users\",\n  \"endpoints\": [\n    {\n      \"path\": \"/users/:id\",\n      \"method\": \"GET\",\n      \"params\": { \"id\": \"string\" },\n      \"response\": {\n        \"200\": { \"id\": \"string\", \"email\": \"string\" },\n        \"404\": { \"message\": \"string\" }\n      }\n    }\n  ]\n}",
+  "noteTitle": "Validation notes",
+  "notes": [
+    "Keep field names stable to avoid accidental breaking changes.",
+    "Prefer explicit response shapes for all returned status codes.",
+    "Use `ckit:validate` as a fast schema guard."
+  ],
+  "commonMistakesTitle": "Common mistakes to avoid",
+  "commonMistakes": [
+    "Changing field names in `response` payloads without running `check`.",
+    "Using inconsistent status mappings between endpoints for similar outcomes.",
+    "Leaving optional input fields undocumented and relying on app-side assumptions only.",
+    "Treating generated artifacts as editable source files instead of generated output."
+  ]
+}

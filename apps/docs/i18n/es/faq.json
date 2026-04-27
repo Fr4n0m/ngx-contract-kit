@@ -1,0 +1,33 @@
+{
+  "title": "FAQ",
+  "intro": "Preguntas más comunes al adoptar `contract-kit`.",
+  "items": [
+    {
+      "question": "¿Por qué enfoque contract-first?",
+      "answer": "Una sola fuente de contrato evita desalineación entre tipos de cliente Angular y handlers backend."
+    },
+    {
+      "question": "¿Cuándo ejecutar `contract-kit check`?",
+      "answer": "Antes de cada release y en CI. Es red de seguridad contra breaks accidentales."
+    },
+    {
+      "question": "¿Puedo validar sin generar?",
+      "answer": "Sí. Usa `contract-kit validate` para ejecutar solo checks de schema."
+    },
+    {
+      "question": "¿Los archivos generados sustituyen código manual?",
+      "answer": "Los generados definen fronteras tipadas. La lógica de negocio sigue en tu código."
+    }
+  ],
+  "commandTitle": "Comando base de check",
+  "commands": [
+    "contract-kit check"
+  ],
+  "troubleshootingTitle": "Si algo no funciona",
+  "troubleshootingItems": [
+    "Ejecuta `contract-kit validate` primero para aislar errores de schema rápido.",
+    "Regenera artefactos tras cada cambio de contrato antes de depurar app code.",
+    "Usa `contract-kit check --json` en CI y revisa el objeto de diff reportado.",
+    "Si la salida no cuadra, adjunta contrato y output de comando en GitHub issue."
+  ]
+}

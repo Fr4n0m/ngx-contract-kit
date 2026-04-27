@@ -43,6 +43,24 @@ export type CheckCommandOptions = {
   reportPath?: string;
 };
 
+function readCliVersion(): string {
+  try {
+    const packageJsonPath = path.resolve(__dirname, "..", "package.json");
+    if (!fs.existsSync(packageJsonPath)) {
+      return "0.0.0";
+    }
+    const content = fs.readFileSync(packageJsonPath, "utf8");
+    const parsed = JSON.parse(content) as { version?: string };
+    if (typeof parsed.version === "string" && parsed.version.trim().length > 0) {
+      return parsed.version;
+    }
+  } catch {
+    // fallback handled below
+  }
+
+  return "0.0.0";
+}
+
 function defaultLogger(message: string): void {
   process.stdout.write(`${message}\n`);
 }
@@ -288,7 +306,7 @@ function parseCheckOptions(rawArgs: string[]): CheckCommandOptions {
 }
 
 export function printHelp(log: CliLogger = defaultLogger): void {
-  log("contract-kit");
+  log(`contract-kit v${readCliVersion()}`);
   log("");
   log("Usage:");
   log("  contract-kit init");
@@ -297,6 +315,7 @@ export function printHelp(log: CliLogger = defaultLogger): void {
   log("  contract-kit mock");
   log("  contract-kit validate");
   log("  contract-kit check [--json] [--report <path>] [--baseline <summary-path>]");
+  log("  contract-kit --version");
 }
 
 export function runCommand(
@@ -307,6 +326,11 @@ export function runCommand(
 ): number {
   if (!command || command === "--help" || command === "-h") {
     printHelp(log);
+    return 0;
+  }
+
+  if (command === "--version" || command === "-v" || command === "version") {
+    log(readCliVersion());
     return 0;
   }
 

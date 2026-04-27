@@ -1,0 +1,68 @@
+{
+  "title": "Documentación",
+  "intro": "Todo lo necesario para adoptar `contract-kit` desde cero: instalación, modelado de contratos, generación y checks de compatibilidad para release.",
+  "audienceTitle": "Para quién es esta documentación",
+  "audienceItems": [
+    "Equipos frontend + backend que quieren una única fuente tipada de API.",
+    "Tech leads que necesitan controles predecibles de compatibilidad en release.",
+    "Desarrolladores que integran Angular y backend sin drift de tipos manual."
+  ],
+  "pathTitle": "Ruta recomendada para empezar",
+  "pathSteps": [
+    {
+      "phase": "Paso 1",
+      "title": "Ponerlo a funcionar en minutos",
+      "description": "Instala el paquete, inicializa estructura y ejecuta tu primer ciclo de generación/check.",
+      "href": "/docs/quickstart",
+      "cta": "Abrir Inicio rápido"
+    },
+    {
+      "phase": "Paso 2",
+      "title": "Entender bien la CLI",
+      "description": "Aprende qué hace cada comando, cuándo ejecutarlo y qué salida esperar.",
+      "href": "/docs/cli-reference",
+      "cta": "Abrir CLI"
+    },
+    {
+      "phase": "Paso 3",
+      "title": "Modelar contratos correctamente",
+      "description": "Define esquemas de endpoint de forma consistente para mantener generación y checks deterministas.",
+      "href": "/docs/contract-schema",
+      "cta": "Abrir Schema"
+    }
+  ],
+  "packagesTitle": "Mapa de paquetes",
+  "packages": [
+    {
+      "name": "@fr4n0m/contract-kit",
+      "role": "Paquete CLI principal para init/generate/check/validate/mock.",
+      "whenUse": "Úsalo directamente en repos de apps o en pipelines CI."
+    },
+    {
+      "name": "@fr4n0m/core",
+      "role": "Núcleo de parseo de contratos y generación determinista de modelos/resúmenes.",
+      "whenUse": "Úsalo para tooling propio alrededor del procesamiento de contratos."
+    },
+    {
+      "name": "@fr4n0m/contract-diff",
+      "role": "Motor reusable de diffs de compatibilidad entre resúmenes generados.",
+      "whenUse": "Úsalo en automatizaciones de release y reporting personalizado."
+    },
+    {
+      "name": "@fr4n0m/plugin-nestjs + @fr4n0m/validator-zod",
+      "role": "Scaffolding backend y validación runtime alineada al contrato.",
+      "whenUse": "Úsalo al integrar contratos en NestJS y middleware de validación."
+    }
+  ],
+  "sectionsTitle": "Secciones",
+  "sections": [
+    { "label": "Inicio rápido", "href": "/docs/quickstart" },
+    { "label": "CLI", "href": "/docs/cli-reference" },
+    { "label": "Schema del contrato", "href": "/docs/contract-schema" },
+    { "label": "Generadores", "href": "/docs/generators" },
+    { "label": "Ejemplos", "href": "/docs/examples" },
+    { "label": "Contribuir", "href": "/docs/contributing" },
+    { "label": "FAQ", "href": "/docs/faq" }
+  ],
+  "helpText": "¿Necesitas soporte o reportar un problema? Usa GitHub Issues del repositorio."
+}

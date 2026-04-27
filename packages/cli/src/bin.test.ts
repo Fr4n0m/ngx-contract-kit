@@ -88,4 +88,17 @@ describe("cli runCommand", () => {
       expect(jsonLine).toBeTruthy();
     });
   });
+
+  it("prints version for --version and version", () => {
+    withTempProject((projectRoot, logs) => {
+      const log = (message: string): void => logs.push(message);
+
+      expect(runCommand("--version", projectRoot, log)).toBe(0);
+      expect(logs[0]).toMatch(/^\d+\.\d+\.\d+/);
+
+      logs.length = 0;
+      expect(runCommand("version", projectRoot, log)).toBe(0);
+      expect(logs[0]).toMatch(/^\d+\.\d+\.\d+/);
+    });
+  });
 });

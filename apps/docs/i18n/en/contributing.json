@@ -1,0 +1,35 @@
+{
+  "title": "Contributing",
+  "intro": "Contributions are welcome. Focus on developer value and product reliability.",
+  "userFirstTitle": "If you are a product user first",
+  "userFirstItems": [
+    "Open an issue with your real use case and current contract sample.",
+    "Describe expected vs current behavior with command output.",
+    "Include package version and environment to speed diagnosis."
+  ],
+  "waysTitle": "How you can help",
+  "ways": [
+    "Report bugs with reproducible contract files.",
+    "Propose DX improvements for CLI and generated outputs.",
+    "Send PRs with tests and clear technical context."
+  ],
+  "prTitle": "PR checklist",
+  "prSteps": [
+    "Keep scope focused and easy to review.",
+    "Update docs only for user-facing behavior changes.",
+    "Ensure tests and type checks pass before opening PR."
+  ],
+  "localTitle": "Local verification",
+  "commands": [
+    "pnpm install",
+    "pnpm lint",
+    "pnpm test",
+    "pnpm build"
+  ],
+  "qualityTitle": "Contribution quality bar",
+  "qualityItems": [
+    "Every behavior change must include tests.",
+    "Docs should explain user impact, not internal implementation only.",
+    "Generated outputs in snapshots must stay deterministic."
+  ]
+}

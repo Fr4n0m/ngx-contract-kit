@@ -1,0 +1,52 @@
+{
+  "title": "Examples",
+  "intro": "Real onboarding scenarios with intent, execution steps, and expected outcomes.",
+  "expectedTitle": "Expected result",
+  "scenarios": [
+    {
+      "title": "Add new endpoint safely",
+      "goal": "Ship a new API operation without drifting Angular/backend types.",
+      "context": "Use this when product adds a new API capability and both frontend/backend teams work in parallel.",
+      "steps": [
+        "Add endpoint shape to the contract file with request and response statuses.",
+        "Run generation and wire Angular client calls + backend handler stubs.",
+        "Execute compatibility checks and review report before merge."
+      ],
+      "expected": [
+        "Generated artifacts include the new endpoint types.",
+        "Frontend can consume the endpoint without manual DTO authoring.",
+        "No unexpected breaking changes appear in check output."
+      ],
+      "commands": [
+        "contract-kit generate",
+        "contract-kit check"
+      ]
+    },
+    {
+      "title": "Validate contract changes in CI",
+      "goal": "Detect breaking API changes before release.",
+      "context": "Use this in pull requests when multiple teams modify contract files frequently.",
+      "steps": [
+        "Validate schema format as a fast first gate.",
+        "Generate or compare summaries against baseline in CI.",
+        "Fail pipeline automatically when breaking changes are detected."
+      ],
+      "expected": [
+        "Invalid contracts fail fast before deployment stages.",
+        "Breaking changes are visible in machine-readable output.",
+        "Release decisions are based on explicit compatibility signals."
+      ],
+      "commands": [
+        "contract-kit validate",
+        "contract-kit check --json"
+      ]
+    }
+  ],
+  "commonPitfallsTitle": "Common pitfalls",
+  "commonPitfalls": [
+    "Committing contract changes without regenerated artifacts.",
+    "Running `check` only locally and skipping CI enforcement.",
+    "Treating generated code as hand-edited source.",
+    "Not documenting expected status code payloads in contract responses."
+  ]
+}

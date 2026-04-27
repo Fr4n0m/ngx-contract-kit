@@ -1,16 +1,55 @@
 {
   "title": "Inicio rápido",
+  "subtitle": "De cero a tu primer flujo con contratos en minutos.",
+  "prerequisitesTitle": "Antes de empezar",
+  "prerequisites": [
+    "Node.js 20+ instalado",
+    "Una carpeta de proyecto donde vivirán los contratos",
+    "Gestor de paquetes disponible (pnpm, npm, yarn o bun)"
+  ],
   "steps": {
-    "install": "Instalar",
-    "initialize": "Inicializar",
-    "generate": "Generar",
-    "compatibility": "Check de compatibilidad"
+    "install": {
+      "title": "Instalar",
+      "description": "Añade la CLI para crear y gestionar artefactos a partir de contratos.",
+      "resultTitle": "Resultado esperado",
+      "results": [
+        "El comando `contract-kit` queda disponible en tu proyecto",
+        "Ya puedes ejecutar init, generate y check"
+      ]
+    },
+    "initialize": {
+      "title": "Inicializar",
+      "description": "Genera la estructura base de archivos y carpetas para trabajar contract-first.",
+      "resultTitle": "Resultado esperado",
+      "results": [
+        "Se crea la carpeta `contracts/`",
+        "Se generan ficheros de configuración base",
+        "Queda listo el punto de partida para tu primer contrato"
+      ]
+    },
+    "generate": {
+      "title": "Generar",
+      "description": "Convierte contratos en artefactos tipados para integración frontend y backend.",
+      "resultTitle": "Resultado esperado",
+      "results": [
+        "Se escriben ficheros generados en la carpeta de salida",
+        "Los tipos quedan alineados con la fuente del contrato",
+        "El equipo consume un modelo de API único"
+      ]
+    },
+    "compatibility": {
+      "title": "Check de compatibilidad",
+      "description": "Ejecuta validación de diffs para detectar breaking changes antes de release.",
+      "resultTitle": "Resultado esperado",
+      "results": [
+        "Los cambios incompatibles se detectan pronto",
+        "Puedes bloquear releases inseguros en CI",
+        "El versionado se decide por impacto real del contrato"
+      ]
+    }
   },
-  "commands": {
-    "initialize": "pnpm ckit:init",
-    "generate": "pnpm ckit:generate",
-    "check": "pnpm ckit:check"
-  },
+  "nextTitle": "Siguiente paso",
+  "nextDescription": "Ve a Docs para ejemplos de schema y referencia de comandos, y conecta tu primer endpoint end-to-end.",
   "installSelector": {
     "label": "Elige el gestor de paquetes",
     "options": {

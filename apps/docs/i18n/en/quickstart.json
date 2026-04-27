@@ -1,16 +1,55 @@
 {
   "title": "Quickstart",
+  "subtitle": "From zero to first contract workflow in minutes.",
+  "prerequisitesTitle": "Before you start",
+  "prerequisites": [
+    "Node.js 20+ installed",
+    "A project folder where contracts will live",
+    "Package manager available (pnpm, npm, yarn or bun)"
+  ],
   "steps": {
-    "install": "Install",
-    "initialize": "Initialize",
-    "generate": "Generate",
-    "compatibility": "Compatibility check"
+    "install": {
+      "title": "Install",
+      "description": "Add the CLI so your project can create and manage contract-driven artifacts.",
+      "resultTitle": "After this step",
+      "results": [
+        "The `contract-kit` command is available in your project",
+        "You can run init, generate and check commands"
+      ]
+    },
+    "initialize": {
+      "title": "Initialize",
+      "description": "Scaffold the baseline files and folders for a contract-first workflow.",
+      "resultTitle": "After this step",
+      "results": [
+        "A `contracts/` folder is created",
+        "Base config files are generated",
+        "You have a ready starting point for your first contract"
+      ]
+    },
+    "generate": {
+      "title": "Generate",
+      "description": "Convert contract definitions into typed artifacts for frontend and backend integration.",
+      "resultTitle": "After this step",
+      "results": [
+        "Generated files are written under your output folder",
+        "Types stay aligned with your contract source",
+        "Teams can consume the same canonical API model"
+      ]
+    },
+    "compatibility": {
+      "title": "Compatibility check",
+      "description": "Run contract diff validation to catch breaking API changes before release.",
+      "resultTitle": "After this step",
+      "results": [
+        "Breaking changes are reported early",
+        "You can block unsafe releases in CI",
+        "Versioning decisions are based on real contract impact"
+      ]
+    }
   },
-  "commands": {
-    "initialize": "pnpm ckit:init",
-    "generate": "pnpm ckit:generate",
-    "check": "pnpm ckit:check"
-  },
+  "nextTitle": "Next",
+  "nextDescription": "Go to Docs for schema examples and command reference, then connect your first endpoint end-to-end.",
   "installSelector": {
     "label": "Choose package manager",
     "options": {

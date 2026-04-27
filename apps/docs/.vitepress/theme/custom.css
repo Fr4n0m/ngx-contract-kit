@@ -405,7 +405,7 @@
 }
 
 .reveal {
-  opacity: 0;
+  opacity: 1;
 }
 
 .reveal-visible {
@@ -413,10 +413,17 @@
   animation-delay: var(--reveal-delay, 0ms);
 }
 
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal,
+  .reveal-pending,
   .reveal-visible {
     opacity: 1 !important;
+    transform: none !important;
     animation: none !important;
   }
 }

@@ -1,0 +1,68 @@
+{
+  "title": "Documentation",
+  "intro": "Everything you need to adopt `contract-kit` from scratch: first install, contract modeling, generation flow, and release safety checks.",
+  "audienceTitle": "Who this is for",
+  "audienceItems": [
+    "Frontend + backend teams that want one typed API source of truth.",
+    "Tech leads who need predictable release checks for API compatibility.",
+    "Developers integrating Angular clients with backend handlers without manual type drift."
+  ],
+  "pathTitle": "Recommended first path",
+  "pathSteps": [
+    {
+      "phase": "Step 1",
+      "title": "Get running in minutes",
+      "description": "Install the package, scaffold a project, and execute your first generation/check cycle.",
+      "href": "/docs/quickstart",
+      "cta": "Open Quickstart"
+    },
+    {
+      "phase": "Step 2",
+      "title": "Understand command behavior",
+      "description": "Learn what each CLI command does, when to run it, and what output to expect.",
+      "href": "/docs/cli-reference",
+      "cta": "Open CLI Reference"
+    },
+    {
+      "phase": "Step 3",
+      "title": "Model your API contracts",
+      "description": "Define endpoint schemas correctly so generation and compatibility checks stay deterministic.",
+      "href": "/docs/contract-schema",
+      "cta": "Open Contract Schema"
+    }
+  ],
+  "packagesTitle": "Package map",
+  "packages": [
+    {
+      "name": "@fr4n0m/contract-kit",
+      "role": "Main CLI package for init/generate/check/validate/mock workflows.",
+      "whenUse": "Use directly in app repos or CI pipelines."
+    },
+    {
+      "name": "@fr4n0m/core",
+      "role": "Contract parser + deterministic summary/model generation core.",
+      "whenUse": "Use when building custom tooling around contract processing."
+    },
+    {
+      "name": "@fr4n0m/contract-diff",
+      "role": "Reusable compatibility diff engine between generated summaries.",
+      "whenUse": "Use in release automation, custom guards, and reporting integrations."
+    },
+    {
+      "name": "@fr4n0m/plugin-nestjs + @fr4n0m/validator-zod",
+      "role": "Backend scaffolding and runtime schema validation outputs.",
+      "whenUse": "Use when wiring generated contracts into NestJS and validation middleware."
+    }
+  ],
+  "sectionsTitle": "Sections",
+  "sections": [
+    { "label": "Quickstart", "href": "/docs/quickstart" },
+    { "label": "CLI Reference", "href": "/docs/cli-reference" },
+    { "label": "Contract Schema", "href": "/docs/contract-schema" },
+    { "label": "Generators", "href": "/docs/generators" },
+    { "label": "Examples", "href": "/docs/examples" },
+    { "label": "Contributing", "href": "/docs/contributing" },
+    { "label": "FAQ", "href": "/docs/faq" }
+  ],
+  "helpText": "Need support or want to report an issue? Use GitHub issues in the repository."
+}

@@ -1,0 +1,52 @@
+{
+  "title": "Ejemplos",
+  "intro": "Escenarios reales de onboarding con objetivo, ejecución y resultado esperado.",
+  "expectedTitle": "Resultado esperado",
+  "scenarios": [
+    {
+      "title": "Añadir endpoint nuevo de forma segura",
+      "goal": "Publicar una nueva operación API sin desalinear tipos Angular/backend.",
+      "context": "Úsalo cuando producto añade una capacidad nueva y frontend/backend avanzan en paralelo.",
+      "steps": [
+        "Añade el endpoint al contrato con request y status de respuesta definidos.",
+        "Ejecuta generación y conecta llamadas Angular + stubs de handler backend.",
+        "Ejecuta checks de compatibilidad y revisa reporte antes de merge."
+      ],
+      "expected": [
+        "Los artefactos generados incluyen el nuevo endpoint tipado.",
+        "Frontend consume endpoint sin crear DTOs manuales duplicados.",
+        "No aparecen breakings inesperados en la salida de check."
+      ],
+      "commands": [
+        "contract-kit generate",
+        "contract-kit check"
+      ]
+    },
+    {
+      "title": "Validar cambios de contrato en CI",
+      "goal": "Detectar breaking changes de API antes del release.",
+      "context": "Úsalo en PRs cuando varios equipos tocan contratos de forma frecuente.",
+      "steps": [
+        "Valida formato schema como primer gate rápido.",
+        "Genera o compara resúmenes contra baseline en CI.",
+        "Falla pipeline automáticamente si detecta breakings."
+      ],
+      "expected": [
+        "Contratos inválidos fallan antes de desplegar.",
+        "Los breakings aparecen en salida estructurada.",
+        "La decisión de release se basa en impacto explícito."
+      ],
+      "commands": [
+        "contract-kit validate",
+        "contract-kit check --json"
+      ]
+    }
+  ],
+  "commonPitfallsTitle": "Errores frecuentes",
+  "commonPitfalls": [
+    "Comitear cambios de contrato sin regenerar artefactos.",
+    "Ejecutar `check` solo en local y no forzarlo en CI.",
+    "Tratar código generado como código manual editable.",
+    "No documentar payloads por status en `response`."
+  ]
+}

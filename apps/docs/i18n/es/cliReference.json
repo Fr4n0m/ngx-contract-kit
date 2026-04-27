@@ -1,0 +1,80 @@
+{
+  "title": "Referencia CLI",
+  "intro": "Guía comando a comando de `@fr4n0m/contract-kit`: qué hace cada comando, cuándo usarlo y qué resultado debes esperar.",
+  "commands": [
+    {
+      "name": "init",
+      "description": "Crea workspace base de contratos y archivos iniciales.",
+      "whenToUse": "Ejecuta una vez por repositorio o al arrancar un workspace nuevo.",
+      "outputs": [
+        "Crea carpeta `contracts/` si no existe.",
+        "Genera configuración base del flujo contract-first.",
+        "Deja el proyecto listo para definir el primer contrato."
+      ],
+      "command": "contract-kit init"
+    },
+    {
+      "name": "generate",
+      "description": "Genera salidas tipadas (modelo, cliente Angular y helpers backend).",
+      "whenToUse": "Ejecuta tras cada cambio de contrato y antes de commitear código dependiente.",
+      "outputs": [
+        "Refresca modelo de contrato y artefactos frontend/backend.",
+        "Mantiene frontend y backend alineados al contrato actual.",
+        "Genera ficheros deterministas aptos para review/CI."
+      ],
+      "command": "contract-kit generate"
+    },
+    {
+      "name": "check",
+      "description": "Detecta cambios de compatibilidad y reporta posibles breaking changes.",
+      "whenToUse": "Ejecuta antes de release y en PRs de CI para bloquear cambios inseguros.",
+      "outputs": [
+        "Reporta cambios breaking y no-breaking detectados.",
+        "Devuelve código de salida no-cero si hay breakings.",
+        "Permite salida estructurada para automatización."
+      ],
+      "command": "contract-kit check"
+    },
+    {
+      "name": "validate",
+      "description": "Ejecuta solo validación del schema, sin generar archivos.",
+      "whenToUse": "Ejecuta en pre-commit o primeras fases de CI para feedback rápido.",
+      "outputs": [
+        "Valida estructura y campos obligatorios del contrato.",
+        "Falla rápido en métodos/status/shape inválidos.",
+        "No escribe artefactos generados."
+      ],
+      "command": "contract-kit validate"
+    },
+    {
+      "name": "mock",
+      "description": "Genera mocks deterministas a partir de contratos.",
+      "whenToUse": "Ejecuta cuando necesitas payloads estables para integración frontend o demos.",
+      "outputs": [
+        "Genera payloads mock predecibles por endpoint/status.",
+        "Permite avanzar frontend antes de tener backend final.",
+        "Mejora reproducibilidad de tests en equipos."
+      ],
+      "command": "contract-kit mock"
+    }
+  ],
+  "executionFlowTitle": "Flujo local típico",
+  "executionFlow": [
+    "Ejecuta `init` una vez para preparar estructura.",
+    "Define o actualiza contratos en `contracts/`.",
+    "Ejecuta `generate` para refrescar artefactos tipados.",
+    "Ejecuta `validate` + `check` antes de merge/release."
+  ],
+  "executionFlowCommands": [
+    "contract-kit init",
+    "contract-kit generate",
+    "contract-kit validate",
+    "contract-kit check"
+  ],
+  "tipsTitle": "Consejos",
+  "tips": [
+    "Ejecuta `validate` en pre-commit o CI para checks rápidos.",
+    "Ejecuta `check` antes de release para detectar breaks pronto.",
+    "Usa artefactos generados como fuente de verdad en Angular y backend."
+  ]
+}

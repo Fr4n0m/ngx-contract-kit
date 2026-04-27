@@ -1,0 +1,33 @@
+{
+  "title": "FAQ",
+  "intro": "Most common questions when adopting `contract-kit`.",
+  "items": [
+    {
+      "question": "Why contracts first?",
+      "answer": "One contract source removes drift between Angular client types and backend handlers."
+    },
+    {
+      "question": "When should I run `contract-kit check`?",
+      "answer": "Before release and in CI. It is the safety net against accidental breaking changes."
+    },
+    {
+      "question": "Can I use only validation without generation?",
+      "answer": "Yes. Use `contract-kit validate` to run schema checks only."
+    },
+    {
+      "question": "Do generated files replace manual code?",
+      "answer": "Generated files define typed boundaries. Business logic stays in your app code."
+    }
+  ],
+  "commandTitle": "Core check command",
+  "commands": [
+    "contract-kit check"
+  ],
+  "troubleshootingTitle": "If something does not work",
+  "troubleshootingItems": [
+    "Run `contract-kit validate` first to isolate schema issues quickly.",
+    "Regenerate artifacts after every contract change before debugging app code.",
+    "Use `contract-kit check --json` in CI and inspect the reported diff object.",
+    "If output is unexpected, attach contract file and command output in a GitHub issue."
+  ]
+}

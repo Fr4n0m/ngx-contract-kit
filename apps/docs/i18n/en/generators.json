@@ -1,0 +1,73 @@
+{
+  "title": "Generators",
+  "intro": "Generation keeps Angular and backend in sync from the same contract source.",
+  "artifactsTitle": "Generated artifacts",
+  "artifacts": [
+    {
+      "name": "contract-model.ts",
+      "purpose": "Typed endpoint model used by all generated outputs.",
+      "whenToUse": "Use this as the canonical type map when building custom integrations.",
+      "outputs": [
+        "Endpoint-level typed request/response model.",
+        "Shared typing source for client and backend generators."
+      ],
+      "file": "generated/contract-model.ts"
+    },
+    {
+      "name": "angular-client.ts",
+      "purpose": "Typed Angular client with method signatures per endpoint.",
+      "whenToUse": "Use in Angular apps to call APIs with contract-driven types.",
+      "outputs": [
+        "Typed method signatures per endpoint.",
+        "Request/response inference without manual DTO duplication."
+      ],
+      "file": "generated/angular-client.ts"
+    },
+    {
+      "name": "zod-schemas.ts",
+      "purpose": "Runtime validation schemas mapped from contract shapes.",
+      "whenToUse": "Use in backend or gateway validation middleware.",
+      "outputs": [
+        "Schema validators for params/query/body/response.",
+        "Runtime safety aligned with contract definitions."
+      ],
+      "file": "generated/zod-schemas.ts"
+    },
+    {
+      "name": "nest-controller.ts",
+      "purpose": "NestJS controller skeleton and route mapping.",
+      "whenToUse": "Use to scaffold backend routes with minimal manual boilerplate.",
+      "outputs": [
+        "Controller skeleton with operation mapping.",
+        "Consistent route declarations from contract paths."
+      ],
+      "file": "generated/nest-controller.ts"
+    },
+    {
+      "name": "nest-handlers.stub.ts",
+      "purpose": "Typed handlers scaffold for backend implementation.",
+      "whenToUse": "Use as implementation entrypoint for service business logic.",
+      "outputs": [
+        "Typed handler signatures per endpoint.",
+        "Clear compile-time contract boundaries for backend teams."
+      ],
+      "file": "generated/nest-handlers.stub.ts"
+    }
+  ],
+  "flowTitle": "Recommended flow",
+  "flowItems": [
+    "Define or update contracts in `contracts/`.",
+    "Run generation and commit generated artifacts.",
+    "Wire generated outputs in Angular and backend.",
+    "Run compatibility checks before release."
+  ],
+  "commandTitle": "Generate now",
+  "command": "pnpm ckit:generate",
+  "readinessTitle": "Release readiness checks",
+  "readinessItems": [
+    "Generated files are updated in the same commit as contract changes.",
+    "No manual edits are made inside generated output files.",
+    "Compatibility checks run in CI before merge.",
+    "Frontend/backend integration tests consume generated artifacts."
+  ]
+}

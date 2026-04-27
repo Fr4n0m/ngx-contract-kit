@@ -1,0 +1,80 @@
+{
+  "title": "CLI Reference",
+  "intro": "Command-by-command guide for `@fr4n0m/contract-kit`: what each command does, when to run it, and what you should expect after execution.",
+  "commands": [
+    {
+      "name": "init",
+      "description": "Create base contract workspace and starter files.",
+      "whenToUse": "Run once per repository or when bootstrapping a new API workspace.",
+      "outputs": [
+        "Creates `contracts/` folder if missing.",
+        "Creates baseline config for contract workflow.",
+        "Leaves project ready for first contract file."
+      ],
+      "command": "contract-kit init"
+    },
+    {
+      "name": "generate",
+      "description": "Generate typed outputs (model, Angular client, backend helpers).",
+      "whenToUse": "Run after every contract change and before committing code that depends on generated artifacts.",
+      "outputs": [
+        "Refreshes contract model and generated client/backend artifacts.",
+        "Keeps frontend and backend code aligned to latest contract.",
+        "Provides deterministic files for review and CI."
+      ],
+      "command": "contract-kit generate"
+    },
+    {
+      "name": "check",
+      "description": "Detect compatibility changes and report potential breaking changes.",
+      "whenToUse": "Run before release and in CI pull requests to block unsafe API changes.",
+      "outputs": [
+        "Reports detected breaking and non-breaking changes.",
+        "Returns non-zero exit code on breaking changes.",
+        "Supports machine-readable output for automation."
+      ],
+      "command": "contract-kit check"
+    },
+    {
+      "name": "validate",
+      "description": "Run schema validation only, without generating files.",
+      "whenToUse": "Run in pre-commit hooks or early CI steps for fast contract sanity checks.",
+      "outputs": [
+        "Validates contract shape and required fields.",
+        "Fails fast on invalid methods/statuses/structures.",
+        "Does not write generated files."
+      ],
+      "command": "contract-kit validate"
+    },
+    {
+      "name": "mock",
+      "description": "Generate deterministic mock payloads from contracts.",
+      "whenToUse": "Run when you need stable sample payloads for frontend integration or API demos.",
+      "outputs": [
+        "Produces predictable mock payloads per endpoint/status.",
+        "Helps frontend teams build against contract before backend is complete.",
+        "Improves test reproducibility across environments."
+      ],
+      "command": "contract-kit mock"
+    }
+  ],
+  "executionFlowTitle": "Typical local workflow",
+  "executionFlow": [
+    "Run `init` once to scaffold structure.",
+    "Define or update contract files under `contracts/`.",
+    "Run `generate` to refresh typed artifacts.",
+    "Run `validate` + `check` before merging or releasing."
+  ],
+  "executionFlowCommands": [
+    "contract-kit init",
+    "contract-kit generate",
+    "contract-kit validate",
+    "contract-kit check"
+  ],
+  "tipsTitle": "Tips",
+  "tips": [
+    "Run `validate` in pre-commit or CI for fast guardrails.",
+    "Run `check` before release to catch breaking changes early.",
+    "Use generated outputs as source of truth in Angular and backend."
+  ]
+}

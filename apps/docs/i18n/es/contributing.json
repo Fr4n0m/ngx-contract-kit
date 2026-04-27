@@ -1,0 +1,35 @@
+{
+  "title": "Contribuir",
+  "intro": "Las contribuciones son bienvenidas. Prioriza valor para developer y fiabilidad del producto.",
+  "userFirstTitle": "Si primero eres usuario del producto",
+  "userFirstItems": [
+    "Abre issue con tu caso real y ejemplo de contrato actual.",
+    "Describe comportamiento esperado vs actual con salida de comandos.",
+    "Incluye versión del paquete y entorno para acelerar diagnóstico."
+  ],
+  "waysTitle": "Cómo puedes ayudar",
+  "ways": [
+    "Reporta bugs con archivos de contrato reproducibles.",
+    "Propón mejoras de DX para CLI y artefactos generados.",
+    "Envía PRs con tests y contexto técnico claro."
+  ],
+  "prTitle": "Checklist para PR",
+  "prSteps": [
+    "Mantén alcance enfocado y fácil de revisar.",
+    "Actualiza docs solo si cambia comportamiento de usuario.",
+    "Asegura tests y type checks en verde antes de abrir PR."
+  ],
+  "localTitle": "Verificación local",
+  "commands": [
+    "pnpm install",
+    "pnpm lint",
+    "pnpm test",
+    "pnpm build"
+  ],
+  "qualityTitle": "Barra de calidad en contribuciones",
+  "qualityItems": [
+    "Todo cambio de comportamiento debe incluir tests.",
+    "Docs deben explicar impacto de usuario, no solo detalle interno.",
+    "Los snapshots de artefactos generados deben mantenerse deterministas."
+  ]
+}

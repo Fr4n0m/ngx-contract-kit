@@ -1,0 +1,58 @@
+{
+  "title": "Schema del Contrato",
+  "intro": "Los contratos son archivos JSON que definen el comportamiento de la API en formato determinista.",
+  "mentalModelTitle": "Modelo mental",
+  "mentalModel": "El contrato es la fuente de verdad de la API. Tu código consume artefactos generados desde esa verdad en lugar de duplicar tipos manualmente por capas.",
+  "requiredTitle": "Estructura base",
+  "requiredItems": [
+    "`service`: nombre lógico del servicio.",
+    "`endpoints`: lista de endpoints.",
+    "Cada endpoint define método, path y status de respuesta."
+  ],
+  "endpointTitle": "Campos por endpoint",
+  "endpointItems": [
+    "`path`: ruta (ejemplo `/users/:id`).",
+    "`method`: verbo HTTP (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).",
+    "`params`, `query`, `body`: shapes de entrada opcionales.",
+    "`response`: objeto indexado por status HTTP."
+  ],
+  "fieldGuideTitle": "Guía de campos",
+  "fieldGuide": [
+    {
+      "name": "service",
+      "meaning": "Namespace lógico de endpoints dentro de un mismo contrato.",
+      "example": "Ejemplo: `users`, `billing`, `notifications`."
+    },
+    {
+      "name": "path + method",
+      "meaning": "Identidad única de operación. Juntos definen routing y firma de métodos generados.",
+      "example": "Ejemplo: `GET /users/:id`, `POST /users`."
+    },
+    {
+      "name": "params / query / body",
+      "meaning": "Canales de entrada tipados. Cliente y validadores generados consumen estos shapes.",
+      "example": "Ejemplo: `params.id`, `query.page`, `body.email`."
+    },
+    {
+      "name": "response",
+      "meaning": "Mapa status HTTP -> payload. Base de tipos de salida y checks de compatibilidad.",
+      "example": "Ejemplo: `200`, `201`, `400`, `404` con schema explícito por status."
+    }
+  ],
+  "sampleTitle": "Ejemplo mínimo de contrato",
+  "sampleFile": "contracts/users.contract.json",
+  "sampleCode": "{\n  \"service\": \"users\",\n  \"endpoints\": [\n    {\n      \"path\": \"/users/:id\",\n      \"method\": \"GET\",\n      \"params\": { \"id\": \"string\" },\n      \"response\": {\n        \"200\": { \"id\": \"string\", \"email\": \"string\" },\n        \"404\": { \"message\": \"string\" }\n      }\n    }\n  ]\n}",
+  "noteTitle": "Notas de validación",
+  "notes": [
+    "Mantén nombres de campos estables para evitar breaking changes accidentales.",
+    "Define respuestas explícitas para todos los status que devuelve el endpoint.",
+    "Usa `ckit:validate` como guard rápido de schema."
+  ],
+  "commonMistakesTitle": "Errores comunes a evitar",
+  "commonMistakes": [
+    "Renombrar campos de `response` sin ejecutar `check`.",
+    "Usar mapeos de status inconsistentes entre endpoints similares.",
+    "Dejar inputs opcionales sin documentar y depender de supuestos en app code.",
+    "Editar manualmente artefactos generados como si fueran fuente."
+  ]
+}

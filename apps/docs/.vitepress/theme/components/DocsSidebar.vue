@@ -59,12 +59,12 @@ onUnmounted(() => {
 <template>
   <aside v-if="isDocsRoute" class="docs-sidebar hidden lg:block">
     <nav
-      class="sticky top-24 border border-black/15 bg-white/70 p-3 font-body shadow-[0_10px_26px_-18px_rgba(7,7,7,0.35)] backdrop-blur-sm dark:border-white/10 dark:bg-[#1f1f1f]/85 dark:shadow-[0_12px_28px_-18px_rgba(0,0,0,0.7)]"
+      class="sticky top-24 border border-black/15 bg-white/70 p-3 font-body shadow-[0_10px_26px_-18px_rgba(7,7,7,0.35)] backdrop-blur-sm dark:border-[#1f1f1f] dark:bg-[#070707] dark:shadow-[0_12px_28px_-18px_rgba(0,0,0,0.7)]"
     >
       <div class="relative">
         <div
           v-if="activeIndex >= 0"
-          class="pointer-events-none absolute left-0 right-0 z-[1] border border-black/10 bg-[#d2ff00]/18 transition-transform duration-300 ease-out dark:border-white/10 dark:bg-white/10"
+          class="pointer-events-none absolute left-0 right-0 z-[1] border border-black/10 bg-[#d2ff00]/18 transition-transform duration-300 ease-out dark:border-[#1f1f1f] dark:bg-[#1f1f1f]"
           :style="{
             height: '2.5rem',
             transform: `translateY(${activeIndex * 2.75}rem)`,

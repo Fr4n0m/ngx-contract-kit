@@ -1,0 +1,73 @@
+{
+  "title": "Generadores",
+  "intro": "La generación mantiene Angular y backend alineados desde una única fuente de contrato.",
+  "artifactsTitle": "Artefactos generados",
+  "artifacts": [
+    {
+      "name": "contract-model.ts",
+      "purpose": "Modelo tipado de endpoints usado por todas las salidas generadas.",
+      "whenToUse": "Úsalo como mapa canónico de tipos al crear integraciones custom.",
+      "outputs": [
+        "Modelo tipado request/response por endpoint.",
+        "Fuente común para generadores frontend y backend."
+      ],
+      "file": "generated/contract-model.ts"
+    },
+    {
+      "name": "angular-client.ts",
+      "purpose": "Cliente Angular tipado con firmas por endpoint.",
+      "whenToUse": "Úsalo en apps Angular para consumir API con tipos derivados de contrato.",
+      "outputs": [
+        "Firmas de métodos tipadas por endpoint.",
+        "Inferencia request/response sin DTOs manuales duplicados."
+      ],
+      "file": "generated/angular-client.ts"
+    },
+    {
+      "name": "zod-schemas.ts",
+      "purpose": "Schemas de validación runtime mapeados desde el contrato.",
+      "whenToUse": "Úsalo en backend o capa gateway para validación runtime.",
+      "outputs": [
+        "Validadores para params/query/body/response.",
+        "Seguridad runtime alineada al contrato."
+      ],
+      "file": "generated/zod-schemas.ts"
+    },
+    {
+      "name": "nest-controller.ts",
+      "purpose": "Esqueleto de controller NestJS y mapeo de rutas.",
+      "whenToUse": "Úsalo para scaffold de rutas backend con mínimo boilerplate manual.",
+      "outputs": [
+        "Esqueleto de controller con mapping de operaciones.",
+        "Declaración de rutas consistente con paths del contrato."
+      ],
+      "file": "generated/nest-controller.ts"
+    },
+    {
+      "name": "nest-handlers.stub.ts",
+      "purpose": "Scaffold de handlers tipados para implementación backend.",
+      "whenToUse": "Úsalo como punto de entrada de implementación de lógica de negocio.",
+      "outputs": [
+        "Firmas tipadas de handlers por endpoint.",
+        "Fronteras de contrato claras en compile-time."
+      ],
+      "file": "generated/nest-handlers.stub.ts"
+    }
+  ],
+  "flowTitle": "Flujo recomendado",
+  "flowItems": [
+    "Define o actualiza contratos en `contracts/`.",
+    "Ejecuta generación y commitea artefactos generados.",
+    "Conecta outputs generados en Angular y backend.",
+    "Ejecuta checks de compatibilidad antes de release."
+  ],
+  "commandTitle": "Generar ahora",
+  "command": "pnpm ckit:generate",
+  "readinessTitle": "Checklist de readiness para release",
+  "readinessItems": [
+    "Artefactos generados actualizados en el mismo commit que cambios de contrato.",
+    "Sin edición manual dentro de ficheros generados.",
+    "Checks de compatibilidad ejecutados en CI antes de merge.",
+    "Tests de integración frontend/backend consumiendo salidas generadas."
+  ]
+}

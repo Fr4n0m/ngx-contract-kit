@@ -117,6 +117,8 @@ async function copyCode(): Promise<void> {
 }
 
 const titleRef = useReveal(0);
+const descriptionRef = useReveal(70);
+const panelRef = useReveal(140);
 </script>
 
 <template>
@@ -127,12 +129,16 @@ const titleRef = useReveal(0);
     >
       {{ title }}
     </h2>
-    <p class="mb-6 max-w-4xl text-[color:var(--vp-c-text-2)]">
+    <p
+      ref="descriptionRef"
+      class="reveal mb-6 max-w-4xl text-[color:var(--vp-c-text-2)]"
+    >
       {{ description }}
     </p>
 
     <div
-      class="landing-card min-w-0 overflow-hidden border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] shadow-card"
+      ref="panelRef"
+      class="reveal landing-card min-w-0 overflow-hidden border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] shadow-card"
     >
       <!-- Tab bar -->
       <div

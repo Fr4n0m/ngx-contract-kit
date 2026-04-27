@@ -41,6 +41,14 @@ const actionThemeClass = {
 const heroRef = useReveal(0);
 const whatYouGetRef = useReveal(0);
 const howItWorksRef = useReveal(0);
+const howItWorksIntroRef = useReveal(60);
+const howStepRefs = [
+  useReveal(80),
+  useReveal(140),
+  useReveal(200),
+  useReveal(260),
+];
+const howBottomCardRefs = [useReveal(320), useReveal(380)];
 </script>
 
 <template>
@@ -124,7 +132,10 @@ const howItWorksRef = useReveal(0);
         >
           {{ t.howItWorks.title }}
         </h2>
-        <p class="mb-6 max-w-4xl text-[color:var(--vp-c-text-2)]">
+        <p
+          ref="howItWorksIntroRef"
+          class="reveal mb-6 max-w-4xl text-[color:var(--vp-c-text-2)]"
+        >
           {{ t.howItWorks.intro }}
         </p>
 
@@ -132,7 +143,8 @@ const howItWorksRef = useReveal(0);
           <article
             v-for="(step, index) in t.howItWorks.steps"
             :key="step.title"
-            class="landing-card min-w-0 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
+            :ref="howStepRefs[index]"
+            class="reveal landing-card min-w-0 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
             <div class="flex items-start justify-between gap-3">
               <div class="inline-flex items-center gap-2">
@@ -159,7 +171,8 @@ const howItWorksRef = useReveal(0);
 
         <div class="mt-6 grid gap-4 lg:grid-cols-2">
           <article
-            class="landing-card min-w-0 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
+            :ref="howBottomCardRefs[0]"
+            class="reveal landing-card min-w-0 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
             <div
               class="mb-2 inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[color:var(--vp-c-text-3)]"
@@ -184,7 +197,8 @@ const howItWorksRef = useReveal(0);
           </article>
 
           <article
-            class="landing-card min-w-0 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
+            :ref="howBottomCardRefs[1]"
+            class="reveal landing-card min-w-0 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
             <h3
               class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]"

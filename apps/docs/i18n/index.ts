@@ -11,6 +11,13 @@ import demoEn from "./en/demo.json";
 import commandPaletteEn from "./en/commandPalette.json";
 import footerEn from "./en/footer.json";
 import linksEn from "./en/links.json";
+import docsHomeEn from "./en/docsHome.json";
+import cliReferenceEn from "./en/cliReference.json";
+import contractSchemaEn from "./en/contractSchema.json";
+import generatorsEn from "./en/generators.json";
+import examplesEn from "./en/examples.json";
+import contributingEn from "./en/contributing.json";
+import faqEn from "./en/faq.json";
 
 import metaEs from "./es/meta.json";
 import langEs from "./es/lang.json";
@@ -25,6 +32,13 @@ import demoEs from "./es/demo.json";
 import commandPaletteEs from "./es/commandPalette.json";
 import footerEs from "./es/footer.json";
 import linksEs from "./es/links.json";
+import docsHomeEs from "./es/docsHome.json";
+import cliReferenceEs from "./es/cliReference.json";
+import contractSchemaEs from "./es/contractSchema.json";
+import generatorsEs from "./es/generators.json";
+import examplesEs from "./es/examples.json";
+import contributingEs from "./es/contributing.json";
+import faqEs from "./es/faq.json";
 
 export const en = {
   meta: metaEn,
@@ -39,7 +53,14 @@ export const en = {
   demo: demoEn,
   commandPalette: commandPaletteEn,
   footer: footerEn,
-  links: linksEn
+  links: linksEn,
+  docsHome: docsHomeEn,
+  cliReference: cliReferenceEn,
+  contractSchema: contractSchemaEn,
+  generators: generatorsEn,
+  examples: examplesEn,
+  contributing: contributingEn,
+  faq: faqEn
 } as const;
 
 export const es = {
@@ -55,7 +76,14 @@ export const es = {
   demo: demoEs,
   commandPalette: commandPaletteEs,
   footer: footerEs,
-  links: linksEs
+  links: linksEs,
+  docsHome: docsHomeEs,
+  cliReference: cliReferenceEs,
+  contractSchema: contractSchemaEs,
+  generators: generatorsEs,
+  examples: examplesEs,
+  contributing: contributingEs,
+  faq: faqEs
 } as const;
 
 export type LocaleDictionary = typeof en;

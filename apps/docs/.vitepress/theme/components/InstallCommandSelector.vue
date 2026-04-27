@@ -33,10 +33,10 @@ const manager = computed<PackageManager>({
 });
 
 const commandByManager: Record<PackageManager, string> = {
-  pnpm: "pnpm add @ngx-contract-kit/cli @ngx-contract-kit/core",
-  npm: "npm install @ngx-contract-kit/cli @ngx-contract-kit/core",
-  yarn: "yarn add @ngx-contract-kit/cli @ngx-contract-kit/core",
-  bun: "bun add @ngx-contract-kit/cli @ngx-contract-kit/core",
+  pnpm: "pnpm add -D @fr4n0m/contract-kit",
+  npm: "npm install -D @fr4n0m/contract-kit",
+  yarn: "yarn add -D @fr4n0m/contract-kit",
+  bun: "bun add -d @fr4n0m/contract-kit",
 };
 
 const managers: PackageManager[] = ["pnpm", "npm", "yarn", "bun"];
@@ -45,7 +45,7 @@ const command = computed(() => commandByManager[manager.value]);
 
 <template>
   <div
-    class="border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card"
+    class="border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] dark:border-[#1f1f1f] dark:bg-[#070707] p-4 shadow-card"
   >
     <label
       for="pkg-manager"

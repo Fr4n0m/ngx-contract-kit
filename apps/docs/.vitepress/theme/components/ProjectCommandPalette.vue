@@ -133,14 +133,14 @@ const lightTheme = {
   titleColor: "#070707",
   descriptionColor: "#1f1f1f",
   mutedColor: "#1f1f1f",
-  sectionTitleColor: "#1f1f1f",
+  sectionTitleColor: "#070707",
   itemTitleColor: "#070707",
   itemSubtitleColor: "#1f1f1f",
   shortcutColor: "#1f1f1f",
   borderColor: "#1f1f1f",
   overlayColor: "rgba(31, 31, 31, 0.33)",
   radius: "20px",
-  shadow: "0 20px 50px -24px rgba(7, 7, 7, 0.35)"
+  shadow: "0 20px 50px -24px rgba(7, 7, 7, 0.35)",
 } as const;
 
 const darkTheme = {
@@ -157,16 +157,16 @@ const darkTheme = {
   borderColor: "#1f1f1f",
   overlayColor: "rgba(7, 7, 7, 0.72)",
   radius: "16px",
-  shadow: "0 24px 64px -24px rgba(0, 0, 0, 0.7)"
+  shadow: "0 24px 64px -24px rgba(0, 0, 0, 0.7)",
 } as const;
 
 const theme = computed<CommandThemeInput>(() =>
-  isDark.value ? darkTheme : lightTheme
+  isDark.value ? darkTheme : lightTheme,
 );
 
 const classNames = {
   item: "ck-cmd-item",
-  closeButton: "ck-cmd-close-btn"
+  closeButton: "ck-cmd-close-btn",
 } as const;
 
 const openPalette = () => {
@@ -413,4 +413,3 @@ h7.999c4.418,0,8,3.582,8,8S68.418,72,64,72z"
   }
 }
 </style>
-

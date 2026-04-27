@@ -12,6 +12,13 @@ import InstallCommandSelector from "./components/InstallCommandSelector.vue";
 import QuickstartGuide from "./components/QuickstartGuide.vue";
 import TerminalCommandList from "./components/TerminalCommandList.vue";
 import TerminalCodeBlock from "./components/TerminalCodeBlock.vue";
+import DocsHomeContent from "./components/docs/DocsHomeContent.vue";
+import CliReferenceContent from "./components/docs/CliReferenceContent.vue";
+import ContractSchemaContent from "./components/docs/ContractSchemaContent.vue";
+import GeneratorsContent from "./components/docs/GeneratorsContent.vue";
+import ExamplesContent from "./components/docs/ExamplesContent.vue";
+import ContributingContent from "./components/docs/ContributingContent.vue";
+import FaqContent from "./components/docs/FaqContent.vue";
 import "./custom.css";
 
 const theme: Theme = {
@@ -31,6 +38,13 @@ const theme: Theme = {
     ctx.app.component("QuickstartGuide", QuickstartGuide);
     ctx.app.component("TerminalCommandList", TerminalCommandList);
     ctx.app.component("TerminalCodeBlock", TerminalCodeBlock);
+    ctx.app.component("DocsHomeContent", DocsHomeContent);
+    ctx.app.component("CliReferenceContent", CliReferenceContent);
+    ctx.app.component("ContractSchemaContent", ContractSchemaContent);
+    ctx.app.component("GeneratorsContent", GeneratorsContent);
+    ctx.app.component("ExamplesContent", ExamplesContent);
+    ctx.app.component("ContributingContent", ContributingContent);
+    ctx.app.component("FaqContent", FaqContent);
   }
 };
 
