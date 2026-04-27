@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, useTemplateRef } from "vue";
 
 defineProps<{
   runLabel: string;
@@ -125,22 +125,34 @@ const GENERATED_FILES = [
   },
 ] as const;
 
+const root = useTemplateRef<HTMLElement>("root");
 const typedCommand = ref("");
 const visibleLines = ref<number[]>([]);
 const showCursor = ref(false);
 const isRunning = ref(false);
 const isCompleted = ref(false);
 const showFiles = ref(false);
+const autoRunCountdown = ref(0);
 
 let timers: ReturnType<typeof setTimeout>[] = [];
+let autoRunTimer: ReturnType<typeof setTimeout> | undefined;
+let countdownInterval: ReturnType<typeof setInterval> | undefined;
+let observer: IntersectionObserver | undefined;
 
 function clearTimers(): void {
   timers.forEach(clearTimeout);
   timers = [];
 }
 
+function cancelAutoRun(): void {
+  if (autoRunTimer) { clearTimeout(autoRunTimer); autoRunTimer = undefined; }
+  if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = undefined; }
+  autoRunCountdown.value = 0;
+}
+
 function reset(): void {
   clearTimers();
+  cancelAutoRun();
   typedCommand.value = "";
   visibleLines.value = [];
   showCursor.value = false;
@@ -151,6 +163,7 @@ function reset(): void {
 
 function run(): void {
   if (isRunning.value) return;
+  cancelAutoRun();
   reset();
   isRunning.value = true;
   showCursor.value = true;
@@ -198,11 +211,40 @@ function run(): void {
   );
 }
 
-onUnmounted(clearTimers);
+onMounted(() => {
+  if (!root.value) return;
+  const DELAY = 2500;
+  const TICK = 100;
+
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting || isRunning.value || isCompleted.value) return;
+      observer?.disconnect();
+
+      autoRunCountdown.value = DELAY;
+      countdownInterval = setInterval(() => {
+        autoRunCountdown.value = Math.max(0, autoRunCountdown.value - TICK);
+      }, TICK);
+
+      autoRunTimer = setTimeout(() => {
+        cancelAutoRun();
+        run();
+      }, DELAY);
+    },
+    { threshold: 0.35 },
+  );
+  observer.observe(root.value);
+});
+
+onUnmounted(() => {
+  clearTimers();
+  cancelAutoRun();
+  observer?.disconnect();
+});
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div ref="root" class="space-y-4">
     <!-- Terminal -->
     <div
       class="overflow-hidden border border-[#1f1f1f] bg-[#070707] shadow-card"
@@ -216,14 +258,23 @@ onUnmounted(clearTimers);
           <span class="h-3 w-3 rounded-full bg-[#28c840]" />
           <span class="ml-2 font-mono text-xs text-[#444]">bash</span>
         </div>
-        <button
-          type="button"
-          :disabled="isRunning"
-          class="inline-flex items-center border border-accent bg-accent px-3 py-1 text-xs font-semibold text-[#1f1f1f] transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-60"
-          @click="isCompleted ? reset() : run()"
-        >
-          {{ isRunning ? runningLabel : isCompleted ? replayLabel : runLabel }}
-        </button>
+        <div class="flex items-center gap-3">
+          <span
+            v-if="autoRunCountdown > 0"
+            class="font-mono text-[10px] text-[#555]"
+          >auto {{ (autoRunCountdown / 1000).toFixed(1) }}s</span>
+          <button
+            type="button"
+            :disabled="isRunning"
+            :class="[
+              'inline-flex items-center border border-accent bg-accent px-3 py-1 text-xs font-semibold text-[#1f1f1f] transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-60',
+              !isRunning && !isCompleted ? 'btn-glow' : '',
+            ]"
+            @click="isCompleted ? reset() : run()"
+          >
+            {{ isRunning ? runningLabel : isCompleted ? replayLabel : runLabel }}
+          </button>
+        </div>
       </div>
 
       <div class="min-h-56 p-5 font-mono text-sm leading-relaxed">
@@ -305,5 +356,18 @@ onUnmounted(clearTimers);
 .file-card {
   animation: reveal-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: var(--delay, 0ms);
+}
+
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 0 6px 1px rgba(210, 255, 0, 0.25); }
+  50% { box-shadow: 0 0 18px 5px rgba(210, 255, 0, 0.55); }
+}
+
+.btn-glow {
+  animation: btn-glow 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-glow { animation: none; }
 }
 </style>
