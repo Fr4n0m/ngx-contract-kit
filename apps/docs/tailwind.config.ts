@@ -11,20 +11,20 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: "#f9faf6",
-          100: "#f4f4ed",
-          200: "#dde1d2",
-          300: "#c7ccb9",
-          400: "#b4b8a5",
-          500: "#8b907f",
-          600: "#686d5f",
-          700: "#535450",
-          800: "#343a26",
-          900: "#282c20"
+          50: "#ffffff",
+          100: "#ffffff",
+          200: "#ffffff",
+          300: "#d2ff00",
+          400: "#d2ff00",
+          500: "#1f1f1f",
+          600: "#1f1f1f",
+          700: "#1f1f1f",
+          800: "#070707",
+          900: "#070707"
         },
         accent: "#d2ff00",
-        ink: "#1f2319",
-        sand: "#f8f4ec"
+        ink: "#1f1f1f",
+        sand: "#ffffff"
       },
       fontFamily: {
         project: ["Bruno Ace", "Ubuntu Sans Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"],
@@ -32,7 +32,7 @@ export default {
         body: ["Ubuntu Sans Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "monospace"]
       },
       boxShadow: {
-        card: "0 20px 40px -26px rgba(29, 31, 33, 0.45)"
+        card: "0 20px 40px -26px rgba(7, 7, 7, 0.35)"
       }
     }
   },

@@ -127,35 +127,35 @@ const formatShortcut = (shortcut: string) =>
     .join(" + ");
 
 const lightTheme = {
-  accentColor: "#9dc400",
-  backgroundColor: "#d8e0d4",
-  textColor: "#142013",
-  titleColor: "#142013",
-  descriptionColor: "#243323",
-  mutedColor: "#536550",
-  sectionTitleColor: "#4a5d47",
-  itemTitleColor: "#1b2a1a",
-  itemSubtitleColor: "#3b4e39",
-  shortcutColor: "#5a6d58",
-  borderColor: "#9fb19a",
-  overlayColor: "rgba(22, 33, 19, 0.33)",
+  accentColor: "#d2ff00",
+  backgroundColor: "#ffffff",
+  textColor: "#070707",
+  titleColor: "#070707",
+  descriptionColor: "#1f1f1f",
+  mutedColor: "#1f1f1f",
+  sectionTitleColor: "#1f1f1f",
+  itemTitleColor: "#070707",
+  itemSubtitleColor: "#1f1f1f",
+  shortcutColor: "#1f1f1f",
+  borderColor: "#1f1f1f",
+  overlayColor: "rgba(31, 31, 31, 0.33)",
   radius: "20px",
-  shadow: "0 20px 50px -24px rgba(34, 49, 32, 0.45)"
+  shadow: "0 20px 50px -24px rgba(7, 7, 7, 0.35)"
 } as const;
 
 const darkTheme = {
   accentColor: "#d2ff00",
-  backgroundColor: "#1b2218",
-  textColor: "#f4f4ed",
-  titleColor: "#f4f4ed",
-  descriptionColor: "#dde1d2",
-  mutedColor: "#a4b09a",
+  backgroundColor: "#070707",
+  textColor: "#ffffff",
+  titleColor: "#ffffff",
+  descriptionColor: "#ffffff",
+  mutedColor: "#ffffff",
   sectionTitleColor: "#d2ff00",
-  itemTitleColor: "#f4f4ed",
-  itemSubtitleColor: "#c8cfbd",
-  shortcutColor: "#c6dc7f",
-  borderColor: "#374531",
-  overlayColor: "rgba(5, 10, 7, 0.72)",
+  itemTitleColor: "#ffffff",
+  itemSubtitleColor: "#ffffff",
+  shortcutColor: "#ffffff",
+  borderColor: "#1f1f1f",
+  overlayColor: "rgba(7, 7, 7, 0.72)",
   radius: "16px",
   shadow: "0 24px 64px -24px rgba(0, 0, 0, 0.7)"
 } as const;

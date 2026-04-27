@@ -31,60 +31,60 @@
 @layer base {
   :root {
     --vp-c-brand-1: #d2ff00;
-    --vp-c-brand-2: #c7f100;
-    --vp-c-brand-3: #b4d900;
-    --vp-c-brand-soft: #b6dd00;
-    --vp-c-bg: #b7c1b2;
-    --vp-c-bg-soft: #cbd3c7;
-    --vp-c-bg-alt: #94a08d;
-    --vp-c-text-1: #11170f;
-    --vp-c-text-2: #1f281b;
-    --vp-c-text-3: #33402c;
+    --vp-c-brand-2: #d2ff00;
+    --vp-c-brand-3: #d2ff00;
+    --vp-c-brand-soft: #d2ff00;
+    --vp-c-bg: #ffffff;
+    --vp-c-bg-soft: #ffffff;
+    --vp-c-bg-alt: #1f1f1f;
+    --vp-c-text-1: #070707;
+    --vp-c-text-2: #1f1f1f;
+    --vp-c-text-3: #1f1f1f;
     --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: linear-gradient(120deg, #d2ff00 5%, #b6dd00 92%);
-    --vp-code-bg: #1f2319;
-    --vp-code-color: #2f4f40;
-    --vp-code-block-color: #264638;
-    --vp-code-lang-color: #4e6559;
-    --ck-code-fg: #163a2b;
-    --ck-code-inline-bg: #d9e5d8;
-    --ck-code-inline-fg: #143327;
-    --ck-code-border: #9fb59b;
+    --vp-home-hero-name-background: linear-gradient(120deg, #d2ff00 5%, #ffffff 92%);
+    --vp-code-bg: #ffffff;
+    --vp-code-color: #070707;
+    --vp-code-block-color: #1f1f1f;
+    --vp-code-lang-color: #1f1f1f;
+    --ck-code-fg: #070707;
+    --ck-code-inline-bg: #ffffff;
+    --ck-code-inline-fg: #070707;
+    --ck-code-border: #1f1f1f;
   }
 
   .dark {
     --vp-c-brand-1: #d2ff00;
-    --vp-c-brand-2: #c7f100;
-    --vp-c-brand-3: #b4d900;
-    --vp-c-bg: #11180f;
-    --vp-c-bg-soft: #1b2218;
-    --vp-c-bg-alt: #242b1f;
-    --vp-c-text-1: #f4f4ed;
-    --vp-c-text-2: #dde1d2;
-    --vp-c-text-3: #b4b8a5;
-    --vp-code-bg: #0e1613;
-    --vp-code-color: #9fc65f;
-    --vp-code-block-color: #b4d96f;
-    --vp-code-lang-color: #bcd2a1;
-    --ck-code-fg: #9cf279;
-    --ck-code-inline-bg: #1c2a1f;
+    --vp-c-brand-2: #d2ff00;
+    --vp-c-brand-3: #d2ff00;
+    --vp-c-bg: #070707;
+    --vp-c-bg-soft: #1f1f1f;
+    --vp-c-bg-alt: #ffffff;
+    --vp-c-text-1: #ffffff;
+    --vp-c-text-2: #ffffff;
+    --vp-c-text-3: #d2ff00;
+    --vp-code-bg: #1f1f1f;
+    --vp-code-color: #d2ff00;
+    --vp-code-block-color: #d2ff00;
+    --vp-code-lang-color: #ffffff;
+    --ck-code-fg: #d2ff00;
+    --ck-code-inline-bg: #1f1f1f;
     --ck-code-inline-fg: #d2ff00;
-    --ck-code-border: #3e5842;
-    --vp-home-hero-name-background: linear-gradient(120deg, #d2ff00 5%, #b4b8a5 92%);
+    --ck-code-border: #ffffff;
+    --vp-home-hero-name-background: linear-gradient(120deg, #d2ff00 5%, #ffffff 92%);
   }
 
   body {
     @apply font-body antialiased;
     overflow-x: hidden;
     background-image:
-      radial-gradient(circle at 10% 6%, rgba(173, 196, 104, 0.18), rgba(183, 193, 178, 0) 44%),
-      radial-gradient(circle at 90% 12%, rgba(60, 73, 55, 0.2), rgba(183, 193, 178, 0) 40%);
+      radial-gradient(circle at 10% 6%, rgba(210, 255, 0, 0.12), rgba(255, 255, 255, 0) 44%),
+      radial-gradient(circle at 90% 12%, rgba(31, 31, 31, 0.16), rgba(255, 255, 255, 0) 40%);
   }
 
   .dark body {
     background-image:
-      radial-gradient(circle at 8% 5%, rgba(210, 255, 0, 0.12), rgba(17, 24, 15, 0) 45%),
-      radial-gradient(circle at 92% 10%, rgba(83, 84, 80, 0.22), rgba(17, 24, 15, 0) 38%);
+      radial-gradient(circle at 8% 5%, rgba(210, 255, 0, 0.12), rgba(7, 7, 7, 0) 45%),
+      radial-gradient(circle at 92% 10%, rgba(31, 31, 31, 0.22), rgba(7, 7, 7, 0) 38%);
   }
 }
 
@@ -120,12 +120,12 @@
   }
 
   .VPNavBar {
-    background: rgba(189, 198, 182, 0.62) !important;
-    border-bottom: 1px solid rgba(47, 62, 40, 0.22);
+    background: rgba(255, 255, 255, 0.78) !important;
+    border-bottom: 1px solid rgba(31, 31, 31, 0.22);
   }
 
   .dark .VPNavBar {
-    background: rgba(13, 20, 12, 0.68) !important;
+    background: rgba(7, 7, 7, 0.74) !important;
     border-bottom-color: rgba(210, 255, 0, 0.18);
   }
 
@@ -142,11 +142,11 @@
 
   .VPSwitch .check {
     background-color: #ffffff;
-    border: 1px solid rgba(31, 35, 25, 0.3);
+    border: 1px solid rgba(31, 31, 31, 0.3);
   }
 
   .VPSwitch .icon {
-    color: #1f2319;
+    color: #1f1f1f;
   }
 
   .dark .VPSwitch {
@@ -155,7 +155,7 @@
   }
 
   .dark .VPSwitch .check {
-    background-color: #11180f;
+    background-color: #070707;
     border-color: rgba(210, 255, 0, 0.3);
   }
 
@@ -173,7 +173,7 @@
 
   .vp-doc div[class*="language-"] {
     border: 1px solid var(--ck-code-border);
-    background: color-mix(in srgb, var(--vp-c-bg-soft) 70%, #0f1d16 30%);
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 86%, #1f1f1f 14%);
   }
 
   .vp-doc div[class*="language-"] code {
@@ -181,15 +181,15 @@
   }
 
   html:not(.dark) .vp-code span {
-    --shiki-light: #335847 !important;
+    --shiki-light: #070707 !important;
   }
 
   .dark .vp-code span {
-    --shiki-dark: #b4d96f !important;
+    --shiki-dark: #d2ff00 !important;
   }
 
   .dark .vp-doc div[class*="language-"] {
-    background: color-mix(in srgb, var(--vp-c-bg-soft) 65%, #07100d 35%);
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 80%, #070707 20%);
   }
 
   .vp-doc div[class*="language-"] .copy,
@@ -202,7 +202,7 @@
     transform: none !important;
     color: var(--vp-c-text-1) !important;
     border: 1px solid var(--vp-c-bg-alt) !important;
-    background: color-mix(in srgb, var(--vp-c-bg-soft) 78%, #ffffff 22%) !important;
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 82%, #ffffff 18%) !important;
   }
 
   .vp-doc div[class*="language-"] .copy:hover,
@@ -210,18 +210,18 @@
   .vp-doc div[class*="language-"] .vp-copy:hover,
   .vp-doc div[class*="language-"] button[title*="Copy"]:hover,
   .vp-doc div[class*="language-"] button[aria-label*="Copy"]:hover {
-    color: #1f2319 !important;
+    color: #1f1f1f !important;
     background: var(--vp-c-brand-1) !important;
     border-color: var(--vp-c-brand-2) !important;
   }
 
   html:not(.dark) .vp-doc a {
-    color: #1f2319;
+    color: #1f1f1f;
     text-decoration-color: rgba(210, 255, 0, 0.75);
   }
 
   html:not(.dark) .vp-doc a:hover {
-    color: #11170f;
+    color: #070707;
     text-decoration-color: rgba(210, 255, 0, 1);
   }
 
@@ -232,7 +232,7 @@
   .dark .vp-doc div[class*="language-"] button[aria-label*="Copy"] {
     color: var(--vp-c-text-1) !important;
     border-color: var(--vp-c-bg-alt) !important;
-    background: color-mix(in srgb, var(--vp-c-bg-soft) 65%, #0b130f 35%) !important;
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 82%, #070707 18%) !important;
   }
 
   .VPSidebar {
@@ -277,13 +277,13 @@
   }
 
   .ck-cmd-item:hover {
-    background: rgba(182, 221, 0, 0.12) !important;
-    border-color: rgba(182, 221, 0, 0.42) !important;
+    background: rgba(210, 255, 0, 0.12) !important;
+    border-color: rgba(210, 255, 0, 0.42) !important;
   }
 
   .ck-cmd-item[aria-selected="true"] {
-    background: rgba(182, 221, 0, 0.2) !important;
-    border-color: rgba(182, 221, 0, 0.55) !important;
+    background: rgba(210, 255, 0, 0.2) !important;
+    border-color: rgba(210, 255, 0, 0.55) !important;
   }
 
   .dark .ck-cmd-item:hover {
@@ -298,9 +298,9 @@
 
   .ck-cmd-close-btn:hover,
   .ck-cmd-close-btn:focus-visible {
-    color: #1f2319 !important;
+    color: #1f1f1f !important;
     border-color: rgba(210, 255, 0, 0.55) !important;
-    background: rgba(182, 221, 0, 0.14) !important;
+    background: rgba(210, 255, 0, 0.14) !important;
   }
 
   .dark .ck-cmd-close-btn:hover,

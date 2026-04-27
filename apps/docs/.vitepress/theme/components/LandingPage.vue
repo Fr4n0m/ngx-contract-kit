@@ -32,7 +32,7 @@ const actionBaseClass =
 
 const actionThemeClass = {
   brand:
-    "border-accent bg-accent !text-[#1f2319] dark:!text-[#1f2319] shadow-card hover:brightness-95",
+    "border-accent bg-accent !text-[#1f1f1f] dark:!text-[#1f1f1f] shadow-card hover:brightness-95",
   alt: "border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] text-[color:var(--vp-c-text-1)] hover:border-accent hover:text-accent dark:border-[color:var(--vp-c-bg-alt)] dark:bg-[color:var(--vp-c-bg-soft)] dark:text-[color:var(--vp-c-text-1)] dark:hover:border-accent dark:hover:text-accent",
 } as const;
 </script>
@@ -124,7 +124,7 @@ const actionThemeClass = {
             <div class="flex items-start justify-between gap-3">
               <div class="inline-flex items-center gap-2">
                 <span
-                  class="inline-flex size-14 items-center justify-center rounded-full bg-accent font-heading text-[30px] text-[#1f2319]"
+                  class="inline-flex size-14 items-center justify-center rounded-full bg-accent font-heading text-[30px] text-[#1f1f1f]"
                 >
                   <component :is="howItWorksIcons[index]" :size="35" />
                 </span>
