@@ -184,15 +184,7 @@
   }
 
   .vp-doc div[class*="language-"] code {
-    color: var(--ck-code-fg) !important;
-  }
-
-  html:not(.dark) .vp-code span {
-    --shiki-light: #ffffff !important;
-  }
-
-  .dark .vp-code span {
-    --shiki-dark: #d2ff00 !important;
+    color: var(--ck-code-fg);
   }
 
   .dark .vp-doc div[class*="language-"] {
@@ -390,6 +382,43 @@
     background: #070707 !important;
     border-color: #1f1f1f !important;
   }
+
+  .schema-mental-card h2,
+  .schema-mental-card h3 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: 0 !important;
+  }
+
+  .demo-code .ck-token {
+    transition: color 0.2s ease;
+  }
+
+  .demo-code .ck-key,
+  .demo-code .ck-keyword,
+  .demo-code .ck-number {
+    color: #d2ff00;
+  }
+
+  .demo-code .ck-command,
+  .demo-code .ck-flag {
+    color: #d2ff00;
+    font-weight: 600;
+  }
+
+  .demo-code .ck-path {
+    color: #9abf00;
+  }
+
+  .demo-code .ck-string,
+  .demo-code .ck-literal {
+    color: #ffffff;
+  }
+
+  .demo-code .ck-comment {
+    color: #d2ff00;
+    opacity: 0.7;
+  }
 }
 
 /* ── Reveal animations ─────────────────────────────────── */
@@ -398,6 +427,7 @@
     opacity: 0;
     transform: translateY(28px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -419,6 +449,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .reveal,
   .reveal-pending,
   .reveal-visible {

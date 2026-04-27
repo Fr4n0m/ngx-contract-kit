@@ -230,11 +230,28 @@ const howBottomCardRefs = [useReveal(320), useReveal(380)];
       <LandingDemoSection
         :title="t.demo.title"
         :description="t.demo.description"
+        :value-title="t.demo.valueTitle"
+        :value-items="t.demo.valueItems"
+        :output-title="t.demo.outputTitle"
+        :output-items="t.demo.outputItems"
         :contract-label="t.demo.contractLabel"
+        :core-label="t.demo.coreLabel"
+        :generator-ts-label="t.demo.generatorTsLabel"
         :angular-label="t.demo.angularLabel"
         :nest-label="t.demo.nestLabel"
         :zod-label="t.demo.zodLabel"
+        :mock-label="t.demo.mockLabel"
+        :diff-label="t.demo.diffLabel"
+        :cli-label="t.demo.cliLabel"
         :generate-badge="t.demo.generateBadge"
+        :flow-title="t.demo.flowTitle"
+        :flow-description="t.demo.flowDescription"
+        :run-label="t.demo.runLabel"
+        :running-label="t.demo.runningLabel"
+        :replay-label="t.demo.replayLabel"
+        :contract-step="t.demo.contractStep"
+        :engine-step="t.demo.engineStep"
+        :output-step="t.demo.outputStep"
       />
     </div>
   </section>

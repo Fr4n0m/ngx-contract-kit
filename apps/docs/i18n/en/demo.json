@@ -1,9 +1,39 @@
 {
   "title": "See it in action",
   "description": "Define one contract file. Run one command. Get typed Angular client, NestJS controller, and Zod schemas — all from a single source of truth.",
+  "valueTitle": "Why this matters in real teams",
+  "valueItems": [
+    "Eliminates duplicated DTO and endpoint definitions across frontend/backend.",
+    "Reduces release risk by making API changes explicit and checkable.",
+    "Keeps generated artifacts deterministic so reviews and CI stay reliable."
+  ],
+  "outputTitle": "What you actually get after generate",
+  "outputItems": [
+    "Core summary + canonical contract model from @fr4n0m/core.",
+    "TypeScript model output from @fr4n0m/generator-typescript.",
+    "Angular client from @fr4n0m/generator-angular-client.",
+    "NestJS scaffolding from @fr4n0m/plugin-nestjs.",
+    "Zod runtime schemas from @fr4n0m/validator-zod.",
+    "Deterministic mocks from @fr4n0m/mock-generator.",
+    "Compatibility diff report from @fr4n0m/contract-diff.",
+    "Executable end-to-end CLI workflow from @fr4n0m/contract-kit."
+  ],
+  "flowTitle": "Interactive generation flow",
+  "flowDescription": "Run the simulation to watch contract data flow through the generator and materialize as production-ready artifacts.",
+  "runLabel": "Run generate",
+  "runningLabel": "Generating...",
+  "replayLabel": "Replay flow",
+  "contractStep": "Contract input",
+  "engineStep": "Generator engine",
+  "outputStep": "Generated outputs",
   "contractLabel": "Contract",
+  "coreLabel": "Core",
+  "generatorTsLabel": "TS Model",
   "angularLabel": "Angular Client",
   "nestLabel": "NestJS Controller",
   "zodLabel": "Zod Schemas",
+  "mockLabel": "Mocks",
+  "diffLabel": "Diff Report",
+  "cliLabel": "CLI Flow",
   "generateBadge": "contract-kit generate"
 }

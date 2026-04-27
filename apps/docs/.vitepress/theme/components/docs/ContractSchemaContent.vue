@@ -22,7 +22,7 @@ const t = computed(() => dict[lang.value as Lang].contractSchema);
     </div>
 
     <section
-      class="space-y-3 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] dark:border-[#1f1f1f] dark:bg-[#070707] p-4 shadow-card"
+      class="schema-mental-card space-y-3 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] dark:border-[#1f1f1f] dark:bg-[#070707] p-4 shadow-card"
     >
       <h3
         class="!m-0 !border-0 !pt-0 font-heading text-2xl text-[color:var(--vp-c-text-1)]"

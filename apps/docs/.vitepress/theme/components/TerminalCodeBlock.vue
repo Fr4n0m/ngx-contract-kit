@@ -1,13 +1,20 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { detectCodeLanguage, highlightCodeHtml } from "../composables/codeHighlight";
 
 const props = defineProps<{
   fileLabel?: string;
+  lang?: string;
   code: string;
 }>();
 
 const copied = ref(false);
 let copiedTimer: ReturnType<typeof setTimeout> | undefined;
+
+const detectedLang = computed(() => detectCodeLanguage(props.lang, props.code));
+const highlightedCode = computed(() =>
+  highlightCodeHtml(props.code, detectedLang.value),
+);
 
 async function copyCode(): Promise<void> {
   if (!props.code) {
@@ -47,10 +54,10 @@ async function copyCode(): Promise<void> {
     >
       <span class="min-w-0 truncate">{{ fileLabel }}</span>
       <div class="flex shrink-0 items-center gap-2">
-        <span class="uppercase tracking-wide text-accent">json</span>
+        <span class="uppercase tracking-wide text-accent">{{ detectedLang }}</span>
         <button
           type="button"
-          class="border border-[color:var(--vp-c-bg-alt)] bg-[#ffffff] px-2 py-1 text-xs font-semibold text-[#1f1f1f] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f] dark:bg-[#1f1f1f] dark:text-[#ffffff] dark:hover:bg-accent dark:hover:text-[#1f1f1f]"
+          class="border border-[#3a3a3a] bg-[#2a2a2a] px-2 py-1 text-xs font-semibold text-[#d2ff00] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f]"
           @click="copyCode"
         >
           {{ copied ? "Copied" : "Copy" }}
@@ -59,6 +66,6 @@ async function copyCode(): Promise<void> {
     </div>
     <pre
       class="m-0 overflow-x-auto whitespace-pre-wrap break-words p-3 md:whitespace-pre"
-    ><code class="font-body text-sm text-[#ffffff] dark:text-accent">{{ code }}</code></pre>
+    ><code class="demo-code font-mono text-sm text-[#ffffff]" v-html="highlightedCode" /></pre>
   </div>
 </template>
