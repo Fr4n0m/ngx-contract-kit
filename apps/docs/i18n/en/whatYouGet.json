@@ -3,14 +3,17 @@
   "items": [
     {
       "kicker": "CLI",
+      "title": "Automation-ready commands",
       "copy": "Commands to initialize projects, generate artifacts, and check breaking changes."
     },
     {
       "kicker": "CORE",
+      "title": "Deterministic contract engine",
       "copy": "Strict schema validation and deterministic endpoint summary generation."
     },
     {
       "kicker": "ROADMAP",
+      "title": "Next delivery track",
       "copy": "Angular generator and backend plugin layers under active development."
     }
   ]

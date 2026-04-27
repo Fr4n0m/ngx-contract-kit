@@ -1,16 +1,19 @@
 [
   {
     "kicker": "PROBLEM",
+    "context": "Current pain point",
     "title": "Frontend and backend drift over time",
     "copy": "Teams duplicate DTOs, clients, and endpoint assumptions in multiple layers."
   },
   {
     "kicker": "SOLUTION",
+    "context": "Recommended approach",
     "title": "Contract-first generation",
     "copy": "Define endpoints once and generate artifacts to keep your stack aligned."
   },
   {
     "kicker": "STATUS",
+    "context": "Current project stage",
     "title": "Runnable MVP already available",
     "copy": "Current release includes CLI init, generate, and compatibility check flow."
   }

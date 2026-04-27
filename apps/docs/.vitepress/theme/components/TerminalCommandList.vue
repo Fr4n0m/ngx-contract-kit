@@ -48,7 +48,7 @@ async function copyCommands(): Promise<void> {
     <div class="mb-2 flex items-center justify-end">
       <button
         type="button"
-        class="rounded-md border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-2 py-1 text-xs font-semibold text-[color:var(--vp-c-text-1)] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f] dark:bg-[color:var(--vp-c-bg-alt)] dark:text-[color:var(--vp-c-text-1)] dark:hover:bg-accent dark:hover:text-[#1f1f1f]"
+        class="rounded-md border border-[color:var(--vp-c-bg-alt)] bg-[#ffffff] px-2 py-1 text-xs font-semibold text-[#1f1f1f] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f] dark:bg-[#1f1f1f] dark:text-[#ffffff] dark:hover:bg-accent dark:hover:text-[#1f1f1f]"
         @click="copyCommands"
       >
         {{ copied ? "Copied" : "Copy" }}
@@ -61,7 +61,7 @@ async function copyCommands(): Promise<void> {
         class="flex min-w-0 items-start gap-2 font-body text-sm"
       >
         <span class="select-none text-accent">$</span>
-        <span class="min-w-0 break-all text-accent">{{ command }}</span>
+        <span class="min-w-0 break-all text-[#ffffff] dark:text-accent">{{ command }}</span>
       </div>
     </div>
   </div>

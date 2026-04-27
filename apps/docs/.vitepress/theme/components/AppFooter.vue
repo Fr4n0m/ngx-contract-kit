@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconBrandGithub } from "@tabler/icons-vue";
+import { IconBrandGithub, IconCoffee } from "@tabler/icons-vue";
 
 type FooterLink = {
   label: string;
@@ -26,16 +26,19 @@ type FooterPayload = {
 defineProps<{
   footer: FooterPayload;
 }>();
+
+const getResourceIcon = (href: string) =>
+  href.includes("buymeacoffee.com") ? IconCoffee : IconBrandGithub;
 </script>
 
 <template>
   <footer
-    class="mt-4 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card sm:px-6 sm:py-8"
+    class="mt-4 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:px-6 sm:py-8"
   >
     <div class="grid gap-8 md:grid-cols-12">
       <div class="md:col-span-6">
         <p
-          class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--vp-c-text-3)] dark:text-accent"
+          class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#1f1f1f] dark:text-accent"
         >
           {{ footer.eyebrow }}
         </p>
@@ -53,7 +56,7 @@ defineProps<{
         <ul class="space-y-2">
           <li v-for="link in footer.productLinks" :key="link.href">
             <a
-              class="text-sm text-[color:var(--vp-c-text-1)] transition hover:text-accent dark:text-[color:var(--vp-c-text-2)] dark:hover:text-accent"
+              class="text-sm text-[color:var(--vp-c-text-2)] transition hover:text-accent"
               :href="link.href"
             >
               {{ link.label }}
@@ -69,12 +72,12 @@ defineProps<{
         <ul class="mt-3 space-y-2">
           <li v-for="link in footer.resourceLinks" :key="link.href">
             <a
-              class="inline-flex items-center gap-1.5 text-sm text-[color:var(--vp-c-text-1)] transition hover:text-accent dark:text-[color:var(--vp-c-text-2)] dark:hover:text-accent"
+              class="inline-flex items-center gap-1.5 text-sm text-[color:var(--vp-c-text-2)] transition hover:text-accent"
               :href="link.href"
               :target="link.href.startsWith('http') ? '_blank' : undefined"
               rel="noreferrer"
             >
-              <IconBrandGithub :size="16" />
+              <component :is="getResourceIcon(link.href)" :size="16" />
               {{ link.label }}
             </a>
           </li>

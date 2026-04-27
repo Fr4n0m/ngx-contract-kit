@@ -23,7 +23,9 @@
     }
   ],
   "example": {
+    "contextLabel": "Input contract",
     "title": "Minimal contract example",
+    "description": "Single source of truth: this file defines one endpoint and its typed response.",
     "fileLabel": "contracts/users.contract.json",
     "code": "{\n  \"service\": \"users\",\n  \"endpoints\": [{\n    \"path\": \"/users/:id\",\n    \"method\": \"GET\",\n    \"response\": { \"200\": { \"id\": \"string\", \"email\": \"string\" } }\n  }]\n}"
   },

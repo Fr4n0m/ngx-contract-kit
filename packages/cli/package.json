@@ -18,7 +18,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
-    "lint": "echo cli: no lint step yet"
+    "lint": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@fr4n0m/contract-diff": "workspace:*",
@@ -28,5 +28,23 @@
     "@fr4n0m/mock-generator": "workspace:*",
     "@fr4n0m/plugin-nestjs": "workspace:*",
     "@fr4n0m/validator-zod": "workspace:*"
-  }
+  },
+  "license": "MIT",
+  "homepage": "https://ngx-contract-kit-docs.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fr4n0m/ngx-contract-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fr4n0m/ngx-contract-kit/issues"
+  },
+  "author": "Fr4n0m (https://codebyfran.es)",
+  "keywords": [
+    "contract-kit",
+    "angular",
+    "backend",
+    "api",
+    "open-source",
+    "cli"
+  ]
 }

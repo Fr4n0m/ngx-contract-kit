@@ -33,7 +33,7 @@ const actionBaseClass =
 const actionThemeClass = {
   brand:
     "border-accent bg-accent !text-[#1f1f1f] dark:!text-[#1f1f1f] shadow-card hover:brightness-95",
-  alt: "border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] text-[color:var(--vp-c-text-1)] hover:border-accent hover:text-accent dark:border-[color:var(--vp-c-bg-alt)] dark:bg-[color:var(--vp-c-bg-soft)] dark:text-[color:var(--vp-c-text-1)] dark:hover:border-accent dark:hover:text-accent",
+  alt: "border-[#1f1f1f] bg-transparent text-[#1f1f1f] hover:-translate-y-0.5 hover:border-[#1f1f1f] hover:bg-[#1f1f1f] hover:text-[#ffffff] hover:shadow-[0_8px_20px_-10px_rgba(7,7,7,0.45)] dark:border-[#ffffff] dark:text-[#ffffff] dark:hover:border-accent dark:hover:bg-accent dark:hover:text-[#070707] dark:hover:shadow-[0_8px_24px_-10px_rgba(210,255,0,0.45)]",
 } as const;
 </script>
 
@@ -43,10 +43,10 @@ const actionThemeClass = {
   >
     <div class="relative z-10 mx-auto w-full max-w-none min-w-0">
       <header
-        class="mb-8 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card sm:mb-10 sm:p-8"
+        class="landing-hero mb-8 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:mb-10 sm:p-8"
       >
         <p
-          class="font-project text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--vp-c-text-3)] dark:text-accent"
+          class="font-project text-sm font-semibold uppercase tracking-[0.2em] text-[#1f1f1f] dark:text-accent"
         >
           {{ t.hero.name }}
         </p>
@@ -81,6 +81,7 @@ const actionThemeClass = {
           :key="card.title"
           :icon="cardIcons[index]"
           :kicker="card.kicker"
+          :context="card.context"
           :title="card.title"
           :copy="card.copy"
           :icon-size="20"
@@ -99,6 +100,7 @@ const actionThemeClass = {
             :key="item.kicker"
             :icon="whatYouGetIcons[index]"
             :kicker="item.kicker"
+            :title="item.title"
             :copy="item.copy"
             :icon-size="18"
           />
@@ -119,7 +121,7 @@ const actionThemeClass = {
           <article
             v-for="(step, index) in t.howItWorks.steps"
             :key="step.title"
-            class="min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
+            class="landing-card min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
             <div class="flex items-start justify-between gap-3">
               <div class="inline-flex items-center gap-2">
@@ -146,8 +148,12 @@ const actionThemeClass = {
 
         <div class="mt-6 grid gap-4 lg:grid-cols-2">
           <article
-            class="min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
+            class="landing-card min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
+            <div class="mb-2 inline-flex items-center gap-2 text-xs uppercase tracking-wider text-[color:var(--vp-c-text-3)]">
+              <span class="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span>{{ t.howItWorks.example.contextLabel }}</span>
+            </div>
             <div class="mb-2 flex items-center justify-between gap-3">
               <h3
                 class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]"
@@ -155,6 +161,9 @@ const actionThemeClass = {
                 {{ t.howItWorks.example.title }}
               </h3>
             </div>
+            <p class="mb-3 text-sm text-[color:var(--vp-c-text-2)]">
+              {{ t.howItWorks.example.description }}
+            </p>
             <TerminalCodeBlock
               :file-label="t.howItWorks.example.fileLabel"
               :code="t.howItWorks.example.code"
@@ -162,7 +171,7 @@ const actionThemeClass = {
           </article>
 
           <article
-            class="min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
+            class="landing-card min-w-0 rounded-2xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-4 shadow-card sm:p-5"
           >
             <h3
               class="break-words font-heading text-xl text-[color:var(--vp-c-text-1)]"

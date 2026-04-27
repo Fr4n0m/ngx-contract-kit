@@ -3,14 +3,17 @@
   "items": [
     {
       "kicker": "CLI",
+      "title": "Comandos listos para automatizar",
       "copy": "Comandos para inicializar proyectos, generar artefactos y detectar breaking changes."
     },
     {
       "kicker": "CORE",
+      "title": "Motor de contratos determinista",
       "copy": "Validación estricta del esquema y generación determinista del resumen de endpoints."
     },
     {
       "kicker": "ROADMAP",
+      "title": "Siguiente bloque de entrega",
       "copy": "Generador Angular y capa de plugins backend en desarrollo activo."
     }
   ]

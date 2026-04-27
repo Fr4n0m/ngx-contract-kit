@@ -23,6 +23,7 @@
     "docs:build": "pnpm --filter @fr4n0m/docs build",
     "release:version": "node tooling/scripts/release-version.mjs",
     "release:version:apply": "node tooling/scripts/release-version.mjs --apply",
+    "release:auth": "node tooling/scripts/release-auth.mjs",
     "release:preflight": "node tooling/scripts/release-preflight.mjs",
     "release:publish:dry": "node tooling/scripts/release-publish.mjs",
     "release:publish:first": "node tooling/scripts/release-publish.mjs --publish"

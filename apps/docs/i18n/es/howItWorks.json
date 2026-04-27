@@ -23,7 +23,9 @@
     }
   ],
   "example": {
+    "contextLabel": "Contrato de entrada",
     "title": "Ejemplo mínimo de contrato",
+    "description": "Fuente única de verdad: este archivo define un endpoint y su respuesta tipada.",
     "fileLabel": "contracts/users.contract.json",
     "code": "{\n  \"service\": \"users\",\n  \"endpoints\": [{\n    \"path\": \"/users/:id\",\n    \"method\": \"GET\",\n    \"response\": { \"200\": { \"id\": \"string\", \"email\": \"string\" } }\n  }]\n}"
   },

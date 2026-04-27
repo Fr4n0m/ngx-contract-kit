@@ -5,6 +5,10 @@
     "noResults": "No matching command found.",
     "closeLabel": "Close command palette"
   },
+  "trigger": {
+    "label": "Open command menu",
+    "hint": "Ctrl + K"
+  },
   "recentsSectionTitle": "Recent",
   "sections": {
     "product": "Product",
@@ -31,7 +35,8 @@
           "id": "docs-quickstart",
           "title": "Quickstart",
           "subtitle": "Install and first commands",
-          "href": "/docs/quickstart"
+          "href": "/docs/quickstart",
+          "shortcut": "mod+q"
         }
       ]
     },
@@ -43,37 +48,43 @@
           "id": "docs-cli",
           "title": "CLI Reference",
           "subtitle": "All CLI commands",
-          "href": "/docs/cli-reference"
+          "href": "/docs/cli-reference",
+          "shortcut": "mod+l"
         },
         {
           "id": "docs-schema",
           "title": "Contract Schema",
           "subtitle": "Structure and validation",
-          "href": "/docs/contract-schema"
+          "href": "/docs/contract-schema",
+          "shortcut": "mod+s"
         },
         {
           "id": "docs-generators",
           "title": "Generators",
           "subtitle": "Supported outputs",
-          "href": "/docs/generators"
+          "href": "/docs/generators",
+          "shortcut": "mod+g"
         },
         {
           "id": "docs-examples",
           "title": "Examples",
           "subtitle": "Integration scenarios",
-          "href": "/docs/examples"
+          "href": "/docs/examples",
+          "shortcut": "mod+e"
         },
         {
           "id": "docs-contributing",
           "title": "Contributing",
           "subtitle": "Open source contributions",
-          "href": "/docs/contributing"
+          "href": "/docs/contributing",
+          "shortcut": "mod+c"
         },
         {
           "id": "docs-faq",
           "title": "FAQ",
           "subtitle": "Common questions",
-          "href": "/docs/faq"
+          "href": "/docs/faq",
+          "shortcut": "mod+f"
         }
       ]
     }
@@ -91,13 +102,15 @@
         "id": "what-you-get",
         "title": "What You Get",
         "subtitle": "Features and capabilities",
-        "href": "/#what-you-get"
+        "href": "/#what-you-get",
+        "shortcut": "mod+w"
       },
       {
         "id": "how-it-works",
         "title": "How It Works",
         "subtitle": "Workflow and release checks",
-        "href": "/#how-it-works"
+        "href": "/#how-it-works",
+        "shortcut": "mod+i"
       }
     ],
     "community": [
@@ -105,13 +118,15 @@
         "id": "github-repo",
         "title": "GitHub Repository",
         "subtitle": "Source code and issues",
-        "href": "https://github.com/Fr4n0m/contract-kit"
+        "href": "https://github.com/Fr4n0m/ngx-contract-kit",
+        "shortcut": "mod+r"
       },
       {
         "id": "fr4nom-site",
         "title": "Fr4n0m Portfolio",
         "subtitle": "Built by Fr4n0m",
-        "href": "https://codebyfran.es"
+        "href": "https://codebyfran.es",
+        "shortcut": "mod+p"
       }
     ]
   }

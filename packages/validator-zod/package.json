@@ -23,10 +23,28 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
-    "lint": "echo validator-zod: no lint step yet"
+    "lint": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@fr4n0m/core": "workspace:*",
     "zod": "^4.1.12"
-  }
+  },
+  "license": "MIT",
+  "homepage": "https://ngx-contract-kit-docs.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fr4n0m/ngx-contract-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fr4n0m/ngx-contract-kit/issues"
+  },
+  "author": "Fr4n0m (https://codebyfran.es)",
+  "keywords": [
+    "contract-kit",
+    "angular",
+    "backend",
+    "api",
+    "open-source",
+    "validator-zod"
+  ]
 }

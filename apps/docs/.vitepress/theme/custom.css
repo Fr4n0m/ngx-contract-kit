@@ -42,11 +42,11 @@
     --vp-c-text-3: #1f1f1f;
     --vp-home-hero-name-color: transparent;
     --vp-home-hero-name-background: linear-gradient(120deg, #d2ff00 5%, #ffffff 92%);
-    --vp-code-bg: #ffffff;
-    --vp-code-color: #070707;
-    --vp-code-block-color: #1f1f1f;
-    --vp-code-lang-color: #1f1f1f;
-    --ck-code-fg: #070707;
+    --vp-code-bg: #1f1f1f;
+    --vp-code-color: #ffffff;
+    --vp-code-block-color: #ffffff;
+    --vp-code-lang-color: #d2ff00;
+    --ck-code-fg: #ffffff;
     --ck-code-inline-bg: #ffffff;
     --ck-code-inline-fg: #070707;
     --ck-code-border: #1f1f1f;
@@ -62,11 +62,11 @@
     --vp-c-text-1: #ffffff;
     --vp-c-text-2: #ffffff;
     --vp-c-text-3: #d2ff00;
-    --vp-code-bg: #1f1f1f;
-    --vp-code-color: #d2ff00;
-    --vp-code-block-color: #d2ff00;
+    --vp-code-bg: #070707;
+    --vp-code-color: #ffffff;
+    --vp-code-block-color: #ffffff;
     --vp-code-lang-color: #ffffff;
-    --ck-code-fg: #d2ff00;
+    --ck-code-fg: #ffffff;
     --ck-code-inline-bg: #1f1f1f;
     --ck-code-inline-fg: #d2ff00;
     --ck-code-border: #ffffff;
@@ -83,8 +83,15 @@
 
   .dark body {
     background-image:
+      linear-gradient(to right, rgba(210, 255, 0, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(210, 255, 0, 0.08) 1px, transparent 1px),
       radial-gradient(circle at 8% 5%, rgba(210, 255, 0, 0.12), rgba(7, 7, 7, 0) 45%),
       radial-gradient(circle at 92% 10%, rgba(31, 31, 31, 0.22), rgba(7, 7, 7, 0) 38%);
+    background-size:
+      14px 24px,
+      14px 24px,
+      auto,
+      auto;
   }
 }
 
@@ -172,8 +179,8 @@
   }
 
   .vp-doc div[class*="language-"] {
-    border: 1px solid var(--ck-code-border);
-    background: color-mix(in srgb, var(--vp-c-bg-soft) 86%, #1f1f1f 14%);
+    border: 1px solid #070707;
+    background: #1f1f1f;
   }
 
   .vp-doc div[class*="language-"] code {
@@ -181,7 +188,7 @@
   }
 
   html:not(.dark) .vp-code span {
-    --shiki-light: #070707 !important;
+    --shiki-light: #ffffff !important;
   }
 
   .dark .vp-code span {
@@ -189,7 +196,8 @@
   }
 
   .dark .vp-doc div[class*="language-"] {
-    background: color-mix(in srgb, var(--vp-c-bg-soft) 80%, #070707 20%);
+    border-color: #1f1f1f;
+    background: #070707;
   }
 
   .vp-doc div[class*="language-"] .copy,
@@ -202,7 +210,7 @@
     transform: none !important;
     color: var(--vp-c-text-1) !important;
     border: 1px solid var(--vp-c-bg-alt) !important;
-    background: color-mix(in srgb, var(--vp-c-bg-soft) 82%, #ffffff 18%) !important;
+    background: #ffffff !important;
   }
 
   .vp-doc div[class*="language-"] .copy:hover,
@@ -232,7 +240,7 @@
   .dark .vp-doc div[class*="language-"] button[aria-label*="Copy"] {
     color: var(--vp-c-text-1) !important;
     border-color: var(--vp-c-bg-alt) !important;
-    background: color-mix(in srgb, var(--vp-c-bg-soft) 82%, #070707 18%) !important;
+    background: #1f1f1f !important;
   }
 
   .VPSidebar {
@@ -315,5 +323,71 @@
   .has-docs-sidebar .VPDoc .content-container .vp-doc>div {
     max-width: none !important;
     width: 100% !important;
+  }
+
+  html:not(.dark) .has-docs-sidebar .vp-doc {
+    color: #1f1f1f;
+  }
+
+  html:not(.dark) .has-docs-sidebar .vp-doc h1,
+  html:not(.dark) .has-docs-sidebar .vp-doc h2,
+  html:not(.dark) .has-docs-sidebar .vp-doc h3 {
+    color: #070707;
+  }
+
+  .dark .has-docs-sidebar .vp-doc h1,
+  .dark .has-docs-sidebar .vp-doc h2,
+  .dark .has-docs-sidebar .vp-doc h3 {
+    color: #ffffff;
+  }
+
+  .has-docs-sidebar .vp-doc hr {
+    border-color: rgba(31, 31, 31, 0.2);
+  }
+
+  .dark .has-docs-sidebar .vp-doc hr {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .has-docs-sidebar .vp-doc blockquote {
+    border-left: 3px solid #d2ff00;
+    background: rgba(210, 255, 0, 0.08);
+    color: #1f1f1f;
+  }
+
+  .dark .has-docs-sidebar .vp-doc blockquote {
+    background: rgba(210, 255, 0, 0.1);
+    color: #ffffff;
+  }
+
+  .has-docs-sidebar .VPDocFooter .pager-link {
+    border: 1px solid rgba(31, 31, 31, 0.2);
+    background: rgba(255, 255, 255, 0.72);
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .has-docs-sidebar .VPDocFooter .pager-link:hover {
+    border-color: rgba(210, 255, 0, 0.9);
+    background: rgba(210, 255, 0, 0.22);
+  }
+
+  .dark .has-docs-sidebar .VPDocFooter .pager-link {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(31, 31, 31, 0.85);
+  }
+
+  .dark .has-docs-sidebar .VPDocFooter .pager-link:hover {
+    border-color: rgba(210, 255, 0, 0.9);
+    background: rgba(210, 255, 0, 0.12);
+  }
+
+  .dark .landing-card {
+    background: #070707 !important;
+    border-color: #1f1f1f !important;
+  }
+
+  .dark .landing-hero {
+    background: #070707 !important;
+    border-color: #1f1f1f !important;
   }
 }

@@ -5,6 +5,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "@fr4n0m/docs#build": {
+      "outputs": [".vitepress/dist/**"]
+    },
     "test": {
       "dependsOn": ["^build"],
       "outputs": []
