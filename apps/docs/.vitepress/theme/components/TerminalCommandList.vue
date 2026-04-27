@@ -42,18 +42,16 @@ async function copyCommands(): Promise<void> {
 
 <template>
   <div
-    class="min-w-0 rounded-xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-code-bg)]"
+    class="relative min-w-0 rounded-xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-code-bg)]"
     :class="compact ? 'p-2' : 'p-3'"
   >
-    <div class="mb-2 flex items-center justify-end">
-      <button
-        type="button"
-        class="rounded-md border border-[#3a3a3a] bg-[#2a2a2a] px-2 py-1 text-xs font-semibold text-[#d2ff00] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f]"
-        @click="copyCommands"
-      >
-        {{ copied ? "Copied" : "Copy" }}
-      </button>
-    </div>
+    <button
+      type="button"
+      class="absolute right-2 top-2 rounded-md border border-[#3a3a3a] bg-[#2a2a2a] px-2 py-1 text-xs font-semibold text-[#d2ff00] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f]"
+      @click="copyCommands"
+    >
+      {{ copied ? "Copied" : "Copy" }}
+    </button>
     <div class="space-y-1">
       <div
         v-for="command in commands"

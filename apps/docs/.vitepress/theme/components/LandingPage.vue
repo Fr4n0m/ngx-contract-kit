@@ -13,6 +13,7 @@ import TerminalCodeBlock from "./TerminalCodeBlock.vue";
 import TerminalCommandList from "./TerminalCommandList.vue";
 import LandingValueCard from "./LandingValueCard.vue";
 import { useLang, type Lang } from "../composables/lang";
+import { useReveal } from "../composables/useReveal";
 
 const dict: Record<Lang, typeof en> = { en, es };
 const { lang } = useLang();
@@ -35,6 +36,10 @@ const actionThemeClass = {
     "border-accent bg-accent !text-[#1f1f1f] dark:!text-[#1f1f1f] shadow-card hover:brightness-95",
   alt: "border-[#1f1f1f] bg-transparent text-[#1f1f1f] hover:-translate-y-0.5 hover:border-[#1f1f1f] hover:bg-[#1f1f1f] hover:text-[#ffffff] hover:shadow-[0_8px_20px_-10px_rgba(7,7,7,0.45)] dark:border-[#ffffff] dark:text-[#ffffff] dark:hover:border-accent dark:hover:bg-accent dark:hover:text-[#070707] dark:hover:shadow-[0_8px_24px_-10px_rgba(210,255,0,0.45)]",
 } as const;
+
+const heroRef = useReveal(0);
+const whatYouGetRef = useReveal(0);
+const howItWorksRef = useReveal(0);
 </script>
 
 <template>
@@ -43,7 +48,8 @@ const actionThemeClass = {
   >
     <div class="relative z-10 mx-auto w-full max-w-none min-w-0">
       <header
-        class="landing-hero mb-8 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:mb-10 sm:p-8"
+        ref="heroRef"
+        class="reveal landing-hero mb-8 rounded-3xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:mb-10 sm:p-8"
       >
         <p
           class="font-project text-sm font-semibold uppercase tracking-[0.2em] text-[#1f1f1f] dark:text-accent"
@@ -85,12 +91,14 @@ const actionThemeClass = {
           :title="card.title"
           :copy="card.copy"
           :icon-size="20"
+          :reveal-delay="index * 80"
         />
       </div>
 
       <section id="what-you-get" class="mt-12">
         <h2
-          class="mb-4 font-heading text-2xl text-[color:var(--vp-c-text-1)] md:text-3xl"
+          ref="whatYouGetRef"
+          class="reveal mb-4 font-heading text-2xl text-[color:var(--vp-c-text-1)] md:text-3xl"
         >
           {{ t.whatYouGet.title }}
         </h2>
@@ -103,13 +111,15 @@ const actionThemeClass = {
             :title="item.title"
             :copy="item.copy"
             :icon-size="18"
+            :reveal-delay="index * 80"
           />
         </div>
       </section>
 
       <section id="how-it-works" class="mt-12">
         <h2
-          class="mb-4 font-heading text-2xl text-[color:var(--vp-c-text-1)] md:text-3xl"
+          ref="howItWorksRef"
+          class="reveal mb-4 font-heading text-2xl text-[color:var(--vp-c-text-1)] md:text-3xl"
         >
           {{ t.howItWorks.title }}
         </h2>
