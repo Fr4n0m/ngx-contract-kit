@@ -57,7 +57,7 @@ const runCommands = computed(() => {
     <section
       class="space-y-3 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] dark:border-[#1f1f1f] dark:bg-[#070707] p-4 shadow-card"
     >
-      <h2 class="font-heading text-xl text-[color:var(--vp-c-text-1)]">
+      <h2 class="!mt-0 !border-t-0 !pt-0 font-heading text-xl text-[color:var(--vp-c-text-1)]">
         {{ t.prerequisitesTitle }}
       </h2>
       <ul class="space-y-1 text-[color:var(--vp-c-text-2)]">
@@ -144,7 +144,7 @@ const runCommands = computed(() => {
     <section
       class="space-y-2 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] dark:border-[#1f1f1f] dark:bg-[#070707] p-4 shadow-card"
     >
-      <h2 class="font-heading text-xl text-[color:var(--vp-c-text-1)]">
+      <h2 class="!mt-0 !border-t-0 !pt-0 font-heading text-xl text-[color:var(--vp-c-text-1)]">
         {{ t.nextTitle }}
       </h2>
       <p class="text-[color:var(--vp-c-text-2)]">
