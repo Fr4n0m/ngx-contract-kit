@@ -231,6 +231,12 @@ function run(): void {
   timers.push(setTimeout(() => { showFiles.value = true; }, allDone + 260));
 }
 
+function jsonLineColor(line: string): string {
+  if (line.startsWith("{") || line.startsWith("}") || line.includes("]")) return "text-[#555]";
+  if (line.includes('"service"') || line.includes('"endpoints"') || line.includes('"path"') || line.includes('"method"') || line.includes('"response"')) return "text-[#9abf00]";
+  return "text-[#d2ff00]";
+}
+
 onMounted(() => {
   if (!root.value) return;
   const DELAY = 2500;
@@ -323,15 +329,7 @@ onUnmounted(() => {
           <div
             v-for="(line, i) in JSON_LINES"
             :key="i"
-            :class="[
-              'font-mono text-xs leading-snug',
-              visibleJsonLines.includes(i) ? 'block' : 'hidden',
-              line.startsWith('{') || line.startsWith('}') || line.includes(']')
-                ? 'text-[#555]'
-                : line.includes('"service"') || line.includes('"endpoints"') || line.includes('"path"') || line.includes('"method"') || line.includes('"response"')
-                  ? 'text-[#9abf00]'
-                  : 'text-[#d2ff00]',
-            ]"
+            :class="['font-mono text-xs leading-snug', visibleJsonLines.includes(i) ? 'block' : 'hidden', jsonLineColor(line)]"
           >{{ line }}</div>
         </div>
 
