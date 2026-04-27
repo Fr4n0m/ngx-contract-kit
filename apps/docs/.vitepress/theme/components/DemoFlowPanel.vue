@@ -329,7 +329,7 @@ onUnmounted(() => {
           <div
             v-for="(line, i) in JSON_LINES"
             :key="i"
-            :class="['font-mono text-xs leading-snug', visibleJsonLines.includes(i) ? 'block' : 'hidden', jsonLineColor(line)]"
+            :class="['font-mono text-xs leading-snug whitespace-pre', visibleJsonLines.includes(i) ? 'block' : 'hidden', jsonLineColor(line)]"
           >{{ line }}</div>
         </div>
 
