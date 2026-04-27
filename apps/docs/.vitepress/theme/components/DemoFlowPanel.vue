@@ -7,7 +7,22 @@ defineProps<{
   replayLabel: string;
 }>();
 
-const COMMAND = "contract-kit generate";
+const CAT_CMD = "cat contracts/users.contract.json";
+const GEN_CMD = "contract-kit generate";
+
+const JSON_LINES = [
+  "{",
+  '  "service": "users",',
+  '  "endpoints": [{',
+  '    "path": "/users/:id",',
+  '    "method": "GET",',
+  '    "response": {',
+  '      "200": { "id": "string", "email": "string" },',
+  '      "404": { "message": "string" }',
+  '    }',
+  '  }]',
+  "}",
+] as const;
 
 const OUTPUT_LINES = [
   { text: "✓ Loading contracts/users.contract.json", type: "success" },
@@ -125,12 +140,14 @@ const GENERATED_FILES = [
   },
 ] as const;
 
+type Phase = "idle" | "cat-typing" | "cat-out" | "gen-typing" | "gen-out" | "done";
+
 const root = useTemplateRef<HTMLElement>("root");
-const typedCommand = ref("");
+const phase = ref<Phase>("idle");
+const typedCat = ref("");
+const typedGenerate = ref("");
+const visibleJsonLines = ref<number[]>([]);
 const visibleLines = ref<number[]>([]);
-const showCursor = ref(false);
-const isRunning = ref(false);
-const isCompleted = ref(false);
 const showFiles = ref(false);
 const autoRunCountdown = ref(0);
 
@@ -153,62 +170,65 @@ function cancelAutoRun(): void {
 function reset(): void {
   clearTimers();
   cancelAutoRun();
-  typedCommand.value = "";
+  phase.value = "idle";
+  typedCat.value = "";
+  typedGenerate.value = "";
+  visibleJsonLines.value = [];
   visibleLines.value = [];
-  showCursor.value = false;
-  isRunning.value = false;
-  isCompleted.value = false;
   showFiles.value = false;
 }
 
 function run(): void {
-  if (isRunning.value) return;
+  if (phase.value !== "idle") return;
   cancelAutoRun();
   reset();
-  isRunning.value = true;
-  showCursor.value = true;
 
-  const chars = COMMAND.split("");
-  const charDelay = 48;
+  const C = 38; // ms per character
 
-  chars.forEach((char, i) => {
+  // ── Phase 1: type cat command ──────────────────────────────
+  phase.value = "cat-typing";
+  CAT_CMD.split("").forEach((char, i) => {
+    timers.push(setTimeout(() => { typedCat.value += char; }, i * C));
+  });
+
+  const catDone = CAT_CMD.length * C + 180;
+
+  // ── Phase 2: stream JSON output ────────────────────────────
+  timers.push(setTimeout(() => { phase.value = "cat-out"; }, catDone));
+  JSON_LINES.forEach((_, i) => {
     timers.push(
-      setTimeout(() => {
-        typedCommand.value += char;
-      }, i * charDelay),
+      setTimeout(
+        () => { visibleJsonLines.value = [...visibleJsonLines.value, i]; },
+        catDone + i * 42,
+      ),
     );
   });
 
-  const commandDone = chars.length * charDelay + 280;
+  const jsonDone = catDone + JSON_LINES.length * 42 + 340;
 
-  timers.push(
-    setTimeout(() => {
-      showCursor.value = false;
-    }, commandDone - 100),
-  );
+  // ── Phase 3: type generate command ────────────────────────
+  timers.push(setTimeout(() => { phase.value = "gen-typing"; }, jsonDone));
+  GEN_CMD.split("").forEach((char, i) => {
+    timers.push(setTimeout(() => { typedGenerate.value += char; }, jsonDone + i * C));
+  });
 
+  const genDone = jsonDone + GEN_CMD.length * C + 260;
+
+  // ── Phase 4: stream generate output ───────────────────────
+  timers.push(setTimeout(() => { phase.value = "gen-out"; }, genDone));
   OUTPUT_LINES.forEach((_, i) => {
     timers.push(
-      setTimeout(() => {
-        visibleLines.value = [...visibleLines.value, i];
-      }, commandDone + i * 165),
+      setTimeout(
+        () => { visibleLines.value = [...visibleLines.value, i]; },
+        genDone + i * 148,
+      ),
     );
   });
 
-  const allDone = commandDone + OUTPUT_LINES.length * 165;
+  const allDone = genDone + OUTPUT_LINES.length * 148;
 
-  timers.push(
-    setTimeout(() => {
-      isRunning.value = false;
-      isCompleted.value = true;
-    }, allDone),
-  );
-
-  timers.push(
-    setTimeout(() => {
-      showFiles.value = true;
-    }, allDone + 260),
-  );
+  timers.push(setTimeout(() => { phase.value = "done"; }, allDone));
+  timers.push(setTimeout(() => { showFiles.value = true; }, allDone + 260));
 }
 
 onMounted(() => {
@@ -218,7 +238,7 @@ onMounted(() => {
 
   observer = new IntersectionObserver(
     ([entry]) => {
-      if (!entry.isIntersecting || isRunning.value || isCompleted.value) return;
+      if (!entry.isIntersecting || phase.value !== "idle") return;
       observer?.disconnect();
 
       autoRunCountdown.value = DELAY;
@@ -265,41 +285,70 @@ onUnmounted(() => {
           >auto {{ (autoRunCountdown / 1000).toFixed(1) }}s</span>
           <button
             type="button"
-            :disabled="isRunning"
+            :disabled="phase !== 'idle' && phase !== 'done'"
             :class="[
               'inline-flex items-center border border-accent bg-accent px-3 py-1 text-xs font-semibold text-[#1f1f1f] transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-60',
-              !isRunning && !isCompleted ? 'btn-glow' : '',
+              phase === 'idle' ? 'btn-glow' : '',
             ]"
-            @click="isCompleted ? reset() : run()"
+            @click="phase === 'done' ? reset() : run()"
           >
-            {{ isRunning ? runningLabel : isCompleted ? replayLabel : runLabel }}
+            {{
+              phase === 'idle' ? runLabel :
+              phase === 'done' ? replayLabel :
+              runningLabel
+            }}
           </button>
         </div>
       </div>
 
       <div class="min-h-56 p-5 font-mono text-sm leading-relaxed">
         <!-- Idle prompt -->
-        <div
-          v-if="!typedCommand && !isCompleted"
-          class="flex items-center gap-2"
-        >
+        <div v-if="phase === 'idle'" class="flex items-center gap-2">
           <span class="text-[#d2ff00]">$</span>
+          <span class="inline-block h-[1em] w-0.5 animate-pulse bg-[#d2ff00]" />
+        </div>
+
+        <!-- cat command typing -->
+        <div v-if="typedCat" class="flex items-center gap-2">
+          <span class="text-[#d2ff00]">$</span>
+          <span class="text-[#888]">{{ typedCat }}</span>
           <span
-            class="inline-block h-[1em] w-0.5 animate-pulse bg-[#d2ff00]"
+            v-if="phase === 'cat-typing'"
+            class="inline-block h-[1em] w-0.5 animate-pulse bg-[#888]"
           />
         </div>
 
-        <!-- Command being typed -->
-        <div v-if="typedCommand" class="flex items-center gap-2">
+        <!-- JSON output -->
+        <div v-if="visibleJsonLines.length" class="mt-0.5 space-y-0">
+          <div
+            v-for="(line, i) in JSON_LINES"
+            :key="i"
+            :class="[
+              'font-mono text-xs leading-snug',
+              visibleJsonLines.includes(i) ? 'block' : 'hidden',
+              line.startsWith('{') || line.startsWith('}') || line.includes(']')
+                ? 'text-[#555]'
+                : line.includes('"service"') || line.includes('"endpoints"') || line.includes('"path"') || line.includes('"method"') || line.includes('"response"')
+                  ? 'text-[#9abf00]'
+                  : 'text-[#d2ff00]',
+            ]"
+          >{{ line }}</div>
+        </div>
+
+        <!-- generate command typing -->
+        <div
+          v-if="phase === 'gen-typing' || phase === 'gen-out' || phase === 'done'"
+          class="mt-1 flex items-center gap-2"
+        >
           <span class="text-[#d2ff00]">$</span>
-          <span class="text-white">{{ typedCommand }}</span>
+          <span class="text-white">{{ typedGenerate }}</span>
           <span
-            v-if="showCursor"
+            v-if="phase === 'gen-typing'"
             class="inline-block h-[1em] w-0.5 animate-pulse bg-white"
           />
         </div>
 
-        <!-- Output lines streaming in -->
+        <!-- generate output lines streaming in -->
         <div class="mt-1 space-y-0.5">
           <div
             v-for="(line, i) in OUTPUT_LINES"
@@ -315,9 +364,7 @@ onUnmounted(() => {
                     ? 'font-semibold text-white'
                     : 'text-[#888]',
             ]"
-          >
-            {{ line.text }}
-          </div>
+          >{{ line.text }}</div>
         </div>
       </div>
     </div>
