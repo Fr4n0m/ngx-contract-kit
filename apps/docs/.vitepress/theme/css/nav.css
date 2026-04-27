@@ -1,0 +1,75 @@
+@layer components {
+  :root {
+    --vp-layout-max-width: 100%;
+  }
+
+  .VPNavBar .container,
+  .VPNavBar .content {
+    max-width: none !important;
+  }
+
+  .VPNavBar .container {
+    padding-left: clamp(1rem, 2vw, 4rem);
+    padding-right: clamp(1rem, 2vw, 4rem);
+  }
+
+  .VPNavBar .content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .VPNavBar .content-body {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .VPNav,
+  .VPNavBar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .VPNavBar {
+    background: rgba(255, 255, 255, 0.78) !important;
+    border-bottom: 1px solid rgba(31, 31, 31, 0.22);
+  }
+
+  .dark .VPNavBar {
+    background: rgba(7, 7, 7, 0.74) !important;
+    border-bottom-color: rgba(210, 255, 0, 0.18);
+  }
+
+  .VPNavBarTitle .title,
+  .VPNavBarTitle .text {
+    font-family: "Bruno Ace", "Ubuntu Sans Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, monospace !important;
+    letter-spacing: 0.02em;
+  }
+
+  .VPSwitch {
+    border: 1px solid rgba(210, 255, 0, 0.55);
+    background-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .VPSwitch .check {
+    background-color: #ffffff;
+    border: 1px solid rgba(31, 31, 31, 0.3);
+  }
+
+  .VPSwitch .icon {
+    color: #1f1f1f;
+  }
+
+  .dark .VPSwitch {
+    border-color: rgba(210, 255, 0, 0.28);
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .dark .VPSwitch .check {
+    background-color: #070707;
+    border-color: rgba(210, 255, 0, 0.3);
+  }
+
+  .dark .VPSwitch .icon {
+    color: #d2ff00;
+  }
+}
