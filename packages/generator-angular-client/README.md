@@ -3,7 +3,6 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
 ![Angular](https://img.shields.io/badge/Angular-17%2B-DD0031?logo=angular&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&logoColor=white)
-![pnpm](https://img.shields.io/badge/pnpm-Workspace-F69220?logo=pnpm&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 **Quick Nav:** [Español](#español) | [English](#english)
@@ -12,34 +11,55 @@
 
 ## Español
 
-### 🚀 ¿Qué es?
+### ¿Qué es?
 
-Generador de cliente Angular para `contract-kit`. Produce un archivo `angular-client.ts` tipado con métodos `HttpClient` para cada endpoint del contrato.
+Generador de cliente Angular para `contract-kit`. Produce un archivo `angular-client.ts` con un servicio `ContractKitClient` que expone un método tipado por cada endpoint del contrato, usando `HttpClient` internamente.
 
-### 📦 Instalación
+### Instalación
 
 ```bash
 npm install @fr4n0m/contract-kit
 ```
 
-### ⚡ Uso rápido
+### Uso rápido
 
 ```ts
 import { generateAngularClient } from "@fr4n0m/contract-kit/generator-angular";
 
 const source = generateAngularClient({ "users.json": usersContract });
-// → genera UsersService con getOne(params: users.getOne.Params): Observable<users.getOne.Response>
+// → genera UsersService con users_getUser(input): Observable<UsersGetUserResponse>
 ```
 
 El CLI escribe la salida en `generated/angular-client.ts`.
 
-### 🧱 API principal
+### Qué genera
+
+Para un endpoint `getUser` en `users.contract.json`:
+
+```ts
+// generated/angular-client.ts (fragmento)
+export type UsersGetUserRequest  = ContractModel["users.getUser"]["params"];
+export type UsersGetUserResponse = ContractModel["users.getUser"]["response"]["200"];
+
+@Injectable({ providedIn: 'root' })
+export class ContractKitClient {
+  constructor(private http: HttpClient) {}
+
+  users_getUser(input: UsersGetUserRequest): Observable<UsersGetUserResponse> {
+    return this.request<UsersGetUserResponse>("GET", "/users/:id", input);
+  }
+}
+```
+
+Los métodos usan `ContractModel` como única fuente de verdad — si el contrato cambia, el tipo del método cambia automáticamente en el siguiente `generate`.
+
+### API principal
 
 | Función | Descripción |
 |---------|-------------|
-| `generateAngularClient(contractsByFile)` | Devuelve string TypeScript con un servicio Angular por archivo de contrato. Cada endpoint se convierte en un método tipado usando `HttpClient` |
+| `generateAngularClient(contractsByFile)` | Devuelve string TypeScript con un `ContractKitClient` unificado. Cada endpoint se convierte en un método tipado usando `HttpClient` |
 
-### 🤝 Contribuciones
+### Contribuciones
 
 ¿Quieres aportar? PRs y propuestas son bienvenidas.
 
@@ -52,34 +72,55 @@ El CLI escribe la salida en `generated/angular-client.ts`.
 
 ## English
 
-### 🚀 What is it?
+### What is it?
 
-Angular client generator for `contract-kit`. Produces a typed `angular-client.ts` file with `HttpClient` methods for every contract endpoint.
+Angular client generator for `contract-kit`. Produces an `angular-client.ts` file with a `ContractKitClient` service that exposes a typed method for each contract endpoint, backed by `HttpClient`.
 
-### 📦 Install
+### Install
 
 ```bash
 npm install @fr4n0m/contract-kit
 ```
 
-### ⚡ Quick usage
+### Quick usage
 
 ```ts
 import { generateAngularClient } from "@fr4n0m/contract-kit/generator-angular";
 
 const source = generateAngularClient({ "users.json": usersContract });
-// → generates UsersService with getOne(params: users.getOne.Params): Observable<users.getOne.Response>
+// → generates ContractKitClient with users_getUser(input): Observable<UsersGetUserResponse>
 ```
 
 The CLI writes the output to `generated/angular-client.ts`.
 
-### 🧱 Main API
+### What it generates
+
+For a `getUser` endpoint in `users.contract.json`:
+
+```ts
+// generated/angular-client.ts (excerpt)
+export type UsersGetUserRequest  = ContractModel["users.getUser"]["params"];
+export type UsersGetUserResponse = ContractModel["users.getUser"]["response"]["200"];
+
+@Injectable({ providedIn: 'root' })
+export class ContractKitClient {
+  constructor(private http: HttpClient) {}
+
+  users_getUser(input: UsersGetUserRequest): Observable<UsersGetUserResponse> {
+    return this.request<UsersGetUserResponse>("GET", "/users/:id", input);
+  }
+}
+```
+
+Methods reference `ContractModel` as the single source of truth — if the contract changes, the method type changes automatically on the next `generate`.
+
+### Main API
 
 | Function | Description |
 |----------|-------------|
-| `generateAngularClient(contractsByFile)` | Returns TypeScript source with an Angular service per contract file. Each endpoint becomes a typed `HttpClient` method |
+| `generateAngularClient(contractsByFile)` | Returns TypeScript source with a unified `ContractKitClient`. Each endpoint becomes a typed `HttpClient` method |
 
-### 🤝 Contributing
+### Contributing
 
 PRs are welcome and encouraged.
 
@@ -90,7 +131,7 @@ PRs are welcome and encouraged.
 
 ---
 
-## 📄 License
+## License
 
 MIT
 

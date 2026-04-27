@@ -359,13 +359,14 @@ const panelRef = useReveal(140);
       ref="panelRef"
       class="reveal landing-card min-w-0 overflow-hidden border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] shadow-card dark:border-[#1f1f1f] dark:bg-[#070707]"
     >
-      <div class="border-b border-[color:var(--vp-c-bg-alt)] bg-[#0d0d0d] px-3 py-3">
+      <!-- Flow header: title, description, run button, progress -->
+      <div class="border-b border-[color:var(--vp-c-divider)] bg-[color:var(--vp-c-bg-alt)] px-3 py-3 dark:border-[#1a1a1a] dark:bg-[#0d0d0d]">
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div class="max-w-3xl">
-            <h3 class="font-heading text-base text-[#ffffff]">
+            <h3 class="font-heading text-base text-[color:var(--vp-c-text-1)] dark:text-[#ffffff]">
               {{ flowTitle }}
             </h3>
-            <p class="mt-1 text-xs text-[#b7b7b7]">
+            <p class="mt-1 text-xs text-[color:var(--vp-c-text-2)] dark:text-[#b7b7b7]">
               {{ flowDescription }}
             </p>
           </div>
@@ -386,31 +387,31 @@ const panelRef = useReveal(140);
         </div>
 
         <div class="mt-3">
-          <div class="relative h-1.5 w-full overflow-hidden bg-[#1f1f1f]">
+          <div class="relative h-1.5 w-full overflow-hidden bg-[color:var(--vp-c-divider)] dark:bg-[#1f1f1f]">
             <div
               class="h-full bg-accent transition-[width] duration-100"
               :style="{ width: `${progress}%` }"
             />
           </div>
-          <div class="mt-3 grid gap-2 text-[10px] uppercase tracking-[0.14em] text-[#9c9c9c] sm:grid-cols-3">
+          <div class="mt-3 grid gap-2 text-[10px] uppercase tracking-[0.14em] text-[color:var(--vp-c-text-3)] dark:text-[#9c9c9c] sm:grid-cols-3">
             <div class="flex items-center gap-2">
               <span
                 class="h-2.5 w-2.5"
-                :class="progress < 20 ? 'bg-accent' : 'bg-[#d2ff00]'"
+                :class="progress < 20 ? 'bg-accent' : 'bg-accent'"
               />
               <span>{{ contractStep }}</span>
             </div>
             <div class="flex items-center gap-2">
               <span
                 class="h-2.5 w-2.5"
-                :class="progress >= 20 ? 'bg-accent' : 'bg-[#1f1f1f]'"
+                :class="progress >= 20 ? 'bg-accent' : 'bg-[color:var(--vp-c-divider)] dark:bg-[#1f1f1f]'"
               />
               <span>{{ engineStep }}</span>
             </div>
             <div class="flex items-center gap-2">
               <span
                 class="h-2.5 w-2.5"
-                :class="progress >= 65 ? 'bg-accent' : 'bg-[#1f1f1f]'"
+                :class="progress >= 65 ? 'bg-accent' : 'bg-[color:var(--vp-c-divider)] dark:bg-[#1f1f1f]'"
               />
               <span>{{ outputStep }}</span>
             </div>
@@ -418,39 +419,41 @@ const panelRef = useReveal(140);
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-1 border-b border-[color:var(--vp-c-bg-alt)] bg-[#070707] px-3 py-2">
+      <!-- Tabs bar -->
+      <div class="flex flex-wrap items-center gap-1 border-b border-[color:var(--vp-c-divider)] bg-[color:var(--vp-c-bg)] px-3 py-2 dark:border-[#1a1a1a] dark:bg-[#070707]">
         <button
-          v-for="tabId in flowTabs"
+          v-for="tabId in outputTabs"
           :key="tabId"
           type="button"
           :class="[
             'px-3 py-1.5 text-xs font-semibold transition',
             activeTab === tabId
               ? 'bg-accent text-[#1f1f1f]'
-              : 'text-[#888] hover:text-[#ffffff]',
+              : 'text-[color:var(--vp-c-text-3)] hover:text-[color:var(--vp-c-text-1)] dark:text-[#888] dark:hover:text-[#ffffff]',
           ]"
           @click="activeTab = tabId"
         >
           {{ tabData[tabId].label }}
         </button>
 
-        <span class="ml-auto flex items-center gap-1 px-1 text-[10px] text-[#555]">
+        <span class="ml-auto flex items-center gap-1 px-1 text-[10px] text-[color:var(--vp-c-text-3)] dark:text-[#555]">
           <span>→</span>
-          <span class="font-mono text-[#d2ff00]">{{ generateBadge }}</span>
+          <span class="font-mono text-ink dark:text-[#d2ff00]">{{ generateBadge }}</span>
         </span>
       </div>
 
+      <!-- File bar: path + lang + copy -->
       <div
-        class="flex items-center justify-between gap-2 border-b border-[color:var(--vp-c-bg-alt)] bg-[#0d0d0d] px-3 py-1.5 text-xs text-[#888]"
+        class="flex items-center justify-between gap-2 border-b border-[color:var(--vp-c-divider)] bg-[color:var(--vp-c-bg-alt)] px-3 py-1.5 text-xs dark:border-[#1a1a1a] dark:bg-[#0d0d0d]"
       >
-        <span class="min-w-0 truncate font-mono">{{ tabData[activeTab].file }}</span>
+        <span class="min-w-0 truncate font-mono text-[color:var(--vp-c-text-2)] dark:text-[#888]">{{ tabData[activeTab].file }}</span>
         <div class="flex shrink-0 items-center gap-2">
-          <span class="font-mono uppercase tracking-wide text-accent">{{
+          <span class="font-mono uppercase tracking-wide text-ink dark:text-accent">{{
             tabData[activeTab].lang
           }}</span>
           <button
             type="button"
-            class="border border-[#3a3a3a] bg-[#2a2a2a] px-2 py-1 text-xs font-semibold text-[#d2ff00] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f]"
+            class="border border-[color:var(--vp-c-divider)] bg-[color:var(--vp-c-bg-soft)] px-2 py-1 text-xs font-semibold text-[color:var(--vp-c-text-1)] transition hover:border-accent hover:bg-accent hover:text-[#1f1f1f] dark:border-[#3a3a3a] dark:bg-[#2a2a2a] dark:text-[#d2ff00]"
             @click="copyCode"
           >
             {{ copied ? "Copied" : "Copy" }}
@@ -458,6 +461,7 @@ const panelRef = useReveal(140);
         </div>
       </div>
 
+      <!-- Code area: always dark terminal, user confirmed this is fine -->
       <pre
         class="m-0 max-h-72 overflow-auto bg-[#070707] p-4 text-sm leading-relaxed"
       ><code class="demo-code font-mono text-[#ffffff]" v-html="highlightedCode" /></pre>

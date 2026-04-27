@@ -2,7 +2,6 @@
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&logoColor=white)
-![pnpm](https://img.shields.io/badge/pnpm-Workspace-F69220?logo=pnpm&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 **Quick Nav:** [Español](#español) | [English](#english)
@@ -11,17 +10,42 @@
 
 ## Español
 
-### 🚀 ¿Qué es?
+### ¿Qué es?
 
-Núcleo del toolkit `contract-kit`. Contiene los tipos de esquema, validación, parsing de contratos, generación de sumarios y utilidades de generación de código.
+Núcleo del toolkit `contract-kit`. Define los tipos del schema de contrato, valida archivos JSON, parsea contratos y genera sumarios que el resto de paquetes usan como entrada.
 
-### 📦 Instalación
+### Instalación
 
 ```bash
 npm install @fr4n0m/contract-kit
 ```
 
-### ⚡ Uso rápido
+### El schema del contrato
+
+Un contrato es un `Record<string, ContractEndpoint>` donde cada clave es el nombre del endpoint:
+
+```ts
+// ContractFile — lo que escribes en contracts/*.json
+{
+  "getUser": {
+    "method": "GET",             // "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
+    "path": "/users/:id",
+    "params": { "id": "string" },           // parámetros de ruta
+    "query": { "active": "boolean" },       // query string
+    "body": { "name": "string" },           // cuerpo de la request (POST/PUT/PATCH)
+    "response": {
+      "200": { "id": "string", "name": "string" },
+      "404": { "message": "string" }
+    }
+  }
+}
+```
+
+**Tipos escalares:** `"string"` | `"number"` | `"boolean"` | `"unknown"`
+
+Los campos `params`, `query`, `body` y cada status de `response` son de tipo `ContractShape`: `Record<string, ContractScalarType>`.
+
+### Uso rápido
 
 ```ts
 import {
@@ -36,7 +60,7 @@ const contracts = scanContractFiles(process.cwd());
 const summary = createSummary(contracts);
 ```
 
-### 🧱 API principal
+### API principal
 
 | Función | Descripción |
 |---------|-------------|
@@ -47,7 +71,7 @@ const summary = createSummary(contracts);
 | `createSummary(contractsByFile)` | Produce un `ContractSummary` plano de todos los contratos |
 | `writeGeneratedArtifacts(outputDir, artifacts)` | Escribe archivos generados en `outputDir` |
 
-### 🤝 Contribuciones
+### Contribuciones
 
 ¿Quieres aportar? PRs y propuestas son bienvenidas.
 
@@ -60,17 +84,42 @@ const summary = createSummary(contracts);
 
 ## English
 
-### 🚀 What is it?
+### What is it?
 
-Core runtime for `contract-kit`. Contains schema types, validation, contract parsing, summary generation, and code generation utilities.
+Core runtime for `contract-kit`. Defines contract schema types, validates JSON files, parses contracts, and generates summaries that other packages use as input.
 
-### 📦 Install
+### Install
 
 ```bash
 npm install @fr4n0m/contract-kit
 ```
 
-### ⚡ Quick usage
+### The contract schema
+
+A contract is a `Record<string, ContractEndpoint>` where each key is the endpoint name:
+
+```ts
+// ContractFile — what you write in contracts/*.json
+{
+  "getUser": {
+    "method": "GET",             // "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
+    "path": "/users/:id",
+    "params": { "id": "string" },           // path parameters
+    "query": { "active": "boolean" },       // query string
+    "body": { "name": "string" },           // request body (POST/PUT/PATCH)
+    "response": {
+      "200": { "id": "string", "name": "string" },
+      "404": { "message": "string" }
+    }
+  }
+}
+```
+
+**Scalar types:** `"string"` | `"number"` | `"boolean"` | `"unknown"`
+
+The `params`, `query`, `body` fields and each status under `response` are of type `ContractShape`: `Record<string, ContractScalarType>`.
+
+### Quick usage
 
 ```ts
 import {
@@ -85,7 +134,7 @@ const contracts = scanContractFiles(process.cwd());
 const summary = createSummary(contracts);
 ```
 
-### 🧱 Main API
+### Main API
 
 | Function | Description |
 |----------|-------------|
@@ -96,7 +145,7 @@ const summary = createSummary(contracts);
 | `createSummary(contractsByFile)` | Produces a flat `ContractSummary` from all contract files |
 | `writeGeneratedArtifacts(outputDir, artifacts)` | Writes generated files to `outputDir` |
 
-### 🤝 Contributing
+### Contributing
 
 PRs are welcome and encouraged.
 
@@ -107,7 +156,7 @@ PRs are welcome and encouraged.
 
 ---
 
-## 📄 License
+## License
 
 MIT
 
