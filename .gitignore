@@ -8,3 +8,4 @@ apps/docs/.vitepress/.temp
 apps/docs/.vitepress/cache
 ROADMAP.md
 .claude/settings.json
+lighthouse-report.json
