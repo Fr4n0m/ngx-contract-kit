@@ -42,7 +42,7 @@ async function copyCommands(): Promise<void> {
 
 <template>
   <div
-    class="flex min-w-0 items-center gap-3 rounded-xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-code-bg)]"
+    class="flex min-w-0 items-start gap-3 rounded-xl border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-code-bg)]"
     :class="compact ? 'p-2' : 'p-3'"
   >
     <div class="min-w-0 flex-1 space-y-1">
