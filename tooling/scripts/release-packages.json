@@ -6,5 +6,5 @@
   "@fr4n0m/plugin-nestjs",
   "@fr4n0m/validator-zod",
   "@fr4n0m/contract-diff",
-  "@fr4n0m/cli"
+  "@fr4n0m/contract-kit"
 ]
