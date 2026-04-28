@@ -1,59 +1,165 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { en, es } from "../../../i18n";
 import { useLang, type Lang } from "../composables/lang";
 
 const dict: Record<Lang, typeof en> = { en, es };
 const { lang, setLang } = useLang();
 const t = computed(() => dict[lang.value as Lang]);
+
+const isOpen = ref(false);
+
+function open(): void {
+  isOpen.value = true;
+  document.body.style.overflow = "hidden";
+}
+
+function close(): void {
+  isOpen.value = false;
+  document.body.style.overflow = "";
+}
+
+function toggle(): void {
+  isOpen.value ? close() : open();
+}
+
+function onKeydown(e: KeyboardEvent): void {
+  if (e.key === "Escape") close();
+}
+
+onMounted(() => window.addEventListener("keydown", onKeydown));
+onUnmounted(() => {
+  window.removeEventListener("keydown", onKeydown);
+  document.body.style.overflow = "";
+});
 </script>
 
 <template>
-  <div class="px-4 py-6">
-    <!-- Nav links -->
-    <nav>
-      <ul class="space-y-1">
-        <li
-          v-for="link in [
-            { label: t.nav.overview, href: '/' },
-            { label: t.nav.whatYouGet, href: '/#what-you-get' },
-            { label: t.nav.howItWorks, href: '/#how-it-works' },
-            { label: t.nav.docs, href: '/docs/' },
-          ]"
-          :key="link.href"
-        >
-          <a
-            class="block px-3 py-3 text-base font-medium text-[color:var(--vp-c-text-1)] transition hover:bg-accent hover:text-[#1f1f1f]"
-            :href="link.href"
-          >{{ link.label }}</a>
-        </li>
-      </ul>
-    </nav>
+  <!-- Hamburger button — mobile only -->
+  <button
+    type="button"
+    :aria-label="isOpen ? 'Close menu' : 'Open menu'"
+    :aria-expanded="isOpen"
+    class="ml-2 flex h-8 w-8 flex-col items-center justify-center gap-[6px] md:hidden"
+    @click="toggle"
+  >
+    <span
+      :class="[
+        'block h-[1.5px] w-5 bg-current transition-all duration-300',
+        isOpen ? 'translate-y-[7.5px] rotate-45' : '',
+      ]"
+    />
+    <span
+      :class="[
+        'block h-[1.5px] w-5 bg-current transition-all duration-200',
+        isOpen ? 'scale-x-0 opacity-0' : '',
+      ]"
+    />
+    <span
+      :class="[
+        'block h-[1.5px] w-5 bg-current transition-all duration-300',
+        isOpen ? '-translate-y-[7.5px] -rotate-45' : '',
+      ]"
+    />
+  </button>
 
-    <!-- Divider -->
-    <div class="my-4 border-t border-[color:var(--vp-c-divider)]" />
+  <Teleport to="body">
+    <!-- Backdrop -->
+    <Transition name="menu-backdrop">
+      <div
+        v-if="isOpen"
+        class="fixed inset-0 z-[9998] bg-black/50 md:hidden"
+        @click="close"
+      />
+    </Transition>
 
-    <!-- Lang switch -->
-    <div>
-      <p class="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--vp-c-text-3)]">
-        Language
-      </p>
-      <div class="flex gap-2 px-3">
-        <button
-          v-for="l in (['en', 'es'] as const)"
-          :key="l"
-          type="button"
-          class="px-5 py-2 text-sm font-semibold transition"
-          :class="
-            lang === l
-              ? 'bg-accent text-[#1f1f1f]'
-              : 'border border-[color:var(--vp-c-divider)] text-[color:var(--vp-c-text-2)] hover:border-accent hover:bg-accent hover:text-[#1f1f1f]'
-          "
-          @click="setLang(l)"
-        >
-          {{ l.toUpperCase() }}
-        </button>
+    <!-- Drawer -->
+    <Transition name="menu-drawer">
+      <div
+        v-if="isOpen"
+        class="fixed inset-y-0 right-0 z-[9999] flex w-72 flex-col border-l border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg)] dark:border-[#1f1f1f] dark:bg-[#0a0a0a] md:hidden"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b border-[color:var(--vp-c-bg-alt)] px-5 py-4 dark:border-[#1f1f1f]">
+          <span class="font-heading text-sm font-semibold tracking-wide text-[color:var(--vp-c-text-1)]">contract-kit</span>
+          <button
+            type="button"
+            aria-label="Close menu"
+            class="flex h-7 w-7 items-center justify-center text-[color:var(--vp-c-text-2)] transition hover:text-[color:var(--vp-c-text-1)]"
+            @click="close"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Nav links -->
+        <nav class="flex-1 overflow-y-auto px-3 py-4">
+          <ul class="space-y-0.5">
+            <li
+              v-for="link in [
+                { label: t.nav.overview, href: '/' },
+                { label: t.nav.whatYouGet, href: '/#what-you-get' },
+                { label: t.nav.howItWorks, href: '/#how-it-works' },
+                { label: t.nav.docs, href: '/docs/' },
+              ]"
+              :key="link.href"
+            >
+              <a
+                class="block px-3 py-3 text-sm text-[color:var(--vp-c-text-1)] transition hover:bg-accent hover:text-[#1f1f1f]"
+                :href="link.href"
+                @click="close"
+              >{{ link.label }}</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Lang switch -->
+        <div class="border-t border-[color:var(--vp-c-bg-alt)] px-5 py-4 dark:border-[#1f1f1f]">
+          <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--vp-c-text-3)]">
+            Language
+          </p>
+          <div class="flex gap-2">
+            <button
+              v-for="l in (['en', 'es'] as const)"
+              :key="l"
+              type="button"
+              class="px-5 py-2 text-sm font-semibold transition"
+              :class="
+                lang === l
+                  ? 'bg-accent text-[#1f1f1f]'
+                  : 'border border-[color:var(--vp-c-bg-alt)] text-[color:var(--vp-c-text-2)] hover:border-accent hover:bg-accent hover:text-[#1f1f1f] dark:border-[#1f1f1f]'
+              "
+              @click="setLang(l)"
+            >
+              {{ l.toUpperCase() }}
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </Transition>
+  </Teleport>
 </template>
+
+<style scoped>
+.menu-backdrop-enter-active,
+.menu-backdrop-leave-active {
+  transition: opacity 0.25s ease;
+}
+.menu-backdrop-enter-from,
+.menu-backdrop-leave-to {
+  opacity: 0;
+}
+
+.menu-drawer-enter-active {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.menu-drawer-leave-active {
+  transition: transform 0.22s cubic-bezier(0.4, 0, 1, 1);
+}
+.menu-drawer-enter-from,
+.menu-drawer-leave-to {
+  transform: translateX(100%);
+}
+</style>

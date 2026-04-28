@@ -1,13 +1,7 @@
 @layer components {
-  /* Force VitePress hamburger visible on mobile even with nav:[] */
+  /* Hide VitePress's own hamburger — replaced by MobileMenu.vue */
   .VPNavBarHamburger {
-    display: flex !important;
-  }
-
-  @media (min-width: 768px) {
-    .VPNavBarHamburger {
-      display: none !important;
-    }
+    display: none !important;
   }
 
 
