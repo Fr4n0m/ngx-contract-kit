@@ -221,6 +221,117 @@ describe("diffSummaries", () => {
     expect(diff.changedResponseFieldTypes).toEqual([]);
   });
 
+  it("detects changed query and body field types", () => {
+    const previous: ContractSummary = {
+      version: 2 as const,
+      endpoints: [
+        {
+          file: "users.contract.json",
+          name: "searchUsers",
+          method: "GET" as const,
+          path: "/users",
+          paramsFields: [],
+          paramsSignatures: [],
+          queryFields: ["limit"],
+          querySignatures: ["limit:string"],
+          bodyFields: ["filter"],
+          bodySignatures: ["filter:string"],
+          responseStatusCodes: ["200"],
+          responseSignatures: { "200": ["items:unknown"] }
+        }
+      ]
+    };
+    const current: ContractSummary = {
+      version: 2 as const,
+      endpoints: [
+        {
+          file: "users.contract.json",
+          name: "searchUsers",
+          method: "GET" as const,
+          path: "/users",
+          paramsFields: [],
+          paramsSignatures: [],
+          queryFields: ["limit"],
+          querySignatures: ["limit:number"],
+          bodyFields: ["filter"],
+          bodySignatures: ["filter:boolean"],
+          responseStatusCodes: ["200"],
+          responseSignatures: { "200": ["items:unknown"] }
+        }
+      ]
+    };
+
+    const diff = diffSummaries(previous, current);
+    expect(diff.breaking).toBe(true);
+    expect(diff.changedRequestFieldTypes).toEqual([
+      "users.contract.json:searchUsers (query: limit: string -> number | body: filter: string -> boolean)"
+    ]);
+    expect(diff.removed).toEqual([]);
+    expect(diff.addedRequestFields).toEqual([]);
+  });
+
+  it("detects added param and query fields", () => {
+    const base = {
+      file: "users.contract.json",
+      name: "getUser",
+      method: "GET" as const,
+      path: "/users",
+      paramsFields: [] as string[],
+      paramsSignatures: [] as string[],
+      queryFields: [] as string[],
+      querySignatures: [] as string[],
+      bodyFields: [] as string[],
+      bodySignatures: [] as string[],
+      responseStatusCodes: ["200"],
+      responseSignatures: { "200": ["id:string"] }
+    };
+    const previous: ContractSummary = { version: 2 as const, endpoints: [base] };
+    const current: ContractSummary = {
+      version: 2 as const,
+      endpoints: [{ ...base, paramsFields: ["id"], paramsSignatures: ["id:string"], queryFields: ["expand"], querySignatures: ["expand:boolean"] }]
+    };
+    const diff = diffSummaries(previous, current);
+    expect(diff.breaking).toBe(true);
+    expect(diff.addedRequestFields).toEqual([
+      "users.contract.json:getUser (params: id | query: expand)"
+    ]);
+  });
+
+  it("detects isolated removedResponseFields and changedResponseFieldTypes", () => {
+    const base = {
+      file: "u.json",
+      name: "ep",
+      method: "GET" as const,
+      path: "/ep",
+      paramsFields: [] as string[],
+      paramsSignatures: [] as string[],
+      queryFields: [] as string[],
+      querySignatures: [] as string[],
+      bodyFields: [] as string[],
+      bodySignatures: [] as string[],
+      responseStatusCodes: ["200"],
+      responseSignatures: { "200": ["id:string", "name:string"] }
+    };
+
+    // removedResponseFields only — no earlier breaking conditions
+    const diffRemoved = diffSummaries(
+      { version: 2 as const, endpoints: [base] },
+      { version: 2 as const, endpoints: [{ ...base, responseSignatures: { "200": ["id:string"] } }] }
+    );
+    expect(diffRemoved.breaking).toBe(true);
+    expect(diffRemoved.removedResponseFields).toHaveLength(1);
+    expect(diffRemoved.changedResponseFieldTypes).toEqual([]);
+
+    // changedResponseFieldTypes only — no earlier breaking conditions
+    const diffChanged = diffSummaries(
+      { version: 2 as const, endpoints: [base] },
+      { version: 2 as const, endpoints: [{ ...base, responseSignatures: { "200": ["id:number", "name:string"] } }] }
+    );
+    expect(diffChanged.breaking).toBe(true);
+    expect(diffChanged.changedResponseFieldTypes).toHaveLength(1);
+    expect(diffChanged.removedResponseFields).toEqual([]);
+  });
+
   it("detects added required request fields and field type changes", () => {
     const previous: ContractSummary = {
       version: 2 as const,
@@ -284,6 +395,38 @@ describe("diffSummaries", () => {
       "users.contract.json:updateUser [200] (id: string -> number)"
     ]);
   });
+
+  it("detects removed body field", () => {
+    const base = {
+      file: "u.json", name: "ep", method: "POST" as const, path: "/ep",
+      paramsFields: [] as string[], paramsSignatures: [] as string[],
+      queryFields: [] as string[], querySignatures: [] as string[],
+      bodyFields: ["name", "email"], bodySignatures: ["name:string", "email:string"],
+      responseStatusCodes: ["200"], responseSignatures: { "200": ["id:string"] }
+    };
+    const diff = diffSummaries(
+      { version: 2 as const, endpoints: [base] },
+      { version: 2 as const, endpoints: [{ ...base, bodyFields: ["name"], bodySignatures: ["name:string"] }] }
+    );
+    expect(diff.breaking).toBe(true);
+    expect(diff.removedRequestFields).toEqual(["u.json:ep (body: email)"]);
+  });
+
+  it("ignores malformed signatures in toSignatureMap", () => {
+    const base = {
+      file: "u.json", name: "ep", method: "GET" as const, path: "/ep",
+      paramsFields: [] as string[], paramsSignatures: [":string", "id:"],
+      queryFields: [] as string[], querySignatures: [] as string[],
+      bodyFields: [] as string[], bodySignatures: [] as string[],
+      responseStatusCodes: ["200"], responseSignatures: { "200": ["id:string"] }
+    };
+    const diff = diffSummaries(
+      { version: 2 as const, endpoints: [base] },
+      { version: 2 as const, endpoints: [base] }
+    );
+    expect(diff.breaking).toBe(false);
+    expect(diff.changedRequestFieldTypes).toEqual([]);
+  });
 });
 
 describe("generateContractModelFile", () => {
@@ -311,6 +454,23 @@ describe("generateContractModelFile", () => {
 });
 
 describe("generateAngularClientFile", () => {
+  it("generates union response type when no 200 status exists", () => {
+    const output = generateAngularClientFile({
+      "orders.contract.json": {
+        createOrder: {
+          method: "POST",
+          path: "/orders",
+          response: {
+            "201": { id: "string" },
+            "400": { error: "string" }
+          }
+        }
+      }
+    });
+    expect(output).toContain('ContractModel["orders.createOrder"]["response"]["201"]');
+    expect(output).toContain('ContractModel["orders.createOrder"]["response"]["400"]');
+  });
+
   it("renders typed request/response aliases and client methods", () => {
     const output = generateAngularClientFile({
       "users.contract.json": {
