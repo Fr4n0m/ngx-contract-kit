@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
+import { useData } from "vitepress";
 import { en, es } from "../../../i18n";
 import { useLang, type Lang } from "../composables/lang";
 
 const dict: Record<Lang, typeof en> = { en, es };
 const { lang, setLang } = useLang();
 const t = computed(() => dict[lang.value as Lang]);
+const { isDark } = useData();
 
 const isOpen = ref(false);
 
@@ -98,6 +100,21 @@ onUnmounted(() => {
             </li>
           </ul>
         </nav>
+
+        <!-- Theme toggle -->
+        <div class="border-t border-[color:var(--vp-c-divider)] px-5 py-4">
+          <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--vp-c-text-3)]">
+            Appearance
+          </p>
+          <button
+            type="button"
+            class="flex w-full items-center justify-between px-3 py-2 text-sm text-[color:var(--vp-c-text-1)] transition hover:bg-accent hover:text-[#1f1f1f]"
+            @click="isDark = !isDark"
+          >
+            <span>{{ isDark ? 'Dark' : 'Light' }}</span>
+            <span class="text-lg leading-none">{{ isDark ? '🌙' : '☀️' }}</span>
+          </button>
+        </div>
 
         <!-- Lang switch -->
         <div class="border-t border-[color:var(--vp-c-divider)] px-5 py-4">
