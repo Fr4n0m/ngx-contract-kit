@@ -59,11 +59,16 @@ const getResourceIcon = (href: string) =>
       </div>
 
       <div class="md:col-span-2">
-        <ul class="space-y-2">
+        <p class="font-heading text-sm text-[color:var(--vp-c-text-1)]">
+          {{ footer.sections.product }}
+        </p>
+        <ul class="mt-3 space-y-2">
           <li v-for="link in footer.productLinks" :key="link.href">
             <a
               class="inline-block text-sm text-[color:var(--vp-c-text-2)] transition hover:text-ink hover:bg-accent duration-300 p-1 hover:scale-95 active:scale-90"
               :href="link.href"
+              :target="link.href.startsWith('http') ? '_blank' : undefined"
+              rel="noreferrer"
             >
               {{ link.label }}
             </a>

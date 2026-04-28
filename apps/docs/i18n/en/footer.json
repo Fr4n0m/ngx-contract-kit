@@ -15,7 +15,8 @@
   "productLinks": [
     { "label": "Docs", "href": "/docs/" },
     { "label": "What You Get", "href": "/#what-you-get" },
-    { "label": "How It Works", "href": "/#how-it-works" }
+    { "label": "How It Works", "href": "/#how-it-works" },
+    { "label": "npm", "href": "https://www.npmjs.com/package/@fr4n0m/contract-kit" }
   ],
   "resourceLinks": [
     { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" },
