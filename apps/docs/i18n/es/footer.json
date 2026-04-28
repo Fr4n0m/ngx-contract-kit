@@ -15,11 +15,11 @@
   "productLinks": [
     { "label": "Docs", "href": "/docs/" },
     { "label": "Qué Incluye", "href": "/#what-you-get" },
-    { "label": "Cómo Funciona", "href": "/#how-it-works" },
-    { "label": "npm", "href": "https://www.npmjs.com/package/@fr4n0m/contract-kit" }
+    { "label": "Cómo Funciona", "href": "/#how-it-works" }
   ],
   "resourceLinks": [
     { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" },
+    { "label": "npm", "href": "https://www.npmjs.com/package/@fr4n0m/contract-kit" },
     { "label": "Buy me a coffee", "href": "https://buymeacoffee.com/fran11799" }
   ],
   "signaturePrefix": "Built for developers by",

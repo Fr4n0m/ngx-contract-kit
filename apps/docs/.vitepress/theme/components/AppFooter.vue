@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconBrandGithub, IconCoffee } from "@tabler/icons-vue";
+import { IconBrandGithub, IconBrandNpm, IconCoffee } from "@tabler/icons-vue";
 import { useReveal } from "../composables/useReveal";
 
 type FooterLink = {
@@ -33,7 +33,9 @@ defineProps<{
 const el = useReveal(0);
 
 const getResourceIcon = (href: string) =>
-  href.includes("buymeacoffee.com") ? IconCoffee : IconBrandGithub;
+  href.includes("buymeacoffee.com") ? IconCoffee
+  : href.includes("npmjs.com") ? IconBrandNpm
+  : IconBrandGithub;
 </script>
 
 <template>
