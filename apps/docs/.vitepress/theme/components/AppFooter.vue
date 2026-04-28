@@ -64,7 +64,7 @@ const getResourceIcon = (href: string) =>
         <ul class="space-y-2">
           <li v-for="link in footer.productLinks" :key="link.href">
             <a
-              class="text-sm text-[color:var(--vp-c-text-2)] transition hover:text-ink hover:bg-accent animation-all duration-300 p-1 hover:scale-95 active:scale-90"
+              class="inline-block text-sm text-[color:var(--vp-c-text-2)] transition hover:text-ink hover:bg-accent duration-300 p-1 hover:scale-95 active:scale-90"
               :href="link.href"
             >
               {{ link.label }}
@@ -80,7 +80,7 @@ const getResourceIcon = (href: string) =>
         <ul class="mt-3 space-y-2">
           <li v-for="link in footer.projectLinks" :key="link.href">
             <a
-              class="text-sm text-[color:var(--vp-c-text-2)] transition hover:text-ink hover:bg-accent animation-all duration-300 p-1 hover:scale-95 active:scale-90"
+              class="inline-block text-sm text-[color:var(--vp-c-text-2)] transition hover:text-ink hover:bg-accent duration-300 p-1 hover:scale-95 active:scale-90"
               :href="link.href"
               target="_blank"
               rel="noreferrer"
@@ -120,7 +120,7 @@ const getResourceIcon = (href: string) =>
       <p class="break-words md:text-center">
         {{ footer.signaturePrefix }}
         <a
-          class="underline underline-offset-4 transition hover:text-ink hover:bg-accent animation-all duration-300 p-1 hover:scale-95 active:scale-90"
+          class="inline-block underline underline-offset-4 transition hover:text-ink hover:bg-accent duration-300 p-1 hover:scale-95 active:scale-90"
           :href="footer.signatureUrl"
           target="_blank"
           rel="noreferrer"
