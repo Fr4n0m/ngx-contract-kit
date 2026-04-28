@@ -155,3 +155,15 @@ published 1.0.0 • 12 hours ago
 - Primer contrato funcional < 15 minutos.
 - Cobertura de tests del core >= 80%.
 - 0 errores criticos abiertos en release 1.0.0.
+
+---
+
+## PROYECTO CERRADO — 2026-04-28
+
+`@fr4n0m/contract-kit@1.0.0` publicado y estable.
+
+- npm: https://www.npmjs.com/package/@fr4n0m/contract-kit
+- Docs: https://ngx-contract-kit-docs.vercel.app/
+- Tests: todos los paquetes >= 80% cobertura
+- Lighthouse: Performance 91, Accessibility 100, Best Practices 100, SEO 100
+- master = develop = remotes
