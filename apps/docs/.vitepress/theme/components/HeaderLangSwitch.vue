@@ -6,7 +6,7 @@ const { lang, setLang } = useLang();
 
 <template>
   <div
-    class="ml-3 flex items-center gap-1 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-1 amination-all duration-300"
+    class="ml-3 hidden items-center gap-1 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-1 amination-all duration-300 md:flex"
   >
     <button
       type="button"

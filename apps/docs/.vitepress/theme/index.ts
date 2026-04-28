@@ -4,6 +4,7 @@ import { h, Fragment } from "vue";
 import LandingPage from "./components/LandingPage.vue";
 import HeaderLangSwitch from "./components/HeaderLangSwitch.vue";
 import HeaderNavLinks from "./components/HeaderNavLinks.vue";
+import MobileMenu from "./components/MobileMenu.vue";
 import GlobalFooter from "./components/GlobalFooter.vue";
 import ProjectCommandPalette from "./components/ProjectCommandPalette.vue";
 import DocsSidebar from "./components/DocsSidebar.vue";
@@ -27,7 +28,7 @@ const theme: Theme = {
   Layout: () =>
     h(DefaultTheme.Layout, null, {
       "nav-bar-content-before": () => h(HeaderNavLinks),
-      "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch)]),
+      "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch), h(MobileMenu)]),
       "layout-top": () => h(Fragment, null, [h(LayoutBackground), h(ProjectCommandPalette)]),
       "doc-before": () => h(DocsSidebar),
       "layout-bottom": () => h(GlobalFooter)
