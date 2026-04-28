@@ -38,6 +38,26 @@
     border-color: #1f1f1f !important;
   }
 
+  /* cmd-kit palette smaller on mobile */
+  @media (max-width: 767px) {
+    .cmdkit-title {
+      font-size: 0.8rem !important;
+    }
+    .cmdkit-vue-input input,
+    .cmdkit-vue-input {
+      font-size: 0.875rem !important;
+    }
+    .ck-cmd-item p {
+      font-size: 0.75rem !important;
+    }
+    .ck-cmd-item {
+      font-size: 0.75rem !important;
+    }
+    dialog[open] {
+      font-size: 0.8rem !important;
+    }
+  }
+
   .dark .landing-hero {
     background: #070707 !important;
     border-color: #1f1f1f !important;

@@ -48,6 +48,7 @@ onUnmounted(() => {
     <span class="bar bar-bot" :class="{ active: isOpen }" />
   </button>
 
+  <ClientOnly>
   <Teleport to="body">
     <Transition name="menu-backdrop">
       <div
@@ -123,6 +124,7 @@ onUnmounted(() => {
       </div>
     </Transition>
   </Teleport>
+  </ClientOnly>
 </template>
 
 <style scoped>
