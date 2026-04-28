@@ -53,15 +53,17 @@
 }
 
 .menu-drawer-enter-active {
-  animation: drawer-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: drawer-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .menu-drawer-leave-active {
-  animation: drawer-out 0.22s cubic-bezier(0.4, 0, 1, 1) both;
+  animation: drawer-out 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
+  pointer-events: none;
 }
 
 .menu-backdrop-enter-active {
-  animation: backdrop-in 0.25s ease both;
+  animation: backdrop-in 0.25s ease forwards;
 }
 .menu-backdrop-leave-active {
-  animation: backdrop-out 0.25s ease both;
+  animation: backdrop-out 0.25s ease forwards;
+  pointer-events: none;
 }

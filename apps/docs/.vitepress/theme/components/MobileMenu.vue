@@ -69,10 +69,10 @@ onUnmounted(() => {
           <button
             type="button"
             aria-label="Close menu"
-            class="flex h-7 w-7 items-center justify-center text-[color:var(--vp-c-text-2)] transition hover:text-[color:var(--vp-c-text-1)]"
+            class="flex h-10 w-10 items-center justify-center text-[color:var(--vp-c-text-2)] transition hover:text-[color:var(--vp-c-text-1)]"
             @click="close"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
