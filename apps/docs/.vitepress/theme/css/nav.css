@@ -1,5 +1,12 @@
 @layer components {
-
+  /* Fix: Tailwind .container (width:100%) overrides VitePress scoped .container (width:16px)
+     inside VPNavBarHamburger — breaks overflow:hidden clip, middle bar leaks as "×-" */
+  .VPNavBarHamburger .container {
+    width: 16px !important;
+    height: 14px !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
 
   :root {
     --vp-layout-max-width: 100%;
