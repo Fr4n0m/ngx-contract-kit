@@ -4,31 +4,22 @@
   "description": "Flujo contract-first para equipos que buscan consistencia entre Angular y backend.",
   "sections": {
     "product": "Producto",
+    "projects": "Mis Proyectos",
     "prs": "PRs aquí"
   },
+  "projectLinks": [
+    { "label": "Local Tools", "href": "https://local-tools-omega.vercel.app/" },
+    { "label": "Dev Crate", "href": "https://dev-crate-kappa.vercel.app/" },
+    { "label": "cmd-kit", "href": "https://cmd-kit.vercel.app/" }
+  ],
   "productLinks": [
-    {
-      "label": "Docs",
-      "href": "/docs/"
-    },
-    {
-      "label": "Qué Incluye",
-      "href": "/#what-you-get"
-    },
-    {
-      "label": "Cómo Funciona",
-      "href": "/#how-it-works"
-    }
+    { "label": "Docs", "href": "/docs/" },
+    { "label": "Qué Incluye", "href": "/#what-you-get" },
+    { "label": "Cómo Funciona", "href": "/#how-it-works" }
   ],
   "resourceLinks": [
-    {
-      "label": "GitHub",
-      "href": "https://github.com/Fr4n0m/ngx-contract-kit"
-    },
-    {
-      "label": "Buy me a coffee",
-      "href": "https://buymeacoffee.com/fran11799"
-    }
+    { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" },
+    { "label": "Buy me a coffee", "href": "https://buymeacoffee.com/fran11799" }
   ],
   "signaturePrefix": "Built for developers by",
   "signatureName": "Fr4n0m",
@@ -36,4 +27,3 @@
   "legal": "Licencia MIT",
   "copyright": "Copyright 2026"
 }
-

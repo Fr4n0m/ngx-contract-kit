@@ -4,31 +4,22 @@
   "description": "Contract-first workflow for teams that want consistency between Angular and backend code.",
   "sections": {
     "product": "Product",
+    "projects": "My Projects",
     "prs": "PRs here"
   },
+  "projectLinks": [
+    { "label": "Local Tools", "href": "https://local-tools-omega.vercel.app/" },
+    { "label": "Dev Crate", "href": "https://dev-crate-kappa.vercel.app/" },
+    { "label": "cmd-kit", "href": "https://cmd-kit.vercel.app/" }
+  ],
   "productLinks": [
-    {
-      "label": "Docs",
-      "href": "/docs/"
-    },
-    {
-      "label": "What You Get",
-      "href": "/#what-you-get"
-    },
-    {
-      "label": "How It Works",
-      "href": "/#how-it-works"
-    }
+    { "label": "Docs", "href": "/docs/" },
+    { "label": "What You Get", "href": "/#what-you-get" },
+    { "label": "How It Works", "href": "/#how-it-works" }
   ],
   "resourceLinks": [
-    {
-      "label": "GitHub",
-      "href": "https://github.com/Fr4n0m/ngx-contract-kit"
-    },
-    {
-      "label": "Buy me a coffee",
-      "href": "https://buymeacoffee.com/fran11799"
-    }
+    { "label": "GitHub", "href": "https://github.com/Fr4n0m/ngx-contract-kit" },
+    { "label": "Buy me a coffee", "href": "https://buymeacoffee.com/fran11799" }
   ],
   "signaturePrefix": "Built for developers by",
   "signatureName": "Fr4n0m",
@@ -36,4 +27,3 @@
   "legal": "MIT License",
   "copyright": "Copyright 2026"
 }
-

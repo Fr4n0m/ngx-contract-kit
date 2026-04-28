@@ -13,9 +13,11 @@ type FooterPayload = {
   description: string;
   sections: {
     product: string;
+    projects: string;
     prs: string;
   };
   productLinks: FooterLink[];
+  projectLinks: FooterLink[];
   resourceLinks: FooterLink[];
   signaturePrefix: string;
   signatureName: string;
@@ -40,7 +42,7 @@ const getResourceIcon = (href: string) =>
     class="reveal mt-4 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-4 py-7 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:px-6 sm:py-8"
   >
     <div class="grid gap-8 md:grid-cols-12">
-      <div class="md:col-span-6">
+      <div class="md:col-span-5">
         <p
           class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#1f1f1f] dark:text-accent"
         >
@@ -58,12 +60,30 @@ const getResourceIcon = (href: string) =>
         </p>
       </div>
 
-      <div class="md:col-span-3">
+      <div class="md:col-span-2">
         <ul class="space-y-2">
           <li v-for="link in footer.productLinks" :key="link.href">
             <a
               class="text-sm text-[color:var(--vp-c-text-2)] transition hover:text-ink hover:bg-accent animation-all duration-300 p-1 hover:scale-95 active:scale-90"
               :href="link.href"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="md:col-span-2">
+        <p class="font-heading text-sm text-[color:var(--vp-c-text-1)]">
+          {{ footer.sections.projects }}
+        </p>
+        <ul class="mt-3 space-y-2">
+          <li v-for="link in footer.projectLinks" :key="link.href">
+            <a
+              class="text-sm text-[color:var(--vp-c-text-2)] transition hover:text-ink hover:bg-accent animation-all duration-300 p-1 hover:scale-95 active:scale-90"
+              :href="link.href"
+              target="_blank"
+              rel="noreferrer"
             >
               {{ link.label }}
             </a>
