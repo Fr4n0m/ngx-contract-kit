@@ -30,6 +30,22 @@
     display: none !important;
   }
 
+  /* Show appearance toggle from tablet up instead of collapsing into ... */
+  .VPNavBarAppearance {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .VPNavBarAppearance {
+      display: flex !important;
+      align-items: center;
+    }
+  }
+
+  /* Hide the ... extra menu — nothing should collapse there */
+  .VPNavBarExtra {
+    display: none !important;
+  }
+
   .VPNav,
   .VPNavBar {
     backdrop-filter: blur(12px);
