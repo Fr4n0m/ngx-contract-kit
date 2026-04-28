@@ -1,14 +1,30 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { useData } from "vitepress";
+import { useData, useRoute } from "vitepress";
 import { IconSun, IconMoon } from "@tabler/icons-vue";
 import { en, es } from "../../../i18n";
 import { useLang, type Lang } from "../composables/lang";
+
+type DocsItem = { key: keyof typeof en.docsNav; href: string };
+const docsItems: DocsItem[] = [
+  { key: "docsHome", href: "/docs/" },
+  { key: "quickstart", href: "/docs/quickstart" },
+  { key: "cliReference", href: "/docs/cli-reference" },
+  { key: "contractSchema", href: "/docs/contract-schema" },
+  { key: "generators", href: "/docs/generators" },
+  { key: "examples", href: "/docs/examples" },
+  { key: "contributing", href: "/docs/contributing" },
+  { key: "faq", href: "/docs/faq" },
+];
 
 const dict: Record<Lang, typeof en> = { en, es };
 const { lang, setLang } = useLang();
 const t = computed(() => dict[lang.value as Lang]);
 const { isDark } = useData();
+const route = useRoute();
+const isDocsRoute = computed(() => route.path.startsWith("/docs/"));
+const isActiveDoc = (href: string) =>
+  href === "/docs/" ? route.path === "/docs/" : route.path.startsWith(href);
 
 const isOpen = ref(false);
 
@@ -83,6 +99,7 @@ onUnmounted(() => {
 
         <!-- Nav -->
         <nav class="flex-1 overflow-y-auto px-3 py-4">
+          <!-- Main links -->
           <ul class="space-y-0.5">
             <li
               v-for="link in [
@@ -100,6 +117,27 @@ onUnmounted(() => {
               >{{ link.label }}</a>
             </li>
           </ul>
+
+          <!-- Docs sidebar — always shown so user can navigate from anywhere -->
+          <div class="mt-4 border-t border-[color:var(--vp-c-divider)] pt-4">
+            <p class="mb-1 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--vp-c-text-3)]">
+              Docs
+            </p>
+            <ul class="space-y-0.5">
+              <li v-for="item in docsItems" :key="item.href">
+                <a
+                  :href="item.href"
+                  class="block px-3 py-2 text-sm transition"
+                  :class="
+                    isActiveDoc(item.href)
+                      ? 'font-semibold text-accent'
+                      : 'text-[color:var(--vp-c-text-2)] hover:bg-accent hover:text-[#1f1f1f]'
+                  "
+                  @click="close"
+                >{{ t.docsNav[item.key] }}</a>
+              </li>
+            </ul>
+          </div>
         </nav>
 
         <!-- Theme toggle -->
