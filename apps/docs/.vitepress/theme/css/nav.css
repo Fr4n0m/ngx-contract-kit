@@ -1,4 +1,16 @@
 @layer components {
+  /* Force VitePress hamburger visible on mobile even with nav:[] */
+  .VPNavBarHamburger {
+    display: flex !important;
+  }
+
+  @media (min-width: 768px) {
+    .VPNavBarHamburger {
+      display: none !important;
+    }
+  }
+
+
   :root {
     --vp-layout-max-width: 100%;
   }
