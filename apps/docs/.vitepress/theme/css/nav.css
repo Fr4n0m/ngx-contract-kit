@@ -1,8 +1,4 @@
 @layer components {
-  /* Hide VitePress's own hamburger — replaced by MobileMenu.vue */
-  .VPNavBarHamburger {
-    display: none !important;
-  }
 
 
   :root {

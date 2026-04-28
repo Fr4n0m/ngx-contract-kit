@@ -28,7 +28,8 @@ const theme: Theme = {
   Layout: () =>
     h(DefaultTheme.Layout, null, {
       "nav-bar-content-before": () => h(HeaderNavLinks),
-      "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch), h(MobileMenu)]),
+      "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch)]),
+      "nav-screen-content-before": () => h(MobileMenu),
       "layout-top": () => h(Fragment, null, [h(LayoutBackground), h(ProjectCommandPalette)]),
       "doc-before": () => h(DocsSidebar),
       "layout-bottom": () => h(GlobalFooter)
