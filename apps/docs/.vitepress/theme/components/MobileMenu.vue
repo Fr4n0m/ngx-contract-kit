@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useData } from "vitepress";
+import { IconSun, IconMoon } from "@tabler/icons-vue";
 import { en, es } from "../../../i18n";
 import { useLang, type Lang } from "../composables/lang";
 
@@ -112,7 +113,7 @@ onUnmounted(() => {
             @click="isDark = !isDark"
           >
             <span>{{ isDark ? 'Dark' : 'Light' }}</span>
-            <span class="text-lg leading-none">{{ isDark ? '🌙' : '☀️' }}</span>
+            <component :is="isDark ? IconMoon : IconSun" :size="18" />
           </button>
         </div>
 
