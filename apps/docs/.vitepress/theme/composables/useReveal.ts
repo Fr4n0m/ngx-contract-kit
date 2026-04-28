@@ -6,10 +6,8 @@ export function useReveal(delay = 0): Ref<HTMLElement | null> {
   let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
   onMounted(() => {
-    if (!el.value) return;
     const target = el.value;
-    target.style.setProperty("--reveal-delay", `${delay}ms`);
-    target.classList.add("reveal-pending");
+    if (!target || !(target instanceof HTMLElement) || !target.style) return;
 
     const show = () => {
       target.classList.remove("reveal-pending");
@@ -22,19 +20,27 @@ export function useReveal(delay = 0): Ref<HTMLElement | null> {
       observer = null;
     };
 
+    // Already in viewport on mount — show immediately, skip delay (fixes LCP)
+    const rect = target.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      show();
+      return;
+    }
+
+    target.style.setProperty("--reveal-delay", `${delay}ms`);
+    target.classList.add("reveal-pending");
+
     observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          show();
-        }
+        if (entry.isIntersecting) show();
       },
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
 
     observer.observe(target);
     fallbackTimer = setTimeout(() => {
-      const rect = target.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) show();
+      const r = target.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) show();
       else fallbackTimer = null;
     }, 900 + delay);
   });
