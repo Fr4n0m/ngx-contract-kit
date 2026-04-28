@@ -141,23 +141,4 @@ onUnmounted(() => {
 .bar-mid.active  { opacity: 0; transform: scaleX(0); }
 .bar-bot.active  { transform: translateY(-7.5px) rotate(-45deg); }
 
-.menu-backdrop-enter-active,
-.menu-backdrop-leave-active {
-  transition: opacity 0.25s ease;
-}
-.menu-backdrop-enter-from,
-.menu-backdrop-leave-to {
-  opacity: 0;
-}
-
-.menu-drawer-enter-active {
-  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.menu-drawer-leave-active {
-  transition: transform 0.22s cubic-bezier(0.4, 0, 1, 1);
-}
-.menu-drawer-enter-from,
-.menu-drawer-leave-to {
-  transform: translateX(100%);
-}
 </style>
