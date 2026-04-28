@@ -43,10 +43,8 @@ const getResourceIcon = (href: string) =>
   >
     <div class="grid gap-8 md:grid-cols-12">
       <div class="md:col-span-5">
-        <p
-          class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#1f1f1f] dark:text-accent"
-        >
-          {{ footer.eyebrow }}
+        <p class="font-heading text-xs font-semibold uppercase tracking-[0.18em]">
+          <span class="bg-accent text-ink px-1.5 py-0.5">{{ footer.eyebrow }}</span>
         </p>
         <h3
           class="mt-3 break-words font-project text-2xl text-[color:var(--vp-c-text-1)]"

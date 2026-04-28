@@ -60,10 +60,8 @@ const howBottomCardRefs = [useReveal(320), useReveal(380)];
         ref="heroRef"
         class="reveal landing-hero mb-8 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:mb-10 sm:p-8"
       >
-        <p
-          class="font-project text-sm font-semibold uppercase tracking-[0.2em] text-[#1f1f1f] dark:text-accent"
-        >
-          {{ t.hero.name }}
+        <p class="font-project text-sm font-semibold uppercase tracking-[0.2em]">
+          <span class="bg-accent text-ink px-1.5 py-0.5">{{ t.hero.name }}</span>
         </p>
         <h1
           class="mt-3 break-words font-heading text-3xl leading-tight text-[color:var(--vp-c-text-1)] md:text-5xl"
