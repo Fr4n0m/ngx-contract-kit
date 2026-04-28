@@ -1,23 +1,16 @@
 @layer components {
-  /* Fix: Tailwind .container (width:100%) overrides VitePress scoped .container (width:16px)
-     inside VPNavBarHamburger — breaks overflow:hidden clip, middle bar leaks as "×-" */
-  .VPNavBarHamburger .container {
-    width: 16px !important;
-    height: 14px !important;
-    overflow: hidden !important;
-    position: relative !important;
-  }
-
   :root {
     --vp-layout-max-width: 100%;
   }
 
-  .VPNavBar .container,
+  /* Scope to direct VPNavBar container only — avoids bleeding into
+     VPNavBarHamburger's inner .container span */
+  .VPNavBar > .wrapper > .container,
   .VPNavBar .content {
     max-width: none !important;
   }
 
-  .VPNavBar .container {
+  .VPNavBar > .wrapper > .container {
     padding-left: clamp(1rem, 2vw, 4rem);
     padding-right: clamp(1rem, 2vw, 4rem);
   }
@@ -30,6 +23,11 @@
   .VPNavBar .content-body {
     min-width: 0 !important;
     width: 100% !important;
+  }
+
+  /* Hide VP's hamburger — replaced by MobileMenu.vue custom button */
+  .VPNavBarHamburger {
+    display: none !important;
   }
 
   .VPNav,
