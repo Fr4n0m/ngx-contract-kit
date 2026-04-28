@@ -130,7 +130,7 @@ onUnmounted(() => {
                   class="block px-3 py-2 text-sm transition"
                   :class="
                     isActiveDoc(item.href)
-                      ? 'font-semibold text-accent'
+                      ? 'bg-accent font-semibold text-[#1f1f1f]'
                       : 'text-[color:var(--vp-c-text-2)] hover:bg-accent hover:text-[#1f1f1f]'
                   "
                   @click="close"
