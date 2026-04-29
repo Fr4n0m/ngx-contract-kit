@@ -139,10 +139,10 @@ const getResourceIcon = (href: string) =>
         {{ footer.signaturePrefix }}
         <img
           id="gravatar-avatar"
-          :src="`https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=28`"
+          :src="`https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=20`"
           alt="Fr4n0m"
-          width="28"
-          height="28"
+          width="20"
+          height="20"
           class="shrink-0 cursor-pointer rounded-full ring-1 ring-[color:var(--vp-c-bg-alt)] transition hover:scale-110 active:scale-95 duration-200"
         />
         <a
