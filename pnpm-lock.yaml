@@ -38,6 +38,9 @@ importers:
       '@fontsource/bruno-ace':
         specifier: ^5.2.8
         version: 5.2.8
+      '@gravatar-com/hovercards':
+        specifier: ^0.16.0
+        version: 0.16.0
       '@tabler/icons-vue':
         specifier: ^3.41.1
         version: 3.41.1(vue@3.5.32(typescript@5.9.3))
@@ -565,6 +568,10 @@ packages:
 
   '@fontsource/bruno-ace@5.2.8':
     resolution: {integrity: sha512-4eZs5PPW6A7tat5w+SoNvWdq1ZX/G+0HHrgEpiEx4rPcHc97N7eIdioyOyeSMRqYoXQZcS4nvFuh17BtTaNlLw==}
+
+  '@gravatar-com/hovercards@0.16.0':
+    resolution: {integrity: sha512-NOB73YXOUALYyqLD8SeiQkKgwrmG8wYeVz8JfqFXiH5NjAt/0iDI0pC4TL/Cqxew3XaDmGUFhXEun7mzopaaCw==}
+    engines: {node: '>=20'}
 
   '@iconify-json/simple-icons@1.2.79':
     resolution: {integrity: sha512-aNyO7Fd1qej9oQfIyohYFRv0lhQLaZ+6UkK1c1qwax0MDPUOZOdq65MlU500kow97pD/W+b2u1And3e25eE24Q==}
@@ -2291,6 +2298,8 @@ snapshots:
     optional: true
 
   '@fontsource/bruno-ace@5.2.8': {}
+
+  '@gravatar-com/hovercards@0.16.0': {}
 
   '@iconify-json/simple-icons@1.2.79':
     dependencies:

@@ -1,6 +1,18 @@
 <script setup lang="ts">
 import { IconBrandGithub, IconBrandNpm, IconCoffee } from "@tabler/icons-vue";
+import { onMounted } from "vue";
 import { useReveal } from "../composables/useReveal";
+
+const GRAVATAR_HASH = "45f9e6ff5a1ed8b109f19dc13f59c26e7d39fceb75f9344ac30ea6db18f6fbde";
+
+onMounted(async () => {
+  const [{ Hovercards }] = await Promise.all([
+    import("@gravatar-com/hovercards"),
+    import("@gravatar-com/hovercards/dist/style.css"),
+  ]);
+  const hc = new Hovercards();
+  hc.attach(document.getElementById("gravatar-avatar"));
+});
 
 type FooterLink = {
   label: string;
@@ -123,21 +135,14 @@ const getResourceIcon = (href: string) =>
         {{ footer.legal }}
       </p>
       <p class="flex items-center justify-start gap-2 break-words md:justify-center">
-        <a
-          href="https://gravatar.com/festoptimistic65d53ae83c"
-          target="_blank"
-          rel="noreferrer"
-          class="shrink-0 transition hover:scale-110 active:scale-95 duration-200"
-          aria-label="Gravatar profile"
-        >
-          <img
-            src="https://www.gravatar.com/avatar/3a7afbe8892915daf263880a9a3fac70?s=28&d=identicon"
-            alt="Fr4n0m"
-            width="28"
-            height="28"
-            class="rounded-full ring-1 ring-[color:var(--vp-c-bg-alt)]"
-          />
-        </a>
+        <img
+          id="gravatar-avatar"
+          :src="`https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=28`"
+          alt="Fr4n0m"
+          width="28"
+          height="28"
+          class="shrink-0 cursor-pointer rounded-full ring-1 ring-[color:var(--vp-c-bg-alt)] transition hover:scale-110 active:scale-95 duration-200"
+        />
         {{ footer.signaturePrefix }}
         <a
           class="inline-block underline underline-offset-4 transition hover:text-ink hover:bg-accent duration-300 p-1 hover:scale-95 active:scale-90"
