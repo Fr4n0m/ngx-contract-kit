@@ -137,22 +137,24 @@ const getResourceIcon = (href: string) =>
       </p>
       <p class="flex items-center justify-start gap-2 break-words md:justify-center">
         {{ footer.signaturePrefix }}
-        <img
-          id="gravatar-avatar"
-          :src="`https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=20`"
-          alt="Fr4n0m"
-          width="20"
-          height="20"
-          class="shrink-0 cursor-pointer rounded-full ring-1 ring-[color:var(--vp-c-bg-alt)] transition hover:scale-110 active:scale-95 duration-200"
-        />
-        <a
-          class="inline-block underline underline-offset-4 transition hover:text-ink hover:bg-accent duration-300 p-1 hover:scale-95 active:scale-90"
-          :href="footer.signatureUrl"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {{ footer.signatureName }}
-        </a>
+        <span class="flex items-center gap-1">
+          <img
+            id="gravatar-avatar"
+            :src="`https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=20`"
+            alt="Fr4n0m"
+            width="20"
+            height="20"
+            class="shrink-0 cursor-pointer rounded-full ring-1 ring-[color:var(--vp-c-bg-alt)] transition hover:scale-110 active:scale-95 duration-200"
+          />
+          <a
+            class="inline-block underline underline-offset-4 transition hover:text-ink hover:bg-accent duration-300 p-1 hover:scale-95 active:scale-90"
+            :href="footer.signatureUrl"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {{ footer.signatureName }}
+          </a>
+        </span>
       </p>
       <p class="md:text-right">
         {{ footer.copyright }}
