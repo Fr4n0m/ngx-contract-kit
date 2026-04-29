@@ -136,6 +136,7 @@ const getResourceIcon = (href: string) =>
         {{ footer.legal }}
       </p>
       <p class="flex items-center justify-start gap-2 break-words md:justify-center">
+        {{ footer.signaturePrefix }}
         <img
           id="gravatar-avatar"
           :src="`https://www.gravatar.com/avatar/${GRAVATAR_HASH}?s=28`"
@@ -144,7 +145,6 @@ const getResourceIcon = (href: string) =>
           height="28"
           class="shrink-0 cursor-pointer rounded-full ring-1 ring-[color:var(--vp-c-bg-alt)] transition hover:scale-110 active:scale-95 duration-200"
         />
-        {{ footer.signaturePrefix }}
         <a
           class="inline-block underline underline-offset-4 transition hover:text-ink hover:bg-accent duration-300 p-1 hover:scale-95 active:scale-90"
           :href="footer.signatureUrl"
