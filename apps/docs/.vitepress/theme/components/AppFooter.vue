@@ -122,7 +122,22 @@ const getResourceIcon = (href: string) =>
       <p class="uppercase tracking-wide">
         {{ footer.legal }}
       </p>
-      <p class="break-words md:text-center">
+      <p class="flex items-center justify-start gap-2 break-words md:justify-center">
+        <a
+          href="https://gravatar.com/3a7afbe8892915daf263880a9a3fac70"
+          target="_blank"
+          rel="noreferrer"
+          class="shrink-0 transition hover:scale-110 active:scale-95 duration-200"
+          aria-label="Gravatar profile"
+        >
+          <img
+            src="https://www.gravatar.com/avatar/3a7afbe8892915daf263880a9a3fac70?s=28&d=identicon"
+            alt="Fr4n0m"
+            width="28"
+            height="28"
+            class="rounded-full ring-1 ring-[color:var(--vp-c-bg-alt)]"
+          />
+        </a>
         {{ footer.signaturePrefix }}
         <a
           class="inline-block underline underline-offset-4 transition hover:text-ink hover:bg-accent duration-300 p-1 hover:scale-95 active:scale-90"
