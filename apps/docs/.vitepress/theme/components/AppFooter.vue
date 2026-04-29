@@ -124,7 +124,7 @@ const getResourceIcon = (href: string) =>
       </p>
       <p class="flex items-center justify-start gap-2 break-words md:justify-center">
         <a
-          href="https://gravatar.com/3a7afbe8892915daf263880a9a3fac70"
+          href="https://gravatar.com/festoptimistic65d53ae83c"
           target="_blank"
           rel="noreferrer"
           class="shrink-0 transition hover:scale-110 active:scale-95 duration-200"
