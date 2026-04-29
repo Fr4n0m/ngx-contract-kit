@@ -11,7 +11,8 @@ onMounted(async () => {
     import("@gravatar-com/hovercards/dist/style.css"),
   ]);
   const hc = new Hovercards();
-  hc.attach(document.getElementById("gravatar-avatar"));
+  const el = document.getElementById("gravatar-avatar");
+  if (el) hc.attach(el);
 });
 
 type FooterLink = {
