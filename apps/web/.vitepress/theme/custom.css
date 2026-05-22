@@ -1,0 +1,12 @@
+@import "@fontsource/bruno-ace";
+@import "./css/fonts.css";
+@import "./css/vars.css";
+@import "./css/nav.css";
+@import "./css/docs.css";
+@import "./css/components.css";
+@import "./css/demo.css";
+@import "./css/animations.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

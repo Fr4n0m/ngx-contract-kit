@@ -1,0 +1,10 @@
+<template>
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div
+      class="absolute inset-0 bg-[linear-gradient(to_right,rgba(31,31,31,0.16)_1px,transparent_1px),linear-gradient(to_bottom,rgba(31,31,31,0.12)_1px,transparent_1px)] bg-[size:14px_24px] dark:bg-[linear-gradient(to_right,rgba(210,255,0,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(210,255,0,0.08)_1px,transparent_1px)]"
+    />
+    <div
+      class="absolute left-1/2 top-[-28%] h-[880px] w-screen -translate-x-1/2 bg-[radial-gradient(circle_360px_at_50%_300px,rgba(210,255,0,0.16),rgba(255,255,255,0))] dark:bg-[radial-gradient(circle_360px_at_50%_300px,rgba(210,255,0,0.14),rgba(7,7,7,0))]"
+    />
+  </div>
+</template>
