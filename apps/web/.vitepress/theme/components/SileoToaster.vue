@@ -21,5 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Toaster position="bottom-left" rich-colors />
+  <Teleport to="body">
+    <Toaster position="bottom-left" rich-colors />
+  </Teleport>
 </template>
