@@ -36,6 +36,7 @@ type FooterPayload = {
   signatureName: string;
   signatureUrl: string;
   legal: string;
+  legalLinks?: FooterLink[];
   copyright: string;
 };
 
@@ -132,8 +133,16 @@ const getResourceIcon = (href: string) =>
     <div
       class="mt-8 grid gap-2 border-t border-[color:var(--vp-c-bg-alt)] pt-4 text-xs text-[color:var(--vp-c-text-2)] md:grid-cols-3 md:items-center"
     >
-      <p class="uppercase tracking-wide">
-        {{ footer.legal }}
+      <p class="flex flex-wrap items-center gap-x-3 gap-y-1 uppercase tracking-wide">
+        <span>{{ footer.legal }}</span>
+        <template v-if="footer.legalLinks">
+          <a
+            v-for="link in footer.legalLinks"
+            :key="link.href"
+            :href="link.href"
+            class="normal-case tracking-normal underline underline-offset-2 hover:text-[color:var(--vp-c-text-1)]"
+          >{{ link.label }}</a>
+        </template>
       </p>
       <p class="flex items-center justify-start gap-2 break-words md:justify-center">
         {{ footer.signaturePrefix }}

@@ -26,5 +26,8 @@
   "signatureName": "Fr4n0m",
   "signatureUrl": "https://codebyfran.es",
   "legal": "Licencia MIT",
+  "legalLinks": [
+    { "label": "Política de privacidad", "href": "/docs/legal/privacidad" }
+  ],
   "copyright": "Copyright 2026"
 }
