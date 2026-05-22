@@ -10,9 +10,9 @@
     "types": ["node"]
   },
   "include": [
-    "apps/docs/.vitepress/**/*.ts",
-    "apps/docs/.vitepress/**/*.vue",
-    "apps/docs/i18n/**/*.json",
+    "apps/web/.vitepress/**/*.ts",
+    "apps/web/.vitepress/**/*.vue",
+    "apps/web/i18n/**/*.json",
     "packages/**/*.ts"
   ]
 }

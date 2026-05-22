@@ -4,9 +4,11 @@ dist
 .DS_Store
 coverage
 .env
-apps/docs/.vitepress/.temp
-apps/docs/.vitepress/cache
+.env.local
+apps/web/.vitepress/.temp
+apps/web/.vitepress/cache
 ROADMAP.md
 .claude/settings.json
 lighthouse-report.json
 lh-report*.json
+.roadmap
