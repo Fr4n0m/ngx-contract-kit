@@ -9,8 +9,10 @@ const copy: Record<Lang, {
   email: string; terms: string; submit: string; privacy: string; privacyUrl: string;
   loadingTitle: string;
   successTitle: string; successDesc: string;
+  confirmedTitle: string; confirmedDesc: string;
   alreadyPendingTitle: string; alreadyPendingDesc: string;
   alreadyActiveTitle: string; alreadyActiveDesc: string;
+  unsubscribedTitle: string; unsubscribedDesc: string;
   errorTitle: string; errorDesc: string; termsErrorDesc: string;
 }> = {
   en: {
@@ -25,10 +27,14 @@ const copy: Record<Lang, {
     loadingTitle: "Sending…",
     successTitle: "Check your inbox",
     successDesc: "Confirm your subscription from your inbox.",
+    confirmedTitle: "Subscription confirmed!",
+    confirmedDesc: "You'll receive an email whenever a new version of ngx-contract-kit is released.",
     alreadyPendingTitle: "Check your inbox",
     alreadyPendingDesc: "We already sent you a confirmation email. Check your inbox and confirm your subscription.",
     alreadyActiveTitle: "Already subscribed",
     alreadyActiveDesc: "This email is already receiving release notifications.",
+    unsubscribedTitle: "Unsubscribed",
+    unsubscribedDesc: "You won't receive any more release notifications.",
     errorTitle: "Error",
     errorDesc: "Could not complete the subscription. Please try again.",
     termsErrorDesc: "You must accept the privacy policy to subscribe.",
@@ -45,10 +51,14 @@ const copy: Record<Lang, {
     loadingTitle: "Enviando…",
     successTitle: "Revisa tu bandeja",
     successDesc: "Confirma la suscripción desde tu email.",
+    confirmedTitle: "¡Suscripción confirmada!",
+    confirmedDesc: "Recibirás un email cada vez que se publique una nueva versión de ngx-contract-kit.",
     alreadyPendingTitle: "Revisa tu bandeja",
     alreadyPendingDesc: "Ya te enviamos un email de confirmación. Revisa tu bandeja y confirma la suscripción.",
     alreadyActiveTitle: "Ya estás suscrito",
     alreadyActiveDesc: "Este email ya recibe notificaciones de nuevas versiones.",
+    unsubscribedTitle: "Baja completada",
+    unsubscribedDesc: "Ya no recibirás más notificaciones de nuevas versiones.",
     errorTitle: "Error",
     errorDesc: "No se pudo completar la suscripción. Inténtalo de nuevo.",
     termsErrorDesc: "Debes aceptar la política de privacidad para suscribirte.",
@@ -57,13 +67,15 @@ const copy: Record<Lang, {
 
 const t = computed(() => copy[lang.value as Lang]);
 
-type SubmitState = "idle" | "success" | "already-pending" | "already-active" | "error";
+export type SubmitState = "idle" | "success" | "confirmed" | "already-pending" | "already-active" | "unsubscribed" | "error";
+
+const props = withDefaults(defineProps<{ initialState?: SubmitState }>(), { initialState: "idle" });
 
 const email = ref("");
 const acceptTerms = ref(false);
 const loading = ref(false);
 const termsError = ref(false);
-const state = ref<SubmitState>("idle");
+const state = ref<SubmitState>(props.initialState);
 
 async function onSubmit() {
   if (loading.value) return;
@@ -129,6 +141,11 @@ async function onSubmit() {
       <p class="mt-0.5 text-sm text-[color:var(--vp-c-text-2)]">{{ t.successDesc }}</p>
     </div>
 
+    <div v-else-if="state === 'confirmed'" class="mt-5 border border-accent bg-accent/10 px-4 py-3">
+      <p class="font-semibold text-[color:var(--vp-c-text-1)]">{{ t.confirmedTitle }}</p>
+      <p class="mt-0.5 text-sm text-[color:var(--vp-c-text-2)]">{{ t.confirmedDesc }}</p>
+    </div>
+
     <div v-else-if="state === 'already-pending'" class="mt-5 border border-accent bg-accent/10 px-4 py-3">
       <p class="font-semibold text-[color:var(--vp-c-text-1)]">{{ t.alreadyPendingTitle }}</p>
       <p class="mt-0.5 text-sm text-[color:var(--vp-c-text-2)]">{{ t.alreadyPendingDesc }}</p>
@@ -137,6 +154,11 @@ async function onSubmit() {
     <div v-else-if="state === 'already-active'" class="mt-5 border border-[color:var(--vp-c-bg-alt)] px-4 py-3">
       <p class="font-semibold text-[color:var(--vp-c-text-1)]">{{ t.alreadyActiveTitle }}</p>
       <p class="mt-0.5 text-sm text-[color:var(--vp-c-text-2)]">{{ t.alreadyActiveDesc }}</p>
+    </div>
+
+    <div v-else-if="state === 'unsubscribed'" class="mt-5 border border-[color:var(--vp-c-bg-alt)] px-4 py-3">
+      <p class="font-semibold text-[color:var(--vp-c-text-1)]">{{ t.unsubscribedTitle }}</p>
+      <p class="mt-0.5 text-sm text-[color:var(--vp-c-text-2)]">{{ t.unsubscribedDesc }}</p>
     </div>
 
     <template v-else>
