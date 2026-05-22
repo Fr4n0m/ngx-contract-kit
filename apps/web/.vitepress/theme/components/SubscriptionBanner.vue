@@ -69,7 +69,7 @@ const t = computed(() => copy[lang.value as Lang]);
 
 export type SubmitState = "idle" | "success" | "confirmed" | "already-pending" | "already-active" | "unsubscribed" | "error";
 
-const props = withDefaults(defineProps<{ initialState?: SubmitState }>(), { initialState: "idle" });
+const props = withDefaults(defineProps<{ initialState?: SubmitState; compact?: boolean }>(), { initialState: "idle", compact: false });
 
 const email = ref("");
 const acceptTerms = ref(false);
@@ -125,7 +125,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <section class="mt-12 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:p-8">
+  <section class="border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:p-8" :class="{ 'mt-12': !compact }">
     <p class="font-heading text-xs font-semibold uppercase tracking-[0.18em]">
       <span class="bg-accent text-ink px-1.5 py-0.5">{{ t.eyebrow }}</span>
     </p>

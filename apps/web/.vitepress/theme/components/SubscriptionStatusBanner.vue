@@ -19,10 +19,49 @@ onMounted(() => {
   url.searchParams.delete("subscription");
   window.history.replaceState({}, "", url.toString());
 });
+
+function close() {
+  state.value = null;
+}
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === "Escape") close();
+}
 </script>
 
 <template>
-  <div v-if="state" class="px-[clamp(1rem,4vw,4rem)]">
-    <SubscriptionBanner :initial-state="state" />
-  </div>
+  <Teleport to="body">
+    <Transition name="modal">
+      <div
+        v-if="state"
+        class="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-8"
+        @keydown="onKeydown"
+      >
+        <div
+          class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          aria-hidden="true"
+          @click="close"
+        />
+        <div class="relative z-10 w-full max-w-xl">
+          <button
+            class="absolute -top-3 -right-3 z-20 flex size-8 items-center justify-center border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] text-[color:var(--vp-c-text-2)] shadow-card transition hover:text-[color:var(--vp-c-text-1)] dark:border-[#1f1f1f] dark:bg-[#0d0d0d]"
+            aria-label="Close"
+            @click="close"
+          >✕</button>
+          <SubscriptionBanner :initial-state="state" compact />
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
+
+<style scoped>
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.2s ease;
+}
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+</style>
