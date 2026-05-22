@@ -36,17 +36,20 @@ const t = ref(copy[lang.value as Lang] ?? copy.en);
 const token = ref("");
 const loading = ref(false);
 const state = ref<"idle" | "done" | "error">("idle");
+const apiError = ref("");
 
 onMounted(() => {
   t.value = copy[lang.value as Lang] ?? copy.en;
   const url = new URL(window.location.href);
   token.value = url.searchParams.get("token") ?? "";
+  console.debug("[unsubscribe] token from URL:", token.value || "(empty)");
 });
 
 async function confirm() {
   if (!token.value || loading.value) return;
   loading.value = true;
   state.value = "idle";
+  apiError.value = "";
 
   try {
     const res = await fetch("https://codebyfran.es/api/projects/ngx-contract-kit/unsubscribe", {
@@ -57,9 +60,18 @@ async function confirm() {
       body: JSON.stringify({ token: token.value }),
     });
 
-    if (!res.ok) throw new Error();
+    const data = await res.json().catch(() => ({}));
+    console.debug("[unsubscribe] response", res.status, data);
+
+    if (!res.ok) {
+      apiError.value = `${res.status}: ${data.message ?? data.error ?? "unknown"}`;
+      state.value = "error";
+      return;
+    }
     state.value = "done";
-  } catch {
+  } catch (err) {
+    console.error("[unsubscribe] fetch error", err);
+    apiError.value = String(err);
     state.value = "error";
   } finally {
     loading.value = false;
@@ -80,7 +92,7 @@ async function confirm() {
     </p>
 
     <p v-if="state === 'error'" class="mt-4 text-sm text-red-500">
-      {{ t.errorDesc }}
+      {{ t.errorDesc }}<template v-if="apiError"> ({{ apiError }})</template>
     </p>
 
     <p v-if="!token && state === 'idle'" class="mt-4 text-sm text-[color:var(--vp-c-text-3)]">
