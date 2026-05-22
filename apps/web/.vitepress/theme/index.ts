@@ -17,6 +17,7 @@ import DemoFlowPanel from "./components/DemoFlowPanel.vue";
 import SileoToaster from "./components/SileoToaster.vue";
 import SubscriptionBanner from "./components/SubscriptionBanner.vue";
 import DocAfterBanner from "./components/DocAfterBanner.vue";
+import SubscriptionStatusBanner from "./components/SubscriptionStatusBanner.vue";
 import UnsubscribePage from "./components/UnsubscribePage.vue";
 import DocsHomeContent from "./components/docs/DocsHomeContent.vue";
 import CliReferenceContent from "./components/docs/CliReferenceContent.vue";
@@ -33,7 +34,7 @@ const theme: Theme = {
     h(DefaultTheme.Layout, null, {
       "nav-bar-content-before": () => h(HeaderNavLinks),
       "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch), h(MobileMenu)]),
-      "layout-top": () => h(Fragment, null, [h(LayoutBackground), h(ProjectCommandPalette)]),
+      "layout-top": () => h(Fragment, null, [h(LayoutBackground), h(ProjectCommandPalette), h(SubscriptionStatusBanner)]),
       "doc-before": () => h(DocsSidebar),
       "layout-bottom": () => h(Fragment, null, [h(SileoToaster), h(DocAfterBanner), h(GlobalFooter)])
     }),
