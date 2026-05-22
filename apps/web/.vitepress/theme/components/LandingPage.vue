@@ -13,6 +13,7 @@ import TerminalCodeBlock from "./TerminalCodeBlock.vue";
 import TerminalCommandList from "./TerminalCommandList.vue";
 import LandingValueCard from "./LandingValueCard.vue";
 import LandingDemoSection from "./LandingDemoSection.vue";
+import SubscriptionBanner from "./SubscriptionBanner.vue";
 import { useLang, type Lang } from "../composables/lang";
 import { useReveal } from "../composables/useReveal";
 

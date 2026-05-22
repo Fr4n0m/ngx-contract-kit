@@ -44,7 +44,7 @@
   ],
   "commonPitfallsTitle": "Errores frecuentes",
   "commonPitfalls": [
-    "Comitear cambios de contrato sin regenerar artefactos.",
+    "Commitear cambios de contrato sin regenerar artefactos.",
     "Ejecutar `check` solo en local y no forzarlo en CI.",
     "Tratar código generado como código manual editable.",
     "No documentar payloads por status en `response`."
