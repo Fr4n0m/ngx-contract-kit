@@ -16,6 +16,7 @@ import TerminalCodeBlock from "./components/TerminalCodeBlock.vue";
 import DemoFlowPanel from "./components/DemoFlowPanel.vue";
 import SileoToaster from "./components/SileoToaster.vue";
 import SubscriptionBanner from "./components/SubscriptionBanner.vue";
+import DocAfterBanner from "./components/DocAfterBanner.vue";
 import UnsubscribePage from "./components/UnsubscribePage.vue";
 import DocsHomeContent from "./components/docs/DocsHomeContent.vue";
 import CliReferenceContent from "./components/docs/CliReferenceContent.vue";
@@ -34,7 +35,7 @@ const theme: Theme = {
       "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch), h(MobileMenu)]),
       "layout-top": () => h(Fragment, null, [h(LayoutBackground), h(ProjectCommandPalette)]),
       "doc-before": () => h(DocsSidebar),
-      "doc-after": () => h(SubscriptionBanner),
+      "doc-after": () => h(DocAfterBanner),
       "layout-bottom": () => h(Fragment, null, [h(SileoToaster), h(GlobalFooter)])
     }),
   enhanceApp(ctx) {

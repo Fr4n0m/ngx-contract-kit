@@ -84,7 +84,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <section class="mt-12 mx-[calc(50%-50vw)] w-screen border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-[clamp(1rem,4vw,4rem)] py-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:py-8">
+  <section class="mt-12 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] p-5 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:p-8">
     <p class="font-heading text-xs font-semibold uppercase tracking-[0.18em]">
       <span class="bg-accent text-ink px-1.5 py-0.5">{{ t.eyebrow }}</span>
     </p>
