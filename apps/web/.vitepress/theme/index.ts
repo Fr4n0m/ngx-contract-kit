@@ -35,8 +35,7 @@ const theme: Theme = {
       "nav-bar-content-after": () => h(Fragment, null, [h(HeaderLangSwitch), h(MobileMenu)]),
       "layout-top": () => h(Fragment, null, [h(LayoutBackground), h(ProjectCommandPalette)]),
       "doc-before": () => h(DocsSidebar),
-      "doc-after": () => h(DocAfterBanner),
-      "layout-bottom": () => h(Fragment, null, [h(SileoToaster), h(GlobalFooter)])
+      "layout-bottom": () => h(Fragment, null, [h(SileoToaster), h(DocAfterBanner), h(GlobalFooter)])
     }),
   enhanceApp(ctx) {
     DefaultTheme.enhanceApp?.(ctx);
