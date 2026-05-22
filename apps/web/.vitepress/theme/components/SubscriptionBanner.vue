@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { toast } from "vue-sonner";
 import { useLang, type Lang } from "../composables/lang";
 
 const { lang } = useLang();
@@ -9,7 +8,7 @@ const copy: Record<Lang, {
   eyebrow: string; title: string; description: string;
   email: string; terms: string; submit: string; privacy: string; privacyUrl: string;
   loadingTitle: string; successTitle: string; successDesc: string;
-  errorTitle: string; errorDesc: string; termsError: string; termsErrorDesc: string;
+  errorTitle: string; errorDesc: string; termsErrorDesc: string;
 }> = {
   en: {
     eyebrow: "Stay updated",
@@ -24,8 +23,7 @@ const copy: Record<Lang, {
     successTitle: "Check your inbox",
     successDesc: "Confirm your subscription from your inbox.",
     errorTitle: "Error",
-    errorDesc: "Could not complete the subscription.",
-    termsError: "Required",
+    errorDesc: "Could not complete the subscription. Please try again.",
     termsErrorDesc: "You must accept the privacy policy to subscribe.",
   },
   es: {
@@ -41,8 +39,7 @@ const copy: Record<Lang, {
     successTitle: "Revisa tu bandeja",
     successDesc: "Confirma la suscripción desde tu email.",
     errorTitle: "Error",
-    errorDesc: "No se pudo completar la suscripción.",
-    termsError: "Requerido",
+    errorDesc: "No se pudo completar la suscripción. Inténtalo de nuevo.",
     termsErrorDesc: "Debes aceptar la política de privacidad para suscribirte.",
   },
 };
@@ -52,16 +49,19 @@ const t = computed(() => copy[lang.value as Lang]);
 const email = ref("");
 const acceptTerms = ref(false);
 const loading = ref(false);
+const termsError = ref(false);
+const submitted = ref(false);
+const submitError = ref(false);
 
 async function onSubmit() {
   if (loading.value) return;
   if (!acceptTerms.value) {
-    toast.error(t.value.termsError, { description: t.value.termsErrorDesc });
+    termsError.value = true;
     return;
   }
+  termsError.value = false;
+  submitError.value = false;
   loading.value = true;
-
-  const id = toast.loading(t.value.loadingTitle);
 
   try {
     const res = await fetch("https://www.codebyfran.es/api/projects/ngx-contract-kit/subscribe", {
@@ -80,11 +80,11 @@ async function onSubmit() {
 
     if (!res.ok) throw new Error();
 
-    toast.success(t.value.successTitle, { id, description: t.value.successDesc });
+    submitted.value = true;
     email.value = "";
     acceptTerms.value = false;
   } catch {
-    toast.error(t.value.errorTitle, { id, description: t.value.errorDesc });
+    submitError.value = true;
   } finally {
     loading.value = false;
   }
@@ -102,28 +102,38 @@ async function onSubmit() {
     <p class="mt-2 max-w-2xl text-sm text-[color:var(--vp-c-text-2)]">
       {{ t.description }}
     </p>
-    <form class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-end" @submit.prevent="onSubmit">
-      <input
-        v-model="email"
-        required
-        type="email"
-        :placeholder="t.email"
-        class="w-full max-w-xs border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg)] px-3 py-2 text-sm text-[color:var(--vp-c-text-1)] placeholder:text-[color:var(--vp-c-text-3)] outline-none focus:border-accent dark:border-[#1f1f1f] dark:bg-[#0d0d0d]"
-      />
-      <button
-        type="submit"
-        :disabled="loading"
-        class="inline-flex items-center border border-accent bg-accent px-4 py-2 text-sm font-semibold text-ink shadow-card transition hover:brightness-95 disabled:opacity-50"
-      >
-        {{ t.submit }}
-      </button>
-    </form>
-    <label class="mt-3 flex items-center gap-2 text-xs text-[color:var(--vp-c-text-3)]">
-      <input v-model="acceptTerms" required type="checkbox" class="accent-[color:var(--vp-c-brand-1)]" />
-      <span>
-        {{ t.terms }}
-        <a :href="t.privacyUrl" class="underline underline-offset-2 hover:text-[color:var(--vp-c-text-1)]">{{ t.privacy }}</a>
-      </span>
-    </label>
+
+    <div v-if="submitted" class="mt-5 border border-accent bg-accent/10 px-4 py-3">
+      <p class="font-semibold text-[color:var(--vp-c-text-1)]">{{ t.successTitle }}</p>
+      <p class="mt-0.5 text-sm text-[color:var(--vp-c-text-2)]">{{ t.successDesc }}</p>
+    </div>
+
+    <template v-else>
+      <form class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-end" @submit.prevent="onSubmit">
+        <input
+          v-model="email"
+          required
+          type="email"
+          :placeholder="t.email"
+          class="w-full max-w-xs border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg)] px-3 py-2 text-sm text-[color:var(--vp-c-text-1)] placeholder:text-[color:var(--vp-c-text-3)] outline-none focus:border-accent dark:border-[#1f1f1f] dark:bg-[#0d0d0d]"
+        />
+        <button
+          type="submit"
+          :disabled="loading"
+          class="inline-flex items-center border border-accent bg-accent px-4 py-2 text-sm font-semibold text-ink shadow-card transition hover:brightness-95 disabled:opacity-50"
+        >
+          {{ loading ? t.loadingTitle : t.submit }}
+        </button>
+      </form>
+      <label class="mt-3 flex items-center gap-2 text-xs text-[color:var(--vp-c-text-3)]" :class="{ 'text-red-500': termsError }">
+        <input v-model="acceptTerms" type="checkbox" class="accent-[color:var(--vp-c-brand-1)]" @change="termsError = false" />
+        <span>
+          {{ t.terms }}
+          <a :href="t.privacyUrl" class="underline underline-offset-2 hover:text-[color:var(--vp-c-text-1)]">{{ t.privacy }}</a>
+        </span>
+      </label>
+      <p v-if="termsError" class="mt-1 text-xs text-red-500">{{ t.termsErrorDesc }}</p>
+      <p v-if="submitError" class="mt-2 text-xs text-red-500">{{ t.errorDesc }}</p>
+    </template>
   </section>
 </template>
