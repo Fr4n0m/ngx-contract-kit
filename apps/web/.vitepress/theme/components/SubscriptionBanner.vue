@@ -9,7 +9,7 @@ const copy: Record<Lang, {
   eyebrow: string; title: string; description: string;
   email: string; terms: string; submit: string; privacy: string; privacyUrl: string;
   loadingTitle: string; successTitle: string; successDesc: string;
-  errorTitle: string; errorDesc: string;
+  errorTitle: string; errorDesc: string; termsError: string; termsErrorDesc: string;
 }> = {
   en: {
     eyebrow: "Stay updated",
@@ -25,6 +25,8 @@ const copy: Record<Lang, {
     successDesc: "Confirm your subscription from your inbox.",
     errorTitle: "Error",
     errorDesc: "Could not complete the subscription.",
+    termsError: "Required",
+    termsErrorDesc: "You must accept the privacy policy to subscribe.",
   },
   es: {
     eyebrow: "Mantente al día",
@@ -40,6 +42,8 @@ const copy: Record<Lang, {
     successDesc: "Confirma la suscripción desde tu email.",
     errorTitle: "Error",
     errorDesc: "No se pudo completar la suscripción.",
+    termsError: "Requerido",
+    termsErrorDesc: "Debes aceptar la política de privacidad para suscribirte.",
   },
 };
 
@@ -51,6 +55,10 @@ const loading = ref(false);
 
 async function onSubmit() {
   if (loading.value) return;
+  if (!acceptTerms.value) {
+    toast.error(t.value.termsError, { description: t.value.termsErrorDesc });
+    return;
+  }
   loading.value = true;
 
   const id = toast.loading(t.value.loadingTitle);
