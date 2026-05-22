@@ -7,7 +7,10 @@ const { lang } = useLang();
 const copy: Record<Lang, {
   eyebrow: string; title: string; description: string;
   email: string; terms: string; submit: string; privacy: string; privacyUrl: string;
-  loadingTitle: string; successTitle: string; successDesc: string;
+  loadingTitle: string;
+  successTitle: string; successDesc: string;
+  alreadyPendingTitle: string; alreadyPendingDesc: string;
+  alreadyActiveTitle: string; alreadyActiveDesc: string;
   errorTitle: string; errorDesc: string; termsErrorDesc: string;
 }> = {
   en: {
@@ -22,6 +25,10 @@ const copy: Record<Lang, {
     loadingTitle: "Sending…",
     successTitle: "Check your inbox",
     successDesc: "Confirm your subscription from your inbox.",
+    alreadyPendingTitle: "Check your inbox",
+    alreadyPendingDesc: "We already sent you a confirmation email. Check your inbox and confirm your subscription.",
+    alreadyActiveTitle: "Already subscribed",
+    alreadyActiveDesc: "This email is already receiving release notifications.",
     errorTitle: "Error",
     errorDesc: "Could not complete the subscription. Please try again.",
     termsErrorDesc: "You must accept the privacy policy to subscribe.",
@@ -38,6 +45,10 @@ const copy: Record<Lang, {
     loadingTitle: "Enviando…",
     successTitle: "Revisa tu bandeja",
     successDesc: "Confirma la suscripción desde tu email.",
+    alreadyPendingTitle: "Revisa tu bandeja",
+    alreadyPendingDesc: "Ya te enviamos un email de confirmación. Revisa tu bandeja y confirma la suscripción.",
+    alreadyActiveTitle: "Ya estás suscrito",
+    alreadyActiveDesc: "Este email ya recibe notificaciones de nuevas versiones.",
     errorTitle: "Error",
     errorDesc: "No se pudo completar la suscripción. Inténtalo de nuevo.",
     termsErrorDesc: "Debes aceptar la política de privacidad para suscribirte.",
@@ -46,12 +57,13 @@ const copy: Record<Lang, {
 
 const t = computed(() => copy[lang.value as Lang]);
 
+type SubmitState = "idle" | "success" | "already-pending" | "already-active" | "error";
+
 const email = ref("");
 const acceptTerms = ref(false);
 const loading = ref(false);
 const termsError = ref(false);
-const submitted = ref(false);
-const submitError = ref(false);
+const state = ref<SubmitState>("idle");
 
 async function onSubmit() {
   if (loading.value) return;
@@ -60,7 +72,7 @@ async function onSubmit() {
     return;
   }
   termsError.value = false;
-  submitError.value = false;
+  state.value = "idle";
   loading.value = true;
 
   try {
@@ -80,11 +92,20 @@ async function onSubmit() {
 
     if (!res.ok) throw new Error();
 
-    submitted.value = true;
+    const data = await res.json();
+
+    if (data.alreadyActive) {
+      state.value = "already-active";
+    } else if (data.alreadyPending) {
+      state.value = "already-pending";
+    } else {
+      state.value = "success";
+    }
+
     email.value = "";
     acceptTerms.value = false;
   } catch {
-    submitError.value = true;
+    state.value = "error";
   } finally {
     loading.value = false;
   }
@@ -103,9 +124,19 @@ async function onSubmit() {
       {{ t.description }}
     </p>
 
-    <div v-if="submitted" class="mt-5 border border-accent bg-accent/10 px-4 py-3">
+    <div v-if="state === 'success'" class="mt-5 border border-accent bg-accent/10 px-4 py-3">
       <p class="font-semibold text-[color:var(--vp-c-text-1)]">{{ t.successTitle }}</p>
       <p class="mt-0.5 text-sm text-[color:var(--vp-c-text-2)]">{{ t.successDesc }}</p>
+    </div>
+
+    <div v-else-if="state === 'already-pending'" class="mt-5 border border-accent bg-accent/10 px-4 py-3">
+      <p class="font-semibold text-[color:var(--vp-c-text-1)]">{{ t.alreadyPendingTitle }}</p>
+      <p class="mt-0.5 text-sm text-[color:var(--vp-c-text-2)]">{{ t.alreadyPendingDesc }}</p>
+    </div>
+
+    <div v-else-if="state === 'already-active'" class="mt-5 border border-[color:var(--vp-c-bg-alt)] px-4 py-3">
+      <p class="font-semibold text-[color:var(--vp-c-text-1)]">{{ t.alreadyActiveTitle }}</p>
+      <p class="mt-0.5 text-sm text-[color:var(--vp-c-text-2)]">{{ t.alreadyActiveDesc }}</p>
     </div>
 
     <template v-else>
@@ -133,7 +164,7 @@ async function onSubmit() {
         </span>
       </label>
       <p v-if="termsError" class="mt-1 text-xs text-red-500">{{ t.termsErrorDesc }}</p>
-      <p v-if="submitError" class="mt-2 text-xs text-red-500">{{ t.errorDesc }}</p>
+      <p v-if="state === 'error'" class="mt-2 text-xs text-red-500">{{ t.errorDesc }}</p>
     </template>
   </section>
 </template>
