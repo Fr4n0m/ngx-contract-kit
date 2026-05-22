@@ -64,7 +64,7 @@ async function onSubmit() {
   loading.value = true;
 
   try {
-    const res = await fetch("https://www.codebyfran.es/api/projects/ngx-contract-kit/subscribe", {
+    const res = await fetch("https://codebyfran.es/api/projects/ngx-contract-kit/subscribe", {
       method: "POST",
       credentials: "omit",
       mode: "cors",
