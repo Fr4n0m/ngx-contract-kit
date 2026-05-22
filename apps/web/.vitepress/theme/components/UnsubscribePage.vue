@@ -17,7 +17,7 @@ async function confirm() {
 
   const id = toast.loading("Procesando…");
   try {
-    const res = await fetch("https://www.codebyfran.es/api/projects/ngx-contract-kit/unsubscribe", {
+    const res = await fetch("https://codebyfran.es/api/projects/ngx-contract-kit/unsubscribe", {
       method: "POST",
       credentials: "omit",
       mode: "cors",
