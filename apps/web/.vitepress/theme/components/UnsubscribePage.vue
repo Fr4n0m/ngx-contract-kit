@@ -13,7 +13,7 @@ const copy: Record<Lang, {
   en: {
     title: "Unsubscribe",
     done: "Unsubscribed",
-    desc: "Confirm you want to stop receiving notifications for new versions of ngx-contract-kit.",
+    desc: "Confirm you want to stop receiving notifications for new versions of Contract-kit.",
     doneDesc: "Your subscription has been cancelled. You won't receive any more release notifications.",
     confirm: "Confirm unsubscribe",
     back: "Back to home",
@@ -23,7 +23,7 @@ const copy: Record<Lang, {
   es: {
     title: "Cancelar suscripción",
     done: "Baja completada",
-    desc: "Confirma que deseas dejar de recibir notificaciones de nuevas versiones de ngx-contract-kit.",
+    desc: "Confirma que deseas dejar de recibir notificaciones de nuevas versiones de Contract-kit.",
     doneDesc: "Tu suscripción ha sido cancelada. Ya no recibirás más notificaciones de nuevas versiones.",
     confirm: "Confirmar baja",
     back: "Volver al inicio",
@@ -70,7 +70,7 @@ async function confirm() {
 <template>
   <div class="mx-auto max-w-lg px-6 py-16 text-center">
     <p class="font-heading text-sm font-semibold uppercase tracking-[0.18em]">
-      <span class="bg-accent text-ink px-1.5 py-0.5">ngx-contract-kit</span>
+      <span class="bg-accent text-ink px-1.5 py-0.5">Contract-kit</span>
     </p>
     <h1 class="mt-4 font-heading text-2xl text-[color:var(--vp-c-text-1)]">
       {{ state === "done" ? t.done : t.title }}
