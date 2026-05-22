@@ -8,5 +8,7 @@ const isHome = computed(() => route.path === "/" || route.path === "/index.md");
 </script>
 
 <template>
-  <SubscriptionBanner v-if="!isHome" />
+  <div v-if="!isHome" class="px-[clamp(1rem,4vw,4rem)]">
+    <SubscriptionBanner />
+  </div>
 </template>
