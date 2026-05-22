@@ -14,8 +14,10 @@ const isHome = computed(() => route.path === "/" || route.path === "/index.md");
 
 <template>
   <div
-    class="mx-auto w-full max-w-none px-[clamp(1rem,4vw,4rem)] pb-6"
-    :class="isHome ? '-mt-20 sm:-mt-16' : 'mt-2'"
+    class="max-w-none px-[clamp(1rem,4vw,4rem)] pb-6"
+    :class="isHome
+      ? 'mx-[calc(50%-50vw)] w-screen -mt-20 sm:-mt-16'
+      : 'mx-auto w-full mt-2'"
   >
     <AppFooter :footer="t.footer" />
   </div>
