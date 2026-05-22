@@ -8,7 +8,7 @@ title: Política de privacidad
 
 ## ¿Quién es responsable de tus datos?
 
-Este servicio es operado por Francisco (fr4n0m). Contacto: [franciis1999@gmail.com](mailto:franciis1999@gmail.com)
+Este servicio es operado por Francisco (fr4n0m). Contacto: [fran11799@outlook.com](mailto:fran11799@outlook.com)
 
 ## ¿Qué datos se recopilan y por qué?
 
@@ -45,7 +45,7 @@ Bajo el RGPD tienes derecho a:
 - **Retirar el consentimiento** — darte de baja en cualquier momento mediante el enlace incluido en cada email, sin consecuencias.
 - **Reclamación** — ante tu autoridad nacional de protección de datos (en España, la AEPD).
 
-Para ejercer cualquiera de estos derechos, escríbenos a [franciis1999@gmail.com](mailto:franciis1999@gmail.com).
+Para ejercer cualquiera de estos derechos, escríbenos a [fran11799@outlook.com](mailto:fran11799@outlook.com).
 
 ## Cambios en esta política
 

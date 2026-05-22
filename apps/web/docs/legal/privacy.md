@@ -8,7 +8,7 @@ title: Privacy Policy
 
 ## Who is responsible for your data?
 
-This service is operated by Francisco (fr4n0m). Contact: [franciis1999@gmail.com](mailto:franciis1999@gmail.com)
+This service is operated by Francisco (fr4n0m). Contact: [fran11799@outlook.com](mailto:fran11799@outlook.com)
 
 ## What data is collected and why?
 
@@ -45,7 +45,7 @@ Under the GDPR you have the right to:
 - **Withdraw consent** — unsubscribe at any time via the link included in every email, with no consequences.
 - **Lodge a complaint** — with your national data protection authority.
 
-To exercise any of these rights, contact [franciis1999@gmail.com](mailto:franciis1999@gmail.com).
+To exercise any of these rights, contact [fran11799@outlook.com](mailto:fran11799@outlook.com).
 
 ## Changes to this policy
 
