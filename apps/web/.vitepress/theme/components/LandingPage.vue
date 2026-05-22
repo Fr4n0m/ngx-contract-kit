@@ -226,8 +226,6 @@ const howBottomCardRefs = [useReveal(320), useReveal(380)];
         </div>
       </section>
 
-      <SubscriptionBanner />
-
       <LandingDemoSection
         :title="t.demo.title"
         :description="t.demo.description"
@@ -239,6 +237,8 @@ const howBottomCardRefs = [useReveal(320), useReveal(380)];
         :running-label="t.demo.runningLabel"
         :replay-label="t.demo.replayLabel"
       />
+
+      <SubscriptionBanner />
     </div>
   </section>
 </template>
