@@ -198,6 +198,7 @@ const openPalette = () => {
       :recents="{ limit: 6, sectionTitle: t.recentsSectionTitle }"
       title="contract-kit"
       shortcut="mod+k"
+      size="small"
     >
       <template #section-title="{ title }">
         <span class="inline-flex items-center gap-2">
