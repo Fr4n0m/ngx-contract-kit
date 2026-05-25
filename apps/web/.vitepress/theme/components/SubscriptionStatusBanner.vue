@@ -43,12 +43,12 @@ function onKeydown(e: KeyboardEvent) {
           @click="close"
         />
         <div class="relative z-10 w-full max-w-xl">
+          <SubscriptionBanner :initial-state="state" compact />
           <button
-            class="absolute -top-3 -right-3 z-20 flex size-8 items-center justify-center border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] text-[color:var(--vp-c-text-2)] shadow-card transition hover:text-[color:var(--vp-c-text-1)] dark:border-[#1f1f1f] dark:bg-[#0d0d0d]"
+            class="absolute top-3 right-3 z-20 flex size-7 items-center justify-center text-[color:var(--vp-c-text-3)] transition hover:text-[color:var(--vp-c-text-1)]"
             aria-label="Close"
             @click="close"
           >✕</button>
-          <SubscriptionBanner :initial-state="state" compact />
         </div>
       </div>
     </Transition>

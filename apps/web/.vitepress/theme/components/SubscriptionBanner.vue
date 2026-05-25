@@ -162,10 +162,10 @@ async function onSubmit() {
 
 <template>
   <section
-    class="border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-5 py-4 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:px-8 sm:py-5 mt-20"
+    class="mt-12 border border-[color:var(--vp-c-bg-alt)] bg-[color:var(--vp-c-bg-soft)] px-5 py-4 shadow-card dark:border-[#1f1f1f] dark:bg-[#070707] sm:px-8 sm:py-5"
   >
     <p
-      class="font-heading py-5 text-sm font-semibold uppercase tracking-[0.18em]"
+      class="font-heading text-sm font-semibold uppercase tracking-[0.18em]"
     >
       <span class="bg-accent text-ink px-1.5 py-0.5">{{ t.eyebrow }}</span>
     </p>
