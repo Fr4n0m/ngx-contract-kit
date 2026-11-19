@@ -4,11 +4,11 @@ title: Privacy Policy
 
 # Privacy Policy
 
-**Last updated:** May 22, 2026
+**Last updated:** November 19, 2026
 
 ## Who is responsible for your data?
 
-This service is operated by Francisco (fr4n0m). Contact: [fran11799@outlook.com](mailto:fran11799@outlook.com)
+This service is operated by Francisco Rodríguez. Contact: [fran11799@outlook.com](mailto:fran11799@outlook.com)
 
 ## What data is collected and why?
 

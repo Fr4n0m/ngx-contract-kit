@@ -4,11 +4,11 @@ title: Política de privacidad
 
 # Política de privacidad
 
-**Última actualización:** 22 de mayo de 2026
+**Última actualización:** 19 de noviembre de 2026
 
 ## ¿Quién es responsable de tus datos?
 
-Este servicio es operado por Francisco (fr4n0m). Contacto: [fran11799@outlook.com](mailto:fran11799@outlook.com)
+Este servicio es operado por Francisco Rodríguez. Contacto: [fran11799@outlook.com](mailto:fran11799@outlook.com)
 
 ## ¿Qué datos se recopilan y por qué?
 
